@@ -39,7 +39,7 @@ function referralTab($pid)
 function generateDropdown($list_id = '', $name = '')
 {
     $getList = sqlStatement("select * from list_options where list_id = ? and activity = 1 order by seq asc", [$list_id]);
-    $drop ='<select name="'.$name.'" class="form-control" style="width:50%">';
+    $drop = '<select name="' . $name . '" class="form-control" style="width:50%">';
     $drop .= '<option value="">--Select--</option>';
     while ($row = sqlFetchArray($getList)) {
         $drop .= sprintf('<option value="%s">%s</option>', $row['option_id'], $row['title']);
