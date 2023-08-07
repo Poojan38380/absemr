@@ -1,9 +1,8 @@
-{ParseAsHTML}
 <form class="container-xl p-0" id="template" name="template" role="form" action="./../lib/doc_lib.php" method="POST">
     <div id="templatediv" class="card-body border overflow-auto">
         <div id="templatecontent" class="template-body">
             <h2><span style="text-decoration:none;">ABS Policies/ Agreements</span></h2>
-                <h2>Notice of Practice Policies</h2>
+                <h3>Notice of Practice Policies</h3>
             <p><strong>APPOINTMENTS AND CANCELLATIONS</strong>
                 - If you cannot attend your individual, family or group session,
                 please remember to cancel or reschedule 12 hours in advance.
