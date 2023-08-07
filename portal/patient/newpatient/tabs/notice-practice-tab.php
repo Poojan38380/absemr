@@ -1,30 +1,9 @@
+{ParseAsHTML}
 <form class="container-xl p-0" id="template" name="template" role="form" action="./../lib/doc_lib.php" method="POST">
     <div id="templatediv" class="card-body border overflow-auto">
         <div id="templatecontent" class="template-body">
-            <h2>&nbsp;<br><br><br><br>
-                <span style="font-size:17pt;font-variant:normal;white-space:pre-wrap;">
-                    <span style="font-family:Arial;">
-                        <span style="color:#000000;">
-                            <span style="font-weight:400;">
-                                <span style="font-style:normal;">
-                                    <span style="text-decoration:none;">ABS Policies/ Agreements</span>
-                                </span>
-                            </span>
-                        </span>
-                    </span>
-                </span>
-                <span style="font-size:11pt;font-variant:normal;white-space:pre-wrap;">
-                    <span style="font-family:Arial;">
-                        <span style="color:#000000;">
-                            <span style="font-weight:400;">
-                                <span style="font-style:normal;">
-                                    <span style="text-decoration:none;"> </span>
-                                </span>
-                            </span>
-                        </span>
-                    </span>
-                </span>Notice of Practice Policies
-            </h2><br><br>
+            <h2><span style="text-decoration:none;">ABS Policies/ Agreements</span></h2>
+                <h2>Notice of Practice Policies</h2>
             <p><strong>APPOINTMENTS AND CANCELLATIONS</strong>
                 - If you cannot attend your individual, family or group session,
                 please remember to cancel or reschedule 12 hours in advance.
