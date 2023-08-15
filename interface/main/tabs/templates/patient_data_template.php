@@ -53,6 +53,9 @@ switch ($search_any_type) {
 }
 </style>
 <script type="text/html" id="patient-data-template">
+    function loadTelehealth() {
+    alert('Telehealth meeting could have been here!');
+    }
     <div class="d-lg-inline-flex w-100">
         <div class="flex-fill">
             <div class="float-left mx-2">

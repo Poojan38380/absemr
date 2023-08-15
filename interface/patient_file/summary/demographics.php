@@ -334,11 +334,6 @@ $oemr_ui = new OemrUI($arrOeUiSettings);
     require_once("$srcdir/options.js.php");
     ?>
     <script>
-
-        function loadTelehealth() {
-            alert('Telehealth meeting could have been here!');
-        }
-
         // Process click on diagnosis for referential cds popup.
         function referentialCdsClick(codetype, codevalue) {
             top.restoreSession();
