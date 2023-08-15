@@ -12,7 +12,7 @@
                     <?php echo xlt("ABS Policies / Agreements") ?>
                 </h2>
                 <h2>
-                    Notice of Practice Policies
+                    <?php echo xlt("Notice of Practice Policies"); ?>
                 </h2>
                 <p><strong>APPOINTMENTS AND CANCELLATIONS</strong>
                     - If you cannot attend your individual, family or group session,

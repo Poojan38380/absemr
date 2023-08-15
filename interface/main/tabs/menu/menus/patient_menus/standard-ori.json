@@ -8,6 +8,16 @@
         "children": [],
         "requirement": 0
     },
+	{
+        "label": "Intake",
+        "menu_id": "history",
+        "target": "main",
+        "on_click":"top.restoreSession()",
+        "url": "interface/patient_file/history/history.php",
+        "pid":"false",
+        "children": [],
+        "requirement": 0
+    },
     {
         "label": "Report",
         "menu_id": "report",
