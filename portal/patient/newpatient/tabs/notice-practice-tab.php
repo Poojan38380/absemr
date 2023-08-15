@@ -9,28 +9,8 @@
         <div id="templatediv" class="card-body border overflow-auto">
             <div id="templatecontent" class="template-body">
                 <h2>
-                    <span style="font-size:17pt;font-variant:normal;white-space:pre-wrap;">
-                        <span style="font-family:Arial;">
-                            <span style="color:#000000;">
-                                <span style="font-weight:400;">
-                                    <span style="font-style:normal;">
-                                        <span style="text-decoration:none;">ABS Policies/ Agreements</span>
-                                    </span>
-                                </span>
-                            </span>
-                        </span>
-                    </span>
-                    <span style="font-size:11pt;font-variant:normal;white-space:pre-wrap;">
-                        <span style="font-family:Arial;">
-                            <span style="color:#000000;">
-                                <span style="font-weight:400;">
-                                    <span style="font-style:normal;">
-                                        <span style="text-decoration:none;"> </span>
-                                    </span>
-                                </span>
-                            </span>
-                        </span>
-                    </span>Notice of Practice Policies
+                    <span style="text-decoration:none;">ABS Policies/ Agreements</span>
+                    Notice of Practice Policies
                 </h2>
                 <p><strong>APPOINTMENTS AND CANCELLATIONS</strong>
                     - If you cannot attend your individual, family or group session,
