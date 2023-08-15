@@ -357,6 +357,5 @@ echo $twig->render('portal/home.html.twig', [
             var tabIframe = document.getElementById('tabIframe');
             tabIframe.contentWindow.location.reload();
         }
-
     });
 </script>
