@@ -199,23 +199,23 @@ function buildNav($newcnt, $pid, $result)
         }
     }
 
-        $videoData = enableVideoButton('portal', $pid);
-        $videoData = json_decode($videoData, true);
-	if($videoData['meetingUrl'] == 'move_to_payment') {
-	    $navItems[] = [
-                'url' => '#paymentcard',
-                'label' => xl('Video'),
-                'icon' => 'fas fa-video-camera',
-                'dataToggle' => 'collapse'
-            ];	
-	}else if($videoData['meetingUrl'] != ''){
-    	     $navItems[] = [
-                    'url' => $videoData['meetingUrl'],
-                    'label' => xl('Video'),
-                    'icon' => 'fas fa-video-camera',
-                    'target_blank' => 'true',
-                ];
-	}
+    $videoData = enableVideoButton('portal', $pid);
+    $videoData = json_decode($videoData, true);
+    if ($videoData['meetingUrl'] == 'move_to_payment') {
+        $navItems[] = [
+            'url' => '#paymentcard',
+            'label' => xl('Video'),
+            'icon' => 'fas fa-video-camera',
+            'dataToggle' => 'collapse'
+        ];
+    } else if ($videoData['meetingUrl'] != '') {
+        $navItems[] = [
+            'url' => $videoData['meetingUrl'],
+            'label' => xl('Video'),
+            'icon' => 'fas fa-video-camera',
+            'target_blank' => 'true',
+        ];
+    }
 
 
     if ($GLOBALS['easipro_enable'] && !empty($GLOBALS['easipro_server']) && !empty($GLOBALS['easipro_name'])) {
@@ -291,7 +291,7 @@ function buildNav($newcnt, $pid, $result)
                 'icon' => 'fa-credit-card',
                 'dataToggle' => 'collapse'
             ];
-	}
+        }
     }
 
     return $navItems;
@@ -338,3 +338,25 @@ echo $twig->render('portal/home.html.twig', [
         'scriptsRenderPre' => RenderEvent::EVENT_SCRIPTS_RENDER_PRE
     ],
 ]);
+?>
+<script>
+    $(document).ready(function() {
+        $("iframe").on("load", function() {
+            var closestIframe = $(this).closest('#newpatientCardForm').find('iframe');
+            closestIframe.attr('id', 'tabIframe');
+
+            $(this).contents().on("click", '#signModalOpen', function() {
+                $('a[href$="#openSignModal"]').click();
+                $('#openSignModal').on('hidden.bs.modal', function() {
+                    reloadIframeAndActivateTab();
+                });
+            });
+        });
+
+        function reloadIframeAndActivateTab() {
+            var tabIframe = document.getElementById('tabIframe');
+            tabIframe.contentWindow.location.reload();
+        }
+
+    });
+</script>
