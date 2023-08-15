@@ -227,7 +227,7 @@ switch ($search_any_type) {
                 </ul>
             </span>
             <span class="messagesColumn">
-        <a class="btn btn-xs btn-link" onclick="loadTeleHealth()" href="#" title="<?php echo xla("Tele Health");?>" style="width: 30px;
+        <a class="btn btn-xs btn-link" onclick="loadTeleHealth()" href="#" title="<?php echo xla("TeleHealth");?>" style="width: 30px;
             height: 30px;
             padding: 4px 0;
             border-radius: 17px!important;
