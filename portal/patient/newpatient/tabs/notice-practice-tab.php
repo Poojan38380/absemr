@@ -9,7 +9,9 @@
         <div id="templatediv" class="card-body border overflow-auto">
             <div id="templatecontent" class="template-body">
                 <h2>
-                    <span style="text-decoration:none;">ABS Policies/ Agreements</span>
+                    <?php echo xlt("ABS Policies / Agreements") ?>
+                </h2>
+                <h2>
                     Notice of Practice Policies
                 </h2>
                 <p><strong>APPOINTMENTS AND CANCELLATIONS</strong>
