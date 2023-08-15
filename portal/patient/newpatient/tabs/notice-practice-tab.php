@@ -8,7 +8,7 @@
     <form class="container-xl p-0" id="template" name="template" role="form" action="./../lib/doc_lib.php" method="POST">
         <div id="templatediv" class="card-body border overflow-auto">
             <div id="templatecontent" class="template-body">
-                <h2>&nbsp;<br><br><br><br>
+                <h2>
                     <span style="font-size:17pt;font-variant:normal;white-space:pre-wrap;">
                         <span style="font-family:Arial;">
                             <span style="color:#000000;">
@@ -31,7 +31,7 @@
                             </span>
                         </span>
                     </span>Notice of Practice Policies
-                </h2><br><br>
+                </h2>
                 <p><strong>APPOINTMENTS AND CANCELLATIONS</strong>
                     - If you cannot attend your individual, family or group session,
                     please remember to cancel or reschedule 12 hours in advance.
