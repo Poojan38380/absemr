@@ -387,7 +387,7 @@ if (!empty($GLOBALS['kernel']->getEventDispatcher())) {
         $(function() {
             goRepeaterServices();
         });
-        function loadTelehealth() {
+        function loadTeleHealth() {
             alert('Telehealth meeting could have been here!');
         }
     </script>
