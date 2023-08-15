@@ -197,9 +197,6 @@ $esignApi = new Api();
 
     <?php Header::setupHeader(['knockout', 'tabs-theme', 'i18next', 'hotkeys']); ?>
     <script>
-        function loadTelehealth() {
-            alert('Telehealth meeting could have been here!');
-        }
         // set up global translations for js
         function setupI18n(lang_id) {
             restoreSession();
@@ -390,6 +387,9 @@ if (!empty($GLOBALS['kernel']->getEventDispatcher())) {
         $(function() {
             goRepeaterServices();
         });
+        function loadTelehealth() {
+            alert('Telehealth meeting could have been here!');
+        }
     </script>
     <?php
     // fire off an event here
