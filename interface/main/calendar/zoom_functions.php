@@ -121,7 +121,7 @@ function createDocument($fileContent = "", $fileName = "comments", $eid, $groupI
 	             unlink($file_name);
 		 }
 	}
- 
+
 }
 
 
@@ -190,11 +190,11 @@ function enableVideoButton($callFrom = 'dashboard', $pid) {
 				$getPatientBalance = get_patient_balance($pid);
                                 if($getPatientBalance > 0)
                                         $data['meetingUrl'] = "move_to_payment";
-				$data['patientBalanceStatus'] = true;	
+				$data['patientBalanceStatus'] = true;
 			//}
 			return json_encode($data, true);
 		}
 }
 
-?>
+
 
