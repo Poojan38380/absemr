@@ -17,13 +17,13 @@ function websdkready() {
   // ZoomMtg.setZoomJSLib('http://localhost:9999/node_modules/@zoomus/websdk/dist/lib', '/av'); // Local version default, Angular Project change to use cdn version
   ZoomMtg.preLoadWasm(); // pre download wasm file to save time.
 
-  var CLIENT_ID = "YOUR_CLIENT_ID_OR_SDK_KEY";
+  var CLIENT_ID = "cSg5F3KETRu05osDKfsaQ";
   /**
    * NEVER PUT YOUR ACTUAL SDK SECRET OR CLIENT SECRET IN CLIENT SIDE CODE, THIS IS JUST FOR QUICK PROTOTYPING
    * The below generateSignature should be done server side as not to expose your SDK SECRET in public
    * You can find an example in here: https://developers.zoom.us/docs/meeting-sdk/auth/#signature
    */
-  var CLIENT_SECRET = "YOUR_CLIENT_SECRET_OR_SDK_SECRET";
+  var CLIENT_SECRET = "LamKLXa80KsxU2TaInVa9YSnM1hwMc82";
 
   // some help code, remember mn, pwd, lang to cookie, and autofill.
   document.getElementById("display_name").value =
@@ -96,7 +96,7 @@ function websdkready() {
         return false;
       }
 
-      
+
       testTool.setCookie("meeting_number", meetingConfig.mn);
       testTool.setCookie("meeting_pwd", meetingConfig.pwd);
 
@@ -119,12 +119,12 @@ function websdkready() {
   function copyToClipboard(elementId) {
     var aux = document.createElement("input");
     aux.setAttribute("value", document.getElementById(elementId).getAttribute('link'));
-    document.body.appendChild(aux);  
+    document.body.appendChild(aux);
     aux.select();
     document.execCommand("copy");
     document.body.removeChild(aux);
   }
-    
+
   // click copy jon link button
   window.copyJoinLink = function (element) {
     var meetingConfig = testTool.getMeetingConfig();
@@ -147,7 +147,7 @@ function websdkready() {
           testTool.serialize(meetingConfig);
         document.getElementById('copy_link_value').setAttribute('link', joinUrl);
         copyToClipboard('copy_link_value');
-        
+
       },
     });
   };
