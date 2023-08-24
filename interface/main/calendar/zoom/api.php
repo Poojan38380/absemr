@@ -1,5 +1,6 @@
 <?php
-include_once('./../../../interface/globals.php');
+
+require_once dirname(__FILE__, 4) . '/globals.php';
 
 class API{
 
@@ -90,5 +91,5 @@ if ($err) {
 }
 //end pf api class
 
-?>
+
 

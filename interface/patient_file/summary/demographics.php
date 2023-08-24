@@ -1050,13 +1050,13 @@ $oemr_ui = new OemrUI($arrOeUiSettings);
                         <div class = "col-sm-6"><b>The insurance ID :</b></div>
                         <div class = "col-sm-6">'.$getAbsIntakeFormDetails['insuranceID'].'</div>
 		</div>
-		
+
 	</div>
     </div>
 </section>';
 	$intakeForm .= '</div>';
 
-	
+
 	$progressNote = '';
 	$progressNote .= '<div>';
         $progressNote .= '<section class="card mb-2  ">
