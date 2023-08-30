@@ -56,7 +56,7 @@ require_once dirname(__FILE__, 2) . '/../../interface/main/calendar/zoom_functio
                       <?php }?>
                          <button class="btn btn-warning" onclick="refreshme()"><?php echo xlt('Zoom Meeting Not Working Yet');?></button>
                         <?php
-                            echo enableVideoButton('dashboard', $groupData['group_id']); //This should display the button like in the patient dashboard
+                            echo enableVideoButton('dashboard', $pid); //This should display the button like in the patient dashboard
                         ?>
                     </div>
                 </div>
