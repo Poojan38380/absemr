@@ -188,7 +188,7 @@ function enableVideoButton($callFrom = null, $pid = null)
         }
     } elseif ($callFrom == 'group') {
         if ($meetingUrl != '') {
-            return '<div style = "margin-bottom:10px"><a class = "btn btn-warning href = "' . $meetingUrl . '" target = "_blank">' . xlt('Zoom Meeting') . '</a></div>';
+            return '<div style = "margin-bottom:10px"><a class = "btn btn-warning href = "' . $meetingUrl . '" target = "_blank">' . xlt('G Zoom') . '</a></div>';
         }
     } else {
             $data = [];
