@@ -53,10 +53,8 @@ require_once dirname(__FILE__, 2) . '/../../interface/main/calendar/zoom_functio
                         <?php } else { ?>
                             <button class="btn btn-primary" onclick="location.href='<?php echo $GLOBALS['rootdir'] . '/therapy_groups/index.php?method=groupDetails&editGroup=1&group_id=' . attr_url($groupData['group_id']); ?>'"><?php echo xlt('Update');?></button>
                         <?php } ?>
-                      <?php }?>
-                         <button class="btn btn-warning" onclick="refreshme()"><?php echo xlt('Zoom Meeting Not Working Yet');?></button>
-                        <?php
-                            echo enableVideoButton('group', $pid); //This should display the button like in the patient dashboard
+                      <?php }
+                            echo enableVideoButton('group', $groupData['group_id']); //This should display the button like in the patient dashboard
                         ?>
                     </div>
                 </div>
