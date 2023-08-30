@@ -163,7 +163,7 @@ function enableVideoButton($callFrom = null, $pid = null)
     $meetingUrl = '';
     $getMeetingUrl = sqlQuery("select meeting_link, pc_startTime from openemr_postcalendar_events where pc_pid = ? and pc_eventDate >= ? and meeting_link IS NOT NULL and pc_startTime > now() order by pc_startTime asc limit 1", [$pid, date('Y-m-d')]);
     //whether patient in only one group
-    $checkForGroup = sqlQuery("select ope.meeting_link, ope.pc_startTime from therapy_groups_participants tg left join openemr_postcalendar_events ope on ope.pc_gid = tg.group_id where tg.pid = ? and ope.pc_eventDate >= ? and ope.meeting_link IS NOT NULL  and ope.pc_startTime > now() order by ope.pc_startTime asc limit 1", [$pid, date('Y-m-d')]);
+    $checkForGroup = sqlQuery("select ope.meeting_link, ope.pc_startTime from therapy_groups_participants tg left join openemr_postcalendar_events ope on ope.pc_gid = tg.group_id where tg.group_id = ? and ope.pc_eventDate >= ? and ope.meeting_link IS NOT NULL  and ope.pc_startTime > now() order by ope.pc_startTime asc limit 1", [$pid, date('Y-m-d')]);
     if (!empty($getMeetingUrl) && $getMeetingUrl['meeting_link'] != '' && !empty($checkForGroup) && $checkForGroup['meeting_link'] != '') {
         //needs time compare - set earlistone in url
         if (strtotime($getMeetingUrl['pc_startTime']) > strtotime($checkForGroup['pc_startTime'])) {
@@ -187,7 +187,9 @@ function enableVideoButton($callFrom = null, $pid = null)
             return '<div style = "margin-bottom:10px"><a class = "btn btn-warning href ="' . $meetingUrl . '" target = "_blank" ' . $disableButton . '>' . xlt('Zoom Meeting') . '</a></div>';
         }
     } elseif ($callFrom == 'group') {
-        return '<div style = "margin-bottom:10px"><a class = "btn btn-warning href = "' . $meetingUrl . '" target = "_blank">' . xlt('Zoom Meeting') . '</a></div>';
+        if ($meetingUrl != '') {
+            return '<div style = "margin-bottom:10px"><a class = "btn btn-warning href = "' . $meetingUrl . '" target = "_blank">' . xlt('Zoom Meeting') . '</a></div>';
+        }
     } else {
             $data = [];
             $data['meetingUrl'] = $meetingUrl;

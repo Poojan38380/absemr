@@ -54,7 +54,7 @@ require_once dirname(__FILE__, 2) . '/../../interface/main/calendar/zoom_functio
                             <button class="btn btn-primary" onclick="location.href='<?php echo $GLOBALS['rootdir'] . '/therapy_groups/index.php?method=groupDetails&editGroup=1&group_id=' . attr_url($groupData['group_id']); ?>'"><?php echo xlt('Update');?></button>
                         <?php } ?>
                       <?php }
-                            echo enableVideoButton('group', $groupData['group_id']) . " " . $groupData['group_id']; //This should display the button like in the patient dashboard
+                            echo enableVideoButton('group', $groupData['group_id']); //This should display the button like in the patient dashboard
                         ?>
                     </div>
                 </div>
