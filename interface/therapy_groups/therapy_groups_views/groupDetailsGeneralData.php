@@ -55,7 +55,9 @@ require_once dirname(__FILE__, 2) . '/../../interface/main/calendar/zoom_functio
                         <?php } ?>
                       <?php }?>
                         <!-- <button class="btn btn-warning" onclick="refreshme()"><?php //echo xlt('Zoom Meeting');?></button> -->
-                        echo
+                        <?php
+                        echo enableVideoButton('dashboard', $groupData['group_id']);
+                        ?>
                     </div>
                 </div>
                 <div class="row">
