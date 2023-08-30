@@ -159,33 +159,35 @@ function sendEmail($subject, $to, $body, $attachment=null){
 //Check patient or group having future appointments
 function enableVideoButton($callFrom = null, $pid = null)
 {
-		$meetingUrl = '';
-		$getMeetingUrl = sqlQuery("select meeting_link, pc_startTime from openemr_postcalendar_events where pc_pid = ? and pc_eventDate >= ? and meeting_link IS NOT NULL and pc_startTime > now() order by pc_startTime asc limit 1", [$pid, date('Y-m-d')]);
-                //whether patient in only one group
-		$checkForGroup = sqlQuery("select ope.meeting_link, ope.pc_startTime from therapy_groups_participants tg left join openemr_postcalendar_events ope on ope.pc_gid = tg.group_id where tg.pid = ? and ope.pc_eventDate >= ? and ope.meeting_link IS NOT NULL  and ope.pc_startTime > now() order by ope.pc_startTime asc limit 1", [$pid, date('Y-m-d')]);
-		if (!empty($getMeetingUrl) && $getMeetingUrl['meeting_link'] != '' && !empty($checkForGroup) && $checkForGroup['meeting_link'] != '') {
-			//needs time compare - set earlistone in url
-			if (strtotime($getMeetingUrl['pc_startTime']) > strtotime($checkForGroup['pc_startTime'])) {
-                $meetingUrl = $checkForGroup['meeting_link'];
-            } else {
-                $meetingUrl = $getMeetingUrl['meeting_link'];
-            }
-        } elseif (!empty($checkForGroup) && $checkForGroup['meeting_link'] != '') {
-                $meetingUrl = $checkForGroup['meeting_link'];
-		} elseif (!empty($getMeetingUrl) && $getMeetingUrl['meeting_link'] != '') {
-			$meetingUrl = $getMeetingUrl['meeting_link'];
-		}
-		// Send button or url based on call - either from dashboard or portal
-		if ($callFrom == 'dashboard') {
-			$button = $disableButton = '';
-			$getPatientBalance = get_patient_balance($pid);
-            if ($getPatientBalance > 0) {
-				$disableButton = 'disabled';
-            }
-			if ($meetingUrl != '') {
-                return '<div style = "margin-bottom:10px"><a class = "btn btn-warning href ="' . $meetingUrl . '" target = "_blank" ' . $disableButton . '>' . xlt('Zoom Meeting') . '</a></div>';
-            }
-		} else {
+    $meetingUrl = '';
+    $getMeetingUrl = sqlQuery("select meeting_link, pc_startTime from openemr_postcalendar_events where pc_pid = ? and pc_eventDate >= ? and meeting_link IS NOT NULL and pc_startTime > now() order by pc_startTime asc limit 1", [$pid, date('Y-m-d')]);
+    //whether patient in only one group
+    $checkForGroup = sqlQuery("select ope.meeting_link, ope.pc_startTime from therapy_groups_participants tg left join openemr_postcalendar_events ope on ope.pc_gid = tg.group_id where tg.pid = ? and ope.pc_eventDate >= ? and ope.meeting_link IS NOT NULL  and ope.pc_startTime > now() order by ope.pc_startTime asc limit 1", [$pid, date('Y-m-d')]);
+    if (!empty($getMeetingUrl) && $getMeetingUrl['meeting_link'] != '' && !empty($checkForGroup) && $checkForGroup['meeting_link'] != '') {
+        //needs time compare - set earlistone in url
+        if (strtotime($getMeetingUrl['pc_startTime']) > strtotime($checkForGroup['pc_startTime'])) {
+            $meetingUrl = $checkForGroup['meeting_link'];
+        } else {
+            $meetingUrl = $getMeetingUrl['meeting_link'];
+        }
+    } elseif (!empty($checkForGroup) && $checkForGroup['meeting_link'] != '') {
+        $meetingUrl = $checkForGroup['meeting_link'];
+    } elseif (!empty($getMeetingUrl) && $getMeetingUrl['meeting_link'] != '') {
+        $meetingUrl = $getMeetingUrl['meeting_link'];
+    }
+    // Send button or url based on call - either from dashboard or portal
+    if ($callFrom == 'dashboard') {
+        $button = $disableButton = '';
+        $getPatientBalance = get_patient_balance($pid);
+        if ($getPatientBalance > 0) {
+            $disableButton = 'disabled';
+        }
+        if ($meetingUrl != '') {
+            return '<div style = "margin-bottom:10px"><a class = "btn btn-warning href ="' . $meetingUrl . '" target = "_blank" ' . $disableButton . '>' . xlt('Zoom Meeting') . '</a></div>';
+        }
+    } elseif ($callFrom == 'group') {
+        return '<div style = "margin-bottom:10px"><a class = "btn btn-warning href = "' . $meetingUrl . '" target = "_blank">' . xlt('Zoom Meeting') . '</a></div>';
+    } else {
             $data = [];
             $data['meetingUrl'] = $meetingUrl;
             $getPatientBalance = get_patient_balance($pid);
