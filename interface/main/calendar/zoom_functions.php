@@ -126,7 +126,8 @@ function createDocument($fileContent = "", $fileName = "comments", $eid, $groupI
 
 
 // Send email functionality
-function sendEmail($subject, $to, $body, $attachment=null){
+function sendEmail($subject, $to, $body, $attachment=null)
+{
     $mail = new PHPMailer();
     $mail->isSMTP();
     $mail->SMTPSecure = 'tls';
