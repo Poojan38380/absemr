@@ -54,6 +54,11 @@ $whereto = $_SESSION['whereto'] ?? null;
 
 $user = $_SESSION['sessionUser'] ?? 'portal user';
 $result = getPatientData($pid);
+$patient_balance = get_patient_balance($pid);
+
+if ($patient_balance > 0) {
+    header('Location: portal_pay_balance.php');
+}
 
 $msgs = getPortalPatientNotes($_SESSION['portal_username']);
 $msgcnt = count($msgs);
