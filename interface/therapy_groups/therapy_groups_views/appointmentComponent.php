@@ -67,7 +67,8 @@ use OpenEMR\Common\Acl\AclMain;
                         <?php if ($edit) { ?>
                             <a onclick="goToEvent(<?php echo attr_js("{$GLOBALS['rootdir']}/main/calendar/add_edit_event.php?group=true&groupid=" . urlencode($groupId) . "&date=" . urlencode($date_for_url) . "&eid=" . urlencode($event['pc_eid'])); ?>)">
                         <?php } ?>
-                        <span class="font-weight-bold"><?php echo text($event['pc_eventDate']) . " (" . xlt($dayname) . ")" ;?></span>
+			<span class="font-weight-bold"><?php echo text($event['pc_eventDate']) . " (" . xlt($dayname) . ")" ;?></span>
+			<a class="btn btn-primary" href="<?php echo $event['meeting_link'] ?>" target = "_blank">Zoom Meeting</a>
                         <br />
                         <span>
                             <?php echo text($disphour) . ":" . text($dispmin) . " " . text($dispampm);
