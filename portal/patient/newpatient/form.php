@@ -188,7 +188,7 @@ $pid = $_REQUEST['pid'];
         }
     </script>
     <div>
-        <h1>Get back to patient chart here</h1>
+        <h1>Get back to patient chart here<?php echo $_SERVER['HTTP_REFERER']; ?></h1>
     </div>
     <div id="tabs">
         <ul>
