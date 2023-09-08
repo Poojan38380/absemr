@@ -74,7 +74,7 @@
         "requirement": 0
     },
     {
-        "label": "Form Data",
+        "label": "Intake",
         "menu_id": "form_data",
         "target": "main",
         "on_click": "top.restoreSession()",
