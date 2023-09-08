@@ -190,7 +190,7 @@ $pid = $_REQUEST['pid'];
     <div>
         <h1>Intake
             <a href="interface/patient_file/summary/demographics.php" onclick="top.restoreSession()" title="Go Back">
-                <i id="advanced-tooltip" class="fa fa-undo fa-2x small" aria-hidden="true"></i></a></h1>
+                <i id="advanced-tooltip" class="fa fa-undo fa-2x small" aria-hidden="true"></i>Go back</a></h1>
     </div>
     <div class="container-fluid">
     <div id="tabs">
