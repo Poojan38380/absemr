@@ -187,6 +187,9 @@ $pid = $_REQUEST['pid'];
             restoreTextInputs();
         }
     </script>
+    <div>
+        <h1>Get back to patient chart here</h1>
+    </div>
     <div id="tabs">
         <ul>
             <?php if (!referralTabSaved($pid)) { ?>
