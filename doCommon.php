@@ -63,7 +63,18 @@ function live()
 
 function createTable()
 {
-    $sql = "CREATE TABLE `patient_notice_form` (
+    // $sql = "CREATE TABLE `patient_notice_form` (
+    // `id` INT(11) NOT NULL AUTO_INCREMENT,
+    // `full_document` TEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+    // `date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+    // `groupname` TEXT NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
+    // `user` TEXT NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
+    // `authorized` TEXT NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
+    // `activity` TEXT NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
+    // `pid` BIGINT(20) NULL DEFAULT NULL,
+    // PRIMARY KEY (`id`) USING BTREE ) COLLATE='utf8_general_ci'";
+
+    $sql = "CREATE TABLE `patient_release_form` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`full_document` TEXT NULL DEFAULT NULL COLLATE 'utf8_general_ci',
 	`date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
@@ -72,7 +83,8 @@ function createTable()
 	`authorized` TEXT NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
 	`activity` TEXT NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
 	`pid` BIGINT(20) NULL DEFAULT NULL,
-	PRIMARY KEY (`id`) USING BTREE ) COLLATE='utf8_general_ci'";
+	PRIMARY KEY (`id`) USING BTREE
+) COLLATE='utf8_general_ci'";
 
     return DBRun($GLOBALS['userName'], $GLOBALS['password'], $GLOBALS['db'], $sql);
 }
