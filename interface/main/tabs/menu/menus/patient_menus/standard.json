@@ -78,7 +78,7 @@
         "menu_id": "form_data",
         "target": "main",
         "on_click": "top.restoreSession()",
-        "url": "portal/patient/newpatient/form_edit.php",
+        "url": "portal/patient/newpatient/form.php",
         "pid": "false",
         "children": [],
         "requirement": 0
