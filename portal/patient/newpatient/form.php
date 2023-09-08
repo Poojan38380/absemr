@@ -5,7 +5,7 @@ $pid = $_REQUEST['pid'];
 
 ?>
 <html>
-
+<title>Intake Form</title>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css">
