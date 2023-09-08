@@ -7,10 +7,10 @@ print('</pre>');
 function init()
 {
     // for erver
-    // $database = live();
+    $database = live();
 
     // for local
-    $database = localTest();
+    // $database = localTest();
 
     $GLOBALS['userName'] = $database['username'];
     $GLOBALS['password'] = $database['password'];
@@ -32,28 +32,28 @@ function init()
 }
 
 //for server
-// function live()
-// {
-//     $database = [
-//         'username' => 'absopenemr',
-//         'password' => 'HdTp87iU82ExVrF!@#',
-//         'database' => 'absopenemr',
-//     ];
-
-//     return $database;
-// }
-
-// for localhost
-function localTest()
+function live()
 {
     $database = [
-        'username' => 'openemr1111',
-        'password' => '5HMwK-9@Y2r8CRR',
-        'database' => 'openemr1111',
+        'username' => 'absopenemr',
+        'password' => 'HdTp87iU82ExVrF!@#',
+        'database' => 'absopenemr',
     ];
 
     return $database;
 }
+
+// for localhost
+// function localTest()
+// {
+//     $database = [
+//         'username' => 'openemr1111',
+//         'password' => '5HMwK-9@Y2r8CRR',
+//         'database' => 'openemr1111',
+//     ];
+
+//     return $database;
+// }
 
 // function addColumn()
 // {
