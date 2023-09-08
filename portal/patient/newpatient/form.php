@@ -191,8 +191,9 @@ use OpenEMR\Core\Header;
     </script>
 
     <div class="container">
-        <div>
-            <h1>Intake</h1> <a href="../../../interface/patient_file/summary/demographics.php" onclick="top.restoreSession()" title="Go Back">
+        <div class="mb-3">
+            <h1>Intake</h1>
+            <a href="../../../interface/patient_file/summary/demographics.php" onclick="top.restoreSession()" title="Go Back">
                 <i class="bi bi-arrow-counterclockwise"></i>Back</a>
         </div>
     <div id="tabs">
