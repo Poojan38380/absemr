@@ -18,7 +18,7 @@ use OpenEMR\Core\Header;
     <script src="<?php echo $GLOBALS['web_root']; ?>/portal/sign/assets/signer_api.js?v=<?php echo $GLOBALS['v_js_includes']; ?>"></script>
     <script src="<?php echo $GLOBALS['web_root']; ?>/portal/sign/assets/signature_pad.umd.js?v=<?php echo $GLOBALS['v_js_includes']; ?>"></script>
     <script src="<?php echo $GLOBALS['web_root']; ?>/portal/patient/scripts/libs/LAB.min.js"></script>
-
+    <?php Header::setupHeader(); ?>
 </head>
 
 <body>
@@ -195,7 +195,7 @@ use OpenEMR\Core\Header;
         <div>
             <h1>Intake
                 <a href="../../../interface/patient_file/summary/demographics.php" onclick="top.restoreSession()" title="Go Back">
-                    <i id="advanced-tooltip" class="fa fa-undo fa-2x" aria-hidden="true"></i>Go back</a></h1>
+                    <i id="advanced-tooltip" class="fa fa-undo fa-2x" aria-hidden="true"></i></a></h1>
         </div>
     <div id="tabs">
         <ul>
