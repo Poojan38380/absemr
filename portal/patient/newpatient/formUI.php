@@ -7,14 +7,22 @@ $ignoreAuth = true;
 include_once('../../../interface/globals.php');
 include_once("../../../library/sql.inc");
 
+
 function therapeuticTab($pid)
 {
     require_once('./tabs/therapeutic-tab.php');
+}
+function therapeuticTabSaved($pid)
+{
+    $referralCount = sqlQuery("select count(*) as count from patient_therapeutic_form where pid = ?", [$pid]);
+    if ($referralCount['count']) return true;
+    return false;
 }
 
 function medicalHistoryTab($pid)
 {
     require_once('./tabs/medical-history-tab.php');
+    $onsite_doc = sqlQuery("select * from onsite_documents where pid = ?", [$pid]);
 }
 
 function noticePracticeTab($pid)
@@ -23,19 +31,41 @@ function noticePracticeTab($pid)
     $onsite_signature = sqlQuery("select type,user,sig_image as sign from onsite_signatures where pid = ?", [$pid]);
     require_once('./tabs/notice-practice-tab.php');
 }
-
+function noticePracticeTabSaved($pid)
+{
+    $referralCount = sqlQuery("select count(*) as count from patient_notice_form where pid = ?", [$pid]);
+    if ($referralCount['count']) return true;
+    return false;
+}
 function releaseTab($pid)
 {
     $patient = sqlQuery("select fname, lname from patient_data where pid = ?", [$pid]);
     $onsite_signature = sqlQuery("select type,user,sig_image as sign from onsite_signatures where pid = ?", [$pid]);
     require_once('./tabs/release-tab.php');
 }
-
+function releaseTabSaved($pid)
+{
+    $referralCount = sqlQuery("select count(*) as count from patient_release_form where pid = ?", [$pid]);
+    if ($referralCount['count']) return true;
+    return false;
+}
 function referralTab($pid)
 {
     require_once('./tabs/referral-tab.php');
 }
 
+function referralTabSaved($pid)
+{
+    $referralCount = sqlQuery("select count(*) as count from patient_referral_form where pid = ?", [$pid]);
+    if ($referralCount['count']) return true;
+    return false;
+}
+
+function referralTabEdit($pid)
+{
+    $referral = sqlQuery("select * from patient_referral_form where pid = ?", [$pid]);
+    require_once('./tabs_edit/referral-tab.php');
+}
 function generateDropdown($list_id = '', $name = '')
 {
     $getList = sqlStatement("select * from list_options where list_id = ? and activity = 1 order by seq asc", [$list_id]);
@@ -48,6 +78,29 @@ function generateDropdown($list_id = '', $name = '')
     return $drop;
 }
 
+function selectedDropdown($list_id = '', $name = '', $selected_value = '', $disabled = false)
+{
+    $getList = sqlStatement("select * from list_options where list_id=? and activity=1 order by seq asc", [$list_id]);
+    $dropdown = '<select name="' . $name . '" class="form-control" style="width:50%">';
+
+    while ($row = sqlFetchArray($getList)) {
+        $optionId = $row['option_id'];
+        $isSelected = ($optionId == $selected_value) ? 'selected' : '';
+        $isDisabled = $disabled ? 'disabled' : '';
+
+        $dropdown .= sprintf(
+            '<option value="%s" %s %s>%s</option>',
+            $optionId,
+            $isSelected,
+            $isDisabled,
+            $row['title']
+        );
+    }
+
+    $dropdown .= '</select>';
+    return $dropdown;
+}
+
 function generateRadioButtons($list_id = '', $name = '')
 {
     $getList = sqlStatement("select * from list_options where list_id=? and activity=1 order by seq asc", [$list_id]);
@@ -58,6 +111,28 @@ function generateRadioButtons($list_id = '', $name = '')
     return $radio;
 }
 
+function selectedRadioButtons($list_id = '', $name = '', $selected_value = '', $disabled = false)
+{
+    $getList = sqlStatement("select * from list_options where list_id=? and activity=1 order by seq asc", [$list_id]);
+    $radio = '';
+
+    while ($row = sqlFetchArray($getList)) {
+        $isChecked = ($row['option_id'] == $selected_value) ? 'checked' : '';
+        $isDisabled = $disabled ? 'disabled' : '';
+        $radio .= sprintf(
+            '<div class="radio"><label><input type="radio" name="%s" value="%s" %s %s> %s</label></div>',
+            $name,
+            $row['option_id'],
+            $isChecked,
+            $isDisabled,
+            $row['title']
+        );
+    }
+
+    return $radio;
+}
+
+
 function generateCheckBox($list_id = '', $name = '')
 {
     $getList = sqlStatement("select * from list_options where list_id = ? and activity = 1 order by seq asc", [$list_id]);
@@ -67,6 +142,26 @@ function generateCheckBox($list_id = '', $name = '')
     }
     return $check;
 }
+function selectedCheckBox($list_id = '', $name = '', $selected_value = [], $disabled = false)
+{
+    $getList = sqlStatement("select * from list_options where list_id = ? and activity = 1 order by seq asc", [$list_id]);
+    $check = '';
+    while ($row = sqlFetchArray($getList)) {
+        $isChecked = ($row['option_id'] == $selected_value) ? 'checked' : '';
+        // $isChecked = in_array($row['option_id'], $selected_value) ? 'checked' : '';
+        $isDisabled = $disabled ? 'disabled' : '';
+        $check .= sprintf(
+            '<div class="radio"><label><input type="checkbox" name="%s" value="%s" %s %s> %s</label></div>',
+            $name,
+            $row['option_id'],
+            $isChecked,
+            $isDisabled,
+            $row['title']
+        );
+    }
+    return $check;
+}
+
 
 function getChildrenOptionList()
 {
