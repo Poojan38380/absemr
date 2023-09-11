@@ -18,7 +18,11 @@ function therapeuticTabSaved($pid)
     if ($referralCount['count']) return true;
     return false;
 }
-
+function therapeuticTabEdit($pid)
+{
+    $referral = sqlQuery("select * from patient_therapeutic_form where pid = ?", [$pid]);
+    require_once('./tabs_edit/therapeutic-tab.php');
+}
 function medicalHistoryTab($pid)
 {
     require_once('./tabs/medical-history-tab.php');
@@ -37,6 +41,13 @@ function noticePracticeTabSaved($pid)
     if ($referralCount['count']) return true;
     return false;
 }
+function noticePracticeTabEdit($pid)
+{
+    $patient = sqlQuery("select concat(fname,' ', lname) as name from patient_data where pid = ?", [$pid]);
+    $onsite_signature = sqlQuery("select type,user,sig_image as sign from onsite_signatures where pid = ?", [$pid]);
+    // $referral = sqlQuery("select * from patient_therapeutic_form where pid = ?", [$pid]);
+    require_once('./tabs_edit/notice-practice-tab.php');
+}
 function releaseTab($pid)
 {
     $patient = sqlQuery("select fname, lname from patient_data where pid = ?", [$pid]);
@@ -48,6 +59,13 @@ function releaseTabSaved($pid)
     $referralCount = sqlQuery("select count(*) as count from patient_release_form where pid = ?", [$pid]);
     if ($referralCount['count']) return true;
     return false;
+}
+function releaseTabEdit($pid)
+{
+    $patient = sqlQuery("select fname, lname from patient_data where pid = ?", [$pid]);
+    $onsite_signature = sqlQuery("select type,user,sig_image as sign from onsite_signatures where pid = ?", [$pid]);
+    // $referral = sqlQuery("select * from patient_therapeutic_form where pid = ?", [$pid]);
+    require_once('./tabs_edit/release-tab.php');
 }
 function referralTab($pid)
 {
@@ -100,7 +118,28 @@ function selectedDropdown($list_id = '', $name = '', $selected_value = '', $disa
     $dropdown .= '</select>';
     return $dropdown;
 }
+// function selectedInsuranceCompany($selected_value = '', $disabled = false)
+// {
 
+//     $getComapnies = sqlStatement("select id, name from insurance_companies");
+//     $dropdown = '<select name="insurance_comapny" class="form-control" style="width:50%;">';
+//     while ($row = sqlFetchArray($getComapnies)) {
+//         $optionId = $row['id'];
+//         $isSelected = ($optionId == $selected_value) ? 'selected' : '';
+//         $isDisabled = $disabled ? 'disabled' : '';
+
+//         $dropdown .= sprintf(
+//             '<option value="%s" %s %s>%s</option>',
+//             $optionId,
+//             $isSelected,
+//             $isDisabled,
+//             $row['name']
+//         );
+//     }
+
+//     $dropdown .= '</select>';
+//     return $dropdown;
+// }
 function generateRadioButtons($list_id = '', $name = '')
 {
     $getList = sqlStatement("select * from list_options where list_id=? and activity=1 order by seq asc", [$list_id]);

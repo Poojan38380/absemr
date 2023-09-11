@@ -5,6 +5,7 @@ $pid = $_SESSION['pid'];
 ?>
 <html>
 <title>Intake Form</title>
+
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css">
@@ -186,73 +187,86 @@ $pid = $_SESSION['pid'];
             restoreTextInputs();
         }
     </script>
-    <div id="tabs">
-        <ul>
-            <?php if (referralTabSaved($pid)) { ?>
-                <li><a href="#referral_tab">Referral Form</a></li>
-            <?php } ?>
-            <?php if (therapeuticTabSaved($pid)) { ?>
-                <li><a href="#therapeutic_tab">Therapeutic Form</a></li>
-            <?php } ?>
-            <!-- <li><a href="#medical_history_tab">Medical History</a></li> -->
-            <?php if (noticePracticeTabSaved($pid)) { ?>
-                <li><a href="#notice_practice_tab">Notice of practice policies</a></li>
-            <?php } ?>
-            <?php if (releaseTabSaved($pid)) { ?>
-                <li><a href="#release_tab">Informed Consent For The Release Of Information</a></li>
-            <?php } ?>
-        </ul>
-        <div>
-            <div class="panel-body p-0">
-                <div class="tab-content">
+    <div class="container">
+        <div class="mb-3">
+            <h2 class="text-center">Patient Intake Form</h2>
+            <a href="../../../interface/patient_file/summary/demographics.php" onclick="top.restoreSession()" title="Go Back" class="btn btn-primary">
+                <i class="bi bi-arrow-counterclockwise"></i>Back</a>
+        </div>
+        <br>
+        <?php if ((referralTabSaved($pid)) || (therapeuticTabSaved($pid)) || (noticePracticeTabSaved($pid)) || (releaseTabSaved($pid))) { ?>
+            <div id="tabs">
+                <ul>
                     <?php if (referralTabSaved($pid)) { ?>
-                        <div id="referral_tab" class="tab-pane">
-                            <form id="referralForm" method="POST" onsubmit="closeTab('referral_tab', 'referralForm'); return false;">
-                                <input type="hidden" name="referralTab" value="referralForm">
-                                <?php referralTabEdit($pid); ?>
-                                <!-- <button type="button" class="submit btn btn-primary">Save &amp; Continue</button> -->
-                            </form>
-                        </div>
+                        <li><a href="#referral_tab">Referral Form</a></li>
                     <?php } ?>
                     <?php if (therapeuticTabSaved($pid)) { ?>
-                        <div id="therapeutic_tab" class="tab-pane">
-                            <form id="therapeuticForm" method="POST">
-                                <input type="hidden" name="therapeuticTab" value="therapeuticForm">
-                                <?php therapeuticTab($pid); ?>
-                                <!-- <button type="button" class="submit btn btn-primary">Save &amp; Continue</button> -->
-                            </form>
-                        </div>
+                        <li><a href="#therapeutic_tab">Therapeutic Form</a></li>
                     <?php } ?>
-                    <!-- <div id="medical_history_tab" class="tab-pane">
+                    <!-- <li><a href="#medical_history_tab">Medical History</a></li> -->
+                    <?php if (noticePracticeTabSaved($pid)) { ?>
+                        <li><a href="#notice_practice_tab">Notice of practice policies</a></li>
+                    <?php } ?>
+                    <?php if (releaseTabSaved($pid)) { ?>
+                        <li><a href="#release_tab">Informed Consent For The Release Of Information</a></li>
+                    <?php } ?>
+                </ul>
+                <div>
+                    <div class="panel-body p-0">
+                        <div class="tab-content">
+                            <?php if (referralTabSaved($pid)) { ?>
+                                <div id="referral_tab" class="tab-pane">
+                                    <form id="referralForm" method="POST" onsubmit="closeTab('referral_tab', 'referralForm'); return false;">
+                                        <input type="hidden" name="referralTab" value="referralForm">
+                                        <?php referralTabEdit($pid); ?>
+                                        <!-- <button type="button" class="submit btn btn-primary">Save &amp; Continue</button> -->
+                                    </form>
+                                </div>
+                            <?php } ?>
+                            <?php if (therapeuticTabSaved($pid)) { ?>
+                                <div id="therapeutic_tab" class="tab-pane">
+                                    <form id="therapeuticForm" method="POST">
+                                        <input type="hidden" name="therapeuticTab" value="therapeuticForm">
+                                        <?php therapeuticTabEdit($pid); ?>
+                                        <!-- <button type="button" class="submit btn btn-primary">Save &amp; Continue</button> -->
+                                    </form>
+                                </div>
+                            <?php } ?>
+                            <!-- <div id="medical_history_tab" class="tab-pane">
                         <form id="medicalHistoryForm" method="POST">
                             <?php //medicalHistoryTab($pid);
                             ?>
                             <button type="button" class="submit btn btn-primary">Save &amp; Continue</button>
                         </form>
                     </div> -->
-                    <?php if (noticePracticeTabSaved($pid)) { ?>
-                        <div id="notice_practice_tab" class="tab-pane">
-                            <form id="noticePracticeForm" method="POST">
-                                <input type="hidden" name="noticePracticeTab" value="noticePracticeForm">
-                                <?php noticePracticeTab($pid); ?>
-                                <!-- <button id="notice_practice" type="button" class="submit btn btn-primary">Save &amp; Continue</button> -->
-                            </form>
+                            <?php if (noticePracticeTabSaved($pid)) { ?>
+                                <div id="notice_practice_tab" class="tab-pane">
+                                    <form id="noticePracticeForm" method="POST">
+                                        <input type="hidden" name="noticePracticeTab" value="noticePracticeForm">
+                                        <?php noticePracticeTabEdit($pid); ?>
+                                        <!-- <button id="notice_practice" type="button" class="submit btn btn-primary">Save &amp; Continue</button> -->
+                                    </form>
+                                </div>
+                            <?php } ?>
+                            <?php if (releaseTabSaved($pid)) { ?>
+                                <div id="release_tab" class="tab-pane">
+                                    <form id="releaseForm" method="POST">
+                                        <input type="hidden" name="releaseTab" value="releaseForm">
+                                        <?php releaseTabEdit($pid); ?>
+                                        <!-- <button type="button" class="submit btn btn-primary" id="release">Save</button> -->
+                                    </form>
+                                </div>
+                            <?php } ?>
                         </div>
-                    <?php } ?>
-                    <?php if (releaseTabSaved($pid)) { ?>
-                        <div id="release_tab" class="tab-pane">
-                            <form id="releaseForm" method="POST">
-                                <input type="hidden" name="releaseTab" value="releaseForm">
-                                <?php releaseTab($pid); ?>
-                                <!-- <button type="button" class="submit btn btn-primary" id="release">Save</button> -->
-                            </form>
-                        </div>
-                    <?php } ?>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php } else { ?>
+            <div class="alert alert-danger text-center" role="alert">
+                You haven't submitted forms yet!
+            </div>
+        <?php } ?>
     </div>
-
 </body>
 <script>
     $(document).ready(function() {
