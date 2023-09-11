@@ -7,20 +7,36 @@ $ignoreAuth = true;
 include_once('../../../interface/globals.php');
 include_once("../../../library/sql.inc");
 
+function referralTab($pid)
+{
+    require_once('./tabs/referral-tab.php');
+}
 
+function referralTabSaved($pid)
+{
+    $referralCount = sqlQuery("select count(*) as count from patient_referral_form where pid = ?", [$pid]);
+    if ($referralCount['count']) return true;
+    return false;
+}
+
+function referralTabEdit($pid)
+{
+    $referral = sqlQuery("select * from patient_referral_form where pid = ?", [$pid]);
+    require_once('./tabs_edit/referral-tab.php');
+}
 function therapeuticTab($pid)
 {
     require_once('./tabs/therapeutic-tab.php');
 }
 function therapeuticTabSaved($pid)
 {
-    $referralCount = sqlQuery("select count(*) as count from patient_therapeutic_form where pid = ?", [$pid]);
-    if ($referralCount['count']) return true;
+    $therapeuticCount = sqlQuery("select count(*) as count from patient_therapeutic_form where pid = ?", [$pid]);
+    if ($therapeuticCount['count']) return true;
     return false;
 }
 function therapeuticTabEdit($pid)
 {
-    $referral = sqlQuery("select * from patient_therapeutic_form where pid = ?", [$pid]);
+    $therapeutic = sqlQuery("select * from patient_therapeutic_form where pid = ?", [$pid]);
     require_once('./tabs_edit/therapeutic-tab.php');
 }
 function medicalHistoryTab($pid)
@@ -67,23 +83,7 @@ function releaseTabEdit($pid)
     // $referral = sqlQuery("select * from patient_therapeutic_form where pid = ?", [$pid]);
     require_once('./tabs_edit/release-tab.php');
 }
-function referralTab($pid)
-{
-    require_once('./tabs/referral-tab.php');
-}
 
-function referralTabSaved($pid)
-{
-    $referralCount = sqlQuery("select count(*) as count from patient_referral_form where pid = ?", [$pid]);
-    if ($referralCount['count']) return true;
-    return false;
-}
-
-function referralTabEdit($pid)
-{
-    $referral = sqlQuery("select * from patient_referral_form where pid = ?", [$pid]);
-    require_once('./tabs_edit/referral-tab.php');
-}
 function generateDropdown($list_id = '', $name = '')
 {
     $getList = sqlStatement("select * from list_options where list_id = ? and activity = 1 order by seq asc", [$list_id]);

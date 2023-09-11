@@ -78,11 +78,16 @@
     <div class="row" name="insuranceComDiv" style="display:block">
         <label>Insurance Company</label><br>
         <select name="insurance_comapny" class="form-control" style="width:50%;">
-            <option value="<?= $row['id'] ?>"><?= $row['id'] ?></option>
             <?php
-            $getComapnies = sqlStatement("select id, name from insurance_companies");
-            while ($row = sqlFetchArray($getComapnies)) { ?>
-                <option value="<?= $row['id'] ?>"> <?= $row['id'] ?></option>
+            $getComapnies = sqlStatement("select id, name from insurance_companies where id =" . $referral['insurance_comapny']);
+            while ($row = sqlFetchArray($getComapnies)) {
+                $optionId = $row['row_id'];
+                $selected = ""; // Initialize selected as empty string
+                if ($optionId == $_POST['insurance_comapny']) {
+                    $selected = "selected"; // Set selected to "selected" if it matches the POST value
+                    $disabled = "disabled";
+                } ?>
+                <option value="<?= $row['id'] ?>" <?= $selected ?> <?= $disabled ?>><?= $row['name'] ?></option>
             <?php } ?>
         </select><br>
         <label>insuranceID</label><br>
@@ -90,7 +95,7 @@
     </div>
 <?php } ?>
 <?php if ($referral['payment_ifo'] == 'Eap') { ?>
-    <div class="row" name="eapDiv" style="display: none;">
+    <div class="row" name="eapDiv" style="display: Block;">
         <label>Name of the EAP program <span style="color: red;"> * </span></label>
         <?= selectedRadioButtons('eap_pgms_rad', 'eap_pgms', $referral['eap_pgms'] ?? '', true) ?>
 
