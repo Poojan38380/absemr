@@ -26,7 +26,7 @@
     <label>How long have you been unemployed? <span style="color:red"> * </span></label></br>
     <input type="text" style="width:50%" name="how_long_unemployeed" class="form-control"></br>
     <label>Reason for unemployment <span style="color:red"> * </span></label></br>
-    <textarea name="reason_unemployee"></textarea>
+    <textarea name="reason_unemployee" class="form-control"></textarea>
 </div>
 
 <div class="row" style="display:none" name="publicAssistanceDiv">
@@ -586,4 +586,3 @@
     <label>Please explain what your current primary mental health concerns are and what is motivation to seek help?</label></br>
     <textarea name="explain_primary_mentalHealth" class="form-control"></textarea>
 </div>
-
