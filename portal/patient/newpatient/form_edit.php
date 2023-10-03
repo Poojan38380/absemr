@@ -216,10 +216,10 @@ $pid = $_SESSION['pid'];
                         <div class="tab-content">
                             <?php if (referralTabSaved($pid)) { ?>
                                 <div id="referral_tab" class="tab-pane">
-                                    <form id="referralForm" method="POST" onsubmit="closeTab('referral_tab', 'referralForm'); return false;">
-                                        <input type="hidden" name="referralTab" value="referralForm">
+                                    <form id="referralForm" method="POST">
+                                        <input type="hidden" name="updateReferralTab" value="referralForm">
                                         <?php referralTabEdit($pid); ?>
-                                        <!-- <button type="button" class="submit btn btn-primary">Save &amp; Continue</button> -->
+                                        <button type="button" class="submit btn btn-primary">Update &amp; Continue</button>
                                     </form>
                                 </div>
                             <?php } ?>
@@ -293,19 +293,12 @@ $pid = $_SESSION['pid'];
 
             $.ajax({
                 type: 'POST',
-                url: './formAjax.php',
+                url: './updateAjax.php',
                 data: $('#referralForm').serialize(),
                 success: function(data) {
                     $("#tabs").tabs({
                         active: 1
                     });
-                    form[0].reset();
-                    // Hide the tab content for the form that was just submitted
-                    $('#referral_tab').hide();
-
-                    // Hide the corresponding tab <li>
-                    $('ul.ui-tabs-nav li a[href="#referral_tab"]').parent().hide();
-
                 }
             });
         });
@@ -440,7 +433,6 @@ $pid = $_SESSION['pid'];
             } else {
                 $('div[name=insuranceComDiv]').css('display', 'none');
             }
-            console.log($(this).val());
             if ($(this).val() == 'Eap') {
                 $('div[name=eapDiv]').css('display', 'block');
             } else {
@@ -523,27 +515,27 @@ $pid = $_SESSION['pid'];
         });
 
 
-        // $(document).on('change', 'select[name=living_environment]', function() {
-        //     if ($(this).val() == 'apartment') {
-        //         $('div[name=aptnumber]').css('display', 'block');
-        //     } else
-        //         $('div[name=aptnumber]').css('display', 'none');
+        $(document).on('change', 'select[name=living_environment]', function() {
+            if ($(this).val() == 'apartment') {
+                $('div[name=aptnumber]').css('display', 'block');
+            } else
+                $('div[name=aptnumber]').css('display', 'none');
 
-        //     if ($(this).val() == '3_quater') {
-        //         $('div[name=quaHouse]').css('display', 'block');
-        //     } else
-        //         $('div[name=quaHouse]').css('display', 'none');
+            if ($(this).val() == '3_quater') {
+                $('div[name=quaHouse]').css('display', 'block');
+            } else
+                $('div[name=quaHouse]').css('display', 'none');
 
-        //     if ($(this).val() == 'half_way') {
-        //         $('div[name=halfHouse]').css('display', 'block');
-        //     } else
-        //         $('div[name=halfHouse]').css('display', 'none');
+            if ($(this).val() == 'half_way') {
+                $('div[name=halfHouse]').css('display', 'block');
+            } else
+                $('div[name=halfHouse]').css('display', 'none');
 
-        //     if ($(this).val() == 'Shelter') {
-        //         $('div[name=shelterName]').css('display', 'block');
-        //     } else
-        //         $('div[name=shelterName]').css('display', 'none');
-        // });
+            if ($(this).val() == 'Shelter') {
+                $('div[name=shelterName]').css('display', 'block');
+            } else
+                $('div[name=shelterName]').css('display', 'none');
+        });
 
         $(document).on('change', 'input[name^=therapSupportList]', function() {
             if ($(this).val() == 'employeement') {

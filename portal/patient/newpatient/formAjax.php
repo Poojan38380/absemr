@@ -249,3 +249,16 @@ if (isset($_POST['releaseTab'])) {
 
     // return $_POST;
 }
+
+if (isset($_POST['updateReferralTab'])) {
+
+
+    foreach ($_POST as $key => $value) {
+        if (is_array($_POST[$key])) {
+            $_POST[$key]  = implode('|', $_POST[$key]);
+        }
+    }
+    //changingOfValues();
+    unset($_POST['updateReferralTab']);
+    formUpdate('patient_referral_form', $_POST, '');
+}

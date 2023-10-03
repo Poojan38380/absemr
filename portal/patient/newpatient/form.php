@@ -19,6 +19,32 @@ use OpenEMR\Core\Header;
     <script src="<?php echo $GLOBALS['web_root']; ?>/portal/sign/assets/signer_api.js?v=<?php echo $GLOBALS['v_js_includes']; ?>"></script>
     <script src="<?php echo $GLOBALS['web_root']; ?>/portal/sign/assets/signature_pad.umd.js?v=<?php echo $GLOBALS['v_js_includes']; ?>"></script>
     <script src="<?php echo $GLOBALS['web_root']; ?>/portal/patient/scripts/libs/LAB.min.js"></script>
+    <style>
+        .ui-tabs-nav.fixed-top {
+            position: fixed;
+            /* Fix the ul at the top of the page */
+            top: 0;
+            /* Adjust the top position as needed */
+            width: 100%;
+            /* Make the ul take the full width of the viewport */
+            z-index: 999;
+            /* Ensure the ul is above other content */
+            background-color: #e9e9e9;
+            /* Add a background color if needed */
+        }
+
+        .tabs-container {
+            position: relative;
+            /* Set the container as a reference for the fixed ul */
+        }
+
+        .tab-content {
+            margin-top: 15px;
+            /* Adjust margin-top to push the content below the fixed ul */
+
+            /* Add any other necessary styling for the tab content */
+        }
+    </style>
 </head>
 
 <body>
@@ -197,9 +223,13 @@ use OpenEMR\Core\Header;
             <a href="../../../interface/patient_file/summary/demographics.php" onclick="top.restoreSession()" title="Go Back">
                 <i class="bi bi-arrow-counterclockwise"></i>Back</a>
         </div> -->
+
+    <div id="successAlert" class="alert alert-success" style="display: none;">
+        Your form has been successfully submitted.
+    </div>
     <?php if ((!referralTabSaved($pid)) || (!therapeuticTabSaved($pid)) || (!noticePracticeTabSaved($pid)) || (!releaseTabSaved($pid))) { ?>
         <div id="tabs">
-            <ul>
+            <ul class="fixed-top">
                 <?php if (!referralTabSaved($pid)) { ?>
                     <li><a href="#referral_tab">Referral Form</a></li>
                 <?php } ?>
@@ -214,55 +244,55 @@ use OpenEMR\Core\Header;
                     <li><a href="#release_tab">Informed Consent For The Release Of Information</a></li>
                 <?php } ?>
             </ul>
-            <div>
-                <div class="panel-body p-0">
-                    <div class="tab-content">
-                        <?php if (!referralTabSaved($pid)) { ?>
-                            <div id="referral_tab" class="tab-pane">
-                                <form id="referralForm" method="POST">
-                                    <input type="hidden" name="referralTab" value="referralForm">
-                                    <?php referralTab($pid); ?>
-                                    <button type="button" class="submit btn btn-primary">Save &amp; Continue</button>
-                                </form>
-                            </div>
-                        <?php } ?>
-                        <?php if (!therapeuticTabSaved($pid)) { ?>
-                            <div id="therapeutic_tab" class="tab-pane">
-                                <form id="therapeuticForm" method="POST">
-                                    <input type="hidden" name="therapeuticTab" value="therapeuticForm">
-                                    <?php therapeuticTab($pid); ?>
-                                    <button type="button" class="submit btn btn-primary">Save &amp; Continue</button>
-                                </form>
-                            </div>
-                        <?php } ?>
-                        <!-- <div id="medical_history_tab" class="tab-pane">
+
+            <div class="panel-body p-0">
+                <div class="tab-content">
+                    <?php if (!referralTabSaved($pid)) { ?>
+                        <div id="referral_tab" class="tab-pane">
+                            <form id="referralForm" method="POST">
+                                <input type="hidden" name="referralTab" value="referralForm">
+                                <?php referralTab($pid); ?>
+                                <button type="button" class="submit btn btn-primary">Save &amp; Continue</button>
+                            </form>
+                        </div>
+                    <?php } ?>
+                    <?php if (!therapeuticTabSaved($pid)) { ?>
+                        <div id="therapeutic_tab" class="tab-pane">
+                            <form id="therapeuticForm" method="POST">
+                                <input type="hidden" name="therapeuticTab" value="therapeuticForm">
+                                <?php therapeuticTab($pid); ?>
+                                <button type="button" class="submit btn btn-primary">Save &amp; Continue</button>
+                            </form>
+                        </div>
+                    <?php } ?>
+                    <!-- <div id="medical_history_tab" class="tab-pane">
                         <form id="medicalHistoryForm" method="POST">
                             <?php //medicalHistoryTab($pid);
                             ?>
                             <button type="button" class="submit btn btn-primary">Save &amp; Continue</button>
                         </form>
                     </div> -->
-                        <?php if (!noticePracticeTabSaved($pid)) { ?>
-                            <div id="notice_practice_tab" class="tab-pane">
-                                <form id="noticePracticeForm" method="POST">
-                                    <input type="hidden" name="noticePracticeTab" value="noticePracticeForm">
-                                    <?php noticePracticeTab($pid); ?>
-                                    <button id="notice_practice" type="button" class="submit btn btn-primary">Save &amp; Continue</button>
-                                </form>
-                            </div>
-                        <?php } ?>
-                        <?php if (!releaseTabSaved($pid)) { ?>
-                            <div id="release_tab" class="tab-pane">
-                                <form id="releaseForm" method="POST">
-                                    <input type="hidden" name="releaseTab" value="releaseForm">
-                                    <?php releaseTab($pid); ?>
-                                    <button type="button" class="submit btn btn-primary" id="release">Save</button>
-                                </form>
-                            </div>
-                        <?php } ?>
-                    </div>
+                    <?php if (!noticePracticeTabSaved($pid)) { ?>
+                        <div id="notice_practice_tab" class="tab-pane">
+                            <form id="noticePracticeForm" method="POST">
+                                <input type="hidden" name="noticePracticeTab" value="noticePracticeForm">
+                                <?php noticePracticeTab($pid); ?>
+                                <button id="notice_practice" type="button" class="submit btn btn-primary">Save &amp; Continue</button>
+                            </form>
+                        </div>
+                    <?php } ?>
+                    <?php if (!releaseTabSaved($pid)) { ?>
+                        <div id="release_tab" class="tab-pane">
+                            <form id="releaseForm" method="POST">
+                                <input type="hidden" name="releaseTab" value="releaseForm">
+                                <?php releaseTab($pid); ?>
+                                <button type="button" class="submit btn btn-primary" id="release">Save</button>
+                            </form>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
+
         </div>
         <!-- </div> -->
     <?php } else { ?>
@@ -273,7 +303,6 @@ use OpenEMR\Core\Header;
 </body>
 <script>
     $(document).ready(function() {
-
 
         $("#tabs").tabs({
             active: 0
@@ -300,7 +329,7 @@ use OpenEMR\Core\Header;
                 data: $('#referralForm').serialize(),
                 success: function(data) {
                     $("#tabs").tabs({
-                        active: 0
+                        active: 1
                     });
                     form[0].reset();
                     // Hide the tab content for the form that was just submitted
@@ -308,7 +337,14 @@ use OpenEMR\Core\Header;
 
                     // Hide the corresponding tab <li>
                     $('ul.ui-tabs-nav li a[href="#referral_tab"]').parent().hide();
+                    // Show the success message
 
+                    $('#successAlert').fadeIn();
+
+                    // You can also hide the success message after a certain time if needed
+                    setTimeout(function() {
+                        $('#successAlert').fadeOut();
+                    }, 5000); // Hide after 5 seconds (adjust the time as needed)
                 }
             });
         });
@@ -323,7 +359,7 @@ use OpenEMR\Core\Header;
                 data: $('#therapeuticForm').serialize(),
                 success: function(data) {
                     $("#tabs").tabs({
-                        active: 0
+                        active: 1
                     });
                     // Save state to local storage
                     form[0].reset();
@@ -332,7 +368,13 @@ use OpenEMR\Core\Header;
 
                     // Hide the corresponding tab <li>
                     $('ul.ui-tabs-nav li a[href="#therapeutic_tab"]').parent().hide();
+                    // Show the success message
+                    $('#successAlert').fadeIn();
 
+                    // You can also hide the success message after a certain time if needed
+                    setTimeout(function() {
+                        $('#successAlert').fadeOut();
+                    }, 5000); // Hide after 5 seconds (adjust the time as needed)
                 }
             });
         });
@@ -378,7 +420,7 @@ use OpenEMR\Core\Header;
                 data: payload,
                 success: function(data) {
                     $("#tabs").tabs({
-                        active: 0
+                        active: 1
                     })
                     form[0].reset();
                     // Hide the tab content for the form that was just submitted
@@ -386,7 +428,13 @@ use OpenEMR\Core\Header;
 
                     // Hide the corresponding tab <li>
                     $('ul.ui-tabs-nav li a[href="#notice_practice_tab"]').parent().hide();
-                    console.log('Template content saved successfully.');
+                    // Show the success message
+                    $('#successAlert').fadeIn();
+
+                    // You can also hide the success message after a certain time if needed
+                    setTimeout(function() {
+                        $('#successAlert').fadeOut();
+                    }, 5000); // Hide after 5 seconds (adjust the time as needed)
                 },
                 error: function(error) {
                     console.error('Error saving template content:', error);
@@ -415,7 +463,14 @@ use OpenEMR\Core\Header;
                     $('#release_tab').hide();
                     // Hide the corresponding tab <li>
                     $('ul.ui-tabs-nav li a[href="#release_tab"]').parent().hide();
-                    console.log('Template content saved successfully.');
+
+                    // Show the success message
+                    $('#successAlert').fadeIn();
+                    // You can also hide the success message after a certain time if needed
+                    setTimeout(function() {
+                        $('#successAlert').fadeOut();
+                    }, 5000); // Hide after 5 seconds (adjust the time as needed)
+
                 },
                 error: function(error) {
                     console.error('Error saving template content:', error);

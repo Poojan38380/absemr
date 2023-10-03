@@ -150,25 +150,45 @@ function generateRadioButtons($list_id = '', $name = '')
     return $radio;
 }
 
-function selectedRadioButtons($list_id = '', $name = '', $selected_value = '', $disabled = false)
+function selectedRadioButtons($list_id = '', $name = '', $selected_value = '')
 {
     $getList = sqlStatement("select * from list_options where list_id=? and activity=1 order by seq asc", [$list_id]);
     $radio = '';
 
     while ($row = sqlFetchArray($getList)) {
         $isChecked = ($row['option_id'] == $selected_value) ? 'checked' : '';
-        $isDisabled = $disabled ? 'disabled' : '';
+        // $isDisabled = $disabled ? 'disabled' : '';
         $radio .= sprintf(
-            '<div class="radio"><label><input type="radio" name="%s" value="%s" %s %s> %s</label></div>',
+            '<div class="radio"><label><input type="radio" name="%s" value="%s" %s> %s</label></div>',
             $name,
             $row['option_id'],
             $isChecked,
-            $isDisabled,
             $row['title']
         );
     }
 
     return $radio;
+}
+
+function selectedCheckboxes($list_id = '', $name = '', $selected_values = '')
+{
+    $getList = sqlStatement("select * from list_options where list_id=? and activity=1 order by seq asc", [$list_id]);
+    $checkboxes = '';
+
+    while ($row = sqlFetchArray($getList)) {
+        $isChecked = ($row['option_id'] == $selected_values) ? 'checked' : '';
+        // var_dump($selected_values);
+        // $isDisabled = $disabled ? 'disabled' : '';
+        $checkboxes .= sprintf(
+            '<div class="checkbox"><label><input type="checkbox" name="%s[]" value="%s" %s> %s</label></div>',
+            $name,
+            $row['option_id'],
+            $isChecked,
+            $row['title']
+        );
+    }
+
+    return $checkboxes;
 }
 
 
