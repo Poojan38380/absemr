@@ -199,9 +199,9 @@ $clinical_notes_category = $clinicalNotesService->getClinicalNoteCategories();
                                                 <input type='text' id="code_date_<?php echo attr($key) + 1; ?>" name='code_date[]' class="form-control code_date datepicker" value='<?php echo attr($obj["date"] ?? ''); ?>' title='<?php echo xla('yyyy-mm-dd Date of service'); ?>' />
                                             </div>
                                             <div class="col-12">
-                                                <label for="clinical_notes_type_<?php echo attr($key) + 1; ?>" class="h5"><?php echo xlt('Type'); ?>:</label>
+                                                <label for="clinical_notes_type_<?php echo attr($key) + 1; ?>" class="h5"><?php echo xlt('Diagnoses'); ?>:</label>
                                                 <select name="clinical_notes_type[]" id="clinical_notes_type_<?php echo attr($key) + 1; ?>" class="form-control clinical_notes_type" onchange="typeChange(this)">
-                                                    <option value=""><?php echo xlt('Select Note Type'); ?></option>
+                                                    <option value=""><?php echo xlt('Select Note Diagnoses'); ?></option>
                                                     <?php foreach ($clinical_notes_type as $value) :
                                                         $selected = ($value['value'] == $obj["clinical_notes_type"]) ? 'selected="selected"' : '';
                                                         if (!empty($selected)) {
