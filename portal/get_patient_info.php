@@ -93,7 +93,7 @@ DEFINE("COL_POR_LOGINUSER", "portal_login_username");
 DEFINE("COL_POR_PWD_STAT", "portal_pwd_status");
 DEFINE("COL_POR_ONETIME", "portal_onetime");
 
-$showPayment = true;
+//$showPayment = true;
 // 2 is flag for one time credential reset else 1 = normal reset.
 // one time reset requires a PIN where normal uses a new temp pass sent to user.
 if ($password_update === 2 && !empty($_SESSION['pin'])) {
