@@ -93,7 +93,7 @@ DEFINE("COL_POR_LOGINUSER", "portal_login_username");
 DEFINE("COL_POR_PWD_STAT", "portal_pwd_status");
 DEFINE("COL_POR_ONETIME", "portal_onetime");
 
-//$showPayment = true;
+$showPayment = true;
 // 2 is flag for one time credential reset else 1 = normal reset.
 // one time reset requires a PIN where normal uses a new temp pass sent to user.
 if ($password_update === 2 && !empty($_SESSION['pin'])) {
@@ -231,8 +231,7 @@ if ($userData = sqlQuery($sql, array($auth['pid']))) { // if query gets executed
             );
             $authorizedPortal = true;
             $logit->portalLog('password update', $auth['pid'], ($_POST['login_uname'] . ': ' . $_SESSION['ptName'] . ':success'));
-	}
-	$showPayment = false;
+	    }
     }
 
     if ($auth['portal_pwd_status'] == 0) {
@@ -242,6 +241,21 @@ if ($userData = sqlQuery($sql, array($auth['pid']))) { // if query gets executed
             header('Location: ' . $landingpage);
             exit();
         }
+    }
+    function checkFormsStatus()
+    {
+        $pid = $_SESSION['pid'];
+        $therapeuticCount = sqlQuery("select count(*) as count from patient_therapeutic_form where pid = ?", [$pid]);
+        $referralCount = sqlQuery("select count(*) as count from patient_notice_form where pid = ?", [$pid]);
+        $releaseCount = sqlQuery("select count(*) as count from patient_release_form where pid = ?", [$pid]);
+        if ($therapeuticCount['count'] && $referralCount['count'] && $releaseCount['count']) {
+            return true;
+        }
+        return false;
+    }
+
+    if (checkFormsStatus()) {
+        $showPayment = false;
     }
 
     if ($auth['portal_pwd_status'] == 1) {
@@ -284,5 +298,5 @@ if ($userData = sqlQuery($sql, array($auth['pid']))) { // if query gets executed
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header("Cache-Control: no-cache");
 header("Pragma: no-cache");
-header('Location: ./home.php');
+header('Location: ./home.php?screen=' . $showPayment);
 exit();
