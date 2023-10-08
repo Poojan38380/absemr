@@ -265,4 +265,11 @@ $clinical_notes_category = $clinicalNotesService->getClinicalNoteCategories();
         </div>
     </div>
 </body>
+<script>
+    const defaultText = 'Client Completed intake session. Client completed a comprehensive Psycho-Social Evaluation, mental-status exam, a treatment plan and agreed to work on therapeutic goals and objectives as stated in the evaluation and treatment plan. Client agreed to follow up with the medical doctor for a physical evaluation and bring back a copy of PE from PCP for coordination of care. Client agreed to participate in psychotherapy sessions and therapy sessions will start this week or next week.';
+    const narrative = document.getElementById('description_1');
+    if (narrative.value === '') {
+        narrative.value = defaultText;
+    }
+</script>
 </html>
