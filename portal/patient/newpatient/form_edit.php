@@ -253,7 +253,7 @@ $pid = $_SESSION['pid'];
                                     <form id="releaseForm" method="POST">
                                         <input type="hidden" name="releaseTab" value="releaseForm">
                                         <?php releaseTabEdit($pid); ?>
-                                        <!-- <button type="button" class="submit btn btn-primary" id="release">Save</button> -->
+                                         <button type="button" class="submit btn btn-primary" id="release">Save</button>
                                     </form>
                                 </div>
                             <?php } ?>
@@ -263,7 +263,7 @@ $pid = $_SESSION['pid'];
             </div>
         <?php } else { ?>
             <div class="alert alert-danger text-center" role="alert">
-                You haven't submitted forms yet!
+                <?php xlt('Patients have not filled out intake form yet.'); ?>
             </div>
         <?php } ?>
     </div>
