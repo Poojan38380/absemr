@@ -249,9 +249,9 @@ if ($userData = sqlQuery($sql, array($auth['pid']))) { // if query gets executed
         $referralCount = sqlQuery("select count(*) as count from patient_notice_form where pid = ?", [$pid]);
         $releaseCount = sqlQuery("select count(*) as count from patient_release_form where pid = ?", [$pid]);
         if ($therapeuticCount['count'] && $referralCount['count'] && $releaseCount['count']) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     if (checkFormsStatus()) {
