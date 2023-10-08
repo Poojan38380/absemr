@@ -160,10 +160,10 @@
 
 <div class="row">
     <label>
-        Who Referred You to ABS? Please include all involved agencies with all contact
+        <?php echo xlt('Who Referred You to ABS? Please include all involved agencies with all contact
         information, including phone numbers and emails. If you where referred by a court
         please also include attorney information. If you have more then one case please let
-        us know now to help you.
+        us know now to help you') ?>.
     </label>
     <?= selectedCheckboxes('refsource', 'Who_Referred_You_to_ABS_', $referral['Who_Referred_You_to_ABS_'] ?? '') ?>
 
