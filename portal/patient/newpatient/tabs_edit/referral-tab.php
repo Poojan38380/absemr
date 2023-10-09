@@ -35,12 +35,12 @@
 <div class="row"><label>What type of living environment do you reside in?</label>
     <?= selectedDropdown('living_environment', 'living_environment', $referral['living_environment'] ?? '') ?>
 </div>
-<?php if ($referral['living_environment'] == 'Shelter') { ?>
+<?php //if ($referral['living_environment'] == 'Shelter') { ?>
 <div class="row">
     <h5>Shelter Name:</h5>
     <?php echo $referral['shelter_name'] ?>
 </div>
-<?php } ?>
+<?php //} ?>
 
 
 <div class="row" name="aptnumber" style="display:none">
