@@ -23,6 +23,10 @@ if (isset($_POST['updateReferralTab'])) {
     }
     //changingOfValues();
     unset($_POST['updateReferralTab']);
-    file_put_contents('/var/www/html/traps/referralupdate.txt', print_r($_POST, true));
-    formUpdate('patient_referral_form', $_POST, $_POST['id']);
+    foreach ($_POST as $key => $value) {
+        $sql = "UPDATE `patient_referral_form` SET ? = ? where id = ?";
+        if (!$_POST['id']) {
+            sqlStatement($sql, [$key, $value, $_POST['id']]);
+        }
+    }
 }
