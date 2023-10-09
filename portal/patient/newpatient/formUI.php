@@ -27,7 +27,7 @@ function referralTabId($pid)
 
 function referralTabEdit($pid)
 {
-    //$referral = sqlQuery("select * from patient_referral_form where pid = ?", [$pid]);
+    $referral = sqlQuery("select * from patient_referral_form where pid = ?", [$pid]);
     require_once('./tabs_edit/referral-tab.php');
 }
 function therapeuticTab($pid)
