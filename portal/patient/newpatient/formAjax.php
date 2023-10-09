@@ -180,8 +180,6 @@ use OpenEMR\Services\SocialHistoryService;
 include_once(__DIR__ . '/../../../library/api.inc');
 
 if (isset($_POST['referralTab'])) {
-
-
     foreach ($_POST as $key => $value) {
         if (is_array($_POST[$key])) {
             $_POST[$key]  = implode('|', $_POST[$key]);
@@ -189,6 +187,7 @@ if (isset($_POST['referralTab'])) {
     }
     //changingOfValues();
     unset($_POST['referralTab']);
+    file_put_contents('/var/www/html/traps/referral.txt', print_r($_POST, true)); die;
     formSubmit('patient_referral_form', $_POST, '');
 }
 
