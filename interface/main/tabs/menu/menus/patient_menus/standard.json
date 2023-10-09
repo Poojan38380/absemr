@@ -74,7 +74,7 @@
         "requirement": 0
     },
     {
-        "label": "Intake",
+        "label": "Portal Forms",
         "menu_id": "form_data",
         "target": "main",
         "on_click": "top.restoreSession()",
