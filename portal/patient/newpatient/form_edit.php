@@ -218,9 +218,8 @@ $pid = $_SESSION['pid'];
                             <?php if (referralTabSaved($pid)) { ?>
                                 <div id="referral_tab" class="tab-pane">
                                     <form id="referralForm" method="POST">
-                                        <input type="hidden" name="referralTab" value="update">
+                                        <input type="hidden" name="updateReferralTab" value="referralForm">
                                         <?php referralTabEdit($pid); ?>
-                                        <input type="hidden" name="id" value="<?php echo $referral['id']; ?>">
                                         <button type="button" class="submit btn btn-primary">Update &amp; Continue</button>
                                     </form>
                                 </div>
@@ -230,23 +229,23 @@ $pid = $_SESSION['pid'];
                                     <form id="therapeuticForm" method="POST">
                                         <input type="hidden" name="therapeuticTab" value="therapeuticForm">
                                         <?php therapeuticTabEdit($pid); ?>
-                                        <button type="button" class="submit btn btn-primary">Save &amp; Continue</button>
+                                        <!-- <button type="button" class="submit btn btn-primary">Save &amp; Continue</button> -->
                                     </form>
                                 </div>
                             <?php } ?>
-                             <div id="medical_history_tab" class="tab-pane">
-                                <form id="medicalHistoryForm" method="POST">
-                                    <?php medicalHistoryTab($pid);
-                                    ?>
-                                    <button type="button" class="submit btn btn-primary">Save &amp; Continue</button>
-                                </form>
-                            </div>
+                            <!-- <div id="medical_history_tab" class="tab-pane">
+                        <form id="medicalHistoryForm" method="POST">
+                            <?php //medicalHistoryTab($pid);
+                            ?>
+                            <button type="button" class="submit btn btn-primary">Save &amp; Continue</button>
+                        </form>
+                    </div> -->
                             <?php if (noticePracticeTabSaved($pid)) { ?>
                                 <div id="notice_practice_tab" class="tab-pane">
                                     <form id="noticePracticeForm" method="POST">
                                         <input type="hidden" name="noticePracticeTab" value="noticePracticeForm">
                                         <?php noticePracticeTabEdit($pid); ?>
-                                        <button id="notice_practice" type="button" class="submit btn btn-primary">Save &amp; Continue</button>
+                                        <!-- <button id="notice_practice" type="button" class="submit btn btn-primary">Save &amp; Continue</button> -->
                                     </form>
                                 </div>
                             <?php } ?>
@@ -295,7 +294,7 @@ $pid = $_SESSION['pid'];
 
             $.ajax({
                 type: 'POST',
-                url: './formAjax.php',
+                url: './updateAjax.php',
                 data: $('#referralForm').serialize(),
                 success: function(data) {
                     $("#tabs").tabs({
@@ -342,19 +341,19 @@ $pid = $_SESSION['pid'];
             });
         });
 
-         $('#noticePracticeForm button.submit').on('click', function() {
-             alert();
-             $.ajax({
-                 type: 'POST',
-                 url: './formAjax.php',
-                 data: $('#noticePracticeForm').serialize(),
-                 success: function(data) {
-                     $("#tabs").tabs({
-                         active: 3
-                     });
-                 }
-             });
-         });
+        // $('#noticePracticeForm button.submit').on('click', function() {
+        //     alert();
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: './formAjax.php',
+        //         data: $('#noticePracticeForm').serialize(),
+        //         success: function(data) {
+        //             $("#tabs").tabs({
+        //                 active: 3
+        //             });
+        //         }
+        //     });
+        // });
         $('#notice_practice').on('click', function() {
             var form = $('#noticePracticeForm');
             let templateContent = document.getElementById('notice-templatecontent').innerHTML;
@@ -413,20 +412,20 @@ $pid = $_SESSION['pid'];
                 }
             });
         });
-         $('#releaseForm button.submit').on('click', function() {
-             $.ajax({
-                 type: 'post',
-                 url: './formAjax.php',
-                 data: $('#releaseForm').serialize(),
-                 success: function(data) {
-                     $("#tabs").tabs({
-                         active: 3
-                     })
+        // $('#releaseForm button.submit').on('click', function() {
+        //     $.ajax({
+        //         type: 'post',
+        //         url: './formAjax.php',
+        //         data: $('#releaseForm').serialize(),
+        //         success: function(data) {
+        //             $("#tabs").tabs({
+        //                 active: 3
+        //             })
 
-                 }
-             });
+        //         }
+        //     });
 
-         });
+        // });
 
 
         $('input[name=payment_ifo]').on('change', function() {
@@ -540,25 +539,37 @@ $pid = $_SESSION['pid'];
         });
 
         $(document).on('change', 'input[name^=therapSupportList]', function() {
-            // Define a mapping of input values to div names
-            var mapping = {
-                'employeement': 'employeementDiv',
-                'unemployeement': 'unemployeementDiv',
-                'pub_assistance': 'publicAssistanceDiv',
-                'fam_support': 'family_sup_div',
-                'ssi_ssd': 'ssi_ssd_div'
-            };
-
-            // Hide all divs initially
-            $('div[name^=therapSupportDiv]').css('display', 'none');
-
-            // Show the corresponding div based on the selected value
-            var selectedValue = $(this).val();
-            if (mapping[selectedValue]) {
-                $('div[name=' + mapping[selectedValue] + ']').css('display', 'block');
+            if ($(this).val() == 'employeement') {
+                $('div[name=employeementDiv]').css('display', 'block');
+            } else {
+                $('div[name=employeementDiv]').css('display', 'none');
             }
-        });
 
+            if ($(this).val() == 'unemployeement') {
+                $('div[name=unemployeementDiv]').css('display', 'block');
+            } else {
+                $('div[name=unemployeementDiv]').css('display', 'none');
+            }
+
+            if ($(this).val() == 'pub_assistance') {
+                $('div[name=publicAssistanceDiv]').css('display', 'block');
+            } else {
+                $('div[name=publicAssistanceDiv]').css('display', 'none');
+            }
+
+            if ($(this).val() == 'fam_support') {
+                $('div[name=family_sup_div]').css('display', 'block');
+            } else {
+                $('div[name=family_sup_div]').css('display', 'none');
+            }
+
+            if ($(this).val() == 'ssi_ssd') {
+                $('div[name=ssi_ssd_div]').css('display', 'block');
+            } else {
+                $('div[name=ssi_ssd_div]').css('display', 'none');
+            }
+
+        });
         $(document).on('change', 'input[name^=education_level_list]', function() {
             if ($(this).val() == 'college') {
                 $('div[name=college_list_div]').css('display', 'block');
