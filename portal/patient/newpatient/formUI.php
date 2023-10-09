@@ -19,12 +19,6 @@ function referralTabSaved($pid)
     return false;
 }
 
-function referralTabId($pid)
-{
-    $referral = sqlQuery("select id from patient_referral_form where pid = ?", [$pid]);
-    return $referral['id'];
-}
-
 function referralTabEdit($pid)
 {
     $referral = sqlQuery("select * from patient_referral_form where pid = ?", [$pid]);
