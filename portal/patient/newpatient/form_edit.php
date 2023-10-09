@@ -299,9 +299,9 @@ $pid = $_SESSION['pid'];
                     $("#tabs").tabs({
                         active: 1
                     });
+                    alert('Referral form updated successfully.')
                 }
-                alert('Referral form updated successfully.');
-            });
+            })
         });
 
 
