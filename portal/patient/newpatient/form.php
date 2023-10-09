@@ -251,7 +251,7 @@ use OpenEMR\Core\Header;
                     <?php if (!referralTabSaved($pid)) { ?>
                         <div id="referral_tab" class="tab-pane">
                             <form id="referralForm" method="POST">
-                                <input type="hidden" name="referralTab" value="referralForm">
+                                <input type="hidden" name="referralTab" value="save">
                                 <?php referralTab($pid); ?>
                                 <button type="button" class="submit btn btn-primary">Save &amp; Continue</button>
                             </form>
