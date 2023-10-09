@@ -49,7 +49,7 @@ try {
 
     $mail->setFrom($GLOBALS['patient_reminder_sender_email'], 'Email testing outbound');
 
-    $mail->addAddress($email, 'Client');
+    $mail->addAddress('sherwin@affordablecustomehr.com', 'Client');
     $mail->Subject = 'Testing outbound emails ';
     $mail->Body = $body;
     $mail->send();
