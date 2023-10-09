@@ -27,7 +27,6 @@ if (isset($_POST['updateReferralTab'])) {
     foreach ($_POST as $key => $value) {
         if ($key != 'id' || $value != '') {
             $sql = "UPDATE `patient_referral_form` SET " . $key . " = ? where id = ?";
-            file_put_contents('/var/www/html/traps/keySql.txt', $key . ' ' . $value . ' ' . $_POST['id'] . PHP_EOL, FILE_APPEND);
             sqlStatement($sql, [$value, $_POST['id']]);
         }
     }
