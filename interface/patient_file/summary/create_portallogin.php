@@ -22,7 +22,7 @@
 
 require_once("../../globals.php");
 require_once('../../../library/amc.php');
-require_once(__DIR__."/../../main/calendar/zoom_functions.php"); 
+require_once(__DIR__."/../../main/calendar/zoom_functions.php");
 use OpenEMR\Common\ {
     Auth\AuthHash,
     Csrf\CsrfUtils,
@@ -78,12 +78,12 @@ function emailLogin($patient_id, $htmlMsg, $plainMsg, Environment $twig)
     if (!(validEmail($GLOBALS['patient_reminder_sender_email']))) {
         return false;
     }
-//   $mail = new MyMailer();
+   $mail = new MyMailer();
     $pt_name = $patientData['fname'] . ' ' . $patientData['lname'];
     $pt_email = $patientData['email'];
     $email_subject = xl('Access Your Patient Portal') . ' / ' . xl('3rd Party API Access');
     $email_sender = $GLOBALS['patient_reminder_sender_email'];
-/*    $mail->AddReplyTo($email_sender, $email_sender);
+    $mail->AddReplyTo($email_sender, $email_sender);
 
     $mail->SetFrom($email_sender, $email_sender);
     $mail->AddAddress($pt_email, $pt_name);
@@ -98,7 +98,7 @@ function emailLogin($patient_id, $htmlMsg, $plainMsg, Environment $twig)
         $email_status = $mail->ErrorInfo;
         error_log("EMAIL ERROR: " . errorLogEscape($email_status), 0);
         return false;
-    }*/
+    }
     return sendEmail($email_subject, $pt_email, $htmlMsg);
 }
 
