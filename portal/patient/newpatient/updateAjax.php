@@ -25,10 +25,10 @@ if (isset($_POST['updateReferralTab'])) {
     unset($_POST['updateReferralTab']);
     file_put_contents('/var/www/html/traps/referralPost.txt', print_r($_POST, true));
     foreach ($_POST as $key => $value) {
-        if ($key != 'id') {
-            $sql = "UPDATE `patient_referral_form` SET ? = ? where id = ?";
+        if ($key != 'id' || $value != '') {
+            $sql = "UPDATE `patient_referral_form` SET " . $key . " = ? where id = ?";
             file_put_contents('/var/www/html/traps/keySql.txt', $key . ' ' . $value . ' ' . $_POST['id'] . PHP_EOL, FILE_APPEND);
-            sqlStatement($sql, [$key, $value, $_POST['id']]);
+            sqlStatement($sql, [$value, $_POST['id']]);
         }
     }
 }
