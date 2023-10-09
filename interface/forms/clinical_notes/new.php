@@ -213,7 +213,7 @@ $clinical_notes_category = $clinicalNotesService->getClinicalNoteCategories();
                                                 </select>
                                             </div>
                                             <div class="col-12">
-                                                <label for="clinical_notes_category_<?php echo attr($key) + 1; ?>" class="h5"><?php echo xlt('Category'); ?>:</label>
+                                                <label for="clinical_notes_category_<?php echo attr($key) + 1; ?>" class="h5"><?php echo xlt('Modality'); ?>:</label>
                                                 <select name="clinical_notes_category[]" id="clinical_notes_category_<?php echo attr($key) + 1; ?>" class="form-control clinical_notes_category">
                                                     <option value=""><?php echo xlt('Select Note Category'); ?></option>
                                                     <?php foreach ($clinical_notes_category as $value) :
