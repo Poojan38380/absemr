@@ -189,7 +189,7 @@ $pid = $_SESSION['pid'];
     </script>
     <div class="container">
         <div class="mb-3">
-            <h2 class="text-center">Patient Intake Form</h2>
+            <h2 class="text-center">Patient Portal Forms</h2>
             <a href="../../../interface/patient_file/summary/demographics.php" onclick="top.restoreSession()" title="Go Back" class="btn btn-primary">
                 <i class="bi bi-arrow-counterclockwise"></i>Back</a>
         </div>
@@ -203,14 +203,13 @@ $pid = $_SESSION['pid'];
                     <?php if (therapeuticTabSaved($pid)) { ?>
                         <li><a href="#therapeutic_tab">Therapeutic Form</a></li>
                     <?php } ?>
-
+                    <!-- <li><a href="#medical_history_tab">Medical History</a></li> -->
                     <?php if (noticePracticeTabSaved($pid)) { ?>
                         <li><a href="#notice_practice_tab">Notice of practice policies</a></li>
                     <?php } ?>
                     <?php if (releaseTabSaved($pid)) { ?>
                         <li><a href="#release_tab">Informed Consent For The Release Of Information</a></li>
                     <?php } ?>
-                    <li><a href="#medical_history_tab">Medical History</a></li>
                 </ul>
                 <div>
                     <div class="panel-body p-0">
