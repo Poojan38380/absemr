@@ -2,6 +2,7 @@
 
 include_once('./formUI.php');
 $pid = $_SESSION['pid'];
+
 ?>
 <html>
 <title>Intake Form</title>
@@ -220,7 +221,7 @@ $pid = $_SESSION['pid'];
                                     <form id="referralForm" method="POST">
                                         <input type="hidden" name="referralTab" value="update">
                                         <?php referralTabEdit($pid); ?>
-                                        <input type="hidden" name="id" value="<?php echo $referral['id']; ?>">
+                                        <input type="hidden" name="id" value="<?php echo referralTabId($pid); ?>">
                                         <button type="button" class="submit btn btn-primary">Update &amp; Continue</button>
                                     </form>
                                 </div>
