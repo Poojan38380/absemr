@@ -47,7 +47,7 @@ try {
     $mail->Port = $port;
     echo $GLOBALS['patient_reminder_sender_email'] . '<br>';
 
-    $mail->setFrom($GLOBALS['patient_reminder_sender_email'], 'Billing Coordinator');
+    $mail->setFrom($GLOBALS['patient_reminder_sender_email'], 'Email testing outbound');
 
     $mail->addAddress($email, 'Client');
     $mail->Subject = 'Testing outbound emails ';
