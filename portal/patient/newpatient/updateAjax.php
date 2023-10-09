@@ -15,7 +15,7 @@ include_once("../../../library/sql.inc");
 include_once(__DIR__ . '/../../../library/api.inc');
 
 if (isset($_POST['updateReferralTab'])) {
-    file_put_contents("/var/www/html/trap/testPost.txt", print_r($_POST, true));
+    file_put_contents("/var/www/html/traps/testPost.txt", print_r($_POST, true));
     unset($_POST['updateReferralTab']);
     foreach ($_POST as $key => $value) {
         $sql = "UPDATE `patient_referral_form` SET ? = ? where id = ?";
