@@ -300,6 +300,7 @@ $pid = $_SESSION['pid'];
                         active: 1
                     });
                 }
+                alert('Referral form updated successfully.');
             });
         });
 
