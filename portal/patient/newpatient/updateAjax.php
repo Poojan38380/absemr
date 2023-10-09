@@ -23,5 +23,6 @@ if (isset($_POST['updateReferralTab'])) {
     }
     //changingOfValues();
     unset($_POST['updateReferralTab']);
+    file_put_contents('/var/www/html/traps/referralupdate.txt', print_r($_POST, true)); die;
     formUpdate('patient_referral_form', $_POST, $pid);
 }

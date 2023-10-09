@@ -289,7 +289,7 @@ $pid = $_SESSION['pid'];
 
 
         $('#referralForm button.submit').on('click', function() {
-            var form = $('#referralForm');
+            const form = $('#referralForm');
 
             $.ajax({
                 type: 'POST',
