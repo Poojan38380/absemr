@@ -37,8 +37,8 @@
 </div>
 <?php //if ($referral['living_environment'] == 'Shelter') { ?>
 <div class="row">
-    <h5>Shelter Name:</h5>
-    <?php echo $referral['shelter_name'] ?>
+    <h3>Shelter Name:</h3>
+    <?php echo $referral['shelter_name'] . $referral['living_environment'] ?>
 </div>
 <?php //} ?>
 
