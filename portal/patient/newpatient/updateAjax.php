@@ -30,6 +30,9 @@ if (isset($_POST['updateReferralTab'])) {
         if ($key = 'id') {
             continue;
         }
+        if (empty($value)) {
+            continue;
+        }
         sqlStatement($sql, [$key, $value, $_POST['id']]);
     }
 }
