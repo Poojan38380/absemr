@@ -1,3 +1,4 @@
+<input type="hidden" name="id" value="<?php echo $referral['id'] ?>">
 <div class="row" style="margin-bottom: 1rem;">
     <label>
         <h2>Client Information</h2></br>
