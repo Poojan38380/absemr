@@ -23,10 +23,26 @@ if (isset($_POST['updateReferralTab'])) {
     }
     //changingOfValues();
     unset($_POST['updateReferralTab']);
-    file_put_contents('/var/www/html/traps/referralPost.txt', print_r($_POST, true));
     foreach ($_POST as $key => $value) {
         if ($key != 'id' || $value != '') {
             $sql = "UPDATE `patient_referral_form` SET " . $key . " = ? where id = ?";
+            sqlStatement($sql, [$value, $_POST['id']]);
+        }
+    }
+}
+
+if (isset($_POST['updateTherapeuticTab'])) {
+
+    foreach ($_POST as $key => $value) {
+        if (is_array($_POST[$key])) {
+            $_POST[$key]  = implode('|', $_POST[$key]);
+        }
+    }
+    //changingOfValues();
+    unset($_POST['updateTherapeuticTab']);
+    foreach ($_POST as $key => $value) {
+        if ($key != 'id' || $value != '') {
+            $sql = "UPDATE `patient_therapeutic_form` SET " . $key . " = ? where id = ?";
             sqlStatement($sql, [$value, $_POST['id']]);
         }
     }

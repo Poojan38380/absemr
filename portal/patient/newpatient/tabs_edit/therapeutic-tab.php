@@ -1,3 +1,4 @@
+<input type="hidden" name="id" value="<?= $therapeutic['id'] ?>">
 <div class="row">
     <label>What is your primary means of finical support?</label></br>
     <?= selectedRadioButtons('therap_support_list', 'therapSupportList', $therapeutic['therapSupportList'], true) ?>

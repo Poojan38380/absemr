@@ -219,16 +219,16 @@ $pid = $_SESSION['pid'];
                                     <form id="referralForm" method="POST">
                                         <input type="hidden" name="updateReferralTab" value="referralForm">
                                         <?php referralTabEdit($pid); ?>
-                                        <button type="button" class="submit btn btn-primary">Update &amp; Continue</button>
+                                        <button type="button" class="submit btn btn-primary mt-3"><?= xlt('Update'); ?></button>
                                     </form>
                                 </div>
                             <?php } ?>
                             <?php if (therapeuticTabSaved($pid)) { ?>
                                 <div id="therapeutic_tab" class="tab-pane">
                                     <form id="therapeuticForm" method="POST">
-                                        <input type="hidden" name="therapeuticTab" value="therapeuticForm">
+                                        <input type="hidden" name="updateTherapeuticTab" value="therapeuticForm">
                                         <?php therapeuticTabEdit($pid); ?>
-                                        <button type="button" class="submit btn btn-primary"><?= xlt('Update'); ?></button>
+                                        <button type="button" class="submit btn btn-primary mt-3"><?= xlt('Update'); ?></button>
                                     </form>
                                 </div>
                             <?php } ?>
@@ -310,20 +310,13 @@ $pid = $_SESSION['pid'];
 
             $.ajax({
                 type: 'POST',
-                url: './formAjax.php',
+                url: './updateAjax.php',
                 data: $('#therapeuticForm').serialize(),
                 success: function(data) {
                     $("#tabs").tabs({
                         active: 2
                     });
-                    // Save state to local storage
-                    form[0].reset();
-                    // Hide the tab content for the form that was just submitted
-                    $('#therapeutic_tab').hide();
-
-                    // Hide the corresponding tab <li>
-                    $('ul.ui-tabs-nav li a[href="#therapeutic_tab"]').parent().hide();
-
+                    alert('Therapeutic form updated successfully.')
                 }
             });
         });
