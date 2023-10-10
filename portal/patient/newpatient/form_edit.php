@@ -228,7 +228,7 @@ $pid = $_SESSION['pid'];
                                     <form id="therapeuticForm" method="POST">
                                         <input type="hidden" name="therapeuticTab" value="therapeuticForm">
                                         <?php therapeuticTabEdit($pid); ?>
-                                        <!-- <button type="button" class="submit btn btn-primary">Save &amp; Continue</button> -->
+                                        <button type="button" class="submit btn btn-primary"><?= xlt('Update'); ?></button>
                                     </form>
                                 </div>
                             <?php } ?>
