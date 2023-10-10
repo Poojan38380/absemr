@@ -78,14 +78,14 @@ function emailLogin($patient_id, $htmlMsg, $plainMsg, Environment $twig)
     if (!(validEmail($GLOBALS['patient_reminder_sender_email']))) {
         return false;
     }
-   $mail = new MyMailer();
+    $mail = new MyMailer();
     $pt_name = $patientData['fname'] . ' ' . $patientData['lname'];
     $pt_email = $patientData['email'];
-    $email_subject = xl('Access Your Patient Portal') . ' / ' . xl('3rd Party API Access');
+    $email_subject = xl('Access to Clinical Portal for Applied Behavioral Sciences');
     $email_sender = $GLOBALS['patient_reminder_sender_email'];
-    $mail->AddReplyTo($email_sender, $email_sender);
+    $mail->AddReplyTo($email_sender, 'ABS Portal Credentials - Do not reply');
 
-    $mail->SetFrom($email_sender, $email_sender);
+    $mail->SetFrom($email_sender, 'ABS Portal Credentials - Do not reply');
     $mail->AddAddress($pt_email, $pt_name);
     $mail->Subject = $email_subject;
     $mail->MsgHTML($htmlMsg);
