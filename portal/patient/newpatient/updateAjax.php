@@ -41,7 +41,7 @@ if (isset($_POST['updateTherapeuticTab'])) {
     foreach ($_POST as $key => $value) {
         if ($key != 'id' || $value != '') {
             $sql = "UPDATE `patient_therapeutic_form` SET " . $key . " = ? where id = ?";
-            //sqlStatement($sql, [$value, $_POST['id']]);
+            sqlStatement($sql, [$value, $_POST['id']]);
         }
     }
 }
