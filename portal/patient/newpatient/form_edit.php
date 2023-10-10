@@ -229,7 +229,7 @@ $pid = $_SESSION['pid'];
                                         <input type="hidden" name="updateTherapeuticTab" value="therapeuticForm">
                                         <?php therapeuticTabEdit($pid); ?>
                                         <div class="mt-3">
-                                            <button type="button" class="submit btn btn-primary"><?= xlt('Update'); ?></button>
+                                            <br><br><button type="button" class="submit btn btn-primary"><?= xlt('Update'); ?></button>
                                         </div>
                                     </form>
                                 </div>
