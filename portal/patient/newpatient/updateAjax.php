@@ -15,13 +15,12 @@ include_once("../../../library/sql.inc");
 include_once(__DIR__ . '/../../../library/api.inc');
 
 if (isset($_POST['updateReferralTab'])) {
-
     foreach ($_POST as $key => $value) {
         if (is_array($_POST[$key])) {
             $_POST[$key]  = implode('|', $_POST[$key]);
         }
     }
-    //changingOfValues();
+
     unset($_POST['updateReferralTab']);
     foreach ($_POST as $key => $value) {
         if ($key != 'id' || $value != '') {
@@ -32,18 +31,17 @@ if (isset($_POST['updateReferralTab'])) {
 }
 
 if (isset($_POST['updateTherapeuticTab'])) {
-
     foreach ($_POST as $key => $value) {
         if (is_array($_POST[$key])) {
             $_POST[$key]  = implode('|', $_POST[$key]);
         }
     }
-    //changingOfValues();
+
     unset($_POST['updateTherapeuticTab']);
     foreach ($_POST as $key => $value) {
         if ($key != 'id' || $value != '') {
             $sql = "UPDATE `patient_therapeutic_form` SET " . $key . " = ? where id = ?";
-            sqlStatement($sql, [$value, $_POST['id']]);
+            //sqlStatement($sql, [$value, $_POST['id']]);
         }
     }
 }
