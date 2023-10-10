@@ -713,7 +713,7 @@
 <?php } ?>
 
 <?php if ($therapeutic['mental_health_treat'] == 'no') { ?>
-    <div class="row" style="display:block" name="mentalHealthNoDiv">
+    <div class="row" style="display:block" name="mentalHealthNoDiv" class="mb-3">
         <label>Please explain what your current primary mental health concerns are and what is motivation to seek help?</label></br>
         <textarea name="explain_primary_mentalHealth" class="form-control" ><?php echo $therapeutic['explain_primary_mentalHealth'] ?></textarea>
     </div>
