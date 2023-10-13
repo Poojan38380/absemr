@@ -45,16 +45,16 @@ if (isset($_POST['therapeuticTab'])) {
     formSubmit('patient_therapeutic_form', $_POST, '');
 }
 
-// if (isset($_POST['noticePracticeTab'])) {
-//     foreach ($_POST as $key => $value) {
-//         if (is_array($_POST[$key])) {
-//             $_POST[$key]  = implode('|', $_POST[$key]);
-//         }
-//     }
-//     //changingOfValues();
-//     unset($_POST['noticePracticeTab']);
-//     formSubmit('patient_notice_form', $_POST, '');
-// }
+if (isset($_POST['noticePracticeTab'])) {
+     foreach ($_POST as $key => $value) {
+         if (is_array($_POST[$key])) {
+             $_POST[$key]  = implode('|', $_POST[$key]);
+         }
+     }
+     //changingOfValues();
+     unset($_POST['noticePracticeTab']);
+     formSubmit('patient_notice_form', $_POST, '');
+}
 
 if (isset($_POST['noticePracticeTab'])) {
 
