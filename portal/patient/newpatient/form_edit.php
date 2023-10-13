@@ -255,7 +255,7 @@ $pid = $_SESSION['pid'];
                                     <form id="releaseForm" method="POST">
                                         <input type="hidden" name="releaseTab" value="releaseForm">
                                         <?php releaseTabEdit($pid); ?>
-                                         <button type="button" class="submit btn btn-primary" id="release">Save</button>
+                                         <!--<button type="button" class="submit btn btn-primary" id="release">Save</button>-->
                                     </form>
                                 </div>
                             <?php } ?>
