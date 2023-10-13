@@ -222,23 +222,11 @@
                             <i class="fa fa-file-signature"></i>
                             Create Signature
                         </a>
-                        <!-- <br><br>
-                        <label for="witnessSignature"><?php echo xlt("Witness Signature"); ?></label>
-                        <a class="dropdown-item" id="signModalOpen" data-toggle="modal">
-                            <i class="fa fa-file-signature"></i>
-                            create Signature
-                        </a> -->
-
-
                     <?php } ?>
 
                     <br><br>
                     Date&nbsp; <?php echo date('Y-m-d'); ?>
-
                 </span>
-
-
-
             </div>
 
         </div>

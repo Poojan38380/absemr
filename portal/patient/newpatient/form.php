@@ -393,19 +393,6 @@ use OpenEMR\Core\Header;
             });
         });
 
-        // $('#noticePracticeForm button.submit').on('click', function() {
-        //     alert();
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: './formAjax.php',
-        //         data: $('#noticePracticeForm').serialize(),
-        //         success: function(data) {
-        //             $("#tabs").tabs({
-        //                 active: 3
-        //             });
-        //         }
-        //     });
-        // });
         $('#notice_practice').on('click', function() {
             var form = $('#noticePracticeForm');
             let templateContent = document.getElementById('notice-templatecontent').innerHTML;
@@ -478,20 +465,6 @@ use OpenEMR\Core\Header;
                 }
             });
         });
-        // $('#releaseForm button.submit').on('click', function() {
-        //     $.ajax({
-        //         type: 'post',
-        //         url: './formAjax.php',
-        //         data: $('#releaseForm').serialize(),
-        //         success: function(data) {
-        //             $("#tabs").tabs({
-        //                 active: 3
-        //             })
-
-        //         }
-        //     });
-
-        // });
 
 
         $('input[name=payment_ifo]').on('change', function() {
