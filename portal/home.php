@@ -137,18 +137,6 @@ function buildNav($newcnt, $pid, $result)
                     'dataToggle' => 'collapse',
                 ],
                 [
-                    'url' => '#documentscard',
-                    'label' => xl('My Documents'),
-                    'icon' => 'fa-file-medical',
-                    'dataToggle' => 'collapse'
-                ],
-                [
-                    'url' => '#lists',
-                    'label' => xl('My Dashboard'),
-                    'icon' => 'fa-list',
-                    'dataToggle' => 'collapse'
-                ],
-                [
                     'url' => '#openSignModal',
                     'label' => xl('My Signature'),
                     'icon' => 'fa-file-signature',
