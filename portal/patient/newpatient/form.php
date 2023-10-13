@@ -218,12 +218,6 @@ use OpenEMR\Core\Header;
         }
     </script>
 
-    <!-- <div class="container"> -->
-    <!-- <div class="mb-3">
-            <h1>Intake</h1>
-            <a href="../../../interface/patient_file/summary/demographics.php" onclick="top.restoreSession()" title="Go Back">
-                <i class="bi bi-arrow-counterclockwise"></i>Back</a>
-        </div> -->
 
     <div id="successAlert" class="alert alert-success" style="display: none;">
         Your form has been successfully submitted.
