@@ -136,14 +136,6 @@ function buildNav($newcnt, $pid, $result)
                     'icon' => 'fa-user',
                     'dataToggle' => 'collapse',
                 ],
-
-                [
-                    'url' => '#secure-msgs-card',
-                    'label' => xl('My Messages'),
-                    'icon' => 'fa-envelope',
-                    'dataToggle' => 'collapse',
-                    'messageCount' => $newcnt ?? 0,
-                ],
                 [
                     'url' => '#documentscard',
                     'label' => xl('My Documents'),
