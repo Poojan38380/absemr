@@ -145,25 +145,7 @@ function buildNav($newcnt, $pid, $result)
                 ]
             ],
         ],
-        [
-            'url' => '#',
-            'label' => xl('Reports'),
-            'icon' => 'fa-book-medical',
-            'dropdownID' => 'reports',
-            'children' => [
-                [
-                    'url' => $GLOBALS['web_root'] . '' . '/ccdaservice/ccda_gateway.php?action=view&csrf_token_form=' . urlencode(CsrfUtils::collectCsrfToken()),
-                    'label' => xl('View CCD'),
-                    'icon' => 'fa-eye',
-                    'target_blank' => 'true',
-                ],
-                [
-                    'url' => $GLOBALS['web_root'] . '' . '/ccdaservice/ccda_gateway.php?action=dl&csrf_token_form=' . urlencode(CsrfUtils::collectCsrfToken()),
-                    'label' => xl('Download CCD'),
-                    'icon' => 'fa-download',
-                ]
-            ]
-        ]
+
     ];
     if (($GLOBALS['portal_two_ledger'] || $GLOBALS['portal_two_payments'])) {
         if (!empty($GLOBALS['portal_two_ledger'])) {
