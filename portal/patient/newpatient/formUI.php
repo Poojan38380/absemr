@@ -118,28 +118,28 @@ function selectedDropdown($list_id = '', $name = '', $selected_value = '', $disa
     $dropdown .= '</select>';
     return $dropdown;
 }
-// function selectedInsuranceCompany($selected_value = '', $disabled = false)
-// {
+function selectedInsuranceCompany($selected_value = '', $disabled = false)
+{
 
-//     $getComapnies = sqlStatement("select id, name from insurance_companies");
-//     $dropdown = '<select name="insurance_comapny" class="form-control" style="width:50%;">';
-//     while ($row = sqlFetchArray($getComapnies)) {
-//         $optionId = $row['id'];
-//         $isSelected = ($optionId == $selected_value) ? 'selected' : '';
-//         $isDisabled = $disabled ? 'disabled' : '';
+    $getComapnies = sqlStatement("select id, name from insurance_companies");
+    $dropdown = '<select name="insurance_comapny" class="form-control" style="width:50%;">';
+    while ($row = sqlFetchArray($getComapnies)) {
+        $optionId = $row['id'];
+        $isSelected = ($optionId == $selected_value) ? 'selected' : '';
+        $isDisabled = $disabled ? 'disabled' : '';
 
-//         $dropdown .= sprintf(
-//             '<option value="%s" %s %s>%s</option>',
-//             $optionId,
-//             $isSelected,
-//             $isDisabled,
-//             $row['name']
-//         );
-//     }
+        $dropdown .= sprintf(
+            '<option value="%s" %s %s>%s</option>',
+            $optionId,
+            $isSelected,
+            $isDisabled,
+            $row['name']
+        );
+    }
 
-//     $dropdown .= '</select>';
-//     return $dropdown;
-// }
+    $dropdown .= '</select>';
+    return $dropdown;
+}
 function generateRadioButtons($list_id = '', $name = '')
 {
     $getList = sqlStatement("select * from list_options where list_id=? and activity=1 order by seq asc", [$list_id]);

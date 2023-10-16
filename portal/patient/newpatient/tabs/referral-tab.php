@@ -1,7 +1,7 @@
 
 <div class="row" style="margin-bottom: 1rem;">
     <label>
-        <h2>Client Information</h2></br>
+        <h2><?= xlt('Client Information') ?></h2></br>
         This information is held in strict confidence and is protected under federal HIPAA laws and will be used only for clinical purposes. Please complete it as accurately and as detailed as possible. If you have any questions please call our office at 1800-574-9ABS and speak to an on-call administrator. Thank you
     </label>
 </div>
