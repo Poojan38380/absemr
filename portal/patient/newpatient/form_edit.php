@@ -1,7 +1,12 @@
 <?php
 
+$ignoreAuth_onsite_portal = true; // ignore the standard authentication for a regular OpenEMR user
+require_once dirname(__FILE__, 4) . '/interface/globals.php';
 include_once('./formUI.php');
-$pid = $_SESSION['pid'];
+$pid = $_REQUEST['pid'];
+
+use OpenEMR\Core\Header;
+
 ?>
 <html>
 <title><?= xlt("Intake Form") ?></title>
@@ -15,20 +20,40 @@ $pid = $_SESSION['pid'];
     <script src="<?= $GLOBALS['web_root']; ?>/portal/sign/assets/signer_api.js?v=<?= $GLOBALS['v_js_includes']; ?>"></script>
     <script src="<?= $GLOBALS['web_root']; ?>/portal/sign/assets/signature_pad.umd.js?v=<?= $GLOBALS['v_js_includes']; ?>"></script>
     <script src="<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/libs/LAB.min.js"></script>
+    <style>
+        .ui-tabs-nav.fixed-top {
+            position: fixed;
+            /* Fix the ul at the top of the page */
+            top: 0;
+            /* Adjust the top position as needed */
+            width: 100%;
+            /* Make the ul take the full width of the viewport */
+            z-index: 999;
+            /* Ensure the ul is above other content */
+            background-color: #e9e9e9;
+            /* Add a background color if needed */
+        }
 
+        .tabs-container {
+            position: relative;
+            /* Set the container as a reference for the fixed ul */
+        }
+
+        .tab-content {
+            margin-top: 15px;
+            /* Adjust margin-top to push the content below the fixed ul */
+
+            /* Add any other necessary styling for the tab content */
+        }
+    </style>
 </head>
 
 <body>
     <script>
         <?php require($GLOBALS['srcdir'] . '/js/xl/jquery-datetimepicker-2-5-4-alternate.js.php'); ?>
-        $LAB.script("<?php echo $GLOBALS['assets_static_relative']; ?>/underscore/underscore-min.js")
-            .script("<?php echo $GLOBALS['assets_static_relative']; ?>/moment/moment.js")
-            .script("<?php echo $GLOBALS['assets_static_relative']; ?>/backbone/backbone-min.js")
-            .script("<?php echo $GLOBALS['web_root']; ?>/portal/patient/scripts/app.js?v=<?php echo $GLOBALS['v_js_includes']; ?>")
-            .script("<?php echo $GLOBALS['web_root']; ?>/portal/patient/scripts/model.js?v=<?php echo $GLOBALS['v_js_includes']; ?>").wait()
-            .script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsitedocuments.js?v=<?= $GLOBALS['v_js_includes']; ?>").wait()
-            .script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsiteportalactivities.js?v=<?= $GLOBALS['v_js_includes']; ?>")
-            .wait(function() {
+        $LAB.script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsitedocuments.js?v=<?= $GLOBALS['v_js_includes']; ?>").wait().script(
+            "<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsiteportalactivities.js?v=<?= $GLOBALS['v_js_includes']; ?>").
+        wait(function() {
             page.init();
             pageAudit.init();
             if (isPortal) {
@@ -192,80 +217,77 @@ $pid = $_SESSION['pid'];
             restoreTextInputs();
         }
     </script>
-    <div class="container">
-        <div class="mb-3">
-            <h2 class="text-center">Patient Portal Forms</h2>
-            <a href="../../../interface/patient_file/summary/demographics.php" onclick="top.restoreSession()" title="Go Back" class="btn btn-primary">
-                <i class="bi bi-arrow-counterclockwise"></i>Back</a>
-        </div>
-        <br>
-        <?php if ((referralTabSaved($pid)) || (therapeuticTabSaved($pid)) || (noticePracticeTabSaved($pid)) || (releaseTabSaved($pid))) { ?>
-            <div id="tabs">
-                <ul>
-                    <?php if (referralTabSaved($pid)) { ?>
-                        <li><a href="#referral_tab">Referral Form</a></li>
-                    <?php } ?>
-                    <?php if (therapeuticTabSaved($pid)) { ?>
-                        <li><a href="#therapeutic_tab">Therapeutic Form</a></li>
-                    <?php } ?>
-                    <!-- <li><a href="#medical_history_tab">Medical History</a></li> -->
-                    <?php if (noticePracticeTabSaved($pid)) { ?>
-                        <li><a href="#notice_practice_tab">Notice of practice policies</a></li>
-                    <?php } ?>
-                    <?php if (releaseTabSaved($pid)) { ?>
-                        <li><a href="#release_tab">Informed Consent For The Release Of Information</a></li>
-                    <?php } ?>
-                </ul>
-                <div>
-                    <div class="panel-body p-0">
-                        <div class="tab-content">
-                            <?php if (referralTabSaved($pid)) { ?>
-                                <div id="referral_tab" class="tab-pane">
-                                    <form id="referralForm" method="POST">
-                                        <input type="hidden" name="updateReferralTab" value="referralForm">
-                                        <?php referralTabEdit($pid); ?>
-                                        <button type="button" class="submit btn btn-primary mt-3"><?= xlt('Update'); ?></button>
-                                    </form>
-                                </div>
-                            <?php } ?>
-                            <?php if (therapeuticTabSaved($pid)) { ?>
-                                <div id="therapeutic_tab" class="tab-pane">
-                                    <form id="therapeuticForm" method="POST">
-                                        <input type="hidden" name="updateTherapeuticTab" value="therapeuticForm">
-                                        <?php therapeuticTabEdit($pid); ?>
-                                        <div class="mt-3">
-                                            <br><br><button type="button" class="submit btn btn-primary"><?= xlt('Update'); ?></button>
-                                        </div>
-                                    </form>
-                                </div>
-                            <?php } ?>
 
-                            <?php if (noticePracticeTabSaved($pid)) { ?>
-                                <div id="notice_practice_tab" class="tab-pane">
-                                    <form id="noticePracticeForm" method="POST">
-                                        <input type="hidden" name="noticePracticeTab" value="noticePracticeForm">
-                                        <?php noticePracticeTabEdit($pid); ?>
-                                    </form>
-                                </div>
-                            <?php } ?>
-                            <?php if (releaseTabSaved($pid)) { ?>
-                                <div id="release_tab" class="tab-pane">
-                                    <form id="releaseForm" method="POST">
-                                        <input type="hidden" name="releaseTab" value="releaseForm">
-                                        <?php releaseTabEdit($pid); ?>
-                                    </form>
-                                </div>
-                            <?php } ?>
+
+    <div id="successAlert" class="alert alert-success" style="display: none;">
+        Your form has been successfully submitted.
+    </div>
+    <?php if ((!referralTabSaved($pid)) || (!therapeuticTabSaved($pid)) || (!noticePracticeTabSaved($pid)) || (!releaseTabSaved($pid))) { ?>
+        <div id="tabs">
+            <ul class="fixed-top">
+                <?php if (!referralTabSaved($pid)) { ?>
+                    <li><a href="#referral_tab">Referral Form</a></li>
+                <?php } ?>
+                <?php if (!therapeuticTabSaved($pid)) { ?>
+                    <li><a href="#therapeutic_tab">Therapeutic Form</a></li>
+                <?php } ?>
+                <!-- <li><a href="#medical_history_tab">Medical History</a></li> -->
+                <?php if (!noticePracticeTabSaved($pid)) { ?>
+                    <li><a href="#notice_practice_tab">Notice of practice policies</a></li>
+                <?php } ?>
+                <?php if (!releaseTabSaved($pid)) { ?>
+                    <li><a href="#release_tab">Informed Consent For The Release Of Information</a></li>
+                <?php } ?>
+            </ul>
+
+            <div class="panel-body p-0">
+                <div class="tab-content">
+                    <?php if (!referralTabSaved($pid)) { ?>
+                        <div id="referral_tab" class="tab-pane">
+                            <form id="referralForm" method="POST">
+                                <input type="hidden" name="referralTab" value="save">
+                                <?php referralTab($pid); ?>
+                                <button type="button" class="submit btn btn-primary">Save &amp; Continue</button>
+                            </form>
                         </div>
-                    </div>
+                    <?php } ?>
+                    <?php if (!therapeuticTabSaved($pid)) { ?>
+                        <div id="therapeutic_tab" class="tab-pane">
+                            <form id="therapeuticForm" method="POST">
+                                <input type="hidden" name="therapeuticTab" value="therapeuticForm">
+                                <?php therapeuticTab($pid); ?>
+                                <button type="button" class="submit btn btn-primary">Save &amp; Continue</button>
+                            </form>
+                        </div>
+                    <?php } ?>
+
+                    <?php if (!noticePracticeTabSaved($pid)) { ?>
+                        <div id="notice_practice_tab" class="tab-pane">
+                            <form id="noticePracticeForm" method="POST">
+                                <input type="hidden" name="noticePracticeTab" value="noticePracticeForm">
+                                <?php noticePracticeTab($pid); ?>
+                                <button id="notice_practice" type="button" class="submit btn btn-primary">Save &amp; Continue</button>
+                            </form>
+                        </div>
+                    <?php } ?>
+                    <?php if (!releaseTabSaved($pid)) { ?>
+                        <div id="release_tab" class="tab-pane">
+                            <form id="releaseForm" method="POST">
+                                <input type="hidden" name="releaseTab" value="releaseForm">
+                                <?php releaseTab($pid); ?>
+                                <button type="button" class="submit btn btn-primary" id="release">Save</button>
+                            </form>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
-        <?php } else { ?>
-            <div class="alert alert-danger text-center" role="alert">
-                <?= xlt('Patient has not filled out questioner form yet.'); ?>
-            </div>
-        <?php } ?>
-    </div>
+        </div>
+        <!-- </div> -->
+    <?php } else { ?>
+        <div class="alert alert-success" role="alert">
+            <?= xlt("Intake forms submitted successfully") ?>!
+        </div>
+    <?php } ?>
 </body>
 <script>
     $(document).ready(function() {
@@ -285,18 +307,32 @@ $pid = $_SESSION['pid'];
         });
 
         $('#referralForm button.submit').on('click', function() {
-            //Not hiding the tab once it is updated
+            var form = $('#referralForm');
+
             $.ajax({
                 type: 'POST',
-                url: './updateAjax.php',
+                url: './formAjax.php',
                 data: $('#referralForm').serialize(),
                 success: function(data) {
                     $("#tabs").tabs({
                         active: 1
                     });
-                    alert('Referral form updated successfully.')
+                    form[0].reset();
+                    // Hide the tab content for the form that was just submitted
+                    $('#referral_tab').hide();
+
+                    // Hide the corresponding tab <li>
+                    $('ul.ui-tabs-nav li a[href="#referral_tab"]').parent().hide();
+                    // Show the success message
+
+                    $('#successAlert').fadeIn();
+
+                    // You can also hide the success message after a certain time if needed
+                    setTimeout(function() {
+                        $('#successAlert').fadeOut();
+                    }, 5000); // Hide after 5 seconds (adjust the time as needed)
                 }
-            })
+            });
         });
 
 
@@ -305,18 +341,66 @@ $pid = $_SESSION['pid'];
 
             $.ajax({
                 type: 'POST',
-                url: './updateAjax.php',
+                url: './formAjax.php',
                 data: $('#therapeuticForm').serialize(),
                 success: function(data) {
                     $("#tabs").tabs({
                         active: 1
                     });
-                    alert('Therapeutic form updated successfully.')
+                    // Save state to local storage
+                    form[0].reset();
+                    // Hide the tab content for the form that was just submitted
+                    $('#therapeutic_tab').hide();
+
+                    // Hide the corresponding tab <li>
+                    $('ul.ui-tabs-nav li a[href="#therapeutic_tab"]').parent().hide();
+                    // Show the success message
+                    $('#successAlert').fadeIn();
+
+                    // You can also hide the success message after a certain time if needed
+                    setTimeout(function() {
+                        $('#successAlert').fadeOut();
+                    }, 5000); // Hide after 5 seconds (adjust the time as needed)
                 }
             });
         });
 
+        $('#notice_practice').on('click', function() {
+            var form = $('#noticePracticeForm');
+            let templateContent = document.getElementById('notice-templatecontent').innerHTML;
+            var payload = {
+                noticePracticeTab: true,
+                full_document: templateContent
+            };
 
+            // let escapedContent = encodeURIComponent(templateContent);
+            $.ajax({
+                url: './formAjax.php',
+                method: 'POST',
+                data: payload,
+                success: function(data) {
+                    $("#tabs").tabs({
+                        active: 1
+                    })
+                    form[0].reset();
+                    // Hide the tab content for the form that was just submitted
+                    $('#notice_practice_tab').hide();
+
+                    // Hide the corresponding tab <li>
+                    $('ul.ui-tabs-nav li a[href="#notice_practice_tab"]').parent().hide();
+                    // Show the success message
+                    $('#successAlert').fadeIn();
+
+                    // You can also hide the success message after a certain time if needed
+                    setTimeout(function() {
+                        $('#successAlert').fadeOut();
+                    }, 5000); // Hide after 5 seconds (adjust the time as needed)
+                },
+                error: function(error) {
+                    console.error('Error saving template content:', error);
+                }
+            });
+        });
 
         $('#release').on('click', function() {
             var form = $('#releaseForm');
@@ -330,15 +414,23 @@ $pid = $_SESSION['pid'];
                 method: 'POST',
                 data: payload,
                 success: function(data) {
+
                     $("#tabs").tabs({
-                        active: 4
+                        active: 0
                     })
                     form[0].reset();
                     // Hide the tab content for the form that was just submitted
                     $('#release_tab').hide();
                     // Hide the corresponding tab <li>
                     $('ul.ui-tabs-nav li a[href="#release_tab"]').parent().hide();
-                    console.log('Template content saved successfully.');
+
+                    // Show the success message
+                    $('#successAlert').fadeIn();
+                    // You can also hide the success message after a certain time if needed
+                    setTimeout(function() {
+                        $('#successAlert').fadeOut();
+                    }, 5000); // Hide after 5 seconds (adjust the time as needed)
+
                 },
                 error: function(error) {
                     console.error('Error saving template content:', error);
@@ -353,6 +445,7 @@ $pid = $_SESSION['pid'];
             } else {
                 $('div[name=insuranceComDiv]').css('display', 'none');
             }
+            console.log($(this).val());
             if ($(this).val() == 'Eap') {
                 $('div[name=eapDiv]').css('display', 'block');
             } else {
@@ -433,7 +526,6 @@ $pid = $_SESSION['pid'];
             $('input[name="treatment_plan"][value="' + plan + '"]').attr('checked', true);
             $('input[name="treatment_plan"]:not(:checked)').attr('disabled', true);
         });
-
 
         $(document).on('change', 'select[name=living_environment]', function() {
             if ($(this).val() == 'apartment') {
