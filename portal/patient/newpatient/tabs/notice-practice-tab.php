@@ -9,10 +9,10 @@
         <div id="templatediv" class="card-body border overflow-auto">
             <div id="notice-templatecontent" class="template-body">
                 <h2>
-                    <?php echo xlt("ABS Policies / Agreements") ?>
+                    <?= xlt("ABS Policies / Agreements") ?>
                 </h2>
                 <h2>
-                    <?php echo xlt("Notice of Practice Policies"); ?>
+                    <?= xlt("Notice of Practice Policies"); ?>
                 </h2>
                 <p><strong>APPOINTMENTS AND CANCELLATIONS</strong>
                     - If you cannot attend your individual, family or group session,

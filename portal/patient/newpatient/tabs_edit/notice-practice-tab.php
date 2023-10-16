@@ -9,10 +9,10 @@
         <div id="templatediv" class="card-body border overflow-auto">
             <div id="notice-templatecontent" class="template-body">
                 <h2>
-                    <?php echo xlt("ABS Policies / Agreements") ?>
+                    <?= xlt("ABS Policies / Agreements") ?>
                 </h2>
                 <h2>
-                    <?php echo xlt("Notice of Practice Policies"); ?>
+                    <?= xlt("Notice of Practice Policies"); ?>
                 </h2>
                 <p><strong>APPOINTMENTS AND CANCELLATIONS</strong>
                     - If you cannot attend your individual, family or group session,
@@ -210,11 +210,11 @@
                 </script>
                 <span>
                     <?php if (isset($onsite_signature['sign']) && !empty($onsite_signature['sign'])) { ?>
-                        <label for="patientSignature"><?php echo xlt("Patient Signature"); ?></label>
-                        <img class="signature" id="patientSignature" style="cursor:pointer;color:red;height:65px !important;width:auto;" data-type="<?php echo ($onsite_signature['type']); ?>" data-action="fetch_signature" alt="(Click in signature)" data-pid="<?php echo (isset($pid)) ? (int)$pid : ''; ?>" data-user="<?php echo (isset($onsite_signature['user'])) ? $onsite_signature['user'] : ''; ?>" src="<?php echo (isset($onsite_signature['sign'])) ? $onsite_signature['sign'] : ''; ?>">
+                        <label for="patientSignature"><?= xlt("Patient Signature"); ?></label>
+                        <img class="signature" id="patientSignature" style="cursor:pointer;color:red;height:65px !important;width:auto;" data-type="<?= ($onsite_signature['type']); ?>" data-action="fetch_signature" alt="(Click in signature)" data-pid="<?php echo (isset($pid)) ? (int)$pid : ''; ?>" data-user="<?php echo (isset($onsite_signature['user'])) ? $onsite_signature['user'] : ''; ?>" src="<?= (isset($onsite_signature['sign'])) ? $onsite_signature['sign'] : ''; ?>">
                         <!-- <br><br>
-                        <label for="witnessSignature"><?php echo xlt("Witness Signature"); ?></label>
-                        <img class="signature" id="witnessSignature" style="cursor:pointer;color:red;height:65px !important;width:auto;" data-type="<?php echo ($onsite_signature['type']); ?>" data-action="fetch_signature" alt="(Click in signature)" data-pid="<?php echo (isset($pid)) ? (int)$pid : ''; ?>" data-user="<?php echo (isset($onsite_signature['user'])) ? $onsite_signature['user'] : ''; ?>" src="<?php echo (isset($onsite_signature['sign'])) ? $onsite_signature['sign'] : ''; ?>"> -->
+                        <label for="witnessSignature"><?= xlt("Witness Signature"); ?></label>
+                        <img class="signature" id="witnessSignature" style="cursor:pointer;color:red;height:65px !important;width:auto;" data-type="<?= ($onsite_signature['type']); ?>" data-action="fetch_signature" alt="(Click in signature)" data-pid="<?= (isset($pid)) ? (int)$pid : ''; ?>" data-user="<?= (isset($onsite_signature['user'])) ? $onsite_signature['user'] : ''; ?>" src="<?php echo (isset($onsite_signature['sign'])) ? $onsite_signature['sign'] : ''; ?>"> -->
 
                     <?php } else { ?>
                         <label for="patientSignature"><?php echo xlt("Patient Signature"); ?></label>
