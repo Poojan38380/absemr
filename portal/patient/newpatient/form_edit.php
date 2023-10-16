@@ -12,7 +12,6 @@ $pid = $_SESSION['pid'];
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <link href="<?= $GLOBALS['web_root']; ?>/portal/sign/css/signer_modal.css?v=<?= $GLOBALS['v_js_includes']; ?>" rel="stylesheet">
-    <script src="<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/model.js?v=<?= $GLOBALS['v_js_includes']; ?>"></script>
     <script src="<?= $GLOBALS['web_root']; ?>/portal/sign/assets/signer_api.js?v=<?= $GLOBALS['v_js_includes']; ?>"></script>
     <script src="<?= $GLOBALS['web_root']; ?>/portal/sign/assets/signature_pad.umd.js?v=<?= $GLOBALS['v_js_includes']; ?>"></script>
     <script src="<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/libs/LAB.min.js"></script>
@@ -22,9 +21,10 @@ $pid = $_SESSION['pid'];
 <body>
     <script>
         <?php require($GLOBALS['srcdir'] . '/js/xl/jquery-datetimepicker-2-5-4-alternate.js.php'); ?>
-        $LAB.script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsitedocuments.js?v=<?= $GLOBALS['v_js_includes']; ?>").wait().script(
-            "<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsiteportalactivities.js?v=<?= $GLOBALS['v_js_includes']; ?>").
-        wait(function() {
+        $LAB.script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/model.js?v=<?= $GLOBALS['v_js_includes']; ?>").wait()
+            .script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsitedocuments.js?v=<?= $GLOBALS['v_js_includes']; ?>").wait()
+            .script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsiteportalactivities.js?v=<?= $GLOBALS['v_js_includes']; ?>")
+            .wait(function() {
             page.init();
             pageAudit.init();
             if (isPortal) {
