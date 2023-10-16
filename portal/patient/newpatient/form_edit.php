@@ -265,7 +265,7 @@ $pid = $_SESSION['pid'];
             </div>
         <?php } else { ?>
             <div class="alert alert-danger text-center" role="alert">
-                <?php xlt('Patients have not filled out intake form yet.'); ?>
+                <?= xlt('Patient has not filled out questioner form yet.'); ?>
             </div>
         <?php } ?>
     </div>
