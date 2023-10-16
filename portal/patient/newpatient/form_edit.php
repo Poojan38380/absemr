@@ -21,7 +21,8 @@ $pid = $_SESSION['pid'];
 <body>
     <script>
         <?php require($GLOBALS['srcdir'] . '/js/xl/jquery-datetimepicker-2-5-4-alternate.js.php'); ?>
-        $LAB.script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/model.js?v=<?= $GLOBALS['v_js_includes']; ?>").wait()
+        $LAB.script("<?php echo $GLOBALS['assets_static_relative']; ?>/backbone/backbone-min.js")
+            .script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/model.js?v=<?= $GLOBALS['v_js_includes']; ?>").wait()
             .script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsitedocuments.js?v=<?= $GLOBALS['v_js_includes']; ?>").wait()
             .script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsiteportalactivities.js?v=<?= $GLOBALS['v_js_includes']; ?>")
             .wait(function() {
