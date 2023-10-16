@@ -9,17 +9,17 @@ use OpenEMR\Core\Header;
 
 ?>
 <html>
-<title>Intake Form</title>
+<title><?= xlt("Intake Form") ?></title>
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-    <link href="<?php echo $GLOBALS['web_root']; ?>/portal/sign/css/signer_modal.css?v=<?php echo $GLOBALS['v_js_includes']; ?>" rel="stylesheet">
-    <script src="<?php echo $GLOBALS['web_root']; ?>/portal/sign/assets/signer_api.js?v=<?php echo $GLOBALS['v_js_includes']; ?>"></script>
-    <script src="<?php echo $GLOBALS['web_root']; ?>/portal/sign/assets/signature_pad.umd.js?v=<?php echo $GLOBALS['v_js_includes']; ?>"></script>
-    <script src="<?php echo $GLOBALS['web_root']; ?>/portal/patient/scripts/libs/LAB.min.js"></script>
+    <link href="<?= $GLOBALS['web_root']; ?>/portal/sign/css/signer_modal.css?v=<?= $GLOBALS['v_js_includes']; ?>" rel="stylesheet">
+    <script src="<?= $GLOBALS['web_root']; ?>/portal/sign/assets/signer_api.js?v=<?= $GLOBALS['v_js_includes']; ?>"></script>
+    <script src="<?= $GLOBALS['web_root']; ?>/portal/sign/assets/signature_pad.umd.js?v=<?= $GLOBALS['v_js_includes']; ?>"></script>
+    <script src="<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/libs/LAB.min.js"></script>
     <style>
         .ui-tabs-nav.fixed-top {
             position: fixed;
@@ -51,8 +51,8 @@ use OpenEMR\Core\Header;
 <body>
     <script>
         <?php require($GLOBALS['srcdir'] . '/js/xl/jquery-datetimepicker-2-5-4-alternate.js.php'); ?>
-        $LAB.script("<?php echo $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsitedocuments.js?v=<?php echo $GLOBALS['v_js_includes']; ?>").wait().script(
-            "<?php echo $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsiteportalactivities.js?v=<?php echo $GLOBALS['v_js_includes']; ?>").
+        $LAB.script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsitedocuments.js?v=<?= $GLOBALS['v_js_includes']; ?>").wait().script(
+            "<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsiteportalactivities.js?v=<?= $GLOBALS['v_js_includes']; ?>").
         wait(function() {
             page.init();
             pageAudit.init();
@@ -260,13 +260,7 @@ use OpenEMR\Core\Header;
                             </form>
                         </div>
                     <?php } ?>
-                    <!-- <div id="medical_history_tab" class="tab-pane">
-                        <form id="medicalHistoryForm" method="POST">
-                            <?php //medicalHistoryTab($pid);
-                            ?>
-                            <button type="button" class="submit btn btn-primary">Save &amp; Continue</button>
-                        </form>
-                    </div> -->
+
                     <?php if (!noticePracticeTabSaved($pid)) { ?>
                         <div id="notice_practice_tab" class="tab-pane">
                             <form id="noticePracticeForm" method="POST">
@@ -287,18 +281,16 @@ use OpenEMR\Core\Header;
                     <?php } ?>
                 </div>
             </div>
-
         </div>
         <!-- </div> -->
     <?php } else { ?>
         <div class="alert alert-success" role="alert">
-            Intake forms submitted successfully!
+            <?= xlt("Intake forms submitted successfully") ?>!
         </div>
     <?php } ?>
 </body>
 <script>
     $(document).ready(function() {
-
         $("#tabs").tabs({
             active: 0
         });
@@ -313,7 +305,6 @@ use OpenEMR\Core\Header;
         $('.datepicker').datepicker({
             maxDate: 0
         });
-
 
         $('#referralForm button.submit').on('click', function() {
             var form = $('#referralForm');
@@ -370,19 +361,6 @@ use OpenEMR\Core\Header;
                     setTimeout(function() {
                         $('#successAlert').fadeOut();
                     }, 5000); // Hide after 5 seconds (adjust the time as needed)
-                }
-            });
-        });
-
-        $("#medicalHistoryForm button.submit").on('click', function() {
-            $.ajax({
-                type: 'post',
-                url: './formAjax.php',
-                data: $('#medicalHistoryForm').serialize(),
-                success: function(data) {
-                    $("#tabs").tabs({
-                        active: 0
-                    })
                 }
             });
         });

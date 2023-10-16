@@ -4,25 +4,25 @@ include_once('./formUI.php');
 $pid = $_SESSION['pid'];
 ?>
 <html>
-<title>Intake Form</title>
+<title><?= xlt("Intake Form") ?></title>
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-    <link href="<?php echo $GLOBALS['web_root']; ?>/portal/sign/css/signer_modal.css?v=<?php echo $GLOBALS['v_js_includes']; ?>" rel="stylesheet">
-    <script src="<?php echo $GLOBALS['web_root']; ?>/portal/sign/assets/signer_api.js?v=<?php echo $GLOBALS['v_js_includes']; ?>"></script>
-    <script src="<?php echo $GLOBALS['web_root']; ?>/portal/sign/assets/signature_pad.umd.js?v=<?php echo $GLOBALS['v_js_includes']; ?>"></script>
-    <script src="<?php echo $GLOBALS['web_root']; ?>/portal/patient/scripts/libs/LAB.min.js"></script>
+    <link href="<?= $GLOBALS['web_root']; ?>/portal/sign/css/signer_modal.css?v=<?= $GLOBALS['v_js_includes']; ?>" rel="stylesheet">
+    <script src="<?= $GLOBALS['web_root']; ?>/portal/sign/assets/signer_api.js?v=<?= $GLOBALS['v_js_includes']; ?>"></script>
+    <script src="<?= $GLOBALS['web_root']; ?>/portal/sign/assets/signature_pad.umd.js?v=<?= $GLOBALS['v_js_includes']; ?>"></script>
+    <script src="<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/libs/LAB.min.js"></script>
 
 </head>
 
 <body>
     <script>
         <?php require($GLOBALS['srcdir'] . '/js/xl/jquery-datetimepicker-2-5-4-alternate.js.php'); ?>
-        $LAB.script("<?php echo $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsitedocuments.js?v=<?php echo $GLOBALS['v_js_includes']; ?>").wait().script(
-            "<?php echo $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsiteportalactivities.js?v=<?php echo $GLOBALS['v_js_includes']; ?>").
+        $LAB.script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsitedocuments.js?v=<?= $GLOBALS['v_js_includes']; ?>").wait().script(
+            "<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsiteportalactivities.js?v=<?= $GLOBALS['v_js_includes']; ?>").
         wait(function() {
             page.init();
             pageAudit.init();
@@ -234,19 +234,12 @@ $pid = $_SESSION['pid'];
                                     </form>
                                 </div>
                             <?php } ?>
-                            <!-- <div id="medical_history_tab" class="tab-pane">
-                        <form id="medicalHistoryForm" method="POST">
-                            <?php //medicalHistoryTab($pid);
-                            ?>
-                            <button type="button" class="submit btn btn-primary">Save &amp; Continue</button>
-                        </form>
-                    </div> -->
+
                             <?php if (noticePracticeTabSaved($pid)) { ?>
                                 <div id="notice_practice_tab" class="tab-pane">
                                     <form id="noticePracticeForm" method="POST">
                                         <input type="hidden" name="noticePracticeTab" value="noticePracticeForm">
                                         <?php noticePracticeTabEdit($pid); ?>
-                                        <!-- <button id="notice_practice" type="button" class="submit btn btn-primary">Save &amp; Continue</button> -->
                                     </form>
                                 </div>
                             <?php } ?>
@@ -255,7 +248,6 @@ $pid = $_SESSION['pid'];
                                     <form id="releaseForm" method="POST">
                                         <input type="hidden" name="releaseTab" value="releaseForm">
                                         <?php releaseTabEdit($pid); ?>
-                                         <!--<button type="button" class="submit btn btn-primary" id="release">Save</button>-->
                                     </form>
                                 </div>
                             <?php } ?>
@@ -272,8 +264,6 @@ $pid = $_SESSION['pid'];
 </body>
 <script>
     $(document).ready(function() {
-
-
         $("#tabs").tabs({
             active: 0
         });
@@ -289,10 +279,8 @@ $pid = $_SESSION['pid'];
             maxDate: 0
         });
 
-
         $('#referralForm button.submit').on('click', function() {
-            const form = $('#referralForm');
-
+            //Not hiding the tab once it is updated
             $.ajax({
                 type: 'POST',
                 url: './updateAjax.php',
@@ -316,69 +304,14 @@ $pid = $_SESSION['pid'];
                 data: $('#therapeuticForm').serialize(),
                 success: function(data) {
                     $("#tabs").tabs({
-                        active: 2
+                        active: 1
                     });
                     alert('Therapeutic form updated successfully.')
                 }
             });
         });
 
-        $("#medicalHistoryForm button.submit").on('click', function() {
-            $.ajax({
-                type: 'post',
-                url: './formAjax.php',
-                data: $('#medicalHistoryForm').serialize(),
-                success: function(data) {
-                    $("#tabs").tabs({
-                        active: 3
-                    })
-                }
-            });
-        });
 
-        // $('#noticePracticeForm button.submit').on('click', function() {
-        //     alert();
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: './formAjax.php',
-        //         data: $('#noticePracticeForm').serialize(),
-        //         success: function(data) {
-        //             $("#tabs").tabs({
-        //                 active: 3
-        //             });
-        //         }
-        //     });
-        // });
-        $('#notice_practice').on('click', function() {
-            var form = $('#noticePracticeForm');
-            let templateContent = document.getElementById('notice-templatecontent').innerHTML;
-            var payload = {
-                noticePracticeTab: true,
-                full_document: templateContent
-            };
-
-            // let escapedContent = encodeURIComponent(templateContent);
-            $.ajax({
-                url: './formAjax.php',
-                method: 'POST',
-                data: payload,
-                success: function(data) {
-                    $("#tabs").tabs({
-                        active: 3
-                    })
-                    form[0].reset();
-                    // Hide the tab content for the form that was just submitted
-                    $('#notice_practice_tab').hide();
-
-                    // Hide the corresponding tab <li>
-                    $('ul.ui-tabs-nav li a[href="#notice_practice_tab"]').parent().hide();
-                    console.log('Template content saved successfully.');
-                },
-                error: function(error) {
-                    console.error('Error saving template content:', error);
-                }
-            });
-        });
 
         $('#release').on('click', function() {
             var form = $('#releaseForm');
@@ -407,20 +340,6 @@ $pid = $_SESSION['pid'];
                 }
             });
         });
-        // $('#releaseForm button.submit').on('click', function() {
-        //     $.ajax({
-        //         type: 'post',
-        //         url: './formAjax.php',
-        //         data: $('#releaseForm').serialize(),
-        //         success: function(data) {
-        //             $("#tabs").tabs({
-        //                 active: 3
-        //             })
-
-        //         }
-        //     });
-
-        // });
 
 
         $('input[name=payment_ifo]').on('change', function() {
