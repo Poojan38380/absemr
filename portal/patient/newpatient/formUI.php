@@ -180,7 +180,7 @@ var_dump($selected_value);
     $i = 0;
     while ($row = sqlFetchArray($getList)) {
         $isChecked = ($row['option_id'] === $selected_value[$i]) ? 'checked' : '';
-         var_dump($isChecked, $i);
+         var_dump($i);
 
         $checkboxes .= sprintf(
             '<div class="checkbox"><label><input type="checkbox" name="%s[]" value="%s" %s> %s</label></div>',
