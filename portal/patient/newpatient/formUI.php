@@ -180,7 +180,7 @@ function selectedCheckboxes($list_id = '', $name = '', $selected_values = '')
     $i = 0;
     while ($row = sqlFetchArray($getList)) {
         $isChecked = ($row['option_id'] == $selected_values[$i]) ? 'checked' : '';
-        // var_dump($selected_values);
+         var_dump($selected_values[$i]);
         // $isDisabled = $disabled ? 'disabled' : '';
         $checkboxes .= sprintf(
             '<div class="checkbox"><label><input type="checkbox" name="%s[]" value="%s" %s> %s</label></div>',
