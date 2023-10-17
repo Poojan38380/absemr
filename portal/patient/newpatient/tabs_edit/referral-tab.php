@@ -173,6 +173,7 @@
         please also include attorney information. If you have more then one case please let
         us know now to help you') ?>.
     </label>
+    <?php var_dump($referral['lawyerDiv_info']) ?>
     <?= selectedCheckboxes('refsource', 'Who_Referred_You_to_ABS_', $referral['Who_Referred_You_to_ABS_'] ?? '') ?>
 
 </div>
@@ -181,7 +182,6 @@
 
     <div class="row" name="lawyerDiv" style="display:block">
         <label>Who represents you? <span style="color:red">*</span></label>
-        <?php var_dump($referral['lawyerDiv_info']) ?>
         <?= selectedCheckboxes('lawyerDiv', 'lawyerDiv_info', $referral['lawyerDiv_info'] ?? '') ?>
 
         <label>What type of case is this <span style="color:red">*</span></label>
