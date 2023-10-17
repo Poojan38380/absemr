@@ -174,14 +174,13 @@ function selectedCheckboxes($list_id = '', $name = '', $selected_values = '')
 {
     //because it is a string when it comes in. the string is the exploded into an array
     $selected_value = explode('|', $selected_values);
-var_dump($selected_value);
+
     $getList = sqlStatement("select * from list_options where list_id = ? and activity = 1 order by seq asc", [$list_id]);
     $checkboxes = '';
 
     while ($row = sqlFetchArray($getList)) {
-        $isChecked = ($row['option_id'] === $selected_value[$i]) ? 'checked' : '';
         $valueSelected = array_search($row['option_id'], $selected_value);
-         var_dump($valueSelected);
+        $isChecked = ($valueSelected !== false) ? 'checked' : '';
 
         $checkboxes .= sprintf(
             '<div class="checkbox"><label><input type="checkbox" name="%s[]" value="%s" %s> %s</label></div>',
