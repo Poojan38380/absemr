@@ -178,7 +178,7 @@
 </div>
 
 <!-- Lawyer div -->
-<?php if ($referral['Who_Referred_You_to_ABS_'] == 'Patient') { ?>
+
     <div class="row" name="lawyerDiv" style="display:block">
         <label>Who represents you? <span style="color:red">*</span></label>
         <?= selectedRadioButtons('lawyerDiv', 'lawyerDiv_info', $referral['lawyerDiv_info'] ?? '') ?>
@@ -195,10 +195,10 @@
         <label>Attorney's Email</label><span style="color:red">*</span></br>
         <input type="text" name="lawyer_attroney_email" class="form-control" style="width:50%" value="<?php echo $referral['lawyer_attroney_email'] ?>"></br>
     </div>
-<?php } ?>
+
 
 <!-- Childwelfare div -->
-<?php if ($referral['Who_Referred_You_to_ABS_'] == 'Employee') { ?>
+
     <div class="row" name="childwelfareDiv" style="display:block">
         <label>Which Child Welfare Office?<span style="color:red">*</span></label>
         <?= selectedRadioButtons('child_welfare', 'childwelfare', $referral['childwelfare'] ?? '') ?>
@@ -212,11 +212,10 @@
         <label>Child Welfare Worker's Email<span style="color:red">*</span></label>
         <input type="text" name="welfare_worker_email" class="form-control" style="width:50%" value="<?php echo $referral['welfare_worker_email'] ?>"></br>
     </div>
-<?php } ?>
+
 
 <!-- Court -->
-<?php if ($referral['Who_Referred_You_to_ABS_'] == 'Court') { ?>
-    <div class="row" name="courtDiv" style="display:block">
+<div class="row" name="courtDiv" style="display:block">
         <label>
             Where is your court case? <span style="color:red">*</span>
         </label>
@@ -245,95 +244,84 @@
         ];
         ?>
 
-        <?php foreach ($county_courts as $county => $court) { ?>
-            <div class="county_courts" name="<?= $county ?>" style="display: none;">
-                <label>Select your county court</label>
-                <?= selectedRadioButtons($court, 'courtName') ?>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="courtName" value="Other" <?php echo ($referral['courtName'] == 'Other') ?  "checked" : ""; ?>> Other
-                    </label>
-                    <input type="text" style="width: 100px" name="otherCourtName" value="<?php echo $referral['otherCourtName'] ?>">
-                </div>
-            </div>
-        <?php } ?>
 
-        <div class="county_courts" name="Other" style="display:none">
-            <label>Enter the exact name of the referring court: </label>
-            <input type="text" style="width: 100px" name="courtName" value="<?php echo $referral['courtName'] ?>">
+    <div class="county_courts" name="<?= $county ?>" style="display: none;">
+        <label>Select your county court</label>
+        <?= selectedRadioButtons($court, 'courtName') ?>
+        <div class="radio">
+            <label>
+                <input type="radio" name="courtName" value="Other" <?php echo ($referral['courtName'] == 'Other') ?  "checked" : ""; ?>> Other
+            </label>
+            <input type="text" style="width: 100px" name="otherCourtName" value="<?php echo $referral['otherCourtName'] ?>">
         </div>
-
     </div>
-<?php } ?>
+
+
+    <div class="county_courts" name="Other" style="display:none">
+        <label>Enter the exact name of the referring court: </label>
+        <input type="text" style="width: 100px" name="courtName" value="<?php echo $referral['courtName'] ?>">
+    </div>
+
+</div>
 
 <!-- DMV -->
-<?php if ($referral['Who_Referred_You_to_ABS_'] == 'Walk-In') { ?>
-    <div class="row" name="DMVDiv" style="display:block">
-        <label>Which DMV?</label>
-        <?= selectedRadioButtons('dmv', 'dmv', $referral['dmv'] ?? '') ?>
-    </div>
-<?php } ?>
+
+<div class="row" name="DMVDiv" style="display:block">
+    <label>Which DMV?</label>
+    <?= selectedRadioButtons('dmv', 'dmv', $referral['dmv'] ?? '') ?>
+</div>
 
 <!-- Probation -->
-<?php if ($referral['Who_Referred_You_to_ABS_'] == 'Newspaper') { ?>
-    <div class="row" name="probationDiv" style="display:block">
-        <label>Which department of Probation referred you?<span style="color:red">*</span></label>
-        <?= selectedRadioButtons('Intake_Probation', 'prob_courtCase', $referral['prob_courtCase']) ?>
+<div class="row" name="probationDiv" style="display:block">
+    <label>Which department of Probation referred you?<span style="color:red">*</span></label>
+    <?= selectedRadioButtons('Intake_Probation', 'prob_courtCase', $referral['prob_courtCase']) ?>
 
-        <label>Probation Officer's Name<span style="color:red">*</span></label>
-        <input type="text" name="prob_offc_name" class="form-control" style="width:50%" value="<?php echo $referral['prob_offc_name'] ?>"></br>
+    <label>Probation Officer's Name<span style="color:red">*</span></label>
+    <input type="text" name="prob_offc_name" class="form-control" style="width:50%" value="<?php echo $referral['prob_offc_name'] ?>"></br>
 
-        <label>Probation Officer's Phone Number<span style="color:red">*</span></label>
-        <input type="text" name="prob_offc_ph" class="form-control" style="width:50%" value="<?php echo $referral['prob_offc_ph'] ?>"></br>
+    <label>Probation Officer's Phone Number<span style="color:red">*</span></label>
+    <input type="text" name="prob_offc_ph" class="form-control" style="width:50%" value="<?php echo $referral['prob_offc_ph'] ?>"></br>
 
-        <label>Probation Officer's Email<span style="color:red">*</span></label>
-        <input type="text" name="prob_offc_email" class="form-control" style="width:50%" value="<?php echo $referral['prob_offc_email'] ?>"></br>
-    </div>
-<?php } ?>
+    <label>Probation Officer's Email<span style="color:red">*</span></label>
+    <input type="text" name="prob_offc_email" class="form-control" style="width:50%" value="<?php echo $referral['prob_offc_email'] ?>"></br>
+</div>
 
-<?php if ($referral['Who_Referred_You_to_ABS_'] == 'Radio') { ?>
-    <div class="row" name="doctorDiv" style="display:block">
-        <label>Doctor's Name<span style="color:red">*</span></label>
-        <input type="text" name="doc_name" class="form-control" style="width:50%" value="<?php echo $referral['doc_name'] ?>"></br>
+<div class="row" name="doctorDiv" style="display:block">
+    <label>Doctor's Name<span style="color:red">*</span></label>
+    <input type="text" name="doc_name" class="form-control" style="width:50%" value="<?php echo $referral['doc_name'] ?>"></br>
 
-        <label>Doctor's Phone Number<span style="color:red">*</span></label>
-        <input type="text" name="doc_phone" class="form-control" style="width:50%" value="<?php echo $referral['doc_phone'] ?>"></br>
+    <label>Doctor's Phone Number<span style="color:red">*</span></label>
+    <input type="text" name="doc_phone" class="form-control" style="width:50%" value="<?php echo $referral['doc_phone'] ?>"></br>
 
-        <label>Doctor's Email<span style="color:red">*</span></label>
-        <input type="text" name="doc_email" class="form-control" style="width:50%" value="<?php echo $referral['doc_email'] ?>"></br>
-    </div>
-<?php } ?>
+    <label>Doctor's Email<span style="color:red">*</span></label>
+    <input type="text" name="doc_email" class="form-control" style="width:50%" value="<?php echo $referral['doc_email'] ?>"></br>
+</div>
 
-<?php if ($referral['Who_Referred_You_to_ABS_'] == 'hospital') { ?>
-    <div class="row" name="hospitalDiv" style="display:block">
-        <label>What is the name of the Hospital<span style="color:red">*</span></label>
-        <input type="text" name="hospital_name" class="form-control" style="width:50%" value="<?php echo $referral['hospital_name'] ?>"></br>
-    </div>
-<?php } ?>
+<div class="row" name="hospitalDiv" style="display:block">
+    <label>What is the name of the Hospital<span style="color:red">*</span></label>
+    <input type="text" name="hospital_name" class="form-control" style="width:50%" value="<?php echo $referral['hospital_name'] ?>"></br>
+</div>
 
-<?php if ($referral['Who_Referred_You_to_ABS_'] == 'Coupon') { ?>
-    <div class="row" name="paroleDiv" style="display:block">
-        <label>Parole Officer's Name<span style="color:red">*</span></label>
-        <input type="text" name="parole_offc_name" class="form-control" style="width:50%" value="<?php echo $referral['parole_offc_name'] ?>"></br>
+<div class="row" name="paroleDiv" style="display:block">
+    <label>Parole Officer's Name<span style="color:red">*</span></label>
+    <input type="text" name="parole_offc_name" class="form-control" style="width:50%" value="<?php echo $referral['parole_offc_name'] ?>"></br>
 
-        <label>Parole Officer's Phone Number<span style="color:red">*</span></label>
-        <input type="text" name="parole_offc_ph" class="form-control" style="width:50%" value="<?php echo $referral['parole_offc_ph'] ?>"></br>
+    <label>Parole Officer's Phone Number<span style="color:red">*</span></label>
+    <input type="text" name="parole_offc_ph" class="form-control" style="width:50%" value="<?php echo $referral['parole_offc_ph'] ?>"></br>
 
 
-        <label>Parole Officer's Email<span style="color:red">*</span></label>
-        <input type="text" name="parole_offc_email" class="form-control" style="width:50%" value="<?php echo $referral['parole_offc_email'] ?>"></br>
-    </div>
-<?php } ?>
+    <label>Parole Officer's Email<span style="color:red">*</span></label>
+    <input type="text" name="parole_offc_email" class="form-control" style="width:50%" value="<?php echo $referral['parole_offc_email'] ?>"></br>
+</div>
 
-<?php if ($referral['Who_Referred_You_to_ABS_'] == 'Referral Card') { ?>
-    <div class="row" name="socialWorkerDiv" style="display:block">
-        <label>Social Worker's Name<span style="color:red">*</span></label>
-        <input type="text" name="social_worker_name" class="form-control" style="width:50%" value="<?php echo $referral['social_worker_name'] ?>"></br>
+<div class="row" name="socialWorkerDiv" style="display:block">
+    <label>Social Worker's Name<span style="color:red">*</span></label>
+    <input type="text" name="social_worker_name" class="form-control" style="width:50%" value="<?php echo $referral['social_worker_name'] ?>"></br>
 
-        <label>Social Worker's Phone Number<span style="color:red">*</span></label>
-        <input type="text" name="social_worker_ph" class="form-control" style="width:50%" value="<?php echo $referral['social_worker_ph'] ?>"></br>
+    <label>Social Worker's Phone Number<span style="color:red">*</span></label>
+    <input type="text" name="social_worker_ph" class="form-control" style="width:50%" value="<?php echo $referral['social_worker_ph'] ?>"></br>
 
-        <label>Social Worker's Email<span style="color:red">*</span></label>
-        <input type="text" name="social_worker_email" class="form-control" style="width:50%" value="<?php echo $referral['social_worker_email'] ?>"></br>
-    </div>
-<?php } ?>
+    <label>Social Worker's Email<span style="color:red">*</span></label>
+    <input type="text" name="social_worker_email" class="form-control" style="width:50%" value="<?php echo $referral['social_worker_email'] ?>"></br>
+</div>
+
