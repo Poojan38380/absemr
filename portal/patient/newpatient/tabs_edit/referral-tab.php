@@ -181,7 +181,8 @@
 
     <div class="row" name="lawyerDiv" style="display:block">
         <label>Who represents you? <span style="color:red">*</span></label>
-        <?= selectedRadioButtons('lawyerDiv', 'lawyerDiv_info', $referral['lawyerDiv_info'] ?? '') ?>
+        <?php //var_dump($referral['lawyerDiv_info'] ?? '') ?>
+        <?= selectedCheckboxes('lawyerDiv', 'lawyerDiv_info', $referral['lawyerDiv_info'] ?? '') ?>
 
         <label>What type of case is this <span style="color:red">*</span></label>
         <?= selectedRadioButtons('caseType', 'caseType_info', $referral['caseType_info'] ?? '') ?>
