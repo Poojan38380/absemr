@@ -173,15 +173,15 @@ function selectedRadioButtons($list_id = '', $name = '', $selected_value = '')
 function selectedCheckboxes($list_id = '', $name = '', $selected_values = '')
 {
     //because it is a string when it comes in. the string is the exploded into an array
-    $selected_values = explode('|', $selected_values);
-
-    $getList = sqlStatement("select * from list_options where list_id=? and activity=1 order by seq asc", [$list_id]);
+    $selected_value = explode('|', $selected_values);
+var_dump($selected_value);
+    $getList = sqlStatement("select * from list_options where list_id = ? and activity = 1 order by seq asc", [$list_id]);
     $checkboxes = '';
     $i = 0;
     while ($row = sqlFetchArray($getList)) {
-        $isChecked = ($row['option_id'] == $selected_values[$i]) ? 'checked' : '';
-         var_dump($selected_values[$i]);
-        // $isDisabled = $disabled ? 'disabled' : '';
+        $isChecked = ($row['option_id'] === $selected_value[$i]) ? 'checked' : '';
+         var_dump($selected_value[$i]);
+
         $checkboxes .= sprintf(
             '<div class="checkbox"><label><input type="checkbox" name="%s[]" value="%s" %s> %s</label></div>',
             $name,
