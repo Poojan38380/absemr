@@ -360,7 +360,7 @@ $pid = $_SESSION['pid'];
                 $('div[name=eapDiv]').css('display', 'none');
             }
         });
-        const who = $('input[name^=Who_Referred_You_to_ABS_]').prop('checked');
+        const who = $('input[name^=Who_Referred_You_to_ABS_]' == 'Patient').prop('checked');
         console.log(who);
         $('input[name^=Who_Referred_You_to_ABS_]').on('change', function() {
             const referersAndDivs = [{
