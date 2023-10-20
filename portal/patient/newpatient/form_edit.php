@@ -362,7 +362,7 @@ $pid = $_SESSION['pid'];
         });
         const who = $('input[name^=Who_Referred_You_to_ABS_]').prop('checked');
         console.log(who);
-        $('input[name^=Who_Referred_You_to_ABS_]').on('load', function() {
+        $('input[name^=Who_Referred_You_to_ABS_]').on('change', function() {
             const referersAndDivs = [{
                     value: 'Patient',
                     div: 'lawyerDiv'
@@ -409,10 +409,11 @@ $pid = $_SESSION['pid'];
                 },
             ];
 
-            var referer = this;
+            const referer = this;
 
             referersAndDivs.forEach(function(item) {
                 const div = $('div[name=' + item.div + ']');
+                console.log(div);
                 if ($(referer).val() === item.value) {
                     const checked = $(referer).is(':checked');
                     div.css('display', checked ? 'block' : 'none');
