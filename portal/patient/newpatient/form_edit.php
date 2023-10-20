@@ -21,6 +21,7 @@ $pid = $_SESSION['pid'];
 <body>
     <script>
         <?php require($GLOBALS['srcdir'] . '/js/xl/jquery-datetimepicker-2-5-4-alternate.js.php'); ?>
+        let rcid = <?= $rcid ?? '' ?>;
         $LAB.script("<?php echo $GLOBALS['assets_static_relative']; ?>/underscore/underscore-min.js")
             .script("<?php echo $GLOBALS['assets_static_relative']; ?>/moment/moment.js")
             .script("<?php echo $GLOBALS['assets_static_relative']; ?>/backbone/backbone-min.js")
