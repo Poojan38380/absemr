@@ -348,7 +348,7 @@ $pid = $_SESSION['pid'];
         });
 
 
-        $('input[name=payment_ifo]').on('change', function() {
+        $('input[name=payment_ifo]').on('load', function() {
             if ($(this).val() == 'med_insu') {
                 $('div[name=insuranceComDiv]').css('display', 'block');
             } else {
@@ -361,7 +361,7 @@ $pid = $_SESSION['pid'];
             }
         });
 
-        $('input[name^=Who_Referred_You_to_ABS_]').on('load', function() {
+        $('input[name^=Who_Referred_You_to_ABS_]').load(function() {
             const referersAndDivs = [{
                     value: 'Patient',
                     div: 'lawyerDiv'
