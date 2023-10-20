@@ -360,8 +360,9 @@ $pid = $_SESSION['pid'];
                 $('div[name=eapDiv]').css('display', 'none');
             }
         });
-
-        $('input[name^=Who_Referred_You_to_ABS_]').load(function() {
+        const who = $('input[name^=Who_Referred_You_to_ABS_]').prop('checked', true);
+        console.log(who);
+        $('input[name^=Who_Referred_You_to_ABS_]').on('load', function() {
             const referersAndDivs = [{
                     value: 'Patient',
                     div: 'lawyerDiv'
@@ -414,7 +415,6 @@ $pid = $_SESSION['pid'];
                 const div = $('div[name=' + item.div + ']');
                 if ($(referer).val() === item.value) {
                     const checked = $(referer).is(':checked');
-                    console.log(div, checked);
                     div.css('display', checked ? 'block' : 'none');
                 }
             });
