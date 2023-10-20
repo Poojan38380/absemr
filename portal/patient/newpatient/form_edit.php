@@ -414,6 +414,7 @@ $pid = $_SESSION['pid'];
                 const div = $('div[name=' + item.div + ']');
                 if ($(referer).val() === item.value) {
                     const checked = $(referer).is(':checked');
+                    console.log(div, checked);
                     div.css('display', checked ? 'block' : 'none');
                 }
             });
