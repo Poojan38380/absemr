@@ -300,7 +300,6 @@ $pid = $_SESSION['pid'];
             })
         });
 
-
         $('#therapeuticForm button.submit').on('click', function() {
             var form = $('#therapeuticForm');
 
@@ -316,8 +315,6 @@ $pid = $_SESSION['pid'];
                 }
             });
         });
-
-
 
         $('#release').on('click', function() {
             var form = $('#releaseForm');
@@ -362,8 +359,9 @@ $pid = $_SESSION['pid'];
         });
         const who = $('input[name^=Who_Referred_You_to_ABS_]').prop('checked');
         console.log(who);
-        const what = $('input[name^=Who_Referred_You_to_ABS_]').val();
-        console.log(what);
+        const what = $('input[name^=Who_Referred_You_to_ABS_]').each(function() {
+            console.log($(this).val());
+        })
         $('input[name^=Who_Referred_You_to_ABS_]').on('change', function() {
             const referersAndDivs = [{
                     value: 'Patient',
@@ -410,7 +408,6 @@ $pid = $_SESSION['pid'];
                     div: 'socialWorkerDiv'
                 },
             ];
-
             const referer = this;
 
             referersAndDivs.forEach(function(item) {
