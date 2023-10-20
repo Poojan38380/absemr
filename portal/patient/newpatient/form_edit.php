@@ -359,7 +359,7 @@ $pid = $_SESSION['pid'];
         });
 
         $('input[name^=Who_Referred_You_to_ABS_]').each(function() {
-            console.log($(this).is(':checked');
+            console.log($(this).prop('checked');
             console.log($(this).val());
         })
         $('input[name^=Who_Referred_You_to_ABS_]').on('change', function() {
