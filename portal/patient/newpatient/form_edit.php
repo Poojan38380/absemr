@@ -357,9 +357,9 @@ $pid = $_SESSION['pid'];
                 $('div[name=eapDiv]').css('display', 'none');
             }
         });
-        const who = $('input[name^=Who_Referred_You_to_ABS_]').prop('checked');
-        console.log(who);
-        const what = $('input[name^=Who_Referred_You_to_ABS_]').each(function() {
+
+        $('input[name^=Who_Referred_You_to_ABS_]').each(function() {
+            console.log($(this).is(':checked')
             console.log($(this).val());
         })
         $('input[name^=Who_Referred_You_to_ABS_]').on('change', function() {
