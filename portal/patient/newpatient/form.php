@@ -503,9 +503,9 @@ use OpenEMR\Core\Header;
             var referer = this;
 
             referersAndDivs.forEach(function(item) {
-                var div = $('div[name=' + item.div + ']')
+                const div = $('div[name=' + item.div + ']');
                 if ($(referer).val() === item.value) {
-                    var checked = $(referer).is(':checked');
+                    const checked = $(referer).is(':checked');
                     div.css('display', checked ? 'block' : 'none');
                 }
             });
