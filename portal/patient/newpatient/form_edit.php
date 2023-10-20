@@ -419,7 +419,7 @@ $pid = $_SESSION['pid'];
             });
         });
 
-        $('input[name=countyName]').on('change', function() {
+        $('input[name=countyName]').on('load', function() {
             $('div.county_courts').css('display', 'none');
             var div = $('div.county_courts[name="' + $(this).val() + '"]').css('display', 'block');
         });
