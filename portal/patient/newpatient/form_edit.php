@@ -360,10 +360,10 @@ $pid = $_SESSION['pid'];
 
         $('input[name^=Who_Referred_You_to_ABS_]').each(function() {
             //console.log($(this).val(), $(this).is(':checked'));
-            if ($(this).val() === 'Referral Card' && $(this).is(':checked')) {
-                $('div[name=socialWorkerDiv]').css('display', 'block');
+            if ($(this).val() === 'Patient' && $(this).is(':checked')) {
+                $('div[name=lawyerDiv]').css('display', 'block');
             } else {
-                $('div[name=socialWorkerDiv]').css('display', 'none');
+                $('div[name=lawyerDiv]').css('display', 'none');
             }
             if ($(this).val() === 'Court' && $(this).is(':checked')) {
                 $('div[name=courtDiv]').css('display', 'block');
@@ -374,6 +374,11 @@ $pid = $_SESSION['pid'];
                 $('div[name=DMVDiv]').css('display', 'block');
             } else {
                 $('div[name=DMVDiv]').css('display', 'none');
+            }
+            if ($(this).val() === 'Referral Card' && $(this).is(':checked')) {
+                $('div[name=socialWorkerDiv]').css('display', 'block');
+            } else {
+                $('div[name=socialWorkerDiv]').css('display', 'none');
             }
         })
         $('input[name^=Who_Referred_You_to_ABS_]').on('change', function() {
