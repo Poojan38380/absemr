@@ -638,22 +638,22 @@
         <div class="checkbox">
             <?php var_dump($therapeutic['mentalHealthTreatment']); ?>
             <label>
-                <input type="checkbox" name="mentalHealthTreatment[]" value="inpatient" <?php echo ($therapeutic['mentalHealthTreatment'] === 'inpatient') ?  "selected" : ""; ?> > Inpatient
+                <input type="checkbox" name="mentalHealthTreatment[]" value="inpatient" <?php echo ($therapeutic['mentalHealthTreatment'] === 'inpatient') ?  "checked" : ""; ?> > Inpatient
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="mentalHealthTreatment[]" value="outpatient" <?php echo ($therapeutic['mentalHealthTreatment'] === 'outpatient') ?  "select: selected" : ""; ?> > Outpatient
+                <input type="checkbox" name="mentalHealthTreatment[]" value="outpatient" <?php echo ($therapeutic['mentalHealthTreatment'] === 'outpatient') ?  "checked" : ""; ?> > Outpatient
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="mentalHealthTreatment[]" value="partialHospitaliation" <?php echo ($therapeutic['mentalHealthTreatment'] === 'partialHospitaliation') ?  "selected" : ""; ?> > Partial hospitalization
+                <input type="checkbox" name="mentalHealthTreatment[]" value="partialHospitaliation" <?php echo ($therapeutic['mentalHealthTreatment'] === 'partialHospitaliation') ?  "checked" : ""; ?> > Partial hospitalization
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="mentalHealthTreatment[]" value="dayTreatment" <?php echo ($therapeutic['mentalHealthTreatment'] === 'dayTreatment') ?  "selected" : ""; ?> > Day treatment
+                <input type="checkbox" name="mentalHealthTreatment[]" value="dayTreatment" <?php echo ($therapeutic['mentalHealthTreatment'] === 'dayTreatment') ?  "checked" : ""; ?> > Day treatment
             </label>
         </div>
     </div>
