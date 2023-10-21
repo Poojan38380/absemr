@@ -636,12 +636,12 @@
 
         <label>What kind of mental health treatment did you undergo?<span style="color:red"> * </span></label></br>
         <div class="checkbox">
-            <label>
+            <label><?php var_dump($therapeutic['mentalHealthTreatment']); ?>
                 <input type="checkbox" name="mentalHealthTreatment[]" value="inpatient" <?php echo ($therapeutic['mentalHealthTreatment'] == 'inpatient') ?  "selected" : ""; ?> > Inpatient
             </label>
         </div>
         <div class="checkbox">
-            <label>
+            <label><?php var_dump($therapeutic['mentalHealthTreatment']); ?>
                 <input type="checkbox" name="mentalHealthTreatment[]" value="outpatient" <?php echo ($therapeutic['mentalHealthTreatment'] == 'outpatient') ?  "selected" : ""; ?> > Outpatient
             </label>
         </div>
