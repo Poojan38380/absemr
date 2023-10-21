@@ -205,8 +205,8 @@
                 <p>&nbsp;</p><br><br>
                 <p><?php echo $patient['name']; ?></p><br><br>
                 <script>
-                    //page.presentPatientSignature = true;
-                    //page.presentWitnessSignature = true;
+                    page.presentPatientSignature = true;
+                    page.presentWitnessSignature = true;
                 </script>
                 <span>
                     <?php if (isset($onsite_signature['sign']) && !empty($onsite_signature['sign'])) { ?>
