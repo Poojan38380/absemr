@@ -54,7 +54,10 @@ function noticePracticeTab($pid)
 function noticePracticeTabSaved($pid)
 {
     $referralCount = sqlQuery("select count(*) as count from patient_notice_form where pid = ?", [$pid]);
-    if ($referralCount['count']) return true;
+    var_dump($referralCount);
+    if ($referralCount['count']) {
+        return true;
+    }
     return false;
 }
 function noticePracticeTabEdit($pid)
