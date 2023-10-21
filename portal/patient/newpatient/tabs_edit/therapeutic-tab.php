@@ -101,13 +101,13 @@
 <div class="row">
     <label>Household Members</label></br>
     <label>Who do you live with?<span style="color:red"> * </span></label><br>
-    <?= selectedCheckBox('who_live_with', 'who_live_with', $therapeutic['who_live_with'], true) ?>
+    <?= selectedCheckBox('who_live_with', 'who_live_with', $therapeutic['who_live_with'], false) ?>
 </div>
 
 <div class="row">
     <label>Children</label></br>
     <label>How many children/step children do you have in total?<span style="color:red"> * </span></label><br>
-    <?= selectedDropdown('how_many_children', 'how_many_children', $therapeutic['how_many_children'], true) ?>
+    <?= selectedDropdown('how_many_children', 'how_many_children', $therapeutic['how_many_children'], false) ?>
     </select>
 </div>
 
