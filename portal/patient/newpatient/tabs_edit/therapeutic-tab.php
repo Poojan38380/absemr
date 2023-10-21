@@ -643,7 +643,7 @@
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="mentalHealthTreatment[]" value="outpatient" <?php echo ($therapeutic['mentalHealthTreatment'] === 'outpatient') ?  "" : "selected"; ?> > Outpatient
+                <input type="checkbox" name="mentalHealthTreatment[]" value="outpatient" <?php echo ($therapeutic['mentalHealthTreatment'] === 'outpatient') ?  "selected" : ""; ?> > Outpatient
             </label>
         </div>
         <div class="checkbox">
