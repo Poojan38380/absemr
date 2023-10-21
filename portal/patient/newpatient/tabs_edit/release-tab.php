@@ -62,8 +62,8 @@
 
                 <?php echo $patient['fname'] . ' ' . $patient['lname']; ?><br>
                 <script>
-                    page.presentPatientSignature = true;
-                    page.presentWitnessSignature = true;
+                    //page.presentPatientSignature = true;
+                    //page.presentWitnessSignature = true;
                 </script>
                 <span>
                     <?php if (isset($onsite_signature['sign']) && !empty($onsite_signature['sign'])) { ?>
