@@ -375,6 +375,36 @@ $pid = $_SESSION['pid'];
             } else {
                 $('div[name=DMVDiv]').css('display', 'none');
             }
+            if ($(this).val() === 'Newspaper' && $(this).is(':checked')) {
+                $('div[name=probationDiv]').css('display', 'block');
+            } else {
+                $('div[name=probationDiv]').css('display', 'none');
+            }
+            if ($(this).val() === 'Radio' && $(this).is(':checked')) {
+                $('div[name=doctorDiv]').css('display', 'block');
+            } else {
+                $('div[name=doctorDiv]').css('display', 'none');
+            }
+            if ($(this).val() === 'T.V.' && $(this).is(':checked')) {
+                $('div[name=eapDiv]').css('display', 'block');
+            } else {
+                $('div[name=eapDiv]').css('display', 'none');
+            }
+            if ($(this).val() === 'hospital' && $(this).is(':checked')) {
+                $('div[name=hospitalDiv]').css('display', 'block');
+            } else {
+                $('div[name=hospitalDiv]').css('display', 'none');
+            }
+            if ($(this).val() === 'Direct Mail' && $(this).is(':checked')) {
+                $('div[name=newyorkPblmGambDiv]').css('display', 'block');
+            } else {
+                $('div[name=newyorkPblmGambDiv]').css('display', 'none');
+            }
+            if ($(this).val() === 'Coupon' && $(this).is(':checked')) {
+                $('div[name=paroleDiv]').css('display', 'block');
+            } else {
+                $('div[name=paroleDiv]').css('display', 'none');
+            }
             if ($(this).val() === 'Referral Card' && $(this).is(':checked')) {
                 $('div[name=socialWorkerDiv]').css('display', 'block');
             } else {
