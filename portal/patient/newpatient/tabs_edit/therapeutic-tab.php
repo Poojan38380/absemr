@@ -671,24 +671,39 @@
 
         <label>What type of outpatient treatment did you receive?</label></br>
         <div class="checkbox">
-            <?php var_dump($therapeutic['outpatient_treatment']); ?>
+            <?php
+            $whichChecked = explode("|", $therapeutic['outpatient_treatment']);
+
+            ?>
             <label>
-                <input type="checkbox" name="outpatient_treatment[]" value="Psychotherapy" <?php echo ($therapeutic['outpatient_treatment'] == 'Psychotherapy') ?  "checked" : ""; ?> > Psychotherapy
+                <input type="checkbox" name="outpatient_treatment[]" value="Psychotherapy" <?php echo ($whichChecked[0] == 'Psychotherapy') ?  "checked" : ""; ?> > Psychotherapy
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="outpatient_treatment[]" value="family_therapy" <?php echo ($therapeutic['outpatient_treatment'] == 'family_therapy') ?  "checked" : ""; ?> > Family Therapy
+                <input type="checkbox" name="outpatient_treatment[]" value="family_therapy"
+                    <?php
+                    $familyTherapy = array_search('family_therapy', $whichChecked);
+                    echo ($familyTherapy !== false ) ?  "checked" : "";
+                ?> > Family Therapy
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="outpatient_treatment[]" value="medication" <?php echo ($therapeutic['outpatient_treatment'] == 'medication') ?  "checked" : ""; ?> > Medication
+                <input type="checkbox" name="outpatient_treatment[]" value="medication"
+                    <?php
+                    $receivedMedication = array_search('medication', $whichChecked);
+                    echo ($receivedMedication !== false) ?  "checked" : "";
+                    ?> > Medication
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="outpatient_treatment[]" value="other" <?php echo ($therapeutic['outpatient_treatment'] == 'other') ?  "checked" : ""; ?> > Other
+                <input type="checkbox" name="outpatient_treatment[]" value="other"
+                    <?php
+                    $other = array_search('other', $whichChecked);
+                    echo ($other !== false) ?  "checked" : "";
+                    ?> > Other
             </label>
         </div>
         <label>Who was your outpatient therapist/doctor?</label></br>
