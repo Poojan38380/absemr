@@ -64,6 +64,7 @@ function noticePracticeTabEdit($pid)
     $patient = sqlQuery("select concat(fname,' ', lname) as name from patient_data where pid = ?", [$pid]);
     $onsite_signature = sqlQuery("select type,user,sig_image as sign from onsite_signatures where pid = ?", [$pid]);
      $referral = sqlQuery("select * from patient_notice_form where pid = ?", [$pid]);
+     var_dump($referral);
     require_once('./tabs_edit/notice-practice-tab.php');
 }
 function releaseTab($pid)
