@@ -174,7 +174,6 @@ function selectedCheckboxes($list_id = '', $name = '', $selected_values = '')
 {
     //because it is a string when it comes in. the string is the exploded into an array
     $selected_value = explode('|', $selected_values);
-
     $getList = sqlStatement("select * from list_options where list_id = ? and activity = 1 order by seq asc", [$list_id]);
     $checkboxes = '';
 
@@ -192,8 +191,6 @@ function selectedCheckboxes($list_id = '', $name = '', $selected_values = '')
     }
     return $checkboxes;
 }
-
-
 function generateCheckBox($list_id = '', $name = '')
 {
     $getList = sqlStatement("select * from list_options where list_id = ? and activity = 1 order by seq asc", [$list_id]);
@@ -203,14 +200,14 @@ function generateCheckBox($list_id = '', $name = '')
     }
     return $check;
 }
-function selectedCheckBox($list_id = '', $name = '', $selected_value = [], $disabled = false)
+function selectedCheckBox($list_id = '', $name = '', $selected_values = '', $disabled = false)
 {
+    $selected_value = explode('|', $selected_values);
     $getList = sqlStatement("select * from list_options where list_id = ? and activity = 1 order by seq asc", [$list_id]);
     $check = '';
     while ($row = sqlFetchArray($getList)) {
-        $isChecked = ($row['option_id'] == $selected_value) ? 'checked' : '';
-        // $isChecked = in_array($row['option_id'], $selected_value) ? 'checked' : '';
-        $isDisabled = $disabled ? 'disabled' : '';
+        $valueSelected = array_search($row['option_id'], $selected_value);
+        $isChecked = ($valueSelected !== false) ? 'checked' : '';
         $check .= sprintf(
             '<div class="radio"><label><input type="checkbox" name="%s" value="%s" %s %s> %s</label></div>',
             $name,
