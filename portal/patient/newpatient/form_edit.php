@@ -253,7 +253,7 @@ $pid = $_SESSION['pid'];
                                 <div id="release_tab" class="tab-pane">
                                     <form id="releaseForm" method="POST">
                                         <input type="hidden" name="releaseTab" value="releaseForm">
-                                        <?php releaseTabEdit($pid); ?>
+                                        <?php //releaseTabEdit($pid); ?>
                                     </form>
                                 </div>
                             <?php } ?>
