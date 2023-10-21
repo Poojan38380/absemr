@@ -83,7 +83,7 @@ function releaseTabEdit($pid)
 {
     $patient = sqlQuery("select fname, lname from patient_data where pid = ?", [$pid]);
     $onsite_signature = sqlQuery("select type,user,sig_image as sign from onsite_signatures where pid = ?", [$pid]);
-    // $referral = sqlQuery("select * from patient_therapeutic_form where pid = ?", [$pid]);
+    $referral = sqlQuery("select * from patient_release_form where pid = ?", [$pid]);
     require_once('./tabs_edit/release-tab.php');
 }
 
