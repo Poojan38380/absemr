@@ -606,6 +606,7 @@
 
 <?php if ($therapeutic['exp_ver_phy_abuse'] == 'yes') { ?>
     <div class="row" style="display:block" name="victimDiv">
+        <?php var_dump($therapeutic['Intake_Victim']); ?>
         <label>What were you a victim of?<span style="color:red"> * </span></label></br>
         <?= selectedCheckBox('Intake_Victim', 'Intake_Victim', $therapeutic['Intake_Victim'], true) ?>
 
