@@ -216,7 +216,6 @@ function selectedCheckBox($list_id = '', $name = '', $selected_value = [], $disa
             $name,
             $row['option_id'],
             $isChecked,
-            $isDisabled,
             $row['title']
         );
     }
