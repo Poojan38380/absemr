@@ -105,3 +105,121 @@
     <?php echo selectedDropdown('how_many_children', 'how_many_children', $therapeutic['how_many_children'], false) ?>
     </select>
 </div>
+<!-- family composition -->
+<div class="row">
+    <!-- <label>Family Composition</label></br> -->
+    <label>Is a member of your family supportive of your recovery/treatment? <span style="color:red"> * </span></label></br>
+    <input type="radio" name="fam_support_recovery" value="yes" <?php echo ($therapeutic['fam_support_recovery'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+    <input type="radio" name="fam_support_recovery" value="no" <?php echo ($therapeutic['fam_support_recovery'] == 'no') ?  "checked" : ""; ?> > No</br>
+
+
+    <?php if ($therapeutic['fam_support_recovery'] == 'yes') { ?>
+        <div class="row" name="fam_support_recovery_div" style="display:block">
+            <label>Would your family members be willing to participate in your treatment? <span style="color:red"> * </span></label></br>
+            <input type="radio" name="fam_mem_willing_part" value="yes" <?php echo ($therapeutic['fam_mem_willing_part'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+            <input type="radio" name="fam_mem_willing_part" value="no" <?php echo ($therapeutic['fam_mem_willing_part'] == 'no') ?  "checked" : ""; ?> > No</br>
+        </div>
+    <?php } ?>
+
+    <?php if ($therapeutic['fam_mem_willing_part'] == 'yes') { ?>
+        <div class="row" name="fam_mem_willing_part_div" style="display:block">
+            <label>What is the name of the family member that will participate in your treatment?<span style="color:red"> * </span></label></br>
+            <input type="text" name="fam_mem_part_name" class="form-control" style="width:50%" value="<?php echo $therapeutic['fam_mem_part_name'] ?>" ></br>
+            <label>What is their relationship to you?<span style="color:red"> * </span></label></br>
+            <input type="text" name="fam_mem_part_relation" class="form-control" style="width:50%" value="<?php echo $therapeutic['fam_mem_part_relation'] ?>" ></br>
+            <label>What is their phone number?<span style="color:red"> * </span></label></br>
+            <input type="text" name="fam_mem_part_ph" class="form-control" style="width:50%" value="<?php echo $therapeutic['fam_mem_part_ph'] ?>" ></br>
+        </div>
+    <?php } ?>
+
+    <div class="row">
+        <label>Family Composition</label></br>
+        <label>Is there any family history of substance abuse or mental illness?<span style="color:red"> * </span></label></br>
+        <input type="radio" name="fam_sub_abuse" value="yes" <?php echo ($therapeutic['fam_sub_abuse'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+        <input type="radio" name="fam_sub_abuse" value="no" <?php echo ($therapeutic['fam_sub_abuse'] == 'no') ?  "checked" : ""; ?> > No</br>
+    </div>
+
+    <?php if ($therapeutic['fam_sub_abuse'] == 'yes') { ?>
+        <div class="row" style="display:block" name="fam_sub_abuse_div">
+            <label>Please explain the family history of substance abuse or mental illness<span style="color:red"> * </span></label></br>
+            <textarea name="sub_abuse_explanation" class="form-control" ><?php echo $therapeutic['sub_abuse_explanation'] ?></textarea></br>
+        </div>
+    <?php } ?>
+
+
+    <div class="row">
+        <label>Primary care doctor</label></br>
+        <label>Do you have a primary care doctor?<span style="color:red"> * </span></label></br>
+        <input type="radio" name="primary_care_doc" value="yes" <?php echo ($therapeutic['primary_care_doc'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+        <input type="radio" name="primary_care_doc" value="no" <?php echo ($therapeutic['primary_care_doc'] == 'no') ?  "checked" : ""; ?> > No</br>
+    </div>
+
+    <?php if ($therapeutic['primary_care_doc'] == 'yes') { ?>
+        <div class="row" name="primary_care_doc_div" style="display:block">
+            <label>What is your primary care Doctor's Name?<span style="color:red"> * </span></label></br>
+            <input type="text" name="pri_doc_name" value="<?php echo $therapeutic['pri_doc_name'] ?>" class="form-control" style="width:50%" ></br>
+            <label>What is your primary care doctor's phone number?</label></br>
+            <input type="text" name="pri_doc_ph" value="<?php echo $therapeutic['pri_doc_ph'] ?>" class="form-control" style="width:50%" ></br>
+        </div>
+    <?php } ?>
+
+    <div class="row">
+        <label>Physical Health</label></br>
+        <label>What do you consider your current health? (Including physical and mental health)<span style="color:red"> * </span></label></br>
+        <input type="radio" name="curr_health" value="good" <?php echo ($therapeutic['curr_health'] == 'good') ?  "checked" : ""; ?> > Good</br>
+        <input type="radio" name="curr_health" value="fair" <?php echo ($therapeutic['curr_health'] == 'fair') ?  "checked" : ""; ?> > Fair</br>
+        <input type="radio" name="curr_health" value="poor" <?php echo ($therapeutic['curr_health'] == 'poor') ?  "checked" : ""; ?> > Poor</br>
+    </div>
+
+    <?php if ($therapeutic['curr_health'] == 'good') { ?>
+        <div class="row" name="curr_health_good_div" style="display:block">
+            <label>Please list any past medical conditions, procedures, surgeries or injuries you have had.</label></br>
+            <textarea name="surgeries_details" class="form-control" ><?php echo $therapeutic['surgeries_details'] ?></textarea></br>
+        </div>
+    <?php } ?>
+
+    <?php if ($therapeutic['curr_health'] == 'fair') { ?>
+    <div class="row" name="curr_health_good_div" style="display:block">
+        <label>Please list any past medical conditions, procedures, surgeries or injuries you have had.</label></br>
+        <textarea name="surgeries_details" class="form-control" ><?php echo $therapeutic['surgeries_details'] ?></textarea></br>
+    </div>
+
+    <div class="row" name="curr_health_fair_div" style="display:block">
+        <label>What are your current medical conditions that you are aware of?<span style="color:red"> * </span></label></br>
+        <textarea name="med_condition_details" class="form-control" ><?php echo $therapeutic['med_condition_details'] ?></textarea></br>
+    </div>
+
+    <label>Are you currently prescribed medications from a doctor?<span style="color:red"> * </span></label></br>
+    <input type="radio" name="curr_pres_med" value="yes" <?php echo ($therapeutic['curr_pres_med'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+    <input type="radio" name="curr_pres_med" value="no" <?php echo ($therapeutic['curr_pres_med'] == 'no') ?  "checked" : ""; ?> > No</br>
+
+    <?php if ($therapeutic['curr_pres_med'] == 'yes') { ?>
+        <div name="curr_pre_med_div" style="display:block">
+            <label>Please list the doctor-prescribed medications as well as dosages<span style="color:red"> * </span></label></br>
+            <textarea name="curr_pre_med_details" class="form-control" ><?php echo $therapeutic['curr_pre_med_details'] ?></textarea></br>
+        </div>
+
+        <label>Do you take your medication as prescribed?<span style="color:red"> * </span></label></br>
+        <input type="radio" name="do_you_take_med_as_pres" value="yes" <?php echo ($therapeutic['do_you_take_med_as_pres'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+        <input type="radio" name="do_you_take_med_as_pres" value="no" <?php echo ($therapeutic['do_you_take_med_as_pres'] == 'no') ?  "checked" : ""; ?> > No</br>
+    <?php } ?>
+
+    <?php if ($therapeutic['do_you_take_med_as_pres'] == 'no') { ?>
+        <div name="do_you_take_med_as_pres_div" style="display:block">
+            <label>Please explain why you don't take your medications as prescribed<span style="color:red"> * </span></label></br>
+            <textarea name="do_you_take_med_as_pres_details" class="form-control" ></textarea></br>
+        </div>
+    <?php } ?>
+
+    <label>Have you had any recent hospitalization?<span style="color:red"> * </span></label></br>
+    <input type="radio" name="recent_hospitalization" value="yes" <?php echo ($therapeutic['recent_hospitalization'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+    <input type="radio" name="recent_hospitalization" value="no" <?php echo ($therapeutic['recent_hospitalization'] == 'no') ?  "checked" : ""; ?> > No</br>
+
+    <?php if ($therapeutic['recent_hospitalization'] == 'yes') { ?>
+        <div class="row" style="display:block" name="recent_hospitalizationDiv">
+            <label>What where you treated for during your last hospitalization?</label></br>
+            <textarea name="other_health_concern_details" class="form-control" ></textarea></br>
+        </div>
+    <?php } ?>
+</div>
+<?php } ?>
