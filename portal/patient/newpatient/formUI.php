@@ -52,7 +52,9 @@ function noticePracticeTab($pid)
 {
     $patient = sqlQuery("select concat(fname,' ', lname) as name from patient_data where pid = ?", [$pid]);
     $onsite_signature = sqlQuery("select type,user,sig_image as sign from onsite_signatures where pid = ?", [$pid]);
-    require_once('./tabs/notice-practice-tab.php');
+    $doc = file_get_contents('./tabs/notice-practice-tab.php');
+    return $doc;
+    //require_once('./tabs/notice-practice-tab.php');
 }
 function noticePracticeTabSaved($pid)
 {
