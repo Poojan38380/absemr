@@ -241,7 +241,7 @@ $pid = $_SESSION['pid'];
                             <div id="referral_tab" class="tab-pane">
                                 <form id="referralForm" method="POST">
                                     <input type="hidden" name="updateReferralTab" value="referralForm">
-                                    <?php //referralTabEdit($pid); ?>
+                                    <?php referralTabEdit($pid); ?>
                                     <button type="button" class="submit btn btn-primary mt-3"><?= xlt('Update'); ?></button>
                                 </form>
                             </div>
