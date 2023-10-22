@@ -223,3 +223,12 @@
     <?php } ?>
 </div>
 <?php } ?>
+<div class="row">
+    <label>Reason for Referral to ABS</label></br>
+    <?php echo selectedCheckBox('being_referred_to', 'being_referred_to') ?> -->
+</div>
+
+<div class="row">
+    <label>What are the reasons you are being referred for services & what ABS program(s) are you interested in enrolling in?</label></br>
+    <?php echo selectedCheckBox('being_referred_for_services', 'being_referred_for_service', $therapeutic['being_referred_for_service'], true) ?>
+</div>
