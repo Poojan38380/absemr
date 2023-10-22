@@ -67,9 +67,17 @@ function noticePracticeTabEdit($pid)
     $patient = sqlQuery("select concat(fname,' ', lname) as name from patient_data where pid = ?", [$pid]);
     $onsite_signature = sqlQuery("select type,user,sig_image as sign from onsite_signatures where pid = ?", [$pid]);
      $referral = sqlQuery("select * from patient_notice_form where pid = ?", [$pid]);
-     var_dump($referral); //This shows the informed consent release form. but if I remove this line, neither of the forms show up.
+     //var_dump($referral); //This shows the informed consent release form. but if I remove this line, neither of the forms show up.
     require_once('./tabs_edit/notice-practice-tab.php');
 }
+function releaseTabEdit($pid)
+{
+    $patient = sqlQuery("select fname, lname from patient_data where pid = ?", [$pid]);
+    $onsite_signature = sqlQuery("select type,user,sig_image as sign from onsite_signatures where pid = ?", [$pid]);
+    $referral = sqlQuery("select * from patient_release_form where pid = ?", [$pid]);
+    require_once('./tabs_edit/release-tab.php');
+}
+
 function releaseTab($pid)
 {
     $patient = sqlQuery("select fname, lname from patient_data where pid = ?", [$pid]);
@@ -79,15 +87,10 @@ function releaseTab($pid)
 function releaseTabSaved($pid)
 {
     $referralCount = sqlQuery("select count(*) as count from patient_release_form where pid = ?", [$pid]);
-    if ($referralCount['count']) return true;
+    if ($referralCount['count']) {
+        return true;
+    }
     return false;
-}
-function releaseTabEdit($pid)
-{
-    $patient = sqlQuery("select fname, lname from patient_data where pid = ?", [$pid]);
-    $onsite_signature = sqlQuery("select type,user,sig_image as sign from onsite_signatures where pid = ?", [$pid]);
-    $referral = sqlQuery("select * from patient_release_form where pid = ?", [$pid]);
-    require_once('./tabs_edit/release-tab.php');
 }
 
 function generateDropdown($list_id = '', $name = '')
