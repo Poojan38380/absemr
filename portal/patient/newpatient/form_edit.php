@@ -250,8 +250,7 @@ $pid = $_SESSION['pid'];
                             <div id="therapeutic_tab" class="tab-pane">
                                 <form id="therapeuticForm" method="POST">
                                     <input type="hidden" name="updateTherapeuticTab" value="therapeuticForm">
-                                    If you can see this, something went wrong. There is a bug in here somewhere.
-                                    <?php //therapeuticTabEdit($pid); ?>
+                                    <?php therapeuticTabEdit($pid); ?>
                                         <br><br><button type="button" class="submit btn btn-primary"><?= xlt('Update'); ?></button>
                                 </form>
                             </div>
