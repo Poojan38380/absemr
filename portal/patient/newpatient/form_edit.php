@@ -251,21 +251,19 @@ $pid = $_SESSION['pid'];
                                 <form id="therapeuticForm" method="POST">
                                     <input type="hidden" name="updateTherapeuticTab" value="therapeuticForm">
                                     <?php therapeuticTabEdit($pid); ?>
-
                                         <br><br><button type="button" class="submit btn btn-primary"><?= xlt('Update'); ?></button>
-
                                 </form>
                             </div>
                         <?php }
                            if (noticePracticeTabSaved($pid)) { ?>
-                        <div id="notice_practice_tab" class="tab-pane">
+                        <div >
 
                                 <?php noticePracticeTabEdit($pid); ?>
 
                         </div>
                         <?php }
                             if (releaseTabSaved($pid)) { ?>
-                        <div id="release_tab" class="tab-pane">
+                        <div >
 
                                 <?php releaseTabEdit($pid); ?>
 
