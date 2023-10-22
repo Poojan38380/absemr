@@ -246,18 +246,12 @@ $pid = $_SESSION['pid'];
 
                             <?php if (noticePracticeTabSaved($pid)) { ?>
                                 <div id="notice_practice_tab" class="tab-pane">
-                                    <form id="noticePracticeForm" method="POST">
-                                        <input type="hidden" name="noticePracticeTab" value="noticePracticeForm">
-                                        <?php noticePracticeTabEdit($pid); ?>
-                                    </form>
+                                    two
                                 </div>
                             <?php } ?>
                             <?php if (releaseTabSaved($pid)) { ?>
                                 <div id="release_tab" class="tab-pane">
-                                    <form id="releaseForm" method="POST">
-                                        <input type="hidden" name="releaseTab" value="releaseForm">
-                                        <?php releaseTabEdit($pid); ?>
-                                    </form>
+                                    one
                                 </div>
                             <?php } ?>
                         </div>
