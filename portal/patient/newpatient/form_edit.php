@@ -244,7 +244,7 @@ $pid = $_SESSION['pid'];
                                 </div>
                             <?php } ?>
 
-                            <?php if (noticePracticeTabSaved($pid)) { ?>
+                            <?php if (noticePracticeTabSaved($pid)) {  echo "Frank"?>
                                 <div id="notice_practice_tab" class="tab-pane">
                                     <form id="noticePracticeForm" method="POST">
                                         <input type="hidden" name="noticePracticeTab" value="noticePracticeForm">
