@@ -244,16 +244,22 @@ $pid = $_SESSION['pid'];
                                 </div>
                             <?php } ?>
 
-                            <?php if (noticePracticeTabSaved($pid)) { ?>
+                            <?php //if (noticePracticeTabSaved($pid)) { ?>
                                 <div id="notice_practice_tab" class="tab-pane">
-                                    two
+                                    <form id="noticePracticeForm" method="POST">
+                                        <input type="hidden" name="noticePracticeTab" value="noticePracticeForm">
+                                        <?php noticePracticeTabEdit($pid); ?>
+                                    </form>
                                 </div>
-                            <?php } ?>
-                            <?php if (releaseTabSaved($pid)) { ?>
+                            <?php //} ?>
+                            <?php //if (releaseTabSaved($pid)) { ?>
                                 <div id="release_tab" class="tab-pane">
-                                    one
+                                    <form id="releaseForm" method="POST">
+                                        <input type="hidden" name="releaseTab" value="releaseForm">
+                                        <?php releaseTabEdit($pid); ?>
+                                    </form>
                                 </div>
-                            <?php } ?>
+                            <?php //} ?>
                         </div>
                     </div>
                 </div>
