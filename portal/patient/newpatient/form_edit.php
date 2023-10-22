@@ -217,37 +217,37 @@ $pid = $_SESSION['pid'];
                     <?php } ?>
                 </ul>
 
-                    <div class="panel-body p-0">
-                        <div class="tab-content">
-                            <?php if (referralTabSaved($pid)) { ?>
-                                <div id="referral_tab" class="tab-pane">
-                                    <form id="referralForm" method="POST">
-                                        <input type="hidden" name="updateReferralTab" value="referralForm">
-                                        <?php referralTabEdit($pid); ?>
-                                        <button type="button" class="submit btn btn-primary mt-3"><?= xlt('Update'); ?></button>
-                                    </form>
-                                </div>
-                            <?php } ?>
-                            <?php if (therapeuticTabSaved($pid)) { ?>
-                                <div id="therapeutic_tab" class="tab-pane">
-                                    <form id="therapeuticForm" method="POST">
-                                        <input type="hidden" name="updateTherapeuticTab" value="therapeuticForm">
-                                        <?php therapeuticTabEdit($pid); ?>
-                                        <div class="mt-3">
-                                            <br><br><button type="button" class="submit btn btn-primary"><?= xlt('Update'); ?></button>
-                                        </div>
-                                    </form>
-                                </div>
-                            <?php } ?>
-                            <?php if (noticePracticeTabSaved($pid)) { ?>
-                            <div id="notice_practice_tab_edit" class="tab-pane">
-                                <h3>Notice practice</h3>
+                <div class="panel-body p-0">
+                    <div class="tab-content">
+                        <?php if (referralTabSaved($pid)) { ?>
+                            <div id="referral_tab" class="tab-pane">
+                                <form id="referralForm" method="POST">
+                                    <input type="hidden" name="updateReferralTab" value="referralForm">
+                                    <?php referralTabEdit($pid); ?>
+                                    <button type="button" class="submit btn btn-primary mt-3"><?= xlt('Update'); ?></button>
+                                </form>
                             </div>
-                            <?php } ?>
+                        <?php } ?>
+                        <?php if (therapeuticTabSaved($pid)) { ?>
+                            <div id="therapeutic_tab" class="tab-pane">
+                                <form id="therapeuticForm" method="POST">
+                                    <input type="hidden" name="updateTherapeuticTab" value="therapeuticForm">
+                                    <?php therapeuticTabEdit($pid); ?>
+                                    <div class="mt-3">
+                                        <br><br><button type="button" class="submit btn btn-primary"><?= xlt('Update'); ?></button>
+                                    </div>
+                                </form>
+                            </div>
+                        <?php } ?>
+                        <?php if (noticePracticeTabSaved($pid)) { ?>
+                        <div id="notice_practice_tab_edit" class="tab-pane">
+                            <h3>Notice practice</h3>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
+
         <?php } else { ?>
             <div class="alert alert-danger text-center" role="alert">
                 <?= xlt('Patient has not filled out questioner form yet.'); ?>
