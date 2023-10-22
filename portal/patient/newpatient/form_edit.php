@@ -18,7 +18,32 @@ $pid = $_SESSION['pid'];
     <script src="<?= $GLOBALS['web_root']; ?>/portal/sign/assets/signer_api.js?v=<?= $GLOBALS['v_js_includes']; ?>"></script>
     <script src="<?= $GLOBALS['web_root']; ?>/portal/sign/assets/signature_pad.umd.js?v=<?= $GLOBALS['v_js_includes']; ?>"></script>
     <script src="<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/libs/LAB.min.js"></script>
+    <style>
+        .ui-tabs-nav.fixed-top {
+            position: fixed;
+            /* Fix the ul at the top of the page */
+            top: 0;
+            /* Adjust the top position as needed */
+            width: 100%;
+            /* Make the ul take the full width of the viewport */
+            z-index: 999;
+            /* Ensure the ul is above other content */
+            background-color: #e9e9e9;
+            /* Add a background color if needed */
+        }
 
+        .tabs-container {
+            position: relative;
+            /* Set the container as a reference for the fixed ul */
+        }
+
+        .tab-content {
+            margin-top: 15px;
+            /* Adjust margin-top to push the content below the fixed ul */
+
+            /* Add any other necessary styling for the tab content */
+        }
+    </style>
 </head>
 
 <body>
