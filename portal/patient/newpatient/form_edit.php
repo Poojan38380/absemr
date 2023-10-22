@@ -216,7 +216,7 @@ $pid = $_SESSION['pid'];
                         <li><a href="#notice_practice_tab"><?php echo xlt("Notice of practice policies") ?></a></li>
                     <?php } ?>
                 </ul>
-               <div class="tab-content" id="formsContent">
+               <div class="tab-content">
                         <?php if (referralTabSaved($pid)) { ?>
                             <div id="referral_tab" class="tab-pane">
                                 <form id="referralForm" method="POST">
@@ -238,7 +238,7 @@ $pid = $_SESSION['pid'];
                             </div>
                         <?php } ?>
                         <?php if (noticePracticeTabSaved($pid)) { ?>
-                        <div id="notice_practice_tab" class="tab-pane">
+                        <div id="notice_practice_tab_edit" class="tab-pane">
                             <h3>Notice practice</h3>
                         </div>
                         <?php } ?>
