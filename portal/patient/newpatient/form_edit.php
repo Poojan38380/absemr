@@ -207,19 +207,13 @@ $pid = $_SESSION['pid'];
 
                 <ul class="nav nav-tabs" id="myFormTab" role="tablist">
                     <?php if (referralTabSaved($pid)) { ?>
-                        <li class="nav-item" role="presentation">
-                            <a href="#referral_tab">Referral Form</a>
-                        </li>
+                        <li><a href="#referral_tab">Referral Form</a></li>
                     <?php } ?>
                     <?php if (therapeuticTabSaved($pid)) { ?>
-                        <li class="nav-item" role="presentation">
-                            <a href="#therapeutic_tab">Therapeutic Form</a>
-                        </li>
+                        <li><a href="#therapeutic_tab">Therapeutic Form</a></li>
                     <?php } ?>
                     <?php if (noticePracticeTabSaved($pid)) { ?>
-                        <li class="nav-item" role="presentation">
-                            <a href="#notice_practice_tab"><?php echo xlt("Notice of practice policies") ?></a>
-                        </li>
+                        <li><a href="#notice_practice_tab"><?php echo xlt("Notice of practice policies") ?></a></li>
                     <?php } ?>
                 </ul>
                <div class="tab-content" id="formsContent">
