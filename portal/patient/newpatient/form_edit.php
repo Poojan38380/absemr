@@ -248,7 +248,7 @@ $pid = $_SESSION['pid'];
                                 <div id="notice_practice_tab" class="tab-pane">
                                     <form id="noticePracticeForm" method="POST">
                                         <input type="hidden" name="noticePracticeTab" value="noticePracticeForm">
-                                        <?php noticePracticeTabEdit($pid); ?>
+                                        <?php //noticePracticeTabEdit($pid); ?>
                                     </form>
                                 </div>
                             <?php //} ?>
