@@ -1,8 +1,7 @@
 <?php
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
 
+$ignoreAuth_onsite_portal = true; // ignore the standard authentication for a regular OpenEMR user
+require_once dirname(__FILE__, 4) . '/interface/globals.php';
 include_once('./formUI.php');
 $pid = $_SESSION['pid'];
 ?>
@@ -47,25 +46,16 @@ $pid = $_SESSION['pid'];
 </head>
 
 <body>
-    <script>
-        <?php require($GLOBALS['srcdir'] . '/js/xl/jquery-datetimepicker-2-5-4-alternate.js.php'); ?>
-        let recid = '<?= $recid ?? '' ?>';
-        $LAB.script("<?php echo $GLOBALS['assets_static_relative']; ?>/underscore/underscore-min.js")
-            .script("<?php echo $GLOBALS['assets_static_relative']; ?>/moment/moment.js")
-            .script("<?php echo $GLOBALS['assets_static_relative']; ?>/backbone/backbone-min.js")
-            .script("<?php echo $GLOBALS['web_root']; ?>/portal/patient/scripts/app.js?v=<?php echo $GLOBALS['v_js_includes']; ?>")
-            .script("<?php echo $GLOBALS['web_root']; ?>/portal/patient/scripts/model.js?v=<?php echo $GLOBALS['v_js_includes']; ?>").wait()
-            .script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsitedocuments.js?v=<?= $GLOBALS['v_js_includes']; ?>").wait()
-            .script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsiteportalactivities.js?v=<?= $GLOBALS['v_js_includes']; ?>")
-            .wait(function() {
-            page.init();
-            pageAudit.init();
-            if (isPortal) {
-                $('#Help').on('click', function(e) {
-                    e.preventDefault();
-                    $(".helpHide").addClass("d-none");
-                });
-                $("#Help").click();
+<script>
+    <?php require($GLOBALS['srcdir'] . '/js/xl/jquery-datetimepicker-2-5-4-alternate.js.php'); ?>
+    $LAB.script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsitedocuments.js?v=<?= $GLOBALS['v_js_includes']; ?>").wait().script(
+        "<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsiteportalactivities.js?v=<?= $GLOBALS['v_js_includes']; ?>").
+    wait(function() {
+        page.init();
+        pageAudit.init();
+        if (isPortal) {
+            $('#Help').on('click', function(e) {
+                e.preventDefault();
                 $(".helpHide").addClass("d-none");
 
                 $('#showNav').on('click', () => {
