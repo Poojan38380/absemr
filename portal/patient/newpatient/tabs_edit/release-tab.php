@@ -4,7 +4,7 @@
             <p></p>
             <p>&nbsp;</p>
             <h2>Agreements&nbsp;</h2>
-            <p><strong>I,&nbsp;&nbsp;&nbsp;</strong><span><input class="templateInput" type="text" value="<?php //echo $patient['fname']; ?>" style="margin:2px 2px;" data-textvalue="" onblur="templateText(this);"></span>&nbsp;First Name*<strong>&nbsp;&nbsp;&nbsp;</strong><span><input value="<?php echo $patient['lname']; ?>" class="templateInput" type="text" style="margin:2px 2px;" data-textvalue="" onblur="templateText(this);" value="vinu"></span>&nbsp;Last Name*<strong>, authorize Applied Behavioral Sciences, LCSW, PC (ABS)&nbsp;</strong></p>
+            <p><strong>I,&nbsp;&nbsp;&nbsp;</strong><span><input class="templateInput" type="text" value="<?php echo $patient['fname']; ?>" style="margin:2px 2px;" data-textvalue="" onblur="templateText(this);"></span>&nbsp;First Name*<strong>&nbsp;&nbsp;&nbsp;</strong><span><input value="<?php echo $patient['lname']; ?>" class="templateInput" type="text" style="margin:2px 2px;" data-textvalue="" onblur="templateText(this);" value="vinu"></span>&nbsp;Last Name*<strong>, authorize Applied Behavioral Sciences, LCSW, PC (ABS)&nbsp;</strong></p>
             <p>To disclose to (Name of Person or Organization to which disclosure is to be made)&nbsp; &nbsp;</p>
             <p><span><textarea class="templateInput" name="authorityName" rows="03" cols="080" style="margin:2px 2px;" data-textvalue="" onblur="templateText(this);"></textarea></span></p>
             <p><strong>Following information: Attendance, Participation, General Progress</strong></p>
