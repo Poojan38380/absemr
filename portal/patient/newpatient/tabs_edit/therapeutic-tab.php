@@ -333,7 +333,6 @@
         <label>Have you ever been in alcohol or drug treatment before?</label></br>
         <input type="radio" name="ever_been_in_alcohol" value="yes" <?php echo ($therapeutic['ever_been_in_alcohol'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
         <input type="radio" name="ever_been_in_alcohol" value="no" <?php echo ($therapeutic['ever_been_in_alcohol'] == 'no') ?  "checked" : ""; ?> > No</br>
-
     </div>
 <?php } ?>
 
