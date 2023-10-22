@@ -282,7 +282,7 @@ use OpenEMR\Core\Header;
             </div>
         </div>
     </div>
-    <!-- </div> -->
+
 <?php } else { ?>
     <div class="alert alert-success" role="alert">
         <?= xlt("Intake forms submitted successfully") ?>!

@@ -205,7 +205,7 @@ $pid = $_SESSION['pid'];
         <br>
         <?php if ((referralTabSaved($pid)) || (therapeuticTabSaved($pid)) || (noticePracticeTabSaved($pid)) || (releaseTabSaved($pid))) { ?>
             <div id="tabs">
-                <ul>
+                <ul >
                     <?php if (referralTabSaved($pid)) { ?>
                         <li><a href="#referral_tab">Referral Form</a></li>
                     <?php } ?>
@@ -213,12 +213,12 @@ $pid = $_SESSION['pid'];
                         <li><a href="#therapeutic_tab">Therapeutic Form</a></li>
                     <?php } ?>
                     <?php if (noticePracticeTabSaved($pid)) { ?>
-                        <li><a href="#notice_practice_tab_edit"><?php echo xlt("Notice of practice policies") ?></a></li>
+                        <li><a href="#notice_practice_tab"><?php echo xlt("Notice of practice policies") ?></a></li>
                     <?php } ?>
                 </ul>
-                <div>
-                    <div class="panel-body p-0">
-                        <div class="tab-content">
+
+               <div class="panel-body p-0">
+                   <div class="tab-content">
                             <?php if (referralTabSaved($pid)) { ?>
                                 <div id="referral_tab" class="tab-pane">
                                     <form id="referralForm" method="POST">
@@ -247,7 +247,7 @@ $pid = $_SESSION['pid'];
                         </div>
                     </div>
                 </div>
-            </div>
+
         <?php } else { ?>
             <div class="alert alert-danger text-center" role="alert">
                 <?= xlt('Patient has not filled out questioner form yet.'); ?>
@@ -304,9 +304,9 @@ $pid = $_SESSION['pid'];
         });
 
         $('#release').on('click', function() {
-            var form = $('#releaseForm');
+            const form = $('#releaseForm');
             let templateContent = document.getElementById('release-templatecontent').innerHTML;
-            var payload = {
+            const payload = {
                 releaseTab: true,
                 full_document: templateContent
             };
