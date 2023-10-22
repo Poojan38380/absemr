@@ -238,7 +238,10 @@ $pid = $_SESSION['pid'];
                         <li><a href="#therapeutic_tab">Therapeutic Form</a></li>
                     <?php } ?>
                     <?php if (noticePracticeTabSaved($pid)) { ?>
-                        <li><a href="#notice_practice_tab_edit"><?php echo xlt("Notice of practice policies") ?></a></li>
+                        <li><a href="#notice_practice_tab"><?php echo xlt("Notice of practice policies") ?></a></li>
+                    <?php } ?>
+                    <?php if (releaseTabSaved($pid)) { ?>
+                        <li><a href="#release_tab"><?php echo xlt("Informed Consent For The Release Of Information") ?></a></li>
                     <?php } ?>
                 </ul>
 
@@ -252,8 +255,8 @@ $pid = $_SESSION['pid'];
                                     <button type="button" class="submit btn btn-primary mt-3"><?= xlt('Update'); ?></button>
                                 </form>
                             </div>
-                        <?php } ?>
-                        <?php if (therapeuticTabSaved($pid)) { ?>
+                        <?php }
+                         if (therapeuticTabSaved($pid)) { ?>
                             <div id="therapeutic_tab" class="tab-pane">
                                 <form id="therapeuticForm" method="POST">
                                     <input type="hidden" name="updateTherapeuticTab" value="therapeuticForm">
@@ -263,10 +266,21 @@ $pid = $_SESSION['pid'];
                                     </div>
                                 </form>
                             </div>
-                        <?php } ?>
-                        <?php if (noticePracticeTabSaved($pid)) { ?>
-                        <div id="notice_practice_tab_edit" class="tab-pane">
-                            <h3>Notice practice</h3>
+                        <?php }
+                           if (noticePracticeTabSaved($pid)) { ?>
+                        <div id="notice_practice_tab" class="tab-pane">
+                            <form id="noticePracticeForm" method="POST">
+                                <input type="hidden" name="noticePracticeTab" value="noticePracticeForm">
+                                <?php noticePracticeTabEdit($pid); ?>
+                            </form>
+                        </div>
+                        <?php }
+                            if (releaseTabSaved($pid)) { ?>
+                        <div id="release_tab" class="tab-pane">
+                            <form id="releaseForm" method="POST">
+                                <input type="hidden" name="releaseTab" value="releaseForm">
+                                <?php releaseTabEdit($pid); ?>
+                            </form>
                         </div>
                         <?php } ?>
                     </div>
