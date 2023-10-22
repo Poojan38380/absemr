@@ -221,7 +221,7 @@ $pid = $_SESSION['pid'];
             restoreTextInputs();
         }
     </script>
-    <div class="container-fluid">
+    <div class="container">
         <div class="mb-3">
             <h2 class="text-center">Patient Portal Forms</h2>
             <a href="../../../interface/patient_file/summary/demographics.php" onclick="top.restoreSession()" title="Go Back" class="btn btn-primary">
