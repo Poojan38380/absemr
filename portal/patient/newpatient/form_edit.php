@@ -208,8 +208,7 @@ $pid = $_SESSION['pid'];
                 <ul class="nav nav-tabs" id="myFormTab" role="tablist">
                     <?php if (referralTabSaved($pid)) { ?>
                         <li class="nav-item" role="presentation">
-                            <!--<a href="#referral_tab">Referral Form</a>-->
-                            <button class="nav-link active" id="referral-tab" data-bs-toggle="tab" data-bs-target="#referral_tab" type="button" role="tab" aria-controls="referral" aria-selected="true">Referral Form</button>
+                            <a href="#referral_tab">Referral Form</a>
                         </li>
                     <?php } ?>
                     <?php if (therapeuticTabSaved($pid)) { ?>
