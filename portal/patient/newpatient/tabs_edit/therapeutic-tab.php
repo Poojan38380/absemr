@@ -45,3 +45,28 @@
         <input type="text" style="width:50%" name="ssi_ssd" class="form-control" value="<?php echo $therapeutic['ssi_ssd'] ?>" ></br>
     </div>
 <?php } ?>
+<?php if ($therapeutic['therapSupportList'] == 'fam_support') { ?>
+    <div class="row" style="display:block" name="family_sup_div">
+        <label>Who in your family do you receive support from? <span style="color:red"> * </span></label></br>
+        <input type="text" style="width:50%" name="family_support" class="form-control" value="<?php echo $therapeutic['family_support'] ?>" ></br>
+    </div>
+<?php } ?>
+
+<div class="row">
+    <label>Education Level</label></br>
+    <?php echo selectedRadioButtons('education_list', 'education_level_list', $therapeutic['education_level_list'], true) ?>
+</div>
+
+
+<?php if ($therapeutic['education_level_list'] == 'college') { ?>
+    <div class="row" name="college_list_div" style="display:block">
+        <?php echo selectedDropdown('college_list', 'college_list', $therapeutic['college_list'], true) ?>
+        </select>
+    </div>
+<?php } ?>
+
+<div class="row">
+    <label>Family Composition</label></br>
+    <label>Which best describes your relationship status?<span style="color:red"> * </span></label></br>
+    <?php echo selectedRadioButtons('fam_relationship_list', 'fam_relationship_list', $therapeutic['fam_relationship_list'], true) ?>
+</div>
