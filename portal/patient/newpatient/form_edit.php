@@ -212,13 +212,7 @@ $pid = $_SESSION['pid'];
                     <?php if (therapeuticTabSaved($pid)) { ?>
                         <li><a href="#therapeutic_tab">Therapeutic Form</a></li>
                     <?php } ?>
-                    <!-- <li><a href="#medical_history_tab">Medical History</a></li> -->
-                    <?php if (noticePracticeTabSaved($pid)) { ?>
-                        <li><a href="#notice_practice_tab"><?php echo xlt("Notice of practice policies") ?></a></li>
-                    <?php } ?>
-                    <?php if (releaseTabSaved($pid)) { ?>
-                        <li><a href="#release_tab">Informed Consent For The Release Of Information</a></li>
-                    <?php } ?>
+
                 </ul>
                 <div>
                     <div class="panel-body p-0">
@@ -244,22 +238,7 @@ $pid = $_SESSION['pid'];
                                 </div>
                             <?php } ?>
 
-                            <?php //if (noticePracticeTabSaved($pid)) { ?>
-                                <div id="notice_practice_tab" class="tab-pane">
-                                    <form id="noticePracticeForm" method="POST">
-                                        <input type="hidden" name="noticePracticeTab" value="noticePracticeForm">
-                                        <?php noticePracticeTabEdit($pid); ?>
-                                    </form>
-                                </div>
-                            <?php //} ?>
-                            <?php //if (releaseTabSaved($pid)) { ?>
-                                <div id="release_tab" class="tab-pane">
-                                    <form id="releaseForm" method="POST">
-                                        <input type="hidden" name="releaseTab" value="releaseForm">
-                                        <?php releaseTabEdit($pid); ?>
-                                    </form>
-                                </div>
-                            <?php //} ?>
+
                         </div>
                     </div>
                 </div>
