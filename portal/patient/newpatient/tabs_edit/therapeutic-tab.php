@@ -92,3 +92,16 @@
         <input type="text" name="last_relationship" value="<?php echo $therapeutic['last_relationship'] ?>" class="form-control" style="width:50%" ></br>
     </div>
 <?php } ?>
+
+<div class="row">
+    <label>Household Members</label></br>
+    <label>Who do you live with?<span style="color:red"> * </span></label><br>
+    <?php echo selectedCheckBox('who_live_with', 'who_live_with', $therapeutic['who_live_with'], false) ?>
+</div>
+
+<div class="row">
+    <label>Children</label></br>
+    <label>How many children/step children do you have in total?<span style="color:red"> * </span></label><br>
+    <?php echo selectedDropdown('how_many_children', 'how_many_children', $therapeutic['how_many_children'], false) ?>
+    </select>
+</div>
