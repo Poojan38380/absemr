@@ -241,7 +241,7 @@ $pid = $_SESSION['pid'];
                             <div id="referral_tab" class="tab-pane">
                                 <form id="referralForm" method="POST">
                                     <input type="hidden" name="updateReferralTab" value="referralForm">
-                                    <?php referralTabEdit($pid); ?>
+                                    <?php //referralTabEdit($pid); ?>
                                     <button type="button" class="submit btn btn-primary mt-3"><?= xlt('Update'); ?></button>
                                 </form>
                             </div>
@@ -250,7 +250,7 @@ $pid = $_SESSION['pid'];
                             <div id="therapeutic_tab" class="tab-pane">
                                 <form id="therapeuticForm" method="POST">
                                     <input type="hidden" name="updateTherapeuticTab" value="therapeuticForm">
-                                    <?php therapeuticTabEdit($pid); ?>
+                                    <?php //therapeuticTabEdit($pid); ?>
                                         <br><br><button type="button" class="submit btn btn-primary"><?= xlt('Update'); ?></button>
                                 </form>
                             </div>
