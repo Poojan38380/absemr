@@ -251,9 +251,9 @@ $pid = $_SESSION['pid'];
                                 <form id="therapeuticForm" method="POST">
                                     <input type="hidden" name="updateTherapeuticTab" value="therapeuticForm">
                                     <?php therapeuticTabEdit($pid); ?>
-                                    <!--<div class="mt-3">
+                                    <div class="mt-3">
                                         <br><br><button type="button" class="submit btn btn-primary"><?= xlt('Update'); ?></button>
-                                    </div>-->
+                                    </div>
                                 </form>
                             </div>
                         <?php }
@@ -328,6 +328,43 @@ $pid = $_SESSION['pid'];
                         active: 1
                     });
                     alert('Therapeutic form updated successfully.')
+                }
+            });
+        });
+
+        $('#notice_practice').on('click', function() {
+            var form = $('#noticePracticeForm');
+            let templateContent = document.getElementById('notice-templatecontent').innerHTML;
+            var payload = {
+                noticePracticeTab: true,
+                full_document: templateContent
+            };
+
+            // let escapedContent = encodeURIComponent(templateContent);
+            $.ajax({
+                url: './formAjax.php',
+                method: 'POST',
+                data: payload,
+                success: function(data) {
+                    $("#tabs").tabs({
+                        active: 1
+                    })
+                    form[0].reset();
+                    // Hide the tab content for the form that was just submitted
+                    $('#notice_practice_tab').hide();
+
+                    // Hide the corresponding tab <li>
+                    $('ul.ui-tabs-nav li a[href="#notice_practice_tab"]').parent().hide();
+                    // Show the success message
+                    $('#successAlert').fadeIn();
+
+                    // You can also hide the success message after a certain time if needed
+                    setTimeout(function() {
+                        $('#successAlert').fadeOut();
+                    }, 5000); // Hide after 5 seconds (adjust the time as needed)
+                },
+                error: function(error) {
+                    console.error('Error saving template content:', error);
                 }
             });
         });
