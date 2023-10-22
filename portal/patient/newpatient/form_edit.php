@@ -218,7 +218,7 @@ $pid = $_SESSION['pid'];
                 </ul>
                <div class="tab-content" id="formsContent">
                         <?php if (referralTabSaved($pid)) { ?>
-                            <div id="referral_tab" class="tab-pane" role="tabpanel">
+                            <div id="referral_tab" class="tab-pane">
                                 <form id="referralForm" method="POST">
                                     <input type="hidden" name="updateReferralTab" value="referralForm">
                                     <?php referralTabEdit($pid); ?>
@@ -227,7 +227,7 @@ $pid = $_SESSION['pid'];
                             </div>
                         <?php } ?>
                         <?php if (therapeuticTabSaved($pid)) { ?>
-                            <div id="therapeutic_tab" class="tab-pane" role="tabpanel">
+                            <div id="therapeutic_tab" class="tab-pane">
                                 <form id="therapeuticForm" method="POST">
                                     <input type="hidden" name="updateTherapeuticTab" value="therapeuticForm">
                                     <?php therapeuticTabEdit($pid); ?>
@@ -238,7 +238,7 @@ $pid = $_SESSION['pid'];
                             </div>
                         <?php } ?>
                         <?php if (noticePracticeTabSaved($pid)) { ?>
-                        <div id="notice_practice_tab" class="tab-pane" role="tabpanel">
+                        <div id="notice_practice_tab" class="tab-pane">
                             <h3>Notice practice</h3>
                         </div>
                         <?php } ?>
