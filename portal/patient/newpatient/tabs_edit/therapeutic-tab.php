@@ -225,7 +225,7 @@
 <?php } ?>
 <div class="row">
     <label>Reason for Referral to ABS</label></br>
-    <?php echo selectedCheckBox('being_referred_to', 'being_referred_to') ?> -->
+    <?php echo selectedCheckBox('being_referred_to', 'being_referred_to') ?>
 </div>
 
 <div class="row">
