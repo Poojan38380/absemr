@@ -240,7 +240,7 @@ $pid = $_SESSION['pid'];
                                 </div>
                             <?php } ?>
                             <?php if (noticePracticeTabSaved($pid)) { ?>
-                            <div id="notice_practice_tab_edit" class="tab-pane">
+                            <div id="notice_practice_tab_edit" class="">
                                 <h3>Notice practice</h3>
                             </div>
                             <?php } ?>
