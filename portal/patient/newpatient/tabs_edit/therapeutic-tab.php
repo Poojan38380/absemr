@@ -23,3 +23,25 @@
         </select></br>
     </div>
 <?php } ?>
+<?php if ($therapeutic['therapSupportList'] == 'unemployeement') { ?>
+    <div class="row" style="display:block" name="unemployeementDiv">
+        <label>How long have you been unemployed? <span style="color:red"> * </span></label></br>
+        <input type="text" style="width:50%" name="how_long_unemployeed" value="<?php echo $therapeutic['how_long_unemployeed'] ?>" class="form-control" ></br>
+        <label>Reason for unemployment <span style="color:red"> * </span></label></br>
+        <textarea name="reason_unemployee" class="form-control"><?php echo $therapeutic['reason_unemployee'] ?></textarea>
+    </div>
+<?php } ?>
+
+<?php if ($therapeutic['therapSupportList'] == 'pub_assistance') { ?>
+    <div class="row" style="display:block" name="publicAssistanceDiv">
+        <label>How long have you been receiving assistance? <span style="color:red"> * </span></label></br>
+        <input type="text" style="width:50%" name="receiving_assistance" value="<?php echo $therapeutic['receiving_assistance'] ?>" class="form-control" ></br>
+    </div>
+<?php } ?>
+
+<?php if ($therapeutic['therapSupportList'] == 'ssi_ssd') { ?>
+    <div class="row" style="display:block" name="ssi_ssd_div">
+        <label>What is your disability? <span style="color:red"> * </span></label></br>
+        <input type="text" style="width:50%" name="ssi_ssd" class="form-control" value="<?php echo $therapeutic['ssi_ssd'] ?>" ></br>
+    </div>
+<?php } ?>
