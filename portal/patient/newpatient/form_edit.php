@@ -212,7 +212,9 @@ $pid = $_SESSION['pid'];
                     <?php if (therapeuticTabSaved($pid)) { ?>
                         <li><a href="#therapeutic_tab">Therapeutic Form</a></li>
                     <?php } ?>
-
+                    <?php if (noticePracticeTabSaved($pid)) { ?>
+                        <li><a href="#notice_practice_tab"><?php echo xlt("Notice of practice policies") ?></a></li>
+                    <?php } ?>
                 </ul>
                 <div>
                     <div class="panel-body p-0">
@@ -237,8 +239,11 @@ $pid = $_SESSION['pid'];
                                     </form>
                                 </div>
                             <?php } ?>
-
-
+                            <?php if (noticePracticeTabSaved($pid)) { ?>
+                            <div id="notice_practice_tab" class="tab-pane">
+                                <h3>Notice practice</h3>
+                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
