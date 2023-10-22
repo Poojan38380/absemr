@@ -70,3 +70,25 @@
     <label>Which best describes your relationship status?<span style="color:red"> * </span></label></br>
     <?php echo selectedRadioButtons('fam_relationship_list', 'fam_relationship_list', $therapeutic['fam_relationship_list'], true) ?>
 </div>
+<?php if ($therapeutic['fam_relationship_list'] == 'Divorced' || $therapeutic['fam_relationship_list'] == 'Widowed') { ?>
+    <div class="row" name="DivorcedDiv" style="display:block">
+        <label>How many times have you been married?</label></br>
+        <input type="text" name="how_many_married" value="<?php echo $therapeutic['how_many_married'] ?>" class="form-control" style="width:50%" ></br>
+        <label>What are your ex partner('s) name(s)<span style="color:red"> * </span></label></br>
+        <input type="text" name="ex_partner_name" value="<?php echo $therapeutic['ex_partner_name'] ?>" class="form-control" style="width:50%" ></br>
+    </div>
+<?php } ?>
+
+<?php if ($therapeutic['fam_relationship_list'] == 'currently_married') { ?>
+    <div class="row" name="currentMarriedDiv" style="display:block">
+        <label>What is your spouse's name?<span style="color:red"> * </span></label></br>
+        <input type="text" name="spouse_name" class="form-control" value="<?php echo $therapeutic['spouse_name'] ?>" style="width:50%" ></br>
+    </div>
+<?php } ?>
+
+<?php if ($therapeutic['fam_relationship_list'] == 'single_never_married') { ?>
+    <div class="row" name="lastRelationShipDiv" style="display:block">
+        <label>When was your last relationship?<span style="color:red"> * </span></label></br>
+        <input type="text" name="last_relationship" value="<?php echo $therapeutic['last_relationship'] ?>" class="form-control" style="width:50%" ></br>
+    </div>
+<?php } ?>
