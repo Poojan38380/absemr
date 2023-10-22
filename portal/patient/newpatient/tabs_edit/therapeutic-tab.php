@@ -1,7 +1,7 @@
-<input type="hidden" name="id" value="<?= $therapeutic['id'] ?>">
+<input type="hidden" name="id" value="<?php echo $therapeutic['id'] ?>">
 <div class="row">
     <label>What is your primary means of finical support?</label></br>
-    <?= selectedRadioButtons('therap_support_list', 'therapSupportList', $therapeutic['therapSupportList'], true) ?>
+    <?php echo selectedRadioButtons('therap_support_list', 'therapSupportList', $therapeutic['therapSupportList'], true) ?>
 </div>
 <?php if ($therapeutic['therapSupportList'] == 'employeement') { ?>
     <div class="row" name="employeementDiv" style="display:block"></br>
@@ -58,13 +58,13 @@
 
 <div class="row">
     <label>Education Level</label></br>
-    <?= selectedRadioButtons('education_list', 'education_level_list', $therapeutic['education_level_list'], true) ?>
+    <?php echo selectedRadioButtons('education_list', 'education_level_list', $therapeutic['education_level_list'], true) ?>
 </div>
 
 
 <?php if ($therapeutic['education_level_list'] == 'college') { ?>
     <div class="row" name="college_list_div" style="display:block">
-        <?= selectedDropdown('college_list', 'college_list', $therapeutic['college_list'], true) ?>
+        <?php echo selectedDropdown('college_list', 'college_list', $therapeutic['college_list'], true) ?>
         </select>
     </div>
 <?php } ?>
@@ -72,7 +72,7 @@
 <div class="row">
     <label>Family Composition</label></br>
     <label>Which best describes your relationship status?<span style="color:red"> * </span></label></br>
-    <?= selectedRadioButtons('fam_relationship_list', 'fam_relationship_list', $therapeutic['fam_relationship_list'], true) ?>
+    <?php echo selectedRadioButtons('fam_relationship_list', 'fam_relationship_list', $therapeutic['fam_relationship_list'], true) ?>
 </div>
 
 <?php if ($therapeutic['fam_relationship_list'] == 'Divorced' || $therapeutic['fam_relationship_list'] == 'Widowed') { ?>
@@ -101,13 +101,13 @@
 <div class="row">
     <label>Household Members</label></br>
     <label>Who do you live with?<span style="color:red"> * </span></label><br>
-    <?= selectedCheckBox('who_live_with', 'who_live_with', $therapeutic['who_live_with'], false) ?>
+    <?php echo selectedCheckBox('who_live_with', 'who_live_with', $therapeutic['who_live_with'], false) ?>
 </div>
 
 <div class="row">
     <label>Children</label></br>
     <label>How many children/step children do you have in total?<span style="color:red"> * </span></label><br>
-    <?= selectedDropdown('how_many_children', 'how_many_children', $therapeutic['how_many_children'], false) ?>
+    <?php echo selectedDropdown('how_many_children', 'how_many_children', $therapeutic['how_many_children'], false) ?>
     </select>
 </div>
 
@@ -237,19 +237,19 @@
     <label>Reason for Referral to ABS</label></br>
 
     <!-- <label>What ABS program(s) are you interested in or being referred to?</label></br>
-    <?= selectedCheckBox('being_referred_to', 'being_referred_to') ?> -->
+    <?php echo selectedCheckBox('being_referred_to', 'being_referred_to') ?> -->
 
 </div>
 
 <div class="row">
     <label>What are the reasons you are being referred for services & what ABS program(s) are you interested in enrolling in?</label></br>
-    <?= selectedCheckBox('being_referred_for_services', 'being_referred_for_service', $therapeutic['being_referred_for_service'], true) ?>
+    <?php echo selectedCheckBox('being_referred_for_services', 'being_referred_for_service', $therapeutic['being_referred_for_service'], true) ?>
 </div>
 
 <?php if ($therapeutic['being_referred_for_service'] == 'anger_mgmt') { ?>
     <div class="row" name="being_rf_for_services_anger_mgmt_div" style="display:block">
         <label>When was the last time you were in an argument or domestic dispute?<span style="color:red"> * </span></label></br>
-        <?= selectedRadioButtons('argument_domestic_dispute_list', 'anger_mgmt_time_list', $therapeutic['anger_mgmt_time_list'], true) ?>
+        <?php echo selectedRadioButtons('argument_domestic_dispute_list', 'anger_mgmt_time_list', $therapeutic['anger_mgmt_time_list'], true) ?>
 
 
         <label>Were you ever in a physical confrontation or fight?<span style="color:red"> * </span></label><br>
@@ -259,7 +259,7 @@
         <?php if ($therapeutic['physical_confrontation'] == 'yes') { ?>
             <div name="physical_confrontationDiv" style="display:block">
                 <label>Who were you fighting with?<span style="color:red"> * </span></label><br>
-                <?= selectedRadioButtons('fighting_with', 'fighting_with', $therapeutic['fighting_with'], true) ?>
+                <?php echo selectedRadioButtons('fighting_with', 'fighting_with', $therapeutic['fighting_with'], true) ?>
             </div>
         <?php } ?>
 
@@ -279,7 +279,7 @@
         <input type="radio" name="arrested_violent_crime" value="no" <?php echo ($therapeutic['physically_hurt'] == 'no') ?  "checked" : ""; ?> > No</br>
 
         <label>Has impulsive anger or aggression caused you other problems in your life? <span style="color:red"> * </span></label><br>
-        <?= selectedRadioButtons('anger_or_agression_caused', 'anger_or_agression_caused', $therapeutic['anger_or_agression_caused'], true) ?>
+        <?php echo selectedRadioButtons('anger_or_agression_caused', 'anger_or_agression_caused', $therapeutic['anger_or_agression_caused'], true) ?>
     </div>
 <?php } ?>
 
@@ -288,28 +288,28 @@
 <?php if ($therapeutic['being_referred_for_service'] == 'alcohol_drug') { ?>
     <div class="row" style="display:block" name="alcohol_drug_abuse_div">
         <label>How often do you have a drink containing alcohol?</label></br>
-        <?= selectedRadioButtons('drug_consumption_duration', 'dring_contain_alc', $therapeutic['dring_contain_alc'], true) ?>
+        <?php echo selectedRadioButtons('drug_consumption_duration', 'dring_contain_alc', $therapeutic['dring_contain_alc'], true) ?>
 
         <label>How many standard drinks containing alcohol do you have on a typical day when drinking?</label></br>
-        <?= selectedRadioButtons('std_drink_contain_alcohol', 'when_drink_drings', $therapeutic['when_drink_drings'], true) ?>
+        <?php echo selectedRadioButtons('std_drink_contain_alcohol', 'when_drink_drings', $therapeutic['when_drink_drings'], true) ?>
 
         <label>How often do you have six or more drinks on one occasion</label></br>
-        <?= selectedRadioButtons('how_often_drink', 'occasional_drinks', $therapeutic['occasional_drinks'], true) ?>
+        <?php echo selectedRadioButtons('how_often_drink', 'occasional_drinks', $therapeutic['occasional_drinks'], true) ?>
 
         <label>During the past year, how often have you found that you were not able to stop drinking once you had started?</label></br>
-        <?= selectedRadioButtons('how_often_drink', 'how_often_stop_drink', $therapeutic['how_often_stop_drink'], true) ?>
+        <?php echo selectedRadioButtons('how_often_drink', 'how_often_stop_drink', $therapeutic['how_often_stop_drink'], true) ?>
 
         <label>During the past year, how often have you failed to do what was normally expected of you because of drinking?</label></br>
-        <?= selectedRadioButtons('how_often_drink', 'how_often_failed_stop_drink', $therapeutic['how_often_failed_stop_drink'], true) ?>
+        <?php echo selectedRadioButtons('how_often_drink', 'how_often_failed_stop_drink', $therapeutic['how_often_failed_stop_drink'], true) ?>
 
         <label>During the past year, how often have you needed a drink in the morning to get yourself going after a heavy drinking session?</label></br>
-        <?= selectedRadioButtons('how_often_drink', 'how_often_need_drink', $therapeutic['how_often_need_drink'], true) ?>
+        <?php echo selectedRadioButtons('how_often_drink', 'how_often_need_drink', $therapeutic['how_often_need_drink'], true) ?>
 
         <label>During the past year, how often have you had a feeling of guilt or remorse after drinking?</label></br>
-        <?= selectedRadioButtons('how_often_drink', 'remorse_after_drink', $therapeutic['remorse_after_drink'], true) ?>
+        <?php echo selectedRadioButtons('how_often_drink', 'remorse_after_drink', $therapeutic['remorse_after_drink'], true) ?>
 
         <label>During the past year, how often have you been unable to remember what happened the night before because you had been drinking?</label></br>
-        <?= selectedRadioButtons('how_often_drink', 'unable_remember_night_session', $therapeutic['unable_remember_night_session'], true) ?>
+        <?php echo selectedRadioButtons('how_often_drink', 'unable_remember_night_session', $therapeutic['unable_remember_night_session'], true) ?>
 
         <label>Have you or someone else been injured as a result of your drinking?</label></br>
         <input type="radio" name="injured_result_drink" value="no" <?php echo ($therapeutic['injured_result_drink'] == 'no') ?  "checked" : ""; ?> > No</br>
@@ -322,7 +322,7 @@
         <input type="radio" name="concerned_about_drink" value="yes_during_year" <?php echo ($therapeutic['concerned_about_drink'] == 'yes_during_year') ?  "checked" : ""; ?> > Yes, during the past year</br>
 
         <label>What are your drugs of choice? Please list all.</label></br>
-        <?= selectedCheckBox('drug_choices', 'drugs_of_chioces', $therapeutic['drugs_of_chioces'], true) ?>
+        <?php echo selectedCheckBox('drug_choices', 'drugs_of_chioces', $therapeutic['drugs_of_chioces'], true) ?>
 
         <label>How old were you the first time you used?</label></br>
         <input type="text" name="first_time_used" value="<?php echo $therapeutic['first_time_used'] ?>" class="form-control" style="width:50%" ></br>
@@ -350,7 +350,7 @@
 <?php if ($therapeutic['being_referred_for_service'] == 'gam_pblm') { ?>
     <div class="row" style="display:block" name="gam_pblm_div">
         <label>Gambling - Please check all that apply</label><span style="color:red"> * </span></br>
-        <?= selectedCheckBox('gam_pblm_list', 'gamList', $therapeutic['gamList'], true) ?>
+        <?php echo selectedCheckBox('gam_pblm_list', 'gamList', $therapeutic['gamList'], true) ?>
     </div>
 <?php } ?>
 
@@ -361,7 +361,7 @@
         <input type="radio" name="sex_active" value="no" <?php echo ($therapeutic['sex_active'] == 'no') ?  "checked" : ""; ?> > No</br>
 
         <label>What is your sexual preference</label><span style="color:red">*</span></br>
-        <?= selectedRadioButtons('sexual_orientation', 'sex_preference', $therapeutic['sex_preference'], true) ?>
+        <?php echo selectedRadioButtons('sexual_orientation', 'sex_preference', $therapeutic['sex_preference'], true) ?>
 
         <label>Are you satisfied with your sexual identity?</label><span style="color:red">*</span></br>
         <input type="radio" name="satisfied_sex_identity" value="yes" <?php echo ($therapeutic['satisfied_sex_identity'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
@@ -372,14 +372,14 @@
         <input type="radio" name="charged_sex_crime" value="no" <?php echo ($therapeutic['charged_sex_crime'] == 'no') ?  "checked" : ""; ?> > No</br>
 
         <label>Have you ever had any other problems in your life as a result of impulsive sexual behavior such as the following?</label></br>
-        <?= selectedCheckBox('impulsive_sex_behave', 'impulsive_sex_behave', $therapeutic['impulsive_sex_behave'], true) ?>
+        <?php echo selectedCheckBox('impulsive_sex_behave', 'impulsive_sex_behave', $therapeutic['impulsive_sex_behave'], true) ?>
     </div>
 <?php } ?>
 
 <?php if ($therapeutic['being_referred_for_service'] == 'domestic_violence') { ?>
     <div class="row" style="display:block" name="domestic_violence_div"></br>
         <label>When was the last time you were in an argument or domestic dispute?<span style="color:red"> * </span></label></br>
-        <?= selectedRadioButtons('argument_domestic_dispute_list', 'domestic_violence', $therapeutic['domestic_violence'], true) ?>
+        <?php echo selectedRadioButtons('argument_domestic_dispute_list', 'domestic_violence', $therapeutic['domestic_violence'], true) ?>
 
         <label>Were you ever in a physical confrontation or fight?<span style="color:red"> * </span></label></br>
         <input type="radio" name="phy_confrintation" value="yes" <?php echo ($therapeutic['phy_confrintation'] == 'yes') ?  "checked" : ""; ?> > Yes </br>
@@ -394,7 +394,7 @@
         <input type="radio" name="ever_arrested_violent_crime" value="no" <?php echo ($therapeutic['ever_arrested_violent_crime'] == 'no') ?  "checked" : ""; ?> > No </br>
 
         <label>Has impulsive anger or aggression caused you other problems in your life?<span style="color:red"> * </span></label></br>
-        <?= selectedCheckBox('domestic_violence_list', 'domestic_violence_list', $therapeutic['domestic_violence_list'], true) ?>
+        <?php echo selectedCheckBox('domestic_violence_list', 'domestic_violence_list', $therapeutic['domestic_violence_list'], true) ?>
     </div>
 <?php } ?>
 
@@ -415,7 +415,7 @@
 <div class="row">
     <label>Suicidal Thoughts</label></br>
     <label>Have you ever had any suicidal thinking or thoughts of hurting/killing yourself?<span style="color:red"> * </span></label></br>
-    <?= selectedRadioButtons('Intake_suicide', 'Intake_suicide', $therapeutic['Intake_suicide'], true) ?>
+    <?php echo selectedRadioButtons('Intake_suicide', 'Intake_suicide', $therapeutic['Intake_suicide'], true) ?>
 </div>
 
 <?php if ($therapeutic['Intake_suicide'] == 'attemptedsuicide') { ?>
@@ -488,7 +488,7 @@
 <?php if ($therapeutic['arrested_ever'] == 'yes') { ?>
     <div class="row" style="display:block" name="arrested_ever_yes_div">
         <label>How many times have you been arrested?<span style="color:red"> * </span></label></br>
-        <?= selectedDropdown('how_many_arrest', 'how_many_arrest', $therapeutic['how_many_arrest'], true) ?>
+        <?php echo selectedDropdown('how_many_arrest', 'how_many_arrest', $therapeutic['how_many_arrest'], true) ?>
     </div>
 <?php } ?>
 <?php if ($therapeutic['how_many_arrest'] != '') { ?>
@@ -514,7 +514,7 @@
     <?php if ($therapeutic['monitor_agency'] == 'yes') { ?>
         <div class="row" style="display:block" name="sentence_length_div">
             <label>How long is your sentence to supervision?<span style="color:red"> * </span></label></br>
-            <?= selectedDropdown('How_long_is_your_sentence_to_supervision_', 'sentence_length', $therapeutic['sentence_length'], true) ?>
+            <?php echo selectedDropdown('How_long_is_your_sentence_to_supervision_', 'sentence_length', $therapeutic['sentence_length'], true) ?>
         </div>
     <?php } ?>
 
@@ -535,13 +535,13 @@
     <?php if ($therapeutic['incarcerated'] == 'yes') { ?>
         <div class="row" style="display:block" name="incarcerated_length_div">
             <label>If yes how many times incarcerated?<span style="color:red"> * </span></label></br>
-            <?= selectedDropdown('how_many_arrest', 'incarcerated_length', $therapeutic['incarcerated_length'], true) ?>
+            <?php echo selectedDropdown('how_many_arrest', 'incarcerated_length', $therapeutic['incarcerated_length'], true) ?>
         </div>
 
 
         <div class="row" style="display:block" name="incarcerated_years_div">
             <label>How long, in total, have you spent incarcerated?<span style="color:red"> * </span></label></br>
-            <?= selectedDropdown('How_long_is_your_sentence_to_supervision_', 'incarcerated_years', $therapeutic['incarcerated_years'], true) ?>
+            <?php echo selectedDropdown('How_long_is_your_sentence_to_supervision_', 'incarcerated_years', $therapeutic['incarcerated_years'], true) ?>
         </div>
     <?php } ?>
 
@@ -576,14 +576,14 @@
     <?php if ($therapeutic['state_registry'] == 'yes') { ?>
         <div class="row" style="display:block" name="state_registry_list_div">
             <label>If yes, which state registry?<span style="color:red"> * </span></label></br>
-            <?= selectedDropdown('State_Registry', 'state_registry_list', $therapeutic['state_registry_list'], true) ?>
+            <?php echo selectedDropdown('State_Registry', 'state_registry_list', $therapeutic['state_registry_list'], true) ?>
         </div>
     <?php } ?>
 
     <?php if ($therapeutic['state_registry_list'] == '1') { ?>
         <div class="row" style="display:block" name="sex_offender_div">
             <label>If sex offender registry, choose level:<span style="color:red"> * </span></label></br>
-            <?= selectedDropdown('Sex_Offender', 'sex_offender', $therapeutic['sex_offender'], true) ?>
+            <?php echo selectedDropdown('Sex_Offender', 'sex_offender', $therapeutic['sex_offender'], true) ?>
         </div>
     <?php } ?>
 <?php } ?>
@@ -606,7 +606,7 @@
 <?php if ($therapeutic['exp_ver_phy_abuse'] == 'yes') { ?>
     <div class="row" style="display:block" name="victimDiv">
         <label>What were you a victim of?<span style="color:red"> * </span></label></br>
-        <?= selectedCheckBox('Intake_Victim', 'Intake_Victim', $therapeutic['Intake_Victim'], true) ?>
+        <?php echo selectedCheckBox('Intake_Victim', 'Intake_Victim', $therapeutic['Intake_Victim'], true) ?>
 
         <label>Please explain anything checked above.</label></br>
         <textarea class="form-control" name="explain_victim" ><?php echo $therapeutic['explain_victim'] ?></textarea>
