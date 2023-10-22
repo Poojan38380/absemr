@@ -234,13 +234,8 @@
 
                     <br><br>
                     Date&nbsp; <?php echo date('Y-m-d'); ?>
-
                 </span>
-
-
-
             </div>
-
         </div>
         <input type="hidden" name="csrf_token_form" id="csrf_token_form" value="e81f4710111a71ca4f518e1d3820871f89d3c8fe">
         <input type="hidden" name="content" id="content" value="">
