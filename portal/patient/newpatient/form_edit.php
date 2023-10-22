@@ -205,7 +205,7 @@ $pid = $_SESSION['pid'];
         <br>
         <?php if ((referralTabSaved($pid)) || (therapeuticTabSaved($pid)) || (noticePracticeTabSaved($pid)) || (releaseTabSaved($pid))) { ?>
 
-                <ul class="nav nav-tabs" id="myFormTab" role="tablist">
+                <ul >
                     <?php if (referralTabSaved($pid)) { ?>
                         <li><a href="#referral_tab">Referral Form</a></li>
                     <?php } ?>
