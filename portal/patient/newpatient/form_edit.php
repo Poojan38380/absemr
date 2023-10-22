@@ -256,14 +256,14 @@ $pid = $_SESSION['pid'];
                             </div>
                         <?php }
                            if (noticePracticeTabSaved($pid)) { ?>
-                        <div >
+                        <div id="notice_practice_tab" class="tab-pane">
 
                                 <?php noticePracticeTabEdit($pid); ?>
 
                         </div>
                         <?php }
                             if (releaseTabSaved($pid)) { ?>
-                        <div >
+                        <div id="release_tab" class="tab-pane">
 
                                 <?php releaseTabEdit($pid); ?>
 
