@@ -323,3 +323,24 @@
     </div>
 <?php } ?>
 
+<?php if ($therapeutic['being_referred_for_service'] == 'sex_behav') { ?>
+    <div class="row" style="display:block" name="sex_behav_div">
+        <label>Are you currently sexually active? </label><span style="color:red">*</span></br>
+        <input type="radio" name="sex_active" value="yes" <?php echo ($therapeutic['sex_active'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+        <input type="radio" name="sex_active" value="no" <?php echo ($therapeutic['sex_active'] == 'no') ?  "checked" : ""; ?> > No</br>
+
+        <label>What is your sexual preference</label><span style="color:red">*</span></br>
+        <?php echo selectedRadioButtons('sexual_orientation', 'sex_preference', $therapeutic['sex_preference'], true) ?>
+
+        <label>Are you satisfied with your sexual identity?</label><span style="color:red">*</span></br>
+        <input type="radio" name="satisfied_sex_identity" value="yes" <?php echo ($therapeutic['satisfied_sex_identity'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+        <input type="radio" name="satisfied_sex_identity" value="no" <?php echo ($therapeutic['satisfied_sex_identity'] == 'no') ?  "checked" : ""; ?> > No</br>
+
+        <label>Have you ever been charged with a sex crime?</label><span style="color:red">*</span></br>
+        <input type="radio" name="charged_sex_crime" value="yes" <?php echo ($therapeutic['charged_sex_crime'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+        <input type="radio" name="charged_sex_crime" value="no" <?php echo ($therapeutic['charged_sex_crime'] == 'no') ?  "checked" : ""; ?> > No</br>
+
+        <label>Have you ever had any other problems in your life as a result of impulsive sexual behavior such as the following?</label></br>
+        <?php echo selectedCheckBox('impulsive_sex_behave', 'impulsive_sex_behave', $therapeutic['impulsive_sex_behave'], true) ?>
+    </div>
+<?php } ?>
