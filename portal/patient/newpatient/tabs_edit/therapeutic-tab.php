@@ -186,6 +186,17 @@
         <input type="radio" name="do_you_take_med_as_pres" value="yes" <?php echo ($therapeutic['do_you_take_med_as_pres'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
         <input type="radio" name="do_you_take_med_as_pres" value="no" <?php echo ($therapeutic['do_you_take_med_as_pres'] == 'no') ?  "checked" : ""; ?> > No</br>
     <?php } ?>
+    <?php if ($therapeutic['do_you_take_med_as_pres'] == 'no') { ?>
+        <div name="do_you_take_med_as_pres_div" style="display:block">
+            <label>Please explain why you don't take your medications as prescribed<span style="color:red"> * </span></label></br>
+            <textarea name="do_you_take_med_as_pres_details" class="form-control" ></textarea></br>
+        </div>
+    <?php } ?>
+
+    <label>Have you had any recent hospitalization?<span style="color:red"> * </span></label></br>
+    <input type="radio" name="recent_hospitalization" value="yes" <?php echo ($therapeutic['recent_hospitalization'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+    <input type="radio" name="recent_hospitalization" value="no" <?php echo ($therapeutic['recent_hospitalization'] == 'no') ?  "checked" : ""; ?> > No</br>
+
 </div>
 <?php //} ?>
 <div class="row">
