@@ -217,3 +217,40 @@
     <label>What are the reasons you are being referred for services & what ABS program(s) are you interested in enrolling in?</label></br>
     <?php echo selectedCheckBox('being_referred_for_services', 'being_referred_for_service', $therapeutic['being_referred_for_service'], true) ?>
 </div>
+
+<?php if ($therapeutic['being_referred_for_service'] == 'anger_mgmt') { ?>
+    <div class="row" name="being_rf_for_services_anger_mgmt_div" style="display:block">
+        <label>When was the last time you were in an argument or domestic dispute?<span style="color:red"> * </span></label></br>
+        <?php echo selectedRadioButtons('argument_domestic_dispute_list', 'anger_mgmt_time_list', $therapeutic['anger_mgmt_time_list'], true) ?>
+
+
+        <label>Were you ever in a physical confrontation or fight?<span style="color:red"> * </span></label><br>
+        <input type="radio" name="physical_confrontation" value="yes" <?php echo ($therapeutic['physical_confrontation'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+        <input type="radio" name="physical_confrontation" value="no" <?php echo ($therapeutic['physical_confrontation'] == 'no') ?  "checked" : ""; ?> > No</br>
+
+        <?php if ($therapeutic['physical_confrontation'] == 'yes') { ?>
+            <div name="physical_confrontationDiv" style="display:block">
+                <label>Who were you fighting with?<span style="color:red"> * </span></label><br>
+                <?php echo selectedRadioButtons('fighting_with', 'fighting_with', $therapeutic['fighting_with'], true) ?>
+            </div>
+        <?php } ?>
+
+        <label>Have you ever physically hurt or injured someone?<span style="color:red"> * </span></label><br>
+        <input type="radio" name="physically_hurt" value="yes" <?php echo ($therapeutic['physically_hurt'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+        <input type="radio" name="physically_hurt" value="no" <?php echo ($therapeutic['physically_hurt'] == 'no') ?  "checked" : ""; ?> > No</br>
+
+        <?php if ($therapeutic['physically_hurt'] == 'yes') { ?>
+            <div name="injuriesSustainDiv" style="display:block">
+                <label>What injuries did they sustain?<span style="color:red"> * </span></label><br>
+                <textarea name="injurySusDetail" class="form-control" > <?php echo $therapeutic['physically_hurt'] ?></textarea>
+            </div>
+        <?php } ?>
+
+        <label>Were you ever arrested for a violent crime?<span style="color:red"> * </span></label><br>
+        <input type="radio" name="arrested_violent_crime" value="yes" <?php echo ($therapeutic['physically_hurt'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+        <input type="radio" name="arrested_violent_crime" value="no" <?php echo ($therapeutic['physically_hurt'] == 'no') ?  "checked" : ""; ?> > No</br>
+
+        <label>Has impulsive anger or aggression caused you other problems in your life? <span style="color:red"> * </span></label><br>
+        <?php echo selectedRadioButtons('anger_or_agression_caused', 'anger_or_agression_caused', $therapeutic['anger_or_agression_caused'], true) ?>
+    </div>
+<?php } ?>
