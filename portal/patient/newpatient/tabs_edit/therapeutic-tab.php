@@ -197,6 +197,12 @@
     <input type="radio" name="recent_hospitalization" value="yes" <?php echo ($therapeutic['recent_hospitalization'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
     <input type="radio" name="recent_hospitalization" value="no" <?php echo ($therapeutic['recent_hospitalization'] == 'no') ?  "checked" : ""; ?> > No</br>
 
+    <?php if ($therapeutic['recent_hospitalization'] == 'yes') { ?>
+        <div class="row" style="display:block" name="recent_hospitalizationDiv">
+            <label>What where you treated for during your last hospitalization?</label></br>
+            <textarea name="other_health_concern_details" class="form-control" ></textarea></br>
+        </div>
+    <?php } ?>
 </div>
 <?php //} ?>
 <div class="row">
