@@ -380,3 +380,35 @@
     </div>
 <?php } ?>
 
+<div class="row">
+    <label>Suicidal Thoughts</label></br>
+    <label>Have you ever had any suicidal thinking or thoughts of hurting/killing yourself?<span style="color:red"> * </span></label></br>
+    <?php echo selectedRadioButtons('Intake_suicide', 'Intake_suicide', $therapeutic['Intake_suicide'], true) ?>
+</div>
+
+<?php if ($therapeutic['Intake_suicide'] == 'attemptedsuicide') { ?>
+    <div class="row" style="display:block" name="last_attempt_explanation_div">
+        <label>Please explain the method and when the last attempt was<span style="color:red"> * </span></label></br>
+        <textarea class="form-control"></textarea></br>
+    </div>
+
+
+    <div class="row" style="display:block" name="felt_inclined_div">
+        <label>When was the last time you felt inclined to harm yourself?<span style="color:red"> * </span></label></br>
+        <div class="radio">
+            <label>
+                <input type="radio" name="felt_inclined_harm" value="today" <?php echo ($therapeutic['felt_inclined_harm'] == 'today') ?  "checked" : ""; ?> > Today
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="felt_inclined_harm" value="past_2_weeks" <?php echo ($therapeutic['felt_inclined_harm'] == 'past_2_weeks') ?  "checked" : ""; ?> > Within the past 2 weeks
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="felt_inclined_harm" value="past_12_month" <?php echo ($therapeutic['felt_inclined_harm'] == 'past_12_month') ?  "checked" : ""; ?> > Within the past 12 months
+            </label>
+        </div>
+    </div>
+<?php } ?>
