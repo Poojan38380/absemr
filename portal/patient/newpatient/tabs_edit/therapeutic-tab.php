@@ -152,6 +152,31 @@
         <input type="radio" name="primary_care_doc" value="yes" <?php echo ($therapeutic['primary_care_doc'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
         <input type="radio" name="primary_care_doc" value="no" <?php echo ($therapeutic['primary_care_doc'] == 'no') ?  "checked" : ""; ?> > No</br>
     </div>
+
+    <?php if ($therapeutic['primary_care_doc'] == 'yes') { ?>
+        <div class="row" name="primary_care_doc_div" style="display:block">
+            <label>What is your primary care Doctor's Name?<span style="color:red"> * </span></label></br>
+            <input type="text" name="pri_doc_name" value="<?php echo $therapeutic['pri_doc_name'] ?>" class="form-control" style="width:50%" ></br>
+            <label>What is your primary care doctor's phone number?</label></br>
+            <input type="text" name="pri_doc_ph" value="<?php echo $therapeutic['pri_doc_ph'] ?>" class="form-control" style="width:50%" ></br>
+        </div>
+    <?php } ?>
+
+    <div class="row">
+        <label>Physical Health</label></br>
+        <label>What do you consider your current health? (Including physical and mental health)<span style="color:red"> * </span></label></br>
+        <input type="radio" name="curr_health" value="good" <?php echo ($therapeutic['curr_health'] == 'good') ?  "checked" : ""; ?> > Good</br>
+        <input type="radio" name="curr_health" value="fair" <?php echo ($therapeutic['curr_health'] == 'fair') ?  "checked" : ""; ?> > Fair</br>
+        <input type="radio" name="curr_health" value="poor" <?php echo ($therapeutic['curr_health'] == 'poor') ?  "checked" : ""; ?> > Poor</br>
+    </div>
+
+    <?php if ($therapeutic['curr_health'] == 'good') { ?>
+        <div class="row" name="curr_health_good_div" style="display:block">
+            <label>Please list any past medical conditions, procedures, surgeries or injuries you have had.</label></br>
+            <textarea name="surgeries_details" class="form-control" ><?php echo $therapeutic['surgeries_details'] ?></textarea></br>
+        </div>
+    <?php } ?>
+
 </div>
 <?php //} ?>
 <div class="row">
