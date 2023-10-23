@@ -379,3 +379,4 @@
         <textarea class="form-control" name="non_chemical_addiction"><?php echo $therapeutic['non_chemical_addiction'] ?></textarea></br>
     </div>
 <?php } ?>
+
