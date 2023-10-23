@@ -254,3 +254,54 @@
         <?php echo selectedRadioButtons('anger_or_agression_caused', 'anger_or_agression_caused', $therapeutic['anger_or_agression_caused'], true) ?>
     </div>
 <?php } ?>
+<!-- Alcohol div -->
+<?php if ($therapeutic['being_referred_for_service'] == 'alcohol_drug') { ?>
+    <div class="row" style="display:block" name="alcohol_drug_abuse_div">
+        <label>How often do you have a drink containing alcohol?</label></br>
+        <?php echo selectedRadioButtons('drug_consumption_duration', 'dring_contain_alc', $therapeutic['dring_contain_alc'], true) ?>
+
+        <label>How many standard drinks containing alcohol do you have on a typical day when drinking?</label></br>
+        <?php echo selectedRadioButtons('std_drink_contain_alcohol', 'when_drink_drings', $therapeutic['when_drink_drings'], true) ?>
+
+        <label>How often do you have six or more drinks on one occasion</label></br>
+        <?php echo selectedRadioButtons('how_often_drink', 'occasional_drinks', $therapeutic['occasional_drinks'], true) ?>
+
+        <label>During the past year, how often have you found that you were not able to stop drinking once you had started?</label></br>
+        <?php echo selectedRadioButtons('how_often_drink', 'how_often_stop_drink', $therapeutic['how_often_stop_drink'], true) ?>
+
+        <label>During the past year, how often have you failed to do what was normally expected of you because of drinking?</label></br>
+        <?php echo selectedRadioButtons('how_often_drink', 'how_often_failed_stop_drink', $therapeutic['how_often_failed_stop_drink'], true) ?>
+
+        <label>During the past year, how often have you needed a drink in the morning to get yourself going after a heavy drinking session?</label></br>
+        <?php echo selectedRadioButtons('how_often_drink', 'how_often_need_drink', $therapeutic['how_often_need_drink'], true) ?>
+
+        <label>During the past year, how often have you had a feeling of guilt or remorse after drinking?</label></br>
+        <?php echo selectedRadioButtons('how_often_drink', 'remorse_after_drink', $therapeutic['remorse_after_drink'], true) ?>
+
+        <label>During the past year, how often have you been unable to remember what happened the night before because you had been drinking?</label></br>
+        <?php echo selectedRadioButtons('how_often_drink', 'unable_remember_night_session', $therapeutic['unable_remember_night_session'], true) ?>
+
+        <label>Have you or someone else been injured as a result of your drinking?</label></br>
+        <input type="radio" name="injured_result_drink" value="no" <?php echo ($therapeutic['injured_result_drink'] == 'no') ?  "checked" : ""; ?> > No</br>
+        <input type="radio" name="injured_result_drink" value="yes_not_in_past_year" <?php echo ($therapeutic['injured_result_drink'] == 'yes_not_in_past_year') ?  "checked" : ""; ?> > Yes, but not in the past year</br>
+        <input type="radio" name="injured_result_drink" value="yes_during_year" <?php echo ($therapeutic['injured_result_drink'] == 'yes_during_year') ?  "checked" : ""; ?> > Yes, during the past year</br>
+
+        <label>Has a relative or friend, doctor or other health worker beeen concerned about your drinking or suggested you cut down?</label></br>
+        <input type="radio" name="concerned_about_drink" value="no" <?php echo ($therapeutic['concerned_about_drink'] == 'no') ?  "checked" : ""; ?> > No</br>
+        <input type="radio" name="concerned_about_drink" value="yes_not_in_past_year" <?php echo ($therapeutic['concerned_about_drink'] == 'yes_not_in_past_year') ?  "checked" : ""; ?> > Yes, but not in the past year</br>
+        <input type="radio" name="concerned_about_drink" value="yes_during_year" <?php echo ($therapeutic['concerned_about_drink'] == 'yes_during_year') ?  "checked" : ""; ?> > Yes, during the past year</br>
+
+        <label>What are your drugs of choice? Please list all.</label></br>
+        <?php echo selectedCheckBox('drug_choices', 'drugs_of_chioces', $therapeutic['drugs_of_chioces'], true) ?>
+
+        <label>How old were you the first time you used?</label></br>
+        <input type="text" name="first_time_used" value="<?php echo $therapeutic['first_time_used'] ?>" class="form-control" style="width:50%" ></br>
+
+        <label>How much did you use at the height of your usage?</label></br>
+        <input type="text" name="height_of_usage" value="<?php echo $therapeutic['height_of_usage'] ?>" class="form-control" style="width:50%" ></br>
+
+        <label>Have you ever been in alcohol or drug treatment before?</label></br>
+        <input type="radio" name="ever_been_in_alcohol" value="yes" <?php echo ($therapeutic['ever_been_in_alcohol'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+        <input type="radio" name="ever_been_in_alcohol" value="no" <?php echo ($therapeutic['ever_been_in_alcohol'] == 'no') ?  "checked" : ""; ?> > No</br>
+    </div>
+<?php } ?>
