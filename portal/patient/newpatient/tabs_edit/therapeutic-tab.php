@@ -177,22 +177,6 @@
         </div>
     <?php } ?>
 
-    <?php if ($therapeutic['curr_health'] == 'fair') { ?>
-    <div class="row" name="curr_health_good_div" style="display:block">
-        <label>Please list any past medical conditions, procedures, surgeries or injuries you have had.</label></br>
-        <textarea name="surgeries_details" class="form-control" ><?php echo $therapeutic['surgeries_details'] ?></textarea></br>
-    </div>
-
-    <div class="row" name="curr_health_fair_div" style="display:block">
-        <label>What are your current medical conditions that you are aware of?<span style="color:red"> * </span></label></br>
-        <textarea name="med_condition_details" class="form-control" ><?php echo $therapeutic['med_condition_details'] ?></textarea></br>
-    </div>
-
-    <label>Are you currently prescribed medications from a doctor?<span style="color:red"> * </span></label></br>
-    <input type="radio" name="curr_pres_med" value="yes" <?php echo ($therapeutic['curr_pres_med'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
-    <input type="radio" name="curr_pres_med" value="no" <?php echo ($therapeutic['curr_pres_med'] == 'no') ?  "checked" : ""; ?> > No</br>
-
-
 </div>
 <?php //} ?>
 <div class="row">
