@@ -106,7 +106,32 @@
     </select>
 </div>
 <!-- family composition -->
+<div class="row">
+    <label>Family Composition</label></br>
+    <label>Is a member of your family supportive of your recovery/treatment? <span style="color:red"> * </span></label></br>
+    <input type="radio" name="fam_support_recovery" value="yes" <?php echo ($therapeutic['fam_support_recovery'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+    <input type="radio" name="fam_support_recovery" value="no" <?php echo ($therapeutic['fam_support_recovery'] == 'no') ?  "checked" : ""; ?> > No</br>
 
+
+    <?php if ($therapeutic['fam_support_recovery'] == 'yes') { ?>
+        <div class="row" name="fam_support_recovery_div" style="display:block">
+            <label>Would your family members be willing to participate in your treatment? <span style="color:red"> * </span></label></br>
+            <input type="radio" name="fam_mem_willing_part" value="yes" <?php echo ($therapeutic['fam_mem_willing_part'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+            <input type="radio" name="fam_mem_willing_part" value="no" <?php echo ($therapeutic['fam_mem_willing_part'] == 'no') ?  "checked" : ""; ?> > No</br>
+        </div>
+    <?php } ?>
+
+    <?php if ($therapeutic['fam_mem_willing_part'] == 'yes') { ?>
+        <div class="row" name="fam_mem_willing_part_div" style="display:block">
+            <label>What is the name of the family member that will participate in your treatment?<span style="color:red"> * </span></label></br>
+            <input type="text" name="fam_mem_part_name" class="form-control" style="width:50%" value="<?php echo $therapeutic['fam_mem_part_name'] ?>" ></br>
+            <label>What is their relationship to you?<span style="color:red"> * </span></label></br>
+            <input type="text" name="fam_mem_part_relation" class="form-control" style="width:50%" value="<?php echo $therapeutic['fam_mem_part_relation'] ?>" ></br>
+            <label>What is their phone number?<span style="color:red"> * </span></label></br>
+            <input type="text" name="fam_mem_part_ph" class="form-control" style="width:50%" value="<?php echo $therapeutic['fam_mem_part_ph'] ?>" ></br>
+        </div>
+    <?php } ?>
+</div>
 <?php //} ?>
 <div class="row">
     <label>Reason for Referral to ABS</label></br>
