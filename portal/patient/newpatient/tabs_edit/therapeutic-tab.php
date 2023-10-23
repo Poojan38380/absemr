@@ -305,3 +305,21 @@
         <input type="radio" name="ever_been_in_alcohol" value="no" <?php echo ($therapeutic['ever_been_in_alcohol'] == 'no') ?  "checked" : ""; ?> > No</br>
     </div>
 <?php } ?>
+<?php if ($therapeutic['being_referred_for_service'] == 'dwi_dui') { ?>
+    <div class="row" style="display:block" name="dwi_dui_div">
+        <label>How many drinking and driving offenses have you had?</label></br>
+        <input type="text" name="how_drink_drive_offence" class="form-control" style="width:50%" value="<?php echo $therapeutic['how_drink_drive_offence'] ?> " ></br>
+
+        <label>Have you ever been in drug treatment before?</label></br>
+        <input type="radio" name="drug_treat_before_ever" value="yes" <?php echo ($therapeutic['drug_treat_before_ever'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+        <input type="radio" name="drug_treat_before_ever" value="no" <?php echo ($therapeutic['drug_treat_before_ever'] == 'no') ?  "checked" : ""; ?> > No</br>
+    </div>
+<?php } ?>
+
+<?php if ($therapeutic['being_referred_for_service'] == 'gam_pblm') { ?>
+    <div class="row" style="display:block" name="gam_pblm_div">
+        <label>Gambling - Please check all that apply</label><span style="color:red"> * </span></br>
+        <?php echo selectedCheckBox('gam_pblm_list', 'gamList', $therapeutic['gamList'], true) ?>
+    </div>
+<?php } ?>
+
