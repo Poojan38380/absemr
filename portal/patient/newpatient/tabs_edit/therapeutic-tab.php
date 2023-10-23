@@ -131,6 +131,27 @@
             <input type="text" name="fam_mem_part_ph" class="form-control" style="width:50%" value="<?php echo $therapeutic['fam_mem_part_ph'] ?>" ></br>
         </div>
     <?php } ?>
+    <div class="row">
+        <label>Family Composition</label></br>
+        <label>Is there any family history of substance abuse or mental illness?<span style="color:red"> * </span></label></br>
+        <input type="radio" name="fam_sub_abuse" value="yes" <?php echo ($therapeutic['fam_sub_abuse'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+        <input type="radio" name="fam_sub_abuse" value="no" <?php echo ($therapeutic['fam_sub_abuse'] == 'no') ?  "checked" : ""; ?> > No</br>
+    </div>
+
+    <?php if ($therapeutic['fam_sub_abuse'] == 'yes') { ?>
+        <div class="row" style="display:block" name="fam_sub_abuse_div">
+            <label>Please explain the family history of substance abuse or mental illness<span style="color:red"> * </span></label></br>
+            <textarea name="sub_abuse_explanation" class="form-control" ><?php echo $therapeutic['sub_abuse_explanation'] ?></textarea></br>
+        </div>
+    <?php } ?>
+
+
+    <div class="row">
+        <label>Primary care doctor</label></br>
+        <label>Do you have a primary care doctor?<span style="color:red"> * </span></label></br>
+        <input type="radio" name="primary_care_doc" value="yes" <?php echo ($therapeutic['primary_care_doc'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+        <input type="radio" name="primary_care_doc" value="no" <?php echo ($therapeutic['primary_care_doc'] == 'no') ?  "checked" : ""; ?> > No</br>
+    </div>
 </div>
 <?php //} ?>
 <div class="row">
