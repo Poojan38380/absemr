@@ -219,8 +219,9 @@
             <textarea name="other_health_concern_details" class="form-control" ></textarea></br>
         </div>
     <?php } ?>
-</div>
-<?php } ?>
+    <?php } ?>
+  </div>
+
 
 <div class="row">
     <label>Reason for Referral to ABS</label></br>
