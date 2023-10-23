@@ -344,3 +344,31 @@
         <?php echo selectedCheckBox('impulsive_sex_behave', 'impulsive_sex_behave', $therapeutic['impulsive_sex_behave'], true) ?>
     </div>
 <?php } ?>
+<?php if ($therapeutic['being_referred_for_service'] == 'domestic_violence') { ?>
+    <div class="row" style="display:block" name="domestic_violence_div"></br>
+        <label>When was the last time you were in an argument or domestic dispute?<span style="color:red"> * </span></label></br>
+        <?php echo selectedRadioButtons('argument_domestic_dispute_list', 'domestic_violence', $therapeutic['domestic_violence'], true) ?>
+
+        <label>Were you ever in a physical confrontation or fight?<span style="color:red"> * </span></label></br>
+        <input type="radio" name="phy_confrintation" value="yes" <?php echo ($therapeutic['phy_confrintation'] == 'yes') ?  "checked" : ""; ?> > Yes </br>
+        <input type="radio" name="phy_confrintation" value="no" <?php echo ($therapeutic['phy_confrintation'] == 'no') ?  "checked" : ""; ?> > No </br>
+
+        <label>Have you ever physically hurt or injured someone?<span style="color:red"> * </span></label></br>
+        <input type="radio" name="phy_hurt" value="yes" <?php echo ($therapeutic['phy_hurt'] == 'yes') ?  "checked" : ""; ?> > Yes </br>
+        <input type="radio" name="phy_hurt" value="no" <?php echo ($therapeutic['phy_hurt'] == 'no') ?  "checked" : ""; ?> > No </br>
+
+        <label>Were you ever arrested for a violent crime?<span style="color:red"> * </span></label></br>
+        <input type="radio" name="ever_arrested_violent_crime" value="yes" <?php echo ($therapeutic['ever_arrested_violent_crime'] == 'yes') ?  "checked" : ""; ?> > Yes </br>
+        <input type="radio" name="ever_arrested_violent_crime" value="no" <?php echo ($therapeutic['ever_arrested_violent_crime'] == 'no') ?  "checked" : ""; ?> > No </br>
+
+        <label>Has impulsive anger or aggression caused you other problems in your life?<span style="color:red"> * </span></label></br>
+        <?php echo selectedCheckBox('domestic_violence_list', 'domestic_violence_list', $therapeutic['domestic_violence_list'], true) ?>
+    </div>
+<?php } ?>
+
+<?php if ($therapeutic['being_referred_for_service'] == 'parent_issue') { ?>
+    <div class="row" style="display:block" name="parenting_issues_div"></br>
+        <label>Please explain the parenting issues</label></br>
+        <textarea class="form-control" name="explain_parenting_issue"><?php echo $therapeutic['explain_parenting_issue'] ?></textarea></br>
+    </div>
+<?php } ?>
