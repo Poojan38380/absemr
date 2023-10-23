@@ -176,7 +176,16 @@
             <textarea name="surgeries_details" class="form-control" ><?php echo $therapeutic['surgeries_details'] ?></textarea></br>
         </div>
     <?php } ?>
+    <?php if ($therapeutic['curr_pres_med'] == 'yes') { ?>
+        <div name="curr_pre_med_div" style="display:block">
+            <label>Please list the doctor-prescribed medications as well as dosages<span style="color:red"> * </span></label></br>
+            <textarea name="curr_pre_med_details" class="form-control" ><?php echo $therapeutic['curr_pre_med_details'] ?></textarea></br>
+        </div>
 
+        <label>Do you take your medication as prescribed?<span style="color:red"> * </span></label></br>
+        <input type="radio" name="do_you_take_med_as_pres" value="yes" <?php echo ($therapeutic['do_you_take_med_as_pres'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
+        <input type="radio" name="do_you_take_med_as_pres" value="no" <?php echo ($therapeutic['do_you_take_med_as_pres'] == 'no') ?  "checked" : ""; ?> > No</br>
+    <?php } ?>
 </div>
 <?php //} ?>
 <div class="row">
