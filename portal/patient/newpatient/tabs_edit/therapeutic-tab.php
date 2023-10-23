@@ -372,3 +372,10 @@
         <textarea class="form-control" name="explain_parenting_issue"><?php echo $therapeutic['explain_parenting_issue'] ?></textarea></br>
     </div>
 <?php } ?>
+
+<?php if ($therapeutic['being_referred_for_service'] == 'non_checm_addiction') { ?>
+    <div class="row" style="display:block" name="non_chemical_addiction_div"></br>
+        <label>Please explain your non-chemical addiction</label></br>
+        <textarea class="form-control" name="non_chemical_addiction"><?php echo $therapeutic['non_chemical_addiction'] ?></textarea></br>
+    </div>
+<?php } ?>
