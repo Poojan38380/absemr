@@ -107,7 +107,7 @@
 </div>
 <!-- family composition -->
 <div class="row">
-    <!-- <label>Family Composition</label></br> -->
+    <label>Family Composition</label></br>
     <label>Is a member of your family supportive of your recovery/treatment? <span style="color:red"> * </span></label></br>
     <input type="radio" name="fam_support_recovery" value="yes" <?php echo ($therapeutic['fam_support_recovery'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
     <input type="radio" name="fam_support_recovery" value="no" <?php echo ($therapeutic['fam_support_recovery'] == 'no') ?  "checked" : ""; ?> > No</br>
@@ -131,7 +131,6 @@
             <input type="text" name="fam_mem_part_ph" class="form-control" style="width:50%" value="<?php echo $therapeutic['fam_mem_part_ph'] ?>" ></br>
         </div>
     <?php } ?>
-
     <div class="row">
         <label>Family Composition</label></br>
         <label>Is there any family history of substance abuse or mental illness?<span style="color:red"> * </span></label></br>
@@ -203,7 +202,6 @@
         <input type="radio" name="do_you_take_med_as_pres" value="yes" <?php echo ($therapeutic['do_you_take_med_as_pres'] == 'yes') ?  "checked" : ""; ?> > Yes</br>
         <input type="radio" name="do_you_take_med_as_pres" value="no" <?php echo ($therapeutic['do_you_take_med_as_pres'] == 'no') ?  "checked" : ""; ?> > No</br>
     <?php } ?>
-
     <?php if ($therapeutic['do_you_take_med_as_pres'] == 'no') { ?>
         <div name="do_you_take_med_as_pres_div" style="display:block">
             <label>Please explain why you don't take your medications as prescribed<span style="color:red"> * </span></label></br>
@@ -222,8 +220,7 @@
         </div>
     <?php } ?>
 </div>
-<?php } ?>
-
+<?php //} ?>
 <div class="row">
     <label>Reason for Referral to ABS</label></br>
 
@@ -273,8 +270,6 @@
         <?php echo selectedRadioButtons('anger_or_agression_caused', 'anger_or_agression_caused', $therapeutic['anger_or_agression_caused'], true) ?>
     </div>
 <?php } ?>
-
-
 <!-- Alcohol div -->
 <?php if ($therapeutic['being_referred_for_service'] == 'alcohol_drug') { ?>
     <div class="row" style="display:block" name="alcohol_drug_abuse_div">
@@ -326,7 +321,6 @@
         <input type="radio" name="ever_been_in_alcohol" value="no" <?php echo ($therapeutic['ever_been_in_alcohol'] == 'no') ?  "checked" : ""; ?> > No</br>
     </div>
 <?php } ?>
-
 <?php if ($therapeutic['being_referred_for_service'] == 'dwi_dui') { ?>
     <div class="row" style="display:block" name="dwi_dui_div">
         <label>How many drinking and driving offenses have you had?</label></br>
@@ -366,7 +360,6 @@
         <?php echo selectedCheckBox('impulsive_sex_behave', 'impulsive_sex_behave', $therapeutic['impulsive_sex_behave'], true) ?>
     </div>
 <?php } ?>
-
 <?php if ($therapeutic['being_referred_for_service'] == 'domestic_violence') { ?>
     <div class="row" style="display:block" name="domestic_violence_div"></br>
         <label>When was the last time you were in an argument or domestic dispute?<span style="color:red"> * </span></label></br>
