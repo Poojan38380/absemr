@@ -74,8 +74,8 @@ function releaseTabEdit($pid)
     $patient = sqlQuery("select fname, lname from patient_data where pid = ?", [$pid]);
     $onsite_signature = sqlQuery("select type,user,sig_image as sign from onsite_signatures where pid = ?", [$pid]);
     $referral = sqlQuery("select * from patient_release_form where pid = ?", [$pid]);
-    var_dump($referral);
-    //require_once('./tabs_edit/release-tab.php');
+    file_put_contents('/var/www/html/traps/working_referral.log', print_r($referral, true));
+    require_once('./tabs_edit/release-tab.php');
 }
 
 function releaseTab($pid)
