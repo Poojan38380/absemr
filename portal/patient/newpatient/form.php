@@ -295,7 +295,7 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
         //var_dump($listOfAppointments);
         //echo "<pre>";
         foreach ($listOfAppointments as $appt) {
-            var_dump($appt);
+            //var_dump($appt);
             echo "<p>" . $appt['pc_eventDate'] . " " . $appt['pc_startTime'] . "</p>";
         }
         //echo "</pre>";
