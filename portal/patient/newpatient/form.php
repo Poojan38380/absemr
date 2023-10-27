@@ -292,7 +292,8 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
     <div class="col-12" style="padding-top: 25px">
         <div class="col-12 mt-5">
         <h3><?php echo xlt("Here are your scheduled appointments") ?></h3>
-     </div>
+        </div>
+        <div class="col-12 mt-5">
         <?php
         if (count($listOfAppointments) > 0) {
             echo "<table class='table mt-5'> <tr><th>Appointment Date</th><th>Appointment Time</th></tr>";
@@ -314,8 +315,7 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
             echo "<p>" . xlt("You have no scheduled appointments, contact the office.") . "</p>";
         }
         ?>
-
-
+        </div>
     </div>
 <?php } ?>
 </body>
