@@ -290,7 +290,7 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
 
 <?php } else { ?>
     <div class="col-12" style="padding-top: 25px">
-        <div class="col-12 mt-5">
+        <div class="col-12 mt-5" style="padding: 35px">
         <h3><?php echo xlt("Here are your scheduled appointments") ?></h3>
         </div>
         <div class="col-12 mt-5">
@@ -308,6 +308,7 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
                 }
             }
             echo "</table>";
+            echo "<p>" . xlt("If you need to reschedule or cancel an appointment, please contact the office.") . "</p>";
             if ($a == 0) {
                 echo "<p>" . xlt("You have no scheduled appointments, contact the office.") . "</p>";
             }
