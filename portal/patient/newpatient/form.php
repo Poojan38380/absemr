@@ -297,6 +297,7 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
             echo "<table class='table'> <tr><th>Appointment Date</th><th>Appointment Time</th></tr>";
             $a = 0;
             foreach ($listOfAppointments as $appt) {
+                echo $appt['pc_apptstatus'] . " " . $appt['pc_eventDate'] . " " . $appt['pc_startTime'] . "<br>";
                 if ($appt['pc_apptstatus'] == '-' && $appt['pc_eventDate'] >= date('Y-m-d')) {
                     echo "<tr><td>" . $appt['pc_eventDate'] . "</td><td> " . $appt['pc_startTime'] . " " . $appt['pc_apptstatus'] . "</td></tr>";
                     $a++;
