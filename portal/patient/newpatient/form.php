@@ -293,16 +293,12 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
         <h3><?= xlt("Here are your scheduled appointments") ?></h3>
         <?php
         //var_dump($listOfAppointments);
-        //echo "<pre>";
+        echo "<table> <tr><th>Appointment Date</th><th>Appointment Time</th></tr>";
         foreach ($listOfAppointments as $appt) {
             //var_dump($appt);
-            echo "<p>" . $appt['pc_eventDate'] . " " . $appt['pc_startTime'] . " " . $appt['pc_apptstatus']. "</p>";
+            echo "<tr><td>" . $appt['pc_eventDate'] . " " . $appt['pc_startTime'] . " " . $appt['pc_apptstatus']. "</td></tr>";
         }
-        //echo "</pre>";
-        /*
-        while ($appt = sqlFetchArray($listOfAppointments)) {
-            var_dump($appt);
-        }*/
+        echo "</table>";
         ?>
 
 
