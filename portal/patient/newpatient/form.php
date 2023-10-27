@@ -289,9 +289,10 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
     </div>
 
 <?php } else { ?>
-    <div class="col-6 w-25">
-
+    <div class="row" style="padding-top: 25px">
+        <div class="col mt-5" >
         <h3><?php echo xlt("Here are your scheduled appointments") ?></h3>
+     </div>
         <?php
         if (count($listOfAppointments) > 0) {
             echo "<table class='table mt-5'> <tr><th>Appointment Date</th><th>Appointment Time</th></tr>";
