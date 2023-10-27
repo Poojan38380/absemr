@@ -289,8 +289,8 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
     </div>
 
 <?php } else { ?>
-    <div class="row" style="padding-top: 25px">
-        <div class="col mt-5" >
+    <div class="col-12" style="padding-top: 25px">
+        <div class="col-12 mt-5">
         <h3><?php echo xlt("Here are your scheduled appointments") ?></h3>
      </div>
         <?php
