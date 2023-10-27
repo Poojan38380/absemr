@@ -294,7 +294,7 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
         <h3><?php echo xlt("Here are your scheduled appointments") ?></h3>
         <?php
         if (count($listOfAppointments) > 0) {
-            echo "<table class='table'> <tr><th>Appointment Date</th><th>Appointment Time</th></tr>";
+            echo "<table class='table mt-5'> <tr><th>Appointment Date</th><th>Appointment Time</th></tr>";
             $a = 0;
             foreach ($listOfAppointments as $appt) {
                 if ($appt['pc_apptstatus'] == '-' && $appt['pc_eventDate'] >= date('Y-m-d 00:00:00')) {
