@@ -290,7 +290,7 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
 
 <?php } else { ?>
     <div class="row">
-        <div class="col-12">
+
         <h3><?php echo xlt("Here are your scheduled appointments") ?></h3>
         <?php
         //var_dump($listOfAppointments);
@@ -302,7 +302,7 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
         echo "</table>";
         ?>
 
-        </div>
+
     </div>
 <?php } ?>
 </body>
