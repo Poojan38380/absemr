@@ -6,6 +6,11 @@ include_once('./formUI.php');
 $pid = $_REQUEST['pid'];
 
 use OpenEMR\Core\Header;
+use OpenEMR\Services\AbsPortal\ActivityService;
+use OpenEMR\Services\AppointmentService;
+
+$patientAppointments = new AppointmentService();
+$listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
 
 ?>
 <html>
@@ -284,8 +289,10 @@ use OpenEMR\Core\Header;
     </div>
 
 <?php } else { ?>
-    <div class="alert alert-success" role="alert">
-        <?= xlt("Intake forms submitted successfully") ?>!
+    <div class="" role="alert">
+        <h3><?= xlt("Here are your scheduled appointments") ?></h3>
+        <?php var_dump($listOfAppointments);?>
+
     </div>
 <?php } ?>
 </body>
