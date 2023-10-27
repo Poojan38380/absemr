@@ -293,11 +293,15 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
         <h3><?= xlt("Here are your scheduled appointments") ?></h3>
         <?php
         //var_dump($listOfAppointments);
-        while ($appt = sqlFetchArray($listOfAppointments)) {
+        foreach ($listOfAppointments as $appt) {
             var_dump($appt);
         }
+        /*
+        while ($appt = sqlFetchArray($listOfAppointments)) {
+            var_dump($appt);
+        }*/
         ?>
-        w
+
 
     </div>
 <?php } ?>
