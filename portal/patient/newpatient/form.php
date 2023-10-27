@@ -225,7 +225,7 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
 
 
 <div id="successAlert" class="alert alert-success" style="display: none;">
-    Your form has been successfully submitted.
+    <?php print xlt('Your form has been successfully submitted') ?>.
 </div>
 <?php if ((!referralTabSaved($pid)) || (!therapeuticTabSaved($pid)) || (!noticePracticeTabSaved($pid)) || (!releaseTabSaved($pid))) { ?>
     <div id="tabs">
@@ -293,13 +293,17 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
 
         <h3><?php echo xlt("Here are your scheduled appointments") ?></h3>
         <?php
-        //var_dump($listOfAppointments);
-        echo "<table class='table'> <tr><th>Appointment Date</th><th>Appointment Time</th></tr>";
-        foreach ($listOfAppointments as $appt) {
-            //var_dump($appt);
-            echo "<tr><td>" . $appt['pc_eventDate'] . "</td><td> " . $appt['pc_startTime'] . " " . $appt['pc_apptstatus']. "</td></tr>";
+        if (count($listOfAppointments) > 0) {
+            echo "<table class='table'> <tr><th>Appointment Date</th><th>Appointment Time</th></tr>";
+            foreach ($listOfAppointments as $appt) {
+                if ($appt['pc_apptstatus'] == '-' && $appt['pc_eventDate'] >= date('Y-m-d')) {
+                    echo "<tr><td>" . $appt['pc_eventDate'] . "</td><td> " . $appt['pc_startTime'] . " " . $appt['pc_apptstatus'] . "</td></tr>";
+                }
+            }
+            echo "</table>";
+        } else {
+            echo "<p>" . xlt("You have no scheduled appointments, contact the office.") . "</p>";
         }
-        echo "</table>";
         ?>
 
 
