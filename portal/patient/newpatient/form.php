@@ -303,6 +303,9 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
                 }
             }
             echo "</table>";
+            if ($a == 0) {
+                echo "<p>" . xlt("You have no scheduled appointments, contact the office.") . "</p>";
+            }
         } else {
             echo "<p>" . xlt("You have no scheduled appointments, contact the office.") . "</p>";
         }
