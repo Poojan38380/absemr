@@ -294,7 +294,7 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
         <h3><?php echo xlt("Here are your scheduled appointments") ?></h3>
         <?php
         //var_dump($listOfAppointments);
-        echo "<table class='table w-50'> <tr><th>Appointment Date</th><th>Appointment Time</th></tr>";
+        echo "<table class='table'> <tr><th>Appointment Date</th><th>Appointment Time</th></tr>";
         foreach ($listOfAppointments as $appt) {
             //var_dump($appt);
             echo "<tr><td>" . $appt['pc_eventDate'] . "</td><td> " . $appt['pc_startTime'] . " " . $appt['pc_apptstatus']. "</td></tr>";
