@@ -308,7 +308,7 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
                 }
             }
             echo "</table>";
-            echo "<p>" . xlt("If you need to reschedule or cancel an appointment, please contact the office.") . "</p>";
+            echo "<p><strong>" . xlt("If you need to reschedule or cancel an appointment, please contact the office.") . "</strong></p>";
             if ($a == 0) {
                 echo "<p>" . xlt("You have no scheduled appointments, contact the office.") . "</p>";
             }
