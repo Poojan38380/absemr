@@ -218,12 +218,12 @@ $pid = $_SESSION['pid'];
                 <i class="bi bi-arrow-counterclockwise"></i>Back</a>
         </div>
         <br>
-        <?php if ((referralTabSaved($pid)) || (therapeuticTabSaved($pid)) || (noticePracticeTabSaved($pid)) || (releaseTabSaved($pid))) { ?>
+        <?php //if ((referralTabSaved($pid)) || (therapeuticTabSaved($pid)) || (noticePracticeTabSaved($pid)) || (releaseTabSaved($pid))) { ?>
             <div id="tabs">
                 <ul>
-                    <?php if (referralTabSaved($pid)) { ?>
+                    <?php //if (referralTabSaved($pid)) { ?>
                         <li><a href="#referral_tab">Referral Form</a></li>
-                    <?php } ?>
+                    <?php //} ?>
                     <?php if (therapeuticTabSaved($pid)) { ?>
                         <li><a href="#therapeutic_tab">Therapeutic Form</a></li>
                     <?php } ?>
@@ -237,7 +237,7 @@ $pid = $_SESSION['pid'];
 
                 <div class="panel-body p-0">
                     <div class="tab-content">
-                        <?php if (referralTabSaved($pid)) { ?>
+                        <?php //if (referralTabSaved($pid)) { ?>
                             <div id="referral_tab" class="tab-pane">
                                 <form id="referralForm" method="POST">
                                     <input type="hidden" name="updateReferralTab" value="referralForm">
@@ -245,7 +245,7 @@ $pid = $_SESSION['pid'];
                                     <button type="button" class="submit btn btn-primary mt-3"><?= xlt('Update'); ?></button>
                                 </form>
                             </div>
-                        <?php }
+                        <?php //}
                          if (therapeuticTabSaved($pid)) { ?>
                             <div id="therapeutic_tab" class="tab-pane">
                                 <form id="therapeuticForm" method="POST">
@@ -272,12 +272,11 @@ $pid = $_SESSION['pid'];
                     </div>
                 </div>
             </div>
-
-        <?php } else { ?>
-            <div class="alert alert-danger text-center" role="alert">
-                <?= xlt('Patient has not filled out questioner form yet.'); ?>
-            </div>
-        <?php } ?>
+        <?php //} //else { ?>
+            <!--<div class="alert alert-danger text-center" role="alert">
+                <?php //echo  xlt('Patient has not filled out questioner form yet.'); ?>
+            </div>-->
+        <?php //} ?>
     </div>
 </body>
 <script>
