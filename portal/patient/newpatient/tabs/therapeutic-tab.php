@@ -1,6 +1,6 @@
 <div class="row">
     <label>What is your primary means of finical support?</label></br>
-    <?= generateRadioButtons('therap_support_list', 'therapSupportList') ?>
+    <?php echo generateRadioButtons('therap_support_list', 'therapSupportList') ?>
 </div>
 
 <div class="row" name="employeementDiv" style="display:none"></br>
@@ -46,18 +46,18 @@
 
 <div class="row">
     <label>Education Level</label></br>
-    <?= generateRadioButtons('education_list', 'education_level_list') ?>
+    <?php echo generateRadioButtons('education_list', 'education_level_list') ?>
 </div>
 
 <div class="row" name="college_list_div" style="display:none">
-    <?= generateDropdown('college_list', 'college_list') ?>
+    <?php echo generateDropdown('college_list', 'college_list') ?>
     </select>
 </div>
 
 <div class="row">
     <label>Family Composition</label></br>
     <label>Which best describes your relationship status?<span style="color:red"> * </span></label></br>
-    <?= generateRadioButtons('fam_relationship_list', 'fam_relationship_list') ?>
+    <?php echo generateRadioButtons('fam_relationship_list', 'fam_relationship_list') ?>
 </div>
 
 <div class="row" name="DivorcedDiv" style="display:none">
@@ -80,13 +80,13 @@
 <div class="row">
     <label>Household Members</label></br>
     <label>Who do you live with?<span style="color:red"> * </span></label><br>
-    <?= generateCheckBox('who_live_with', 'who_live_with') ?>
+    <?php echo generateCheckBox('who_live_with', 'who_live_with') ?>
 </div>
 
 <div class="row">
     <label>Children</label></br>
     <label>How many children/step children do you have in total?<span style="color:red"> * </span></label><br>
-    <?= generateDropdown('how_many_children', 'how_many_children') ?>
+    <?php echo generateDropdown('how_many_children', 'how_many_children') ?>
     </select>
 </div>
 <div class="row" name="children_custody_list_div">
@@ -188,25 +188,25 @@
     <label>Reason for Referral to ABS</label></br>
 
     <!-- <label>What ABS program(s) are you interested in or being referred to?</label></br>
-    <?= generateCheckBox('being_referred_to', 'being_referred_to') ?> -->
+    <?php echo generateCheckBox('being_referred_to', 'being_referred_to') ?> -->
 
 </div>
 
 <div class="row">
     <label>What are the reasons you are being referred for services & what ABS program(s) are you interested in enrolling in?</label></br>
-    <?= generateCheckBox('being_referred_for_services', 'being_referred_for_service') ?>
+    <?php echo generateCheckBox('being_referred_for_services', 'being_referred_for_service') ?>
 </div>
 
 <div class="row" name="being_rf_for_services_anger_mgmt_div" style="display:none">
     <label>When was the last time you were in an argument or domestic dispute?<span style="color:red"> * </span></label></br>
-    <?= generateRadioButtons('argument_domestic_dispute_list', 'anger_mgmt_time_list') ?>
+    <?php echo generateRadioButtons('argument_domestic_dispute_list', 'anger_mgmt_time_list') ?>
     <label>Were you ever in a physical confrontation or fight?<span style="color:red"> * </span></label><br>
     <input type="radio" name="physical_confrontation" value="yes"> Yes</br>
     <input type="radio" name="physical_confrontation" value="no"> No</br>
 
     <div name="physical_confrontationDiv" style="display:none">
         <label>Who were you fighting with?<span style="color:red"> * </span></label><br>
-        <?= generateRadioButtons('fighting_with', 'fighting_with') ?>
+        <?php echo generateRadioButtons('fighting_with', 'fighting_with') ?>
     </div>
 
     <label>Have you ever physically hurt or injured someone?<span style="color:red"> * </span></label><br>
@@ -220,34 +220,34 @@
     <input type="radio" name="arrested_violent_crime" value="yes"> Yes</br>
     <input type="radio" name="arrested_violent_crime" value="no"> No</br>
     <label>Has impulsive anger or aggression caused you other problems in your life? <span style="color:red"> * </span></label><br>
-    <?= generateCheckBox('anger_or_agression_caused', 'anger_or_agression_caused') ?>
+    <?php echo generateCheckBox('anger_or_agression_caused', 'anger_or_agression_caused') ?>
 </div>
 
 <!-- Alcohol div -->
 <div class="row" style="display:none" name="alcohol_drug_abuse_div">
     <label>How often do you have a drink containing alcohol?</label></br>
-    <?= generateRadioButtons('drug_consumption_duration', 'dring_contain_alc') ?>
+    <?php echo generateRadioButtons('drug_consumption_duration', 'dring_contain_alc') ?>
 
     <label>How many standard drinks containing alcohol do you have on a typical day when drinking?</label></br>
-    <?= generateRadioButtons('std_drink_contain_alcohol', 'when_drink_drings') ?>
+    <?php echo generateRadioButtons('std_drink_contain_alcohol', 'when_drink_drings') ?>
 
     <label>How often do you have six or more drinks on one occasion</label></br>
-    <?= generateRadioButtons('how_often_drink', 'occasional_drinks') ?>
+    <?php echo generateRadioButtons('how_often_drink', 'occasional_drinks') ?>
 
     <label>During the past year, how often have you found that you were not able to stop drinking once you had started?</label></br>
-    <?= generateRadioButtons('how_often_drink', 'how_often_stop_drink') ?>
+    <?php echo generateRadioButtons('how_often_drink', 'how_often_stop_drink') ?>
 
     <label>During the past year, how often have you failed to do what was normally expected of you because of drinking?</label></br>
-    <?= generateRadioButtons('how_often_drink', 'how_often_failed_stop_drink') ?>
+    <?php echo generateRadioButtons('how_often_drink', 'how_often_failed_stop_drink') ?>
 
     <label>During the past year, how often have you needed a drink in the morning to get yourself going after a heavy drinking session?</label></br>
-    <?= generateRadioButtons('how_often_drink', 'how_often_need_drink') ?>
+    <?php echo generateRadioButtons('how_often_drink', 'how_often_need_drink') ?>
 
     <label>During the past year, how often have you had a feeling of guilt or remorse after drinking?</label></br>
-    <?= generateRadioButtons('how_often_drink', 'remorse_after_drink') ?>
+    <?php echo generateRadioButtons('how_often_drink', 'remorse_after_drink') ?>
 
     <label>During the past year, how often have you been unable to remember what happened the night before because you had been drinking?</label></br>
-    <?= generateRadioButtons('how_often_drink', 'unable_remember_night_session') ?>
+    <?php echo generateRadioButtons('how_often_drink', 'unable_remember_night_session') ?>
 
     <label>Have you or someone else been injured as a result of your drinking?</label></br>
     <input type="radio" name="injured_result_drink" value="no"> No</br>
@@ -260,7 +260,7 @@
     <input type="radio" name="concerned_about_drink" value="yes_during_year"> Yes, during the past year</br>
 
     <label>What are your drugs of choice? Please list all.</label></br>
-    <?= generateCheckBox('drug_choices', 'drugs_of_chioces') ?>
+    <?php echo generateCheckBox('drug_choices', 'drugs_of_chioces') ?>
 
     <label>How old were you the first time you used?</label></br>
     <input type="text" name="first_time_used" value="" class="form-control" style="width:50%"></br>
@@ -285,7 +285,7 @@
 
 <div class="row" style="display:none" name="gam_pblm_div">
     <label>Gambling - Please check all that apply</label><span style="color:red"> * </span></br>
-    <?= generateCheckBox('gam_pblm_list', 'gamList') ?>
+    <?php echo generateCheckBox('gam_pblm_list', 'gamList') ?>
 </div>
 
 
@@ -294,7 +294,7 @@
     <input type="radio" name="sex_active" value="yes"> Yes</br>
     <input type="radio" name="sex_active" value="no"> No</br>
     <label>What is your sexual preference</label><span style="color:red">*</span></br>
-    <?= generateRadioButtons('sexual_orientation', 'sex_preference') ?>
+    <?php echo generateRadioButtons('sexual_orientation', 'sex_preference') ?>
     <label>Are you satisfied with your sexual identity?</label><span style="color:red">*</span></br>
     <input type="radio" name="satisfied_sex_identity" value="yes"> Yes</br>
     <input type="radio" name="satisfied_sex_identity" value="no"> No</br>
@@ -302,13 +302,13 @@
     <input type="radio" name="charged_sex_crime" value="yes"> Yes</br>
     <input type="radio" name="charged_sex_crime" value="no"> No</br>
     <label>Have you ever had any other problems in your life as a result of impulsive sexual behavior such as the following?</label></br>
-    <?= generateCheckBox('impulsive_sex_behave', 'impulsive_sex_behave') ?>
+    <?php echo generateCheckBox('impulsive_sex_behave', 'impulsive_sex_behave') ?>
 </div>
 
 
 <div class="row" style="display:none" name="domestic_violence_div"></br>
     <label>When was the last time you were in an argument or domestic dispute?<span style="color:red"> * </span></label></br>
-    <?= generateRadioButtons('argument_domestic_dispute_list', 'domestic_violence') ?>
+    <?php echo generateRadioButtons('argument_domestic_dispute_list', 'domestic_violence') ?>
     <label>Were you ever in a physical confrontation or fight?<span style="color:red"> * </span></label></br>
     <input type="radio" name="phy_confrintation" value="yes"> Yes </br>
     <input type="radio" name="phy_confrintation" value="no"> No </br>
@@ -319,7 +319,7 @@
     <input type="radio" name="ever_arrested_violent_crime" value="yes"> Yes </br>
     <input type="radio" name="ever_arrested_violent_crime" value="no"> No </br>
     <label>Has impulsive anger or aggression caused you other problems in your life?<span style="color:red"> * </span></label></br>
-    <?= generateCheckBox('domestic_violence_list', 'domestic_violence_list') ?>
+    <?php echo generateCheckBox('domestic_violence_list', 'domestic_violence_list') ?>
 </div>
 
 <div class="row" style="display:none" name="parenting_issues_div"></br>
@@ -335,7 +335,7 @@
 <div class="row">
     <label>Suicidal Thoughts</label></br>
     <label>Have you ever had any suicidal thinking or thoughts of hurting/killing yourself?<span style="color:red"> * </span></label></br>
-    <?= generateRadioButtons('Intake_suicide', 'Intake_suicide') ?>
+    <?php echo generateRadioButtons('Intake_suicide', 'Intake_suicide') ?>
 </div>
 
 <div class="row" style="display:none" name="last_attempt_explanation_div">
@@ -384,7 +384,7 @@
 
 <div class="row" style="display:none" name="arrested_ever_yes_div">
     <label>How many times have you been arrested?<span style="color:red"> * </span></label></br>
-    <?= generateDropdown('how_many_arrest', 'how_many_arrest') ?>
+    <?php echo generateDropdown('how_many_arrest', 'how_many_arrest') ?>
 </div>
 
 <div class="row" style="display:none" name="arrested_explanation_div">
@@ -408,7 +408,7 @@
 
 <div class="row" style="display:none" name="sentence_length_div">
     <label>How long is your sentence to supervision?<span style="color:red"> * </span></label></br>
-    <?= generateDropdown('How_long_is_your_sentence_to_supervision_', 'sentence_length') ?>
+    <?php echo generateDropdown('How_long_is_your_sentence_to_supervision_', 'sentence_length') ?>
 </div>
 
 <div class="row" style="display:none" name="incarceration_div">
@@ -427,12 +427,12 @@
 
 <div class="row" style="display:none" name="incarcerated_length_div">
     <label>If yes how many times incarcerated?<span style="color:red"> * </span></label></br>
-    <?= generateDropdown('how_many_arrest', 'incarcerated_length') ?>
+    <?php echo generateDropdown('how_many_arrest', 'incarcerated_length') ?>
 </div>
 
 <div class="row" style="display:none" name="incarcerated_years_div">
     <label>How long, in total, have you spent incarcerated?<span style="color:red"> * </span></label></br>
-    <?= generateDropdown('How_long_is_your_sentence_to_supervision_', 'incarcerated_years') ?>
+    <?php echo generateDropdown('How_long_is_your_sentence_to_supervision_', 'incarcerated_years') ?>
 </div>
 
 <div class="row" style="display:none" name="protection_orders_div">
@@ -465,12 +465,12 @@
 
 <div class="row" style="display:none" name="state_registry_list_div">
     <label>If yes, which state registry?<span style="color:red"> * </span></label></br>
-    <?= generateDropdown('State_Registry', 'state_registry_list') ?>
+    <?php echo generateDropdown('State_Registry', 'state_registry_list') ?>
 </div>
 
 <div class="row" style="display:none" name="sex_offender_div">
     <label>If sex offender registry, choose level:<span style="color:red"> * </span></label></br>
-    <?= generateDropdown('Sex_Offender', 'sex_offender') ?>
+    <?php echo generateDropdown('Sex_Offender', 'sex_offender') ?>
 </div>
 
 <div class="row">
@@ -490,7 +490,7 @@
 
 <div class="row" style="display:none" name="victimDiv">
     <label>What were you a victim of?<span style="color:red"> * </span></label></br>
-    <?= generateCheckBox('Intake_Victim', 'Intake_Victim') ?>
+    <?php echo generateCheckBox('Intake_Victim', 'Intake_Victim') ?>
     <label>Please explain anything checked above.</label></br>
     <textarea class="form-control" name="explain_victim"></textarea>
 </div>
