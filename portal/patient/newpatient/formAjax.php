@@ -24,9 +24,7 @@ if (isset($_POST['referralTab'])) {
             $_POST[$key]  = implode('|', $_POST[$key]);
         }
     }
-    //changingOfValues();
     unset($_POST['referralTab']);
-    //file_put_contents('/var/www/html/traps/referral.txt', print_r($_POST, true)); die;
     formSubmit('patient_referral_form', $_POST, '');
 }
 
