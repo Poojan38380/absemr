@@ -247,7 +247,7 @@
 
     <div class="county_courts" name="<?php echo $county ?? '' ?>" style="display: none;">
         <label>Select your county court</label>
-        <?php echo selectedRadioButtons($court, 'courtName') ?>
+        <?php echo selectedRadioButtons($court ?? '', 'courtName') ?>
         <div class="radio">
             <label>
                 <input type="radio" name="courtName" value="Other" <?php echo ($referral['courtName'] ?? '' == 'Other') ?  "checked" : ""; ?>> Other
