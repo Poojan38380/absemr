@@ -457,7 +457,7 @@
 <?php } ?>
 
 <div class="row">
-    <label>Legal History</label></br>
+    <h4>Legal History</h4>
     <label>Have you ever been arrested?<span style="color:red"> * </span></label></br>
     <div class="radio">
         <label>
@@ -574,7 +574,7 @@
 <?php } ?>
 
 <div class="row">
-    <label>Trauma History</label></br>
+    <h4>Trauma History</h4>
     <label>Have you ever experienced sexual/verbal/physical abuse and/or trauma?<span style="color:red"> * </span></label></br>
     <div class="radio">
         <label>
@@ -599,7 +599,7 @@
 <?php } ?>
 
 <div class="row">
-    <label>Mental Health</label></br>
+    <h4>Mental Health</h4>
     <label>Have you ever received psychotherapy or mental health treatment before?<span style="color:red"> * </span></label>
     <div class="radio">
         <label>
