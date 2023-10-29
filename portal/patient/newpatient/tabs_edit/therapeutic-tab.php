@@ -68,7 +68,7 @@
 <div class="row">
     <label>Family Composition</label></br>
     <label>Which best describes your relationship status?<span style="color:red"> * </span></label></br>
-    <?php echo selectedRadioButtons('fam_relationship_list', 'fam_relationship_list', $therapeutic['fam_relationship_list'] ?? '', true) ?>
+    <?php echo selectedRadioButtons('fam_relationship_list', 'fam_relationship_list', $therapeutic['fam_relationship_list'], true) ?>
 </div>
 <?php if ($therapeutic['fam_relationship_list'] ?? '' == 'Divorced' || $therapeutic['fam_relationship_list'] ?? '' == 'Widowed') { ?>
     <div class="row" name="DivorcedDiv" style="display:block">
