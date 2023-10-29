@@ -72,8 +72,7 @@ $pid = $_SESSION['pid'];
                     }
                 }
             }, 2000);
-        }
-        })
+        });
 
         function printaDoc(divName) {
             flattenDocument();
