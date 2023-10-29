@@ -70,7 +70,7 @@
     <label>Which best describes your relationship status?<span style="color:red"> * </span></label></br>
     <?php echo selectedRadioButtons('fam_relationship_list', 'fam_relationship_list', $therapeutic['fam_relationship_list'] ?? '', true) ?>
 </div>
-<?php if ($therapeutic['fam_relationship_list'] == 'Divorced' || $therapeutic['fam_relationship_list'] ?? '' == 'Widowed') { ?>
+<?php if ($therapeutic['fam_relationship_list'] ?? '' == 'Divorced' || $therapeutic['fam_relationship_list'] ?? '' == 'Widowed') { ?>
     <div class="row" name="DivorcedDiv" style="display:block">
         <label>How many times have you been married?</label></br>
         <input type="text" name="how_many_married" value="<?php echo $therapeutic['how_many_married'] ?? '' ?>" class="form-control" style="width:50%" ></br>
@@ -588,7 +588,7 @@
     </div>
 </div>
 
-<?php if ($therapeutic['exp_ver_phy_abuse'] == 'yes') { ?>
+<?php if ($therapeutic['exp_ver_phy_abuse'] ?? '' == 'yes') { ?>
     <div class="row" style="display:block" name="victimDiv">
         <label>What were you a victim of?<span style="color:red"> * </span></label></br>
         <?php echo selectedCheckBox('Intake_Victim', 'Intake_Victim', $therapeutic['Intake_Victim'] ?? '', true) ?>
@@ -613,7 +613,7 @@
     </div>
 </div>
 
-<?php if ($therapeutic['mental_health_treat'] == 'yes') { ?>
+<?php if ($therapeutic['mental_health_treat'] ?? '' == 'yes') { ?>
     <div class="row" style="display:block" name="mentalHealthYesDiv">
         <label>What mental health conditions were you treated for previously?<span style="color:red"> * </span></label></br>
         <input type="text" class="form-control" name="mentalHealthCondition" value="<?php echo $therapeutic['mentalHealthCondition'] ?? '' ?>"></br>
