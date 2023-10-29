@@ -224,9 +224,9 @@ $pid = $_SESSION['pid'];
                     <?php //if (referralTabSaved($pid)) { ?>
                         <li><a href="#referral_tab">Referral Form</a></li>
                     <?php //} ?>
-                    <?php if (therapeuticTabSaved($pid)) { ?>
+                    <?php //if (therapeuticTabSaved($pid)) { ?>
                         <li><a href="#therapeutic_tab">Therapeutic Form</a></li>
-                    <?php } ?>
+                    <?php //} ?>
                     <?php if (noticePracticeTabSaved($pid)) { ?>
                         <li><a href="#notice_practice_tab"><?php echo xlt("Notice of practice policies") ?></a></li>
                     <?php } ?>
