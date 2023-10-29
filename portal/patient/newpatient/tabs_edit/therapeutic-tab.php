@@ -236,7 +236,7 @@
     <?php echo selectedCheckBox('being_referred_for_services', 'being_referred_for_service', $therapeutic['being_referred_for_service'] ?? '', false) ?>
 </div>
 
-<?php if ($therapeutic['being_referred_for_service'] == 'anger_mgmt') { ?>
+<?php if ($therapeutic['being_referred_for_service'] ?? '' == 'anger_mgmt') { ?>
     <div class="row" name="being_rf_for_services_anger_mgmt_div" style="display:block">
         <label>When was the last time you were in an argument or domestic dispute?<span style="color:red"> * </span></label></br>
         <?php echo selectedRadioButtons('argument_domestic_dispute_list', 'anger_mgmt_time_list', $therapeutic['anger_mgmt_time_list'] ?? '', true) ?>
@@ -323,7 +323,7 @@
         <input type="radio" name="ever_been_in_alcohol" value="no" <?php echo ($therapeutic['ever_been_in_alcohol'] ?? '' == 'no') ?  "checked" : ""; ?> > No</br>
     </div>
 <?php } ?>
-<?php if ($therapeutic['being_referred_for_service'] == 'dwi_dui') { ?>
+<?php if ($therapeutic['being_referred_for_service'] ?? '' == 'dwi_dui') { ?>
     <div class="row" style="display:block" name="dwi_dui_div">
         <label>How many drinking and driving offenses have you had?</label></br>
         <input type="text" name="how_drink_drive_offence" class="form-control" style="width:50%" value="<?php echo $therapeutic['how_drink_drive_offence'] ?? '' ?> " ></br>
@@ -578,12 +578,12 @@
     <label>Have you ever experienced sexual/verbal/physical abuse and/or trauma?<span style="color:red"> * </span></label></br>
     <div class="radio">
         <label>
-            <input type="radio" name="exp_ver_phy_abuse" value="yes" <?php echo ($therapeutic['exp_ver_phy_abuse'] == 'yes') ?  "checked" : ""; ?> > Yes
+            <input type="radio" name="exp_ver_phy_abuse" value="yes" <?php echo ($therapeutic['exp_ver_phy_abuse'] ?? '' == 'yes') ?  "checked" : ""; ?> > Yes
         </label>
     </div>
     <div class="radio">
         <label>
-            <input type="radio" name="exp_ver_phy_abuse" value="no" <?php echo ($therapeutic['exp_ver_phy_abuse'] == 'no') ?  "checked" : ""; ?> > No
+            <input type="radio" name="exp_ver_phy_abuse" value="no" <?php echo ($therapeutic['exp_ver_phy_abuse'] ?? '' == 'no') ?  "checked" : ""; ?> > No
         </label>
     </div>
 </div>
@@ -591,10 +591,10 @@
 <?php if ($therapeutic['exp_ver_phy_abuse'] == 'yes') { ?>
     <div class="row" style="display:block" name="victimDiv">
         <label>What were you a victim of?<span style="color:red"> * </span></label></br>
-        <?php echo selectedCheckBox('Intake_Victim', 'Intake_Victim', $therapeutic['Intake_Victim'], true) ?>
+        <?php echo selectedCheckBox('Intake_Victim', 'Intake_Victim', $therapeutic['Intake_Victim'] ?? '', true) ?>
 
         <label>Please explain anything checked above.</label></br>
-        <textarea class="form-control" name="explain_victim" ><?php echo $therapeutic['explain_victim'] ?></textarea>
+        <textarea class="form-control" name="explain_victim" ><?php echo $therapeutic['explain_victim'] ?? '' ?></textarea>
     </div>
 <?php } ?>
 
@@ -603,12 +603,12 @@
     <label>Have you ever received psychotherapy or mental health treatment before?<span style="color:red"> * </span></label>
     <div class="radio">
         <label>
-            <input type="radio" name="mental_health_treat" value="yes" <?php echo ($therapeutic['mental_health_treat'] == 'yes') ?  "checked" : ""; ?> > Yes
+            <input type="radio" name="mental_health_treat" value="yes" <?php echo ($therapeutic['mental_health_treat'] ?? '' == 'yes') ?  "checked" : ""; ?> > Yes
         </label>
     </div>
     <div class="radio">
         <label>
-            <input type="radio" name="mental_health_treat" value="no" <?php echo ($therapeutic['mental_health_treat'] == 'no') ?  "checked" : ""; ?> > No
+            <input type="radio" name="mental_health_treat" value="no" <?php echo ($therapeutic['mental_health_treat'] ?? '' == 'no') ?  "checked" : ""; ?> > No
         </label>
     </div>
 </div>
@@ -616,39 +616,39 @@
 <?php if ($therapeutic['mental_health_treat'] == 'yes') { ?>
     <div class="row" style="display:block" name="mentalHealthYesDiv">
         <label>What mental health conditions were you treated for previously?<span style="color:red"> * </span></label></br>
-        <input type="text" class="form-control" name="mentalHealthCondition" value="<?php echo $therapeutic['mentalHealthCondition'] ?>"></br>
+        <input type="text" class="form-control" name="mentalHealthCondition" value="<?php echo $therapeutic['mentalHealthCondition'] ?? '' ?>"></br>
 
         <label>What kind of mental health treatment did you undergo?<span style="color:red"> * </span></label></br>
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="mentalHealthTreatment[]" value="inpatient" <?php echo ($therapeutic['mentalHealthTreatment'] === 'inpatient') ?  "checked" : ""; ?> > Inpatient
+                <input type="checkbox" name="mentalHealthTreatment[]" value="inpatient" <?php echo ($therapeutic['mentalHealthTreatment'] ?? '' === 'inpatient') ?  "checked" : ""; ?> > Inpatient
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="mentalHealthTreatment[]" value="outpatient" <?php echo ($therapeutic['mentalHealthTreatment'] === 'outpatient') ?  "checked" : ""; ?> > Outpatient
+                <input type="checkbox" name="mentalHealthTreatment[]" value="outpatient" <?php echo ($therapeutic['mentalHealthTreatment'] ?? '' === 'outpatient') ?  "checked" : ""; ?> > Outpatient
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="mentalHealthTreatment[]" value="partialHospitaliation" <?php echo ($therapeutic['mentalHealthTreatment'] === 'partialHospitaliation') ?  "checked" : ""; ?> > Partial hospitalization
+                <input type="checkbox" name="mentalHealthTreatment[]" value="partialHospitaliation" <?php echo ($therapeutic['mentalHealthTreatment'] ?? '' === 'partialHospitaliation') ?  "checked" : ""; ?> > Partial hospitalization
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="mentalHealthTreatment[]" value="dayTreatment" <?php echo ($therapeutic['mentalHealthTreatment'] === 'dayTreatment') ?  "checked" : ""; ?> > Day treatment
+                <input type="checkbox" name="mentalHealthTreatment[]" value="dayTreatment" <?php echo ($therapeutic['mentalHealthTreatment'] ?? '' === 'dayTreatment') ?  "checked" : ""; ?> > Day treatment
             </label>
         </div>
     </div>
 <?php } ?>
 
-<?php if ($therapeutic['mentalHealthTreatment'] == 'inpatient') { ?>
+<?php if ($therapeutic['mentalHealthTreatment'] ?? '' == 'inpatient') { ?>
     <div class="row" style="display:block" name="inPatientDiv">
         <label>How many times were you hospitalized for mental health? When was the last inpatient hospitalization? What was the condition you were treated for? Please explain the treatment?</label>
-        <textarea class="form-control" name="inpatient_treatment_consist" ><?php echo $therapeutic['inpatient_treatment_consist'] ?></textarea></br>
+        <textarea class="form-control" name="inpatient_treatment_consist" ><?php echo $therapeutic['inpatient_treatment_consist'] ?? '' ?></textarea></br>
     </div>
 <?php } ?>
-<?php if ($therapeutic['mentalHealthTreatment'] == 'outpatient') { ?>
+<?php if ($therapeutic['mentalHealthTreatment'] ?? '' == 'outpatient') { ?>
     <div class="row" style="display:block" name="outPatientDiv">
         <label>About when was your last outpatient treatment episode?</label></br>
         <input type="text" class="form-control datepicker" name="date_treat_outputpatient" style="width:50%" value="<?php echo $therapeutic['date_treat_outputpatient'] ?>" ></br>
@@ -691,30 +691,30 @@
             </label>
         </div>
         <label>Who was your outpatient therapist/doctor?</label></br>
-        <input type="text" value="" name="therapist_doc" class="form-control" style="width:50%" value="<?php echo $therapeutic['therapist_doc'] ?>" ></br>
+        <input type="text" value="" name="therapist_doc" class="form-control" style="width:50%" value="<?php echo $therapeutic['therapist_doc'] ?? '' ?>" ></br>
 
         <label>Current and past medication use including dosage? When was the last time you took the prescribed medication?</label></br>
-        <textarea class="form-control" name="prescribed_medication" ><?php echo $therapeutic['prescribed_medication'] ?></textarea>
+        <textarea class="form-control" name="prescribed_medication" ><?php echo $therapeutic['prescribed_medication'] ?? '' ?></textarea>
     </div>
 <?php } ?>
 
-<?php if ($therapeutic['mentalHealthTreatment'] == 'partialHospitaliation') { ?>
+<?php if ($therapeutic['mentalHealthTreatment'] ?? '' == 'partialHospitaliation') { ?>
     <div class="row" style="display:block" name="partialHospitalDiv">
         <label>Partial Hospitalization - Name of program, date of last treatment?</label></br>
-        <input type="text" class="form-control datepicker" name="name_pgm_last_treat" style="width:50%" value="<?php echo $therapeutic['name_pgm_last_treat'] ?>" ></br>
+        <input type="text" class="form-control datepicker" name="name_pgm_last_treat" style="width:50%" value="<?php echo $therapeutic['name_pgm_last_treat'] ?? '' ?>" ></br>
     </div>
 <?php } ?>
 
-<?php if ($therapeutic['mentalHealthTreatment'] == 'dayTreatment') { ?>
+<?php if ($therapeutic['mentalHealthTreatment'] ?? '' == 'dayTreatment') { ?>
     <div class="row" style="display:block" name="dayTreatmentDiv">
         <label>Name of day treatment program, date of last treatment?</label></br>
-        <input type="text" class="form-control datepicker" name="day_treat_name" style="width:50%" value="<?php echo $therapeutic['day_treat_name'] ?>" ></br>
+        <input type="text" class="form-control datepicker" name="day_treat_name" style="width:50%" value="<?php echo $therapeutic['day_treat_name'] ?? '' ?>" ></br>
     </div>
 <?php } ?>
 
-<?php if ($therapeutic['mental_health_treat'] == 'no') { ?>
+<?php if ($therapeutic['mental_health_treat'] ?? '' == 'no') { ?>
     <div class="row" style="display:block" name="mentalHealthNoDiv" class="mb-3">
         <label>Please explain what your current primary mental health concerns are and what is motivation to seek help?</label></br>
-        <textarea name="explain_primary_mentalHealth" class="form-control" ><?php echo $therapeutic['explain_primary_mentalHealth'] ?></textarea>
+        <textarea name="explain_primary_mentalHealth" class="form-control" ><?php echo $therapeutic['explain_primary_mentalHealth'] ?? '' ?></textarea>
     </div>
 <?php } ?>
