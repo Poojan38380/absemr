@@ -233,7 +233,7 @@
 
 <div class="row">
     <label>What are the reasons you are being referred for services & what ABS program(s) are you interested in enrolling in?</label></br>
-    <?php echo selectedCheckBox('being_referred_for_services', 'being_referred_for_service', $therapeutic['being_referred_for_service'] ?? '', false) ?>
+    <?php echo selectedCheckBox('being_referred_for_service', 'being_referred_for_service', $therapeutic['being_referred_for_service'] ?? '', false) ?>
 </div>
 
 <?php if ($therapeutic['being_referred_for_service'] ?? '' == 'anger_mgmt') { ?>
