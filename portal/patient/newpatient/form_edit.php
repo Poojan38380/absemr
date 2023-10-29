@@ -395,12 +395,12 @@ $pid = $_SESSION['pid'];
 
 
         $('input[name=payment_ifo]').on('load', function() {
-            if ($(this).val() == 'med_insu') {
+            if ($(this).val() ==='med_insu') {
                 $('div[name=insuranceComDiv]').css('display', 'block');
             } else {
                 $('div[name=insuranceComDiv]').css('display', 'none');
             }
-            if ($(this).val() == 'Eap') {
+            if ($(this).val() ==='Eap') {
                 $('div[name=eapDiv]').css('display', 'block');
             } else {
                 $('div[name=eapDiv]').css('display', 'none');
@@ -524,7 +524,7 @@ $pid = $_SESSION['pid'];
         });
 
         $('input[name="treatment_plan"]').attr('disabled', true);
-        $('input[name="intake_diagnoses"]').on('change', function() {
+        $('input[name="intake_diagnoses"]').on('change click', function() {
             $('input[name="treatment_plan"]').attr('disabled', false);
             var plan = $(this).val().split('|');
             if (plan.length > 0) {
@@ -535,62 +535,62 @@ $pid = $_SESSION['pid'];
         });
 
 
-        $(document).on('change', 'select[name=living_environment]', function() {
-            if ($(this).val() == 'apartment') {
+        $(document).on('change click', 'select[name=living_environment]', function() {
+            if ($(this).val() ==='apartment') {
                 $('div[name=aptnumber]').css('display', 'block');
             } else
                 $('div[name=aptnumber]').css('display', 'none');
 
-            if ($(this).val() == '3_quater') {
+            if ($(this).val() ==='3_quater') {
                 $('div[name=quaHouse]').css('display', 'block');
             } else
                 $('div[name=quaHouse]').css('display', 'none');
 
-            if ($(this).val() == 'half_way') {
+            if ($(this).val() ==='half_way') {
                 $('div[name=halfHouse]').css('display', 'block');
             } else
                 $('div[name=halfHouse]').css('display', 'none');
 
-            if ($(this).val() == 'Shelter') {
+            if ($(this).val() ==='Shelter') {
                 $('div[name=shelterName]').css('display', 'block');
             } else
                 $('div[name=shelterName]').css('display', 'none');
         });
 
-        $(document).on('change', 'input[name^=therapSupportList]', function() {
-            if ($(this).val() == 'employeement') {
+        $(document).on('change click', 'input[name^=therapSupportList]', function() {
+            if ($(this).val() ==='employeement') {
                 $('div[name=employeementDiv]').css('display', 'block');
             } else {
                 $('div[name=employeementDiv]').css('display', 'none');
             }
 
-            if ($(this).val() == 'unemployeement') {
+            if ($(this).val() ==='unemployeement') {
                 $('div[name=unemployeementDiv]').css('display', 'block');
             } else {
                 $('div[name=unemployeementDiv]').css('display', 'none');
             }
 
-            if ($(this).val() == 'pub_assistance') {
+            if ($(this).val() ==='pub_assistance') {
                 $('div[name=publicAssistanceDiv]').css('display', 'block');
             } else {
                 $('div[name=publicAssistanceDiv]').css('display', 'none');
             }
 
-            if ($(this).val() == 'fam_support') {
+            if ($(this).val() ==='fam_support') {
                 $('div[name=family_sup_div]').css('display', 'block');
             } else {
                 $('div[name=family_sup_div]').css('display', 'none');
             }
 
-            if ($(this).val() == 'ssi_ssd') {
+            if ($(this).val() ==='ssi_ssd') {
                 $('div[name=ssi_ssd_div]').css('display', 'block');
             } else {
                 $('div[name=ssi_ssd_div]').css('display', 'none');
             }
 
         });
-        $(document).on('change', 'input[name^=education_level_list]', function() {
-            if ($(this).val() == 'college') {
+        $(document).on('change click', 'input[name^=education_level_list]', function() {
+            if ($(this).val() ==='college') {
                 $('div[name=college_list_div]').css('display', 'block');
             } else {
                 $('div[name=college_list_div]').css('display', 'none');
@@ -598,27 +598,27 @@ $pid = $_SESSION['pid'];
 
         });
 
-        $(document).on('change', 'input[name^=fam_relationship_list]', function() {
-            if ($(this).val() == 'Divorced' || $(this).val() == 'Widowed') {
+        $(document).on('change click', 'input[name^=fam_relationship_list]', function() {
+            if ($(this).val() ==='Divorced' || $(this).val() ==='Widowed') {
                 $('div[name=DivorcedDiv]').css('display', 'block');
             } else {
                 $('div[name=DivorcedDiv]').css('display', 'none');
             }
 
-            if ($(this).val() == 'currently_married') {
+            if ($(this).val() ==='currently_married') {
                 $('div[name=currentMarriedDiv]').css('display', 'block');
             } else {
                 $('div[name=currentMarriedDiv]').css('display', 'none');
             }
 
-            if ($(this).val() == 'single_never_married') {
+            if ($(this).val() ==='single_never_married') {
                 $('div[name=lastRelationShipDiv]').css('display', 'block');
             } else {
                 $('div[name=lastRelationShipDiv]').css('display', 'none');
             }
 
         });
-        $(document).on('change', 'select[name^=how_many_children]', function() {
+        $(document).on('change click', 'select[name^=how_many_children]', function() {
             $.ajax({
                 type: 'post',
                 url: 'formUI.php?fn=getChildrenOptionList',
@@ -632,16 +632,16 @@ $pid = $_SESSION['pid'];
             });
         });
 
-        $(document).on('change', 'input[name^=fam_support_recovery]', function() {
-            if ($(this).val() == 'yes') {
+        $(document).on('change click', 'input[name^=fam_support_recovery]', function() {
+            if ($(this).val() ==='yes') {
                 $("div[name=fam_support_recovery_div]").css('display', 'block');
             } else {
                 $("div[name=fam_support_recovery_div]").css('display', 'none');
             }
         });
 
-        $(document).on('change', 'input[name^=fam_mem_willing_part]', function() {
-            if ($(this).val() == 'yes') {
+        $(document).on('change click', 'input[name^=fam_mem_willing_part]', function() {
+            if ($(this).val() ==='yes') {
                 $("div[name=fam_mem_willing_part_div]").css('display', 'block');
             } else {
                 $("div[name=fam_mem_willing_part_div]").css('display', 'none');
@@ -649,8 +649,8 @@ $pid = $_SESSION['pid'];
         });
 
 
-        $(document).on('change', 'input[name^=fam_sub_abuse]', function() {
-            if ($(this).val() == 'yes') {
+        $(document).on('change click', 'input[name^=fam_sub_abuse]', function() {
+            if ($(this).val() ==='yes') {
                 $("div[name=fam_sub_abuse_div]").css('display', 'block');
             } else {
                 $("div[name=fam_sub_abuse_div]").css('display', 'none');
@@ -658,8 +658,8 @@ $pid = $_SESSION['pid'];
         });
 
 
-        $(document).on('change', 'input[name^=primary_care_doc]', function() {
-            if ($(this).val() == 'yes') {
+        $(document).on('change click', 'input[name^=primary_care_doc]', function() {
+            if ($(this).val() ==='yes') {
                 $("div[name=primary_care_doc_div]").css('display', 'block');
             } else {
                 $("div[name=primary_care_doc_div]").css('display', 'none');
@@ -667,101 +667,101 @@ $pid = $_SESSION['pid'];
         });
 
 
-        $(document).on('change', 'input[name^=curr_health]', function() {
-            if ($(this).val() == 'good') {
+        $(document).on('change click', 'input[name^=curr_health]', function() {
+            if ($(this).val() ==='good') {
                 $("div[name=curr_health_good_div]").css('display', 'block');
                 $("div[name=curr_health_fair_div]").css('display', 'none');
-            } else if ($(this).val() == 'fair' || $(this).val() == 'poor') {
+            } else if ($(this).val() ==='fair' || $(this).val() ==='poor') {
                 $("div[name=curr_health_good_div]").css('display', 'block');
                 $("div[name=curr_health_fair_div]").css('display', 'block');
             }
         });
 
 
-        $(document).on('change', 'input[name^=curr_pres_med]', function() {
-            if ($(this).val() == 'yes') {
+        $(document).on('change click', 'input[name^=curr_pres_med]', function() {
+            if ($(this).val() ==='yes') {
                 $("div[name=curr_pre_med_div]").css('display', 'block');
             } else
                 $("div[name=curr_pre_med_div]").css('display', 'none');
         });
-        $(document).on('change', 'input[name^=do_you_take_med_as_pres]', function() {
-            if ($(this).val() == 'no') {
+        $(document).on('change click', 'input[name^=do_you_take_med_as_pres]', function() {
+            if ($(this).val() ==='no') {
                 $("div[name=do_you_take_med_as_pres_div]").css('display', 'block');
             } else
                 $("div[name=do_you_take_med_as_pres_div]").css('display', 'none');
         });
 
 
-        $(document).on('change', 'input[name^=being_referred_for_services]', function() {
-            if ($(this).val() == 'anger_mgmt' && $(this).is(':checked')) {
+        $(document).on('change click', 'input[name^=being_referred_for_services]', function() {
+            if ($(this).val() ==='anger_mgmt' && $(this).is(':checked')) {
                 $('div[name=being_rf_for_services_anger_mgmt_div]').css('display', 'block');
-            } else if ($(this).val() == 'anger_mgmt' && !($(this).is(':checked'))) {
+            } else if ($(this).val() ==='anger_mgmt' && !($(this).is(':checked'))) {
                 $('div[name=being_rf_for_services_anger_mgmt_div]').css('display', 'none');
             }
 
-            if ($(this).val() == 'alcohol_drug' && $(this).is(':checked')) {
+            if ($(this).val() ==='alcohol_drug' && $(this).is(':checked')) {
                 $('div[name=alcohol_drug_abuse_div]').css('display', 'block');
-            } else if ($(this).val() == 'alcohol_drug' && !($(this).is(':checked'))) {
+            } else if ($(this).val() ==='alcohol_drug' && !($(this).is(':checked'))) {
                 $('div[name=alcohol_drug_abuse_div]').css('display', 'none');
             }
 
-            if ($(this).val() == 'dwi_dui' && $(this).is(':checked')) {
+            if ($(this).val() ==='dwi_dui' && $(this).is(':checked')) {
                 $('div[name=dwi_dui_div]').css('display', 'block');
-            } else if ($(this).val() == 'dwi_dui' && !($(this).is(':checked'))) {
+            } else if ($(this).val() ==='dwi_dui' && !($(this).is(':checked'))) {
                 $('div[name=dwi_dui_div]').css('display', 'none');
             }
-            if ($(this).val() == 'gam_pblm' && $(this).is(':checked')) {
+            if ($(this).val() ==='gam_pblm' && $(this).is(':checked')) {
                 $('div[name=gam_pblm_div]').css('display', 'block');
-            } else if ($(this).val() == 'gam_pblm' && !($(this).is(':checked'))) {
+            } else if ($(this).val() ==='gam_pblm' && !($(this).is(':checked'))) {
                 $('div[name=gam_pblm_div]').css('display', 'none');
             }
-            if ($(this).val() == 'sex_behav' && $(this).is(':checked')) {
+            if ($(this).val() ==='sex_behav' && $(this).is(':checked')) {
                 $('div[name=sex_behav_div]').css('display', 'block');
-            } else if ($(this).val() == 'sex_behav' && !($(this).is(':checked'))) {
+            } else if ($(this).val() ==='sex_behav' && !($(this).is(':checked'))) {
                 $('div[name=sex_behav_div]').css('display', 'none');
             }
-            if ($(this).val() == 'domestic_violence' && $(this).is(':checked')) {
+            if ($(this).val() ==='domestic_violence' && $(this).is(':checked')) {
                 $('div[name=domestic_violence_div]').css('display', 'block');
-            } else if ($(this).val() == 'domestic_violence' && !($(this).is(':checked'))) {
+            } else if ($(this).val() ==='domestic_violence' && !($(this).is(':checked'))) {
                 $('div[name=domestic_violence_div]').css('display', 'none');
             }
 
-            if ($(this).val() == 'parent_issue' && $(this).is(':checked')) {
+            if ($(this).val() ==='parent_issue' && $(this).is(':checked')) {
                 $('div[name=parenting_issues_div]').css('display', 'block');
-            } else if ($(this).val() == 'parent_issue' && !($(this).is(':checked'))) {
+            } else if ($(this).val() ==='parent_issue' && !($(this).is(':checked'))) {
                 $('div[name=parenting_issues_div]').css('display', 'none');
             }
 
-            if ($(this).val() == 'non_checm_addiction' && $(this).is(':checked')) {
+            if ($(this).val() ==='non_checm_addiction' && $(this).is(':checked')) {
                 $('div[name=non_chemical_addiction_div]').css('display', 'block');
-            } else if ($(this).val() == 'non_checm_addiction' && !($(this).is(':checked'))) {
+            } else if ($(this).val() ==='non_checm_addiction' && !($(this).is(':checked'))) {
                 $('div[name=non_chemical_addiction_div]').css('display', 'none');
             }
 
         });
 
-        $(document).on('change', 'input[name^=physically_hurt]', function() {
-            if ($(this).val() == 'yes') {
+        $(document).on('change click', 'input[name^=physically_hurt]', function() {
+            if ($(this).val() ==='yes') {
                 $('div[name=injuriesSustainDiv]').css('display', 'block');
             } else {
                 $('div[name=injuriesSustainDiv]').css('display', 'none');
             }
         });
 
-        $(document).on('change', 'input[name^=physical_confrontation]', function() {
-            if ($(this).val() == 'yes') {
+        $(document).on('change click', 'input[name^=physical_confrontation]', function() {
+            if ($(this).val() ==='yes') {
                 $('div[name=physical_confrontationDiv]').css('display', 'block');
             } else {
                 $('div[name=physical_confrontationDiv]').css('display', 'none');
             }
         });
 
-        $(document).on('change', 'input[name^=Intake_suicide]', function() {
-            if ($(this).val() == 'attemptedsuicide') {
+        $(document).on('change click', 'input[name^=Intake_suicide]', function() {
+            if ($(this).val() ==='attemptedsuicide') {
                 $('div[name=last_attempt_explanation_div]').css('display', 'block');
                 $('div[name=felt_inclined_div]').css('display', 'block');
                 $('div[name=feelings_explanation_div]').css('display', 'none');
-            } else if ($(this).val() == 'suicidalthoughts') {
+            } else if ($(this).val() ==='suicidalthoughts') {
                 $('div[name=last_attempt_explanation_div]').css('display', 'none');
                 $('div[name=felt_inclined_div]').css('display', 'block');
                 $('div[name=feelings_explanation_div]').css('display', 'block');
@@ -772,15 +772,15 @@ $pid = $_SESSION['pid'];
             }
         });
 
-        $(document).on('change', 'input[name^=arrested_ever]', function() {
-            if ($(this).val() == 'yes') {
+        $(document).on('change click', 'input[name^=arrested_ever]', function() {
+            if ($(this).val() ==='yes') {
                 $('div[name=arrested_ever_yes_div]').css('display', 'block');
             } else {
                 $('div[name=arrested_ever_yes_div]').css('display', 'none');
             }
         });
 
-        $(document).on('change', 'select[name^=how_many_arrest]', function() {
+        $(document).on('change click', 'select[name^=how_many_arrest]', function() {
             if ($(this).val() != '') {
                 $('div[name=arrested_explanation_div]').css('display', 'block');
                 $('div[name=monitoring_agency_div]').css('display', 'block');
@@ -796,16 +796,16 @@ $pid = $_SESSION['pid'];
             }
         });
 
-        $(document).on('change', 'input[name^=monitor_agency]', function() {
-            if ($(this).val() == 'yes') {
+        $(document).on('change click', 'input[name^=monitor_agency]', function() {
+            if ($(this).val() ==='yes') {
                 $('div[name=sentence_length_div]').css('display', 'block');
             } else {
                 $('div[name=sentence_length_div]').css('display', 'none');
             }
         });
 
-        $(document).on('change', 'input[name^=incarcerated]', function() {
-            if ($(this).val() == 'yes') {
+        $(document).on('change click', 'input[name^=incarcerated]', function() {
+            if ($(this).val() ==='yes') {
                 $('div[name=incarcerated_length_div]').css('display', 'block');
                 $('div[name=incarcerated_years_div]').css('display', 'block');
             } else {
@@ -814,32 +814,32 @@ $pid = $_SESSION['pid'];
             }
         });
 
-        $(document).on('change', 'input[name^=state_registry]', function() {
-            if ($(this).val() == 'yes') {
+        $(document).on('change click', 'input[name^=state_registry]', function() {
+            if ($(this).val() ==='yes') {
                 $('div[name=state_registry_list_div]').css('display', 'block');
             } else {
                 $('div[name=state_registry_list_div]').css('display', 'none');
             }
         });
 
-        $(document).on('change', 'select[name^=state_registry_list]', function() {
-            if ($(this).val() == '1') {
+        $(document).on('change click', 'select[name^=state_registry_list]', function() {
+            if ($(this).val() ==='1') {
                 $('div[name=sex_offender_div]').css('display', 'block');
             } else {
                 $('div[name=sex_offender_div]').css('display', 'none');
             }
         });
 
-        $(document).on('change', 'input[name^=exp_ver_phy_abuse]', function() {
-            if ($(this).val() == 'yes') {
+        $(document).on('change click', 'input[name^=exp_ver_phy_abuse]', function() {
+            if ($(this).val() === 'yes') {
                 $('div[name=victimDiv]').css('display', 'block');
             } else {
                 $('div[name=victimDiv]').css('display', 'none');
             }
         });
 
-        $(document).on('change', 'input[name^=mental_health_treat]', function() {
-            if ($(this).val() == 'yes') {
+        $(document).on('change click', 'input[name^=mental_health_treat]', function() {
+            if ($(this).val() === 'yes') {
                 $('div[name=mentalHealthYesDiv]').css('display', 'block');
                 $('div[name=mentalHealthNoDiv]').css('display', 'none');
             } else {
@@ -847,33 +847,34 @@ $pid = $_SESSION['pid'];
                 $('div[name=mentalHealthNoDiv]').css('display', 'block');
             }
         });
-        $(document).on('change', 'input[name^=mentalHealthTreatment]', function() {
-            if ($(this).val() == 'inpatient' && $(this).is(':checked')) {
+
+        $(document).on('change click', 'input[name^=mentalHealthTreatment]', function() {
+            if ($(this).val() === 'inpatient' && $(this).is(':checked')) {
                 $('div[name=inPatientDiv]').css('display', 'block');
-            } else if ($(this).val() == 'inpatient' && !($(this).is(':checked'))) {
+            } else if ($(this).val() ==='inpatient' && !($(this).is(':checked'))) {
                 $('div[name=inPatientDiv]').css('display', 'none');
             }
 
-            if ($(this).val() == 'outpatient' && $(this).is(':checked')) {
+            if ($(this).val() === 'outpatient' && $(this).is(':checked')) {
                 $('div[name=outPatientDiv]').css('display', 'block');
-            } else if ($(this).val() == 'outpatient' && !($(this).is(':checked'))) {
+            } else if ($(this).val() === 'outpatient' && !($(this).is(':checked'))) {
                 $('div[name=outPatientDiv]').css('display', 'none');
             }
 
-            if ($(this).val() == 'partialHospitaliation' && $(this).is(':checked')) {
+            if ($(this).val() === 'partialHospitaliation' && $(this).is(':checked')) {
                 $('div[name=partialHospitalDiv]').css('display', 'block');
-            } else if ($(this).val() == 'partialHospitaliation' && !($(this).is(':checked'))) {
+            } else if ($(this).val() === 'partialHospitaliation' && !($(this).is(':checked'))) {
                 $('div[name=partialHospitalDiv]').css('display', 'none');
             }
 
-            if ($(this).val() == 'dayTreatment' && $(this).is(':checked')) {
+            if ($(this).val() === 'dayTreatment' && $(this).is(':checked')) {
                 $('div[name=dayTreatmentDiv]').css('display', 'block');
-            } else if ($(this).val() == 'dayTreatment' && !($(this).is(':checked'))) {
+            } else if ($(this).val() === 'dayTreatment' && !($(this).is(':checked'))) {
                 $('div[name=dayTreatmentDiv]').css('display', 'none');
             }
         });
-        $(document).on('change', 'input[name^=recent_hospitalization]', function() {
-            if ($(this).val() == 'yes') {
+        $(document).on('change click', 'input[name^=recent_hospitalization]', function() {
+            if ($(this).val() === 'yes') {
                 $('div[name=recent_hospitalizationDiv]').css('display', 'block');
             } else {
                 $('div[name=recent_hospitalizationDiv]').css('display', 'none');
@@ -881,8 +882,8 @@ $pid = $_SESSION['pid'];
         });
 
 
-        $(document).on('change', 'input[name^=perception_orientation]', function() {
-            if ($(this).val() == 'disoriented') {
+        $(document).on('change click', 'input[name^=perception_orientation]', function() {
+            if ($(this).val() === 'disoriented') {
                 $('div[name=disorientedDiv]').css('display', 'block');
             } else {
                 $('div[name=disorientedDiv]').css('display', 'none');
