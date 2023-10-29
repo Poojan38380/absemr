@@ -224,7 +224,7 @@
 
 
 <div class="row">
-    <span style="padding: 10px"><?php print xlt("Reason for Referral to ABS") ?></span></br>
+    <h4 style="padding: 20px"><?php print xlt("Reason for Referral to ABS") ?></h4></br>
 
     <label>What ABS program(s) are you interested in or being referred to?</label></br>
     <?php echo selectedCheckBox('being_referred_to', 'being_referred_to') ?>
