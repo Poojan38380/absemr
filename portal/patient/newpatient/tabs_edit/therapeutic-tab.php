@@ -399,7 +399,7 @@
 <?php } ?>
 
 <div class="row">
-    <label>Suicidal Thoughts</label></br>
+    <h4>Suicidal Thoughts</h4>
     <label>Have you ever had any suicidal thinking or thoughts of hurting/killing yourself?<span style="color:red"> * </span></label></br>
     <?php echo selectedRadioButtons('Intake_suicide', 'Intake_suicide', $therapeutic['Intake_suicide'] ?? '', true) ?>
 </div>
