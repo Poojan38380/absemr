@@ -136,6 +136,7 @@
         <label>Insurance Company</label><br>
         <select name="insurance_comapny" class="form-control" style="width:50%;">
             <?php
+            if ($referral['insurance_comapny']) {
             $getComapnies = sqlStatement("select id, name from insurance_companies where id =" . $referral['insurance_comapny']);
             while ($row = sqlFetchArray($getComapnies)) {
                 $optionId = $row['row_id'];
@@ -145,7 +146,7 @@
 
                 } ?>
                 <option value="<?php echo $row['id']  ?? ''?>" <?php echo $selected ?>><?php echo $row['name'] ?? '' ?></option>
-            <?php } ?>
+            <?php }} ?>
         </select><br>
         <label>insuranceID</label><br>
         <input type="text" class="form-control" style="width:50%" name="insuranceID" value="<?php echo $referral['insuranceID'] ?? '' ?>">
