@@ -171,7 +171,6 @@
             <label>Please explain why you don't take your medications as prescribed<span style="color:red"> * </span></label></br>
             <textarea name="do_you_take_med_as_pres_details" class="form-control"></textarea></br>
         </div>
-
     </div>
 
     <label>Have you had any recent hospitalization?<span style="color:red"> * </span></label></br>
