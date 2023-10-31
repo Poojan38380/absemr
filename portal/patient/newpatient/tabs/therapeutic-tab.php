@@ -94,7 +94,6 @@
 
 <!-- family composition -->
 <div class="row">
-    <!-- <label>Family Composition</label></br> -->
     <label>Is a member of your family supportive of your recovery/treatment? <span style="color:red"> * </span></label></br>
     <input type="radio" name="fam_support_recovery" value="yes"> Yes</br>
     <input type="radio" name="fam_support_recovery" value="no"> No</br>
