@@ -556,7 +556,7 @@ $pid = $_SESSION['pid'];
                 $('div[name=shelterName]').css('display', 'none');
         });
 
-        $(document).on('change click', 'input[name^=therapSupportList]', function() {
+        $(document).on('change', 'input[name^=therapSupportList]', function() {
             if ($(this).val() ==='employeement') {
                 $('div[name=employeementDiv]').css('display', 'block');
             } else {
