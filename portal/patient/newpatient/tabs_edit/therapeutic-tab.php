@@ -100,7 +100,7 @@
 </div>
 
 <div class="row">
-    <label>Children</label></br>
+    <h4>Children</h4>
     <label>How many children/step children do you have in total?<span style="color:red"> * </span></label><br>
     <?php echo selectedDropdown('how_many_children', 'how_many_children', $therapeutic['how_many_children'] ?? '', false) ?>
     </select>
@@ -112,25 +112,21 @@
     <input type="radio" name="fam_support_recovery" value="yes" <?php echo ($therapeutic['fam_support_recovery'] ?? '' == 'yes') ?  "checked" : ""; ?> > Yes</br>
     <input type="radio" name="fam_support_recovery" value="no" <?php echo ($therapeutic['fam_support_recovery'] ?? '' == 'no') ?  "checked" : ""; ?> > No</br>
 
+    <div class="row" name="fam_support_recovery" style="display:block">
+        <label>Would your family members be willing to participate in your treatment? <span style="color:red"> * </span></label></br>
+        <input type="radio" name="fam_mem_willing_part" value="yes" <?php echo ($therapeutic['fam_mem_willing_part'] ?? '' == 'yes') ?  "checked" : ""; ?> > Yes</br>
+        <input type="radio" name="fam_mem_willing_part" value="no" <?php echo ($therapeutic['fam_mem_willing_part'] ?? '' == 'no') ?  "checked" : ""; ?> > No</br>
+    </div>
 
-    <?php if ($therapeutic['fam_support_recovery'] ?? '' == 'yes') { ?>
-        <div class="row" name="fam_support_recovery_div" style="display:block">
-            <label>Would your family members be willing to participate in your treatment? <span style="color:red"> * </span></label></br>
-            <input type="radio" name="fam_mem_willing_part" value="yes" <?php echo ($therapeutic['fam_mem_willing_part'] ?? '' == 'yes') ?  "checked" : ""; ?> > Yes</br>
-            <input type="radio" name="fam_mem_willing_part" value="no" <?php echo ($therapeutic['fam_mem_willing_part'] ?? '' == 'no') ?  "checked" : ""; ?> > No</br>
-        </div>
-    <?php } ?>
+    <div class="row" name="fam_mem_willing_part" style="display:block">
+        <label>What is the name of the family member that will participate in your treatment?<span style="color:red"> * </span></label></br>
+        <input type="text" name="fam_mem_part_name" class="form-control" style="width:50%" value="<?php echo $therapeutic['fam_mem_part_name'] ?? '' ?>" ></br>
+        <label>What is their relationship to you?<span style="color:red"> * </span></label></br>
+        <input type="text" name="fam_mem_part_relation" class="form-control" style="width:50%" value="<?php echo $therapeutic['fam_mem_part_relation'] ?? '' ?>" ></br>
+        <label>What is their phone number?<span style="color:red"> * </span></label></br>
+        <input type="text" name="fam_mem_part_ph" class="form-control" style="width:50%" value="<?php echo $therapeutic['fam_mem_part_ph'] ?? '' ?>" ></br>
+    </div>
 
-    <?php if ($therapeutic['fam_mem_willing_part'] ?? '' == 'yes') { ?>
-        <div class="row" name="fam_mem_willing_part_div" style="display:block">
-            <label>What is the name of the family member that will participate in your treatment?<span style="color:red"> * </span></label></br>
-            <input type="text" name="fam_mem_part_name" class="form-control" style="width:50%" value="<?php echo $therapeutic['fam_mem_part_name'] ?? '' ?>" ></br>
-            <label>What is their relationship to you?<span style="color:red"> * </span></label></br>
-            <input type="text" name="fam_mem_part_relation" class="form-control" style="width:50%" value="<?php echo $therapeutic['fam_mem_part_relation'] ?? '' ?>" ></br>
-            <label>What is their phone number?<span style="color:red"> * </span></label></br>
-            <input type="text" name="fam_mem_part_ph" class="form-control" style="width:50%" value="<?php echo $therapeutic['fam_mem_part_ph'] ?? '' ?>" ></br>
-        </div>
-    <?php } ?>
     <div class="row">
         <label>Family Composition</label></br>
         <label>Is there any family history of substance abuse or mental illness?<span style="color:red"> * </span></label></br>
@@ -138,13 +134,10 @@
         <input type="radio" name="fam_sub_abuse" value="no" <?php echo ($therapeutic['fam_sub_abuse'] ?? '' == 'no') ?  "checked" : ""; ?> > No</br>
     </div>
 
-    <?php if ($therapeutic['fam_sub_abuse'] ?? '' == 'yes') { ?>
-        <div class="row" style="display:block" name="fam_sub_abuse_div">
-            <label>Please explain the family history of substance abuse or mental illness<span style="color:red"> * </span></label></br>
-            <textarea name="sub_abuse_explanation" class="form-control" ><?php echo $therapeutic['sub_abuse_explanation'] ?? '' ?></textarea></br>
-        </div>
-    <?php } ?>
-
+    <div class="row" style="display:block" name="fam_sub_abuse_div">
+        <label>Please explain the family history of substance abuse or mental illness<span style="color:red"> * </span></label></br>
+        <textarea name="sub_abuse_explanation" class="form-control" ><?php echo $therapeutic['sub_abuse_explanation'] ?? '' ?></textarea></br>
+    </div>
 
     <div class="row">
         <label>Primary care doctor</label></br>
