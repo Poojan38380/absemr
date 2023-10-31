@@ -255,13 +255,13 @@ $pid = $_SESSION['pid'];
                                 </form>
                             </div>
                         <?php //}
-                           if (noticePracticeTabSaved($pid)) { ?>
+                           //if (noticePracticeTabSaved($pid)) { ?>
                         <div id="notice_practice_tab" class="tab-pane">
 
                                 <?php noticePracticeTabEdit($pid); ?>
 
                         </div>
-                        <?php }
+                        <?php //}
                             if (releaseTabSaved($pid)) { ?>
                         <div id="release_tab" class="tab-pane">
 
