@@ -112,7 +112,7 @@
     <input type="radio" name="fam_support_recovery" value="yes" <?php echo ($therapeutic['fam_support_recovery'] ?? '' == 'yes') ?  "checked" : ""; ?> > Yes</br>
     <input type="radio" name="fam_support_recovery" value="no" <?php echo ($therapeutic['fam_support_recovery'] ?? '' == 'no') ?  "checked" : ""; ?> > No</br>
 
-    <div class="row" name="fam_support_recovery" style="display:block">
+    <div class="row" name="fam_support_recovery_div" style="display:block">
         <label>Would your family members be willing to participate in your treatment? <span style="color:red"> * </span></label></br>
         <input type="radio" name="fam_mem_willing_part" value="yes" <?php echo ($therapeutic['fam_mem_willing_part'] ?? '' == 'yes') ?  "checked" : ""; ?> > Yes</br>
         <input type="radio" name="fam_mem_willing_part" value="no" <?php echo ($therapeutic['fam_mem_willing_part'] ?? '' == 'no') ?  "checked" : ""; ?> > No</br>
