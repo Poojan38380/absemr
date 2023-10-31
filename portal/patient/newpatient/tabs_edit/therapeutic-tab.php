@@ -3,7 +3,7 @@
     <label>What is your primary means of finical support?</label></br>
     <?php echo selectedRadioButtons('therap_support_list', 'therapSupportList', $therapeutic['therapSupportList'] ?? '', true) ?>
 </div>
-<?php if ($therapeutic['therapSupportList'] ?? '' == 'employeement') { ?>
+
     <div class="row" name="employeementDiv" style="display:block"></br>
         <label>Career/Industry and Where do you work?<span style="color:red"> * </span></label></br>
         <input type="text" style="width:50%" name="career" value="<?php echo $therapeutic['career'] ?? '' ?>" class="form-control"></br>
@@ -22,35 +22,35 @@
             <option value="more_5" <?php echo ($therapeutic['how_long'] ?? '' == 'more_5') ?  "selected" : ""; ?> >More than 5 years</option>
         </select></br>
     </div>
-<?php } ?>
-<?php if ($therapeutic['therapSupportList'] ?? '' == 'unemployeement') { ?>
+
+
     <div class="row" style="display:block" name="unemployeementDiv">
         <label>How long have you been unemployed? <span style="color:red"> * </span></label></br>
         <input type="text" style="width:50%" name="how_long_unemployeed" value="<?php echo $therapeutic['how_long_unemployeed'] ?? '' ?>" class="form-control" ></br>
         <label>Reason for unemployment <span style="color:red"> * </span></label></br>
         <textarea name="reason_unemployee" class="form-control"><?php echo $therapeutic['reason_unemployee'] ?? '' ?></textarea>
     </div>
-<?php } ?>
 
-<?php if ($therapeutic['therapSupportList'] ?? '' == 'pub_assistance') { ?>
+
+
     <div class="row" style="display:block" name="publicAssistanceDiv">
         <label>How long have you been receiving assistance? <span style="color:red"> * </span></label></br>
         <input type="text" style="width:50%" name="receiving_assistance" value="<?php echo $therapeutic['receiving_assistance'] ?? '' ?>" class="form-control" ></br>
     </div>
-<?php } ?>
 
-<?php if ($therapeutic['therapSupportList'] ?? '' == 'ssi_ssd') { ?>
+
+
     <div class="row" style="display:block" name="ssi_ssd_div">
         <label>What is your disability? <span style="color:red"> * </span></label></br>
         <input type="text" style="width:50%" name="ssi_ssd" class="form-control" value="<?php echo $therapeutic['ssi_ssd'] ?? '' ?>" ></br>
     </div>
-<?php } ?>
-<?php if ($therapeutic['therapSupportList'] ?? '' == 'fam_support') { ?>
+
+
     <div class="row" style="display:block" name="family_sup_div">
         <label>Who in your family do you receive support from? <span style="color:red"> * </span></label></br>
         <input type="text" style="width:50%" name="family_support" class="form-control" value="<?php echo $therapeutic['family_support'] ?? '' ?>" ></br>
     </div>
-<?php } ?>
+
 
 <div class="row">
     <label>Education Level</label></br>
@@ -58,40 +58,34 @@
 </div>
 
 
-<?php if ($therapeutic['education_level_list'] ?? '' == 'college') { ?>
+
     <div class="row" name="college_list_div" style="display:block">
         <?php echo selectedDropdown('college_list', 'college_list', $therapeutic['college_list'] ?? '', false) ?>
         </select>
     </div>
-<?php } ?>
+
 
 <div class="row">
     <label>Family Composition</label></br>
     <label>Which best describes your relationship status?<span style="color:red"> * </span></label></br>
     <?php echo selectedRadioButtons('fam_relationship_list', 'fam_relationship_list', $therapeutic['fam_relationship_list'] ?? '', true) ?>
 </div>
-<?php //if ($therapeutic['fam_relationship_list'] ?? '' == 'Divorced' || $therapeutic['fam_relationship_list'] ?? '' == 'Widowed') { ?>
     <div class="row" name="DivorcedDiv" style="display:block">
         <label>How many times have you been married?</label></br>
         <input type="text" name="how_many_married" value="<?php echo $therapeutic['how_many_married'] ?? '' ?>" class="form-control" style="width:50%" ></br>
         <label>What are your ex partner('s) name(s)<span style="color:red"> * </span></label></br>
         <input type="text" name="ex_partner_name" value="<?php echo $therapeutic['ex_partner_name'] ?? '' ?>" class="form-control" style="width:50%" ></br>
     </div>
-<?php //} ?>
 
-<?php if ($therapeutic['fam_relationship_list'] ?? '' == 'currently_married') { ?>
     <div class="row" name="currentMarriedDiv" style="display:block">
         <label>What is your spouse's name?<span style="color:red"> * </span></label></br>
         <input type="text" name="spouse_name" class="form-control" value="<?php echo $therapeutic['spouse_name'] ?? '' ?>" style="width:50%" ></br>
     </div>
-<?php } ?>
 
-<?php if ($therapeutic['fam_relationship_list'] ?? '' == 'single_never_married') { ?>
     <div class="row" name="lastRelationShipDiv" style="display:block">
         <label>When was your last relationship?<span style="color:red"> * </span></label></br>
         <input type="text" name="last_relationship" value="<?php echo $therapeutic['last_relationship'] ?? '' ?>" class="form-control" style="width:50%" ></br>
     </div>
-<?php } ?>
 
 <div class="row">
     <label>Household Members</label></br>
