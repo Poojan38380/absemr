@@ -50,14 +50,14 @@ $pid = $_SESSION['pid'];
     <?php require($GLOBALS['srcdir'] . '/js/xl/jquery-datetimepicker-2-5-4-alternate.js.php'); ?>
     $LAB.script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsitedocuments.js?v=<?= $GLOBALS['v_js_includes']; ?>").wait().script(
         "<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsiteportalactivities.js?v=<?= $GLOBALS['v_js_includes']; ?>").
-    wait(function() {
+        wait(function() {
         page.init();
         pageAudit.init();
         if (isPortal) {
-            $('#Help').on('click', function(e) {
-                e.preventDefault();
-                $(".helpHide").addClass("d-none");
-
+                $('#Help').on('click', function(e) {
+                    e.preventDefault();
+                    $(".helpHide").addClass("d-none");
+                });
                 $('#showNav').on('click', () => {
                     parent.document.getElementById('topNav').classList.toggle('collapse');
                 });
