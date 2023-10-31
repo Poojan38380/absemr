@@ -227,9 +227,9 @@ $pid = $_SESSION['pid'];
                     <?php //if (therapeuticTabSaved($pid)) { ?>
                         <li><a href="#therapeutic_tab">Therapeutic Form</a></li>
                     <?php //} ?>
-                    <?php if (noticePracticeTabSaved($pid)) { ?>
+                    <?php //if (noticePracticeTabSaved($pid)) { ?>
                         <li><a href="#notice_practice_tab"><?php echo xlt("Notice of practice policies") ?></a></li>
-                    <?php } ?>
+                    <?php //} ?>
                     <?php if (releaseTabSaved($pid)) { ?>
                         <li><a href="#release_tab"><?php echo xlt("Informed Consent For The Release Of Information") ?></a></li>
                     <?php } ?>
