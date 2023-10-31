@@ -632,7 +632,6 @@ $pid = $_SESSION['pid'];
         });
 
         $(document).on('change', 'input[name^=fam_support_recovery]', function() {
-            alert('test');
             if ($(this).val() ==='yes') {
                 $("div[name=fam_support_recovery_div]").css('display', 'block');
             } else {
@@ -642,9 +641,9 @@ $pid = $_SESSION['pid'];
 
         $(document).on('change click', 'input[name^=fam_mem_willing_part]', function() {
             if ($(this).val() ==='yes') {
-                $("div[name=fam_mem_willing_part]").css('display', 'block');
+                $("div[name=fam_mem_willing_part_div]").css('display', 'block');
             } else {
-                $("div[name=fam_mem_willing_part]").css('display', 'none');
+                $("div[name=fam_mem_willing_part_div]").css('display', 'none');
             }
         });
 
