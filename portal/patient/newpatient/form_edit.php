@@ -631,7 +631,8 @@ $pid = $_SESSION['pid'];
             });
         });
 
-        $(document).on('change click', 'input[name^=fam_support_recovery]', function() {
+        $(document).on('change', 'input[name^=fam_support_recovery]', function() {
+            alert('test');
             if ($(this).val() ==='yes') {
                 $("div[name=fam_support_recovery]").css('display', 'block');
             } else {
