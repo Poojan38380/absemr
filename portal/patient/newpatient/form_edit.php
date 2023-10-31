@@ -230,9 +230,9 @@ $pid = $_SESSION['pid'];
                     <?php //if (noticePracticeTabSaved($pid)) { ?>
                         <li><a href="#notice_practice_tab"><?php echo xlt("Notice of practice policies") ?></a></li>
                     <?php //} ?>
-                    <?php if (releaseTabSaved($pid)) { ?>
+                    <?php //if (releaseTabSaved($pid)) { ?>
                         <li><a href="#release_tab"><?php echo xlt("Informed Consent For The Release Of Information") ?></a></li>
-                    <?php } ?>
+                    <?php //} ?>
                 </ul>
 
                 <div class="panel-body p-0">
@@ -262,13 +262,13 @@ $pid = $_SESSION['pid'];
 
                         </div>
                         <?php //}
-                            if (releaseTabSaved($pid)) { ?>
+                            //if (releaseTabSaved($pid)) { ?>
                         <div id="release_tab" class="tab-pane">
 
                                 <?php releaseTabEdit($pid); ?>
 
                         </div>
-                        <?php } ?>
+                        <?php //} ?>
                     </div>
                 </div>
             </div>
