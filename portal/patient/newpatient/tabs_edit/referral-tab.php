@@ -136,17 +136,16 @@
         <label>Insurance Company</label><br>
         <select name="insurance_comapny" class="form-control" style="width:50%;">
             <?php
-            if ($referral['insurance_comapny']) {
-            $getComapnies = sqlStatement("select id, name from insurance_companies where id =" . $referral['insurance_comapny']);
+            $getComapnies = sqlStatement("select id, name from insurance_companies");
             while ($row = sqlFetchArray($getComapnies)) {
                 $optionId = $row['row_id'];
                 $selected = ""; // Initialize selected as empty string
-                if ($optionId == $_POST['insurance_comapny']) {
+                if ($optionId == $referral['insurance_comapny']) {
                     $selected = "selected"; // Set selected to "selected" if it matches the POST value
 
                 } ?>
                 <option value="<?php echo $row['id']  ?? ''?>" <?php echo $selected ?>><?php echo $row['name'] ?? '' ?></option>
-            <?php }} ?>
+            <?php } ?>
         </select><br>
         <label>insuranceID</label><br>
         <input type="text" class="form-control" style="width:50%" name="insuranceID" value="<?php echo $referral['insuranceID'] ?? '' ?>">
