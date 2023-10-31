@@ -118,7 +118,7 @@
         <input type="radio" name="fam_mem_willing_part" value="no" <?php echo ($therapeutic['fam_mem_willing_part'] ?? '' == 'no') ?  "checked" : ""; ?> > No</br>
     </div>
 
-    <div class="row" name="fam_mem_willing_part" style="display:block">
+    <div class="row" name="fam_mem_willing_part_div" style="display:block">
         <label>What is the name of the family member that will participate in your treatment?<span style="color:red"> * </span></label></br>
         <input type="text" name="fam_mem_part_name" class="form-control" style="width:50%" value="<?php echo $therapeutic['fam_mem_part_name'] ?? '' ?>" ></br>
         <label>What is their relationship to you?<span style="color:red"> * </span></label></br>
