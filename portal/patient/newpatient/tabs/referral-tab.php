@@ -63,7 +63,7 @@
 
 <div class="row">
     <span style="color:red">
-        <h4>Payment Information</h4>
+        <h4><?php echo xlt("Payment Information"); ?></h4>
     </span>
 </div>
 <div class="row">
