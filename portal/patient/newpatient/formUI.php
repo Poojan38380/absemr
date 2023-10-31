@@ -162,7 +162,8 @@ function generateRadioButtons($list_id = '', $name = '')
 
 function selectedRadioButtons($list_id = '', $name = '', $selected_value = '')
 {
-    $getList = sqlStatement("select * from list_options where list_id=? and activity=1 order by seq asc", [$list_id]);
+    file_put_contents('/var/www/html/traps/working_referral.log', $selected_value);
+    $getList = sqlStatement("select * from list_options where list_id=? and activity = 1 order by seq asc", [$list_id]);
     $radio = '';
 
     while ($row = sqlFetchArray($getList)) {
