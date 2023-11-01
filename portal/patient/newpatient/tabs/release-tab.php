@@ -104,12 +104,7 @@
 
                 <!-- <p>Guardian Signature&nbsp;&nbsp;&nbsp;&nbsp;</p> -->
                 <!-- </br>Date&nbsp; <?php echo date('Y-m-d'); ?><br> -->
-
-
         </div>
-
-        </p>
-        <p>&nbsp;</p>
     </div>
     <input type="hidden" name="csrf_token_form" id="csrf_token_form" value="76c076f2f84ccd3f92d2db613113a750afcdaa4a">
     <input type="hidden" name="content" id="content" value="">

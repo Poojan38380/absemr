@@ -236,7 +236,6 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
             <?php if (!therapeuticTabSaved($pid)) { ?>
                 <li><a href="#therapeutic_tab">Therapeutic Form</a></li>
             <?php } ?>
-            <!-- <li><a href="#medical_history_tab">Medical History</a></li> -->
             <?php if (!noticePracticeTabSaved($pid)) { ?>
                 <li><a href="#notice_practice_tab">Notice of practice policies</a></li>
             <?php } ?>
@@ -447,7 +446,7 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
                 success: function(data) {
 
                     $("#tabs").tabs({
-                        active: 0
+                        active: 1
                     })
                     form[0].reset();
                     // Hide the tab content for the form that was just submitted
