@@ -111,7 +111,6 @@
         </p>
         <p>&nbsp;</p>
     </div>
-    </div>
     <input type="hidden" name="csrf_token_form" id="csrf_token_form" value="76c076f2f84ccd3f92d2db613113a750afcdaa4a">
     <input type="hidden" name="content" id="content" value="">
     <input type="hidden" name="cpid" id="cpid" value="">
