@@ -251,7 +251,6 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
                     <div id="referral_tab" class="tab-pane">
                         <form id="referralForm" method="POST">
                             <input type="hidden" name="referralTab" value="save">
-                            <input type="hidden" name="pid" value="<?php echo $pid; ?>">
                             <?php referralTab($pid); ?>
                             <button type="button" class="submit btn btn-primary">Save &amp; Continue</button>
                         </form>
@@ -261,7 +260,6 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
                     <div id="therapeutic_tab" class="tab-pane">
                         <form id="therapeuticForm" method="POST">
                             <input type="hidden" name="therapeuticTab" value="therapeuticForm">
-                            <input type="hidden" name="pid" value="<?php echo $pid; ?>">
                             <?php therapeuticTab($pid); ?>
                             <button type="button" class="submit btn btn-primary">Save &amp; Continue</button>
                         </form>
@@ -272,7 +270,6 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
                     <div id="notice_practice_tab" class="tab-pane">
                         <form id="noticePracticeForm" method="POST">
                             <input type="hidden" name="noticePracticeTab" value="noticePracticeForm">
-                            <input type="hidden" name="pid" value="<?php echo $pid; ?>">
                             <?php noticePracticeTab($pid); ?>
                             <button id="notice_practice" type="button" class="submit btn btn-primary">Save &amp; Continue</button>
                         </form>
@@ -282,7 +279,6 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
                     <div id="release_tab" class="tab-pane">
                         <form id="releaseForm" method="POST">
                             <input type="hidden" name="releaseTab" value="releaseForm">
-                            <input type="hidden" name="pid" value="<?php echo $pid; ?>">
                             <?php releaseTab($pid); ?>
                             <!--<button type="button" class="submit btn btn-primary" id="release">Save</button>-->
                         </form>
