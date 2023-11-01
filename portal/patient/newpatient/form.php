@@ -225,7 +225,10 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
 
 
 <div id="successAlert" class="alert alert-success" style="display: none;">
-    <?php print xlt('Your form has been successfully submitted') ?>.
+    <?php print xlt('Your form has been successfully submitted') ?>
+</div>
+<div id="finish_instruction" style="display:none;">
+
 </div>
 <?php if ((!referralTabSaved($pid)) || (!therapeuticTabSaved($pid)) || (!noticePracticeTabSaved($pid)) || (!releaseTabSaved($pid))) { ?>
     <div id="tabs">
@@ -460,7 +463,7 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
                     setTimeout(function() {
                         $('#successAlert').fadeOut();
                     }, 5000); // Hide after 5 seconds (adjust the time as needed)
-
+                    location.reload();
                 },
                 error: function(error) {
                     console.error('Error saving template content:', error);
