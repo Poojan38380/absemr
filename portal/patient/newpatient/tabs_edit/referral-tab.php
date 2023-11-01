@@ -41,7 +41,7 @@
     <input type="text" name="apt_number" class="form-control" value="<?php echo $referral['apt_number'] ?>" style="width:50%">
 </div>
 
-    <div class="row" name="aptnumber" style="display:block">
+    <div class="row" name="aptnumber" style="display:none">
         <label>What is your apartment number?<span style="color:red">*</span></label>
         <input type="text" name="apt_number" class="form-control" value="<?php echo $referral['apt_number'] ?? '' ?>" style="width:50%">
     </div>
@@ -82,7 +82,7 @@
 </div>
 
 <?php if ($referral['living_environment'] ?? '' == 'shelter') { ?>
-    <div class="row" name="shelterName" style="display:block">
+    <div class="row" name="shelterName" style="display:none">
         <label>Name of Shelter<span style="color:red">*</span></label>
         <input type="text" name="shelter_name" class="form-control" style="width:50%" value="<?php echo $referral['shelter_name'] ?? '' ?>">
     </div>
@@ -124,7 +124,7 @@
     <?php } ?>
 </div>
 <?php if ($referral['payment_ifo'] ?? '' == 'med_insu') { ?>
-    <div class="row" name="insuranceComDiv" style="display:block">
+    <div class="row" name="insuranceComDiv" style="display:none">
         <label>Insurance Company</label><br>
         <select name="insurance_comapny" class="form-control" style="width:50%;">
             <?php
@@ -171,7 +171,7 @@
 
 <!-- Lawyer div -->
 
-    <div class="row" name="lawyerDiv" style="display:block">
+    <div class="row" name="lawyerDiv" style="display:none">
         <label>Who represents you? <span style="color:red">*</span></label>
         <?php echo selectedCheckboxes('lawyerDiv', 'lawyerDiv_info', $referral['lawyerDiv_info'] ?? '') ?>
 
@@ -191,7 +191,7 @@
 
 <!-- Childwelfare div -->
 
-    <div class="row" name="childwelfareDiv" style="display:block">
+    <div class="row" name="childwelfareDiv" style="display:none">
         <label>Which Child Welfare Office?<span style="color:red">*</span></label>
         <?php echo selectedRadioButtons('child_welfare', 'childwelfare', $referral['childwelfare'] ?? '') ?>
 
@@ -207,7 +207,7 @@
 
 
 <!-- Court -->
-<div class="row" name="courtDiv" style="display:block">
+<div class="row" name="courtDiv" style="display:none">
         <label>
             Where is your court case? <span style="color:red">*</span>
         </label>
@@ -258,13 +258,13 @@
 
 <!-- DMV -->
 
-<div class="row" name="DMVDiv" style="display:block">
+<div class="row" name="DMVDiv" style="display:none">
     <label>Which DMV?</label>
     <?php echo selectedRadioButtons('dmv', 'dmv', $referral['dmv'] ?? '') ?>
 </div>
 
 <!-- Probation -->
-<div class="row" name="probationDiv" style="display:block">
+<div class="row" name="probationDiv" style="display:none">
     <label>Which department of Probation referred you?<span style="color:red">*</span></label>
     <?php echo selectedRadioButtons('Intake_Probation', 'prob_courtCase', $referral['prob_courtCase'] ?? '') ?>
 
@@ -278,7 +278,7 @@
     <input type="text" name="prob_offc_email" class="form-control" style="width:50%" value="<?php echo $referral['prob_offc_email'] ?? '' ?>"></br>
 </div>
 
-<div class="row" name="doctorDiv" style="display:block">
+<div class="row" name="doctorDiv" style="display:none">
     <label>Doctor's Name<span style="color:red">*</span></label>
     <input type="text" name="doc_name" class="form-control" style="width:50%" value="<?php echo $referral['doc_name'] ?? '' ?>"></br>
 
@@ -289,12 +289,12 @@
     <input type="text" name="doc_email" class="form-control" style="width:50%" value="<?php echo $referral['doc_email'] ?? '' ?>"></br>
 </div>
 
-<div class="row" name="hospitalDiv" style="display:block">
+<div class="row" name="hospitalDiv" style="display:none">
     <label>What is the name of the Hospital<span style="color:red">*</span></label>
     <input type="text" name="hospital_name" class="form-control" style="width:50%" value="<?php echo $referral['hospital_name'] ?? '' ?>"></br>
 </div>
 
-<div class="row" name="paroleDiv" style="display:block">
+<div class="row" name="paroleDiv" style="display:none">
     <label>Parole Officer's Name<span style="color:red">*</span></label>
     <input type="text" name="parole_offc_name" class="form-control" style="width:50%" value="<?php echo $referral['parole_offc_name'] ?? '' ?>"></br>
 
@@ -306,7 +306,7 @@
     <input type="text" name="parole_offc_email" class="form-control" style="width:50%" value="<?php echo $referral['parole_offc_email'] ?? '' ?>"></br>
 </div>
 
-<div class="row" name="socialWorkerDiv" style="display:block">
+<div class="row" name="socialWorkerDiv" style="display:none">
     <label>Social Worker's Name<span style="color:red">*</span></label>
     <input type="text" name="social_worker_name" class="form-control" style="width:50%" value="<?php echo $referral['social_worker_name'] ?? '' ?>"></br>
 
