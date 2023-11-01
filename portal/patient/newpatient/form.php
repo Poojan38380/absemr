@@ -280,7 +280,7 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
                         <form id="releaseForm" method="POST">
                             <input type="hidden" name="releaseTab" value="releaseForm">
                             <?php releaseTab($pid); ?>
-                            <button type="button" class="submit btn btn-primary" id="release">Save & Continue release form</button>
+                            <button type="button" class="submit btn btn-primary" id="release">Save & Finish</button>
                         </form>
                     </div>
                 <?php } ?>
