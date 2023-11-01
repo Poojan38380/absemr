@@ -35,48 +35,40 @@
 <div class="row"><label>What type of living environment do you reside in?</label>
     <?php echo selectedDropdown('living_environment', 'living_environment', $referral['living_environment'] ?? '') ?>
 </div>
-<?php if ($referral['living_environment'] ?? '' == 'Shelter') { ?>
-<div class="row">
-    <h4>Shelter Name:</h4>
-    <?php echo $referral['shelter_name']  ?? '' ?>
-</div>
-<?php } ?>
-
 
 <div class="row" name="aptnumber" style="display:none">
     <label>What is your apartment number?<span style="color:red">*</span></label>
     <input type="text" name="apt_number" class="form-control" value="<?php echo $referral['apt_number'] ?>" style="width:50%">
 </div>
-<?php if ($referral['living_environment']  ?? '' == 'apartment') { ?>
+
     <div class="row" name="aptnumber" style="display:block">
         <label>What is your apartment number?<span style="color:red">*</span></label>
         <input type="text" name="apt_number" class="form-control" value="<?php echo $referral['apt_number'] ?? '' ?>" style="width:50%">
     </div>
-<?php } ?>
+
 
 <div class="row" name="quaHouse" style="display:none">
     <label>Name of three quarter house or program<span style="color:red">*</span></label>
     <input type="text" name="qua_house" class="form-control" style="width:50%" value="<?php echo $referral['qua_house'] ?? '' ?>">
 </div>
 
-<?php if ($referral['living_environment']  ?? '' == '3_quater') { ?>
-    <div class="row" name="quaHouse" style="display:block">
+    <div class="row" name="quaHouse" style="display:none">
         <label>Name of three quarter house or program<span style="color:red">*</span></label>
         <input type="text" name="qua_house" class="form-control" style="width:50%" value="<?php echo $referral['qua_house'] ?? '' ?>">
     </div>
-<?php } ?>
+
 
 <div class="row" name="halfHouse" style="display:none">
     <label>Name of halfway house or program<span style="color:red">*</span></label>
     <input type="text" name="half_house" class="form-control" style="width:50%" value="<?php echo $referral['half_house'] ?? '' ?>">
 </div>
 
-<?php if ($referral['living_environment'] ?? '' == 'half_way') { ?>
-    <div class="row" name="halfHouse" style="display:block">
+
+    <div class="row" name="halfHouse" style="display:none">
         <label>Name of halfway house or program<span style="color:red">*</span></label>
         <input type="text" name="half_house" class="form-control" style="width:50%" value="<?php echo $referral['half_house'] ?? '' ?>">
     </div>
-<?php } ?>
+
 
 <div class="row" name="residentTreatmentPgm" style="display:none">
     <label>Name of Residential Treatment Program ?<span style="color:red">*</span></label>
