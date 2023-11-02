@@ -378,7 +378,7 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
                 data: $('#therapeuticForm').serialize(),
                 success: function(data) {
                     $("#tabs").tabs({
-                        active: 1
+                        active: 0
                     });
                     // Save state to local storage
                     form[0].reset();
