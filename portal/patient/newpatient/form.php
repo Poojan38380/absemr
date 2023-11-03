@@ -358,12 +358,12 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
                     $('ul.ui-tabs-nav li a[href="#referral_tab"]').parent().hide();
                     // Show the success message
 
-                    $('#successAlert').fadeIn();
+                    //$('#successAlert').fadeIn();
 
                     // You can also hide the success message after a certain time if needed
-                    setTimeout(function() {
-                        $('#successAlert').fadeOut();
-                    }, 5000); // Hide after 5 seconds (adjust the time as needed)
+                    //setTimeout(function() {
+                      //  $('#successAlert').fadeOut();
+                    //}, 5000); // Hide after 5 seconds (adjust the time as needed)
                 }
             });
         });
@@ -388,12 +388,12 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
                     // Hide the corresponding tab <li>
                     $('ul.ui-tabs-nav li a[href="#therapeutic_tab"]').parent().hide();
                     // Show the success message
-                    $('#successAlert').fadeIn();
+                    //$('#successAlert').fadeIn();
 
                     // You can also hide the success message after a certain time if needed
-                    setTimeout(function() {
-                        $('#successAlert').fadeOut();
-                    }, 5000); // Hide after 5 seconds (adjust the time as needed)
+                    //setTimeout(function() {
+                        //$('#successAlert').fadeOut();
+                    //}, 5000); // Hide after 5 seconds (adjust the time as needed)
                 }
             });
         });
@@ -424,10 +424,12 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
                     // Show the success message
                     $('#successAlert').fadeIn();
 
-                    // You can also hide the success message after a certain time if needed
+                    /*
+                     You can also hide the success message after a certain time if needed
                     setTimeout(function() {
                         $('#successAlert').fadeOut();
                     }, 5000); // Hide after 5 seconds (adjust the time as needed)
+                    */
                 },
                 error: function(error) {
                     console.error('Error saving template content:', error);
@@ -457,12 +459,14 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
                     // Hide the corresponding tab <li>
                     $('ul.ui-tabs-nav li a[href="#release_tab"]').parent().hide();
 
-                    // Show the success message
-                    $('#successAlert').fadeIn();
-                    // You can also hide the success message after a certain time if needed
-                    setTimeout(function() {
-                        $('#successAlert').fadeOut();
-                    }, 5000); // Hide after 5 seconds (adjust the time as needed)
+                    /*
+                     Show the success message
+                     $('#successAlert').fadeIn();
+                     // You can also hide the success message after a certain time if needed
+                     setTimeout(function() {
+                         $('#successAlert').fadeOut();
+                     }, 5000); // Hide after 5 seconds (adjust the time as needed)
+                    */
                     location.reload();
                 },
                 error: function(error) {
