@@ -264,9 +264,7 @@ $pid = $_SESSION['pid'];
                         <?php //}
                             //if (releaseTabSaved($pid)) { ?>
                         <div id="release_tab" class="tab-pane">
-
                                 <?php releaseTabEdit($pid); ?>
-
                         </div>
                         <?php //} ?>
                     </div>
