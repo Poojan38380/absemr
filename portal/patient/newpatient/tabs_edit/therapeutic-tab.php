@@ -378,25 +378,6 @@
         </div>
     </div>
 
-    <div class="row" style="display:none" name="felt_inclined_div">
-        <label>When was the last time you felt inclined to harm yourself?<span style="color:red"> * </span></label></br>
-        <div class="radio">
-            <label>
-                <input type="radio" name="felt_inclined_harm" value="today" <?php echo ($therapeutic['felt_inclined_harm'] ?? '' == 'today') ?  "checked" : ""; ?> > Today
-            </label>
-        </div>
-        <div class="radio">
-            <label>
-                <input type="radio" name="felt_inclined_harm" value="past_2_weeks" <?php echo ($therapeutic['felt_inclined_harm'] ?? '' == 'past_2_weeks') ?  "checked" : ""; ?> > Within the past 2 weeks
-            </label>
-        </div>
-        <div class="radio">
-            <label>
-                <input type="radio" name="felt_inclined_harm" value="past_12_month" <?php echo ($therapeutic['felt_inclined_harm'] ?? '' == 'past_12_month') ?  "checked" : ""; ?> > Within the past 12 months
-            </label>
-        </div>
-    </div>
-
     <div class="row" style="display:none" name="feelings_explanation_div">
         <label>Please explain the best you can the thoughts and feelings you were or are having.<span style="color:red"> * </span></label></br>
         <textarea class="form-control"></textarea></br>
