@@ -96,6 +96,11 @@
     <?php echo selectedDropdown('how_many_children', 'how_many_children', $therapeutic['how_many_children'] ?? '', false) ?>
     </select>
 </div>
+<div class="row" name="childrens_names_ages" style="display: none">
+    <label><?php xlt('What are the names and ages of your children') ?></label>
+    <input type="text" name="all_my_children" value="<?php echo $therapeutic['all_my_children'] ?? '' ?>" class="form-control" style="width:50%" >
+
+</div>
 <!-- family composition -->
 <div class="row">
     <label>Is a member of your family supportive of your recovery/treatment? <span style="color:red"> * </span></label></br>

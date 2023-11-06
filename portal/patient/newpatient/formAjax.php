@@ -36,9 +36,6 @@ if (isset($_POST['therapeuticTab'])) {
             $_POST[$key]  = implode('|', $_POST[$key]);
         }
     }
-
-    print_r($_POST);
-    //changingOfValues();
     unset($_POST['therapeuticTab']);
     formSubmit('patient_therapeutic_form', $_POST, '');
 }
@@ -49,7 +46,6 @@ if (isset($_POST['noticePracticeTab'])) {
              $_POST[$key]  = implode('|', $_POST[$key]);
          }
      }
-     //changingOfValues();
      unset($_POST['noticePracticeTab']);
      formSubmit('patient_notice_form', $_POST, '');
 }
@@ -62,12 +58,7 @@ if (isset($_POST['noticePracticeTab'])) {
         }
     }
     unset($_POST['noticePracticeTab']);
-
-    //$reponse =  formSubmit('patient_notice_form', $_POST, '');
     formSubmit('patient_notice_form', $_POST, '');
-    // print_r($reponse);
-
-    // return $_POST;
 }
 
 if (isset($_POST['releaseTab'])) {
@@ -78,23 +69,15 @@ if (isset($_POST['releaseTab'])) {
         }
     }
     unset($_POST['releaseTab']);
-
-    //$reponse =  formSubmit('patient_notice_form', $_POST, '');
     formSubmit('patient_release_form', $_POST, '');
-    // print_r($reponse);
-
-    // return $_POST;
 }
 
 if (isset($_POST['updateReferralTab'])) {
-
-
     foreach ($_POST as $key => $value) {
         if (is_array($_POST[$key])) {
             $_POST[$key]  = implode('|', $_POST[$key]);
         }
     }
-    //changingOfValues();
     unset($_POST['updateReferralTab']);
     formUpdate('patient_referral_form', $_POST, '');
 }

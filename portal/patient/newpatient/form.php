@@ -475,6 +475,13 @@ $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
             });
         });
 
+        $('input[name=how_many_children]').on('change', function() {
+            if ($(this).val() > 0) {
+                $('div[name=childrens_names_ages_div]').css('display', 'block');
+            } else {
+                $('div[name=childrens_names_ages_div]').css('display', 'none');
+            }
+        });
 
         $('input[name=payment_ifo]').on('change', function() {
             if ($(this).val() == 'med_insu') {

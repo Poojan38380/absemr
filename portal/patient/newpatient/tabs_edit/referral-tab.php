@@ -41,40 +41,20 @@
     <input type="text" name="apt_number" class="form-control" value="<?php echo $referral['apt_number'] ?>" style="width:50%">
 </div>
 
-    <div class="row" name="aptnumber" style="display:none">
-        <label>What is your apartment number?<span style="color:red">*</span></label>
-        <input type="text" name="apt_number" class="form-control" value="<?php echo $referral['apt_number'] ?? '' ?>" style="width:50%">
-    </div>
-
-
 <div class="row" name="quaHouse" style="display:none">
     <label>Name of three quarter house or program<span style="color:red">*</span></label>
     <input type="text" name="qua_house" class="form-control" style="width:50%" value="<?php echo $referral['qua_house'] ?? '' ?>">
 </div>
-
-    <div class="row" name="quaHouse" style="display:none">
-        <label>Name of three quarter house or program<span style="color:red">*</span></label>
-        <input type="text" name="qua_house" class="form-control" style="width:50%" value="<?php echo $referral['qua_house'] ?? '' ?>">
-    </div>
-
 
 <div class="row" name="halfHouse" style="display:none">
     <label>Name of halfway house or program<span style="color:red">*</span></label>
     <input type="text" name="half_house" class="form-control" style="width:50%" value="<?php echo $referral['half_house'] ?? '' ?>">
 </div>
 
-
-    <div class="row" name="halfHouse" style="display:none">
-        <label>Name of halfway house or program<span style="color:red">*</span></label>
-        <input type="text" name="half_house" class="form-control" style="width:50%" value="<?php echo $referral['half_house'] ?? '' ?>">
-    </div>
-
-
 <div class="row" name="residentTreatmentPgm" style="display:none">
     <label>Name of Residential Treatment Program ?<span style="color:red">*</span></label>
     <input type="text" name="resident_treat_pgm" class="form-control" style="width:50%" value="<?php echo $referral['resident_treat_pgm'] ?? '' ?>">
 </div>
-
 
 <div class="row" name="shelterName" style="display:none">
     <label>Name of Shelter<span style="color:red">*</span></label>
