@@ -161,11 +161,6 @@
         <textarea name="surgeries_details" class="form-control" ><?php echo $therapeutic['surgeries_details'] ?? '' ?></textarea></br>
     </div>
 
-    <div class="row" name="curr_health_good_div" style="display:none">
-        <label>Please list any past medical conditions, procedures, surgeries or injuries you have had.</label></br>
-        <textarea name="surgeries_details" class="form-control" ><?php echo $therapeutic['surgeries_details'] ?? '' ?></textarea></br>
-    </div>
-
     <div class="row" name="curr_health_fair_div" style="display:none">
         <label>What are your current medical conditions that you are aware of?<span style="color:red"> * </span></label></br>
         <textarea name="med_condition_details" class="form-control" ><?php echo $therapeutic['med_condition_details'] ?? '' ?></textarea></br>
