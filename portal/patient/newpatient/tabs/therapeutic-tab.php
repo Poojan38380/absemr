@@ -187,13 +187,13 @@
     </div>
 </div>
 
-<div class="row">
+<!--<div class="row">
     <label>Reason for Referral to ABS</label></br>
 
     <label>What ABS program(s) are you interested in or being referred to?</label></br>
-    <?php echo generateCheckBox('being_referred_to', 'being_referred_to') ?>
+    <?php //echo generateCheckBox('being_referred_to', 'being_referred_to') ?>
 
-</div>
+</div>-->
 
 <div class="row">
     <label>What are the reasons you are being referred for services & what ABS program(s) are you interested in enrolling in?</label></br>
