@@ -528,7 +528,7 @@ $pid = $_SESSION['pid'];
         });
 
         $('input[name="treatment_plan"]').attr('disabled', true);
-        $('input[name="intake_diagnoses"]').on('change click', function() {
+        $('input[name="intake_diagnoses"]').on('change', function() {
             $('input[name="treatment_plan"]').attr('disabled', false);
             var plan = $(this).val().split('|');
             if (plan.length > 0) {
@@ -539,7 +539,7 @@ $pid = $_SESSION['pid'];
         });
 
 
-        $(document).on('change click', 'select[name=living_environment]', function() {
+        $(document).on('change', 'select[name=living_environment]', function() {
             if ($(this).val() ==='apartment') {
                 $('div[name=aptnumber]').css('display', 'block');
             } else
@@ -593,7 +593,7 @@ $pid = $_SESSION['pid'];
             }
 
         });
-        $(document).on('change click', 'input[name^=education_level_list]', function() {
+        $(document).on('change', 'input[name^=education_level_list]', function() {
             if ($(this).val() ==='college') {
                 $('div[name=college_list_div]').css('display', 'block');
             } else {
@@ -602,7 +602,7 @@ $pid = $_SESSION['pid'];
 
         });
 
-        $(document).on('change click', 'input[name^=fam_relationship_list]', function() {
+        $(document).on('change', 'input[name^=fam_relationship_list]', function() {
             if ($(this).val() ==='Divorced' || $(this).val() ==='Widowed') {
                 $('div[name=DivorcedDiv]').css('display', 'block');
             } else {
@@ -622,7 +622,7 @@ $pid = $_SESSION['pid'];
             }
 
         });
-        $(document).on('change click', 'select[name^=how_many_children]', function() {
+        $(document).on('change', 'select[name^=how_many_children]', function() {
             $.ajax({
                 type: 'post',
                 url: 'formUI.php?fn=getChildrenOptionList',
@@ -644,7 +644,7 @@ $pid = $_SESSION['pid'];
             }
         });
 
-        $(document).on('change click', 'input[name^=fam_mem_willing_part]', function() {
+        $(document).on('change', 'input[name^=fam_mem_willing_part]', function() {
             if ($(this).val() ==='yes') {
                 $("div[name=fam_mem_willing_part_div]").css('display', 'block');
             } else {
@@ -653,7 +653,7 @@ $pid = $_SESSION['pid'];
         });
 
 
-        $(document).on('change click', 'input[name^=fam_sub_abuse]', function() {
+        $(document).on('change', 'input[name^=fam_sub_abuse]', function() {
             if ($(this).val() ==='yes') {
                 $("div[name=fam_sub_abuse_div]").css('display', 'block');
             } else {
@@ -662,7 +662,7 @@ $pid = $_SESSION['pid'];
         });
 
 
-        $(document).on('change click', 'input[name^=primary_care_doc]', function() {
+        $(document).on('change', 'input[name^=primary_care_doc]', function() {
             if ($(this).val() ==='yes') {
                 $("div[name=primary_care_doc_div]").css('display', 'block');
             } else {
@@ -671,7 +671,7 @@ $pid = $_SESSION['pid'];
         });
 
 
-        $(document).on('change click', 'input[name^=curr_health]', function() {
+        $(document).on('change', 'input[name^=curr_health]', function() {
             if ($(this).val() ==='good') {
                 $("div[name=curr_health_good_div]").css('display', 'block');
                 $("div[name=curr_health_fair_div]").css('display', 'none');
@@ -682,13 +682,13 @@ $pid = $_SESSION['pid'];
         });
 
 
-        $(document).on('change click', 'input[name^=curr_pres_med]', function() {
+        $(document).on('change', 'input[name^=curr_pres_med]', function() {
             if ($(this).val() ==='yes') {
                 $("div[name=curr_pre_med_div]").css('display', 'block');
             } else
                 $("div[name=curr_pre_med_div]").css('display', 'none');
         });
-        $(document).on('change click', 'input[name^=do_you_take_med_as_pres]', function() {
+        $(document).on('change', 'input[name^=do_you_take_med_as_pres]', function() {
             if ($(this).val() ==='no') {
                 $("div[name=do_you_take_med_as_pres_div]").css('display', 'block');
             } else
@@ -696,7 +696,7 @@ $pid = $_SESSION['pid'];
         });
 
 
-        $(document).on('change click', 'input[name^=being_referred_for_services]', function() {
+        $(document).on('change', 'input[name^=being_referred_for_services]', function() {
             if ($(this).val() ==='anger_mgmt' && $(this).is(':checked')) {
                 $('div[name=being_rf_for_services_anger_mgmt_div]').css('display', 'block');
             } else if ($(this).val() ==='anger_mgmt' && !($(this).is(':checked'))) {
@@ -744,7 +744,7 @@ $pid = $_SESSION['pid'];
 
         });
 
-        $(document).on('change click', 'input[name^=physically_hurt]', function() {
+        $(document).on('change', 'input[name^=physically_hurt]', function() {
             if ($(this).val() ==='yes') {
                 $('div[name=injuriesSustainDiv]').css('display', 'block');
             } else {
@@ -752,7 +752,7 @@ $pid = $_SESSION['pid'];
             }
         });
 
-        $(document).on('change click', 'input[name^=physical_confrontation]', function() {
+        $(document).on('change', 'input[name^=physical_confrontation]', function() {
             if ($(this).val() ==='yes') {
                 $('div[name=physical_confrontationDiv]').css('display', 'block');
             } else {
@@ -760,7 +760,7 @@ $pid = $_SESSION['pid'];
             }
         });
 
-        $(document).on('change click', 'input[name^=Intake_suicide]', function() {
+        $(document).on('change', 'input[name^=Intake_suicide]', function() {
             if ($(this).val() ==='attemptedsuicide') {
                 $('div[name=last_attempt_explanation_div]').css('display', 'block');
                 $('div[name=felt_inclined_div]').css('display', 'block');
@@ -776,7 +776,7 @@ $pid = $_SESSION['pid'];
             }
         });
 
-        $(document).on('change click', 'input[name^=arrested_ever]', function() {
+        $(document).on('change', 'input[name^=arrested_ever]', function() {
             if ($(this).val() ==='yes') {
                 $('div[name=arrested_ever_yes_div]').css('display', 'block');
             } else {
@@ -784,7 +784,7 @@ $pid = $_SESSION['pid'];
             }
         });
 
-        $(document).on('change click', 'select[name^=how_many_arrest]', function() {
+        $(document).on('change', 'select[name^=how_many_arrest]', function() {
             if ($(this).val() != '') {
                 $('div[name=arrested_explanation_div]').css('display', 'block');
                 $('div[name=monitoring_agency_div]').css('display', 'block');
@@ -800,7 +800,7 @@ $pid = $_SESSION['pid'];
             }
         });
 
-        $(document).on('change click', 'input[name^=monitor_agency]', function() {
+        $(document).on('change', 'input[name^=monitor_agency]', function() {
             if ($(this).val() ==='yes') {
                 $('div[name=sentence_length_div]').css('display', 'block');
             } else {
@@ -808,7 +808,7 @@ $pid = $_SESSION['pid'];
             }
         });
 
-        $(document).on('change click', 'input[name^=incarcerated]', function() {
+        $(document).on('change', 'input[name^=incarcerated]', function() {
             if ($(this).val() ==='yes') {
                 $('div[name=incarcerated_length_div]').css('display', 'block');
                 $('div[name=incarcerated_years_div]').css('display', 'block');
@@ -818,7 +818,7 @@ $pid = $_SESSION['pid'];
             }
         });
 
-        $(document).on('change click', 'input[name^=state_registry]', function() {
+        $(document).on('change', 'input[name^=state_registry]', function() {
             if ($(this).val() ==='yes') {
                 $('div[name=state_registry_list_div]').css('display', 'block');
             } else {
@@ -826,7 +826,7 @@ $pid = $_SESSION['pid'];
             }
         });
 
-        $(document).on('change click', 'select[name^=state_registry_list]', function() {
+        $(document).on('change', 'select[name^=state_registry_list]', function() {
             if ($(this).val() ==='1') {
                 $('div[name=sex_offender_div]').css('display', 'block');
             } else {
@@ -834,7 +834,7 @@ $pid = $_SESSION['pid'];
             }
         });
 
-        $(document).on('change click', 'input[name^=exp_ver_phy_abuse]', function() {
+        $(document).on('change', 'input[name^=exp_ver_phy_abuse]', function() {
             if ($(this).val() === 'yes') {
                 $('div[name=victimDiv]').css('display', 'block');
             } else {
@@ -842,7 +842,7 @@ $pid = $_SESSION['pid'];
             }
         });
 
-        $(document).on('change click', 'input[name^=mental_health_treat]', function() {
+        $(document).on('change', 'input[name^=mental_health_treat]', function() {
             if ($(this).val() === 'yes') {
                 $('div[name=mentalHealthYesDiv]').css('display', 'block');
                 $('div[name=mentalHealthNoDiv]').css('display', 'none');
@@ -852,7 +852,7 @@ $pid = $_SESSION['pid'];
             }
         });
 
-        $(document).on('change click', 'input[name^=mentalHealthTreatment]', function() {
+        $(document).on('change', 'input[name^=mentalHealthTreatment]', function() {
             if ($(this).val() === 'inpatient' && $(this).is(':checked')) {
                 $('div[name=inPatientDiv]').css('display', 'block');
             } else if ($(this).val() ==='inpatient' && !($(this).is(':checked'))) {
@@ -877,7 +877,7 @@ $pid = $_SESSION['pid'];
                 $('div[name=dayTreatmentDiv]').css('display', 'none');
             }
         });
-        $(document).on('change click', 'input[name^=recent_hospitalization]', function() {
+        $(document).on('change', 'input[name^=recent_hospitalization]', function() {
             if ($(this).val() === 'yes') {
                 $('div[name=recent_hospitalizationDiv]').css('display', 'block');
             } else {
@@ -886,7 +886,7 @@ $pid = $_SESSION['pid'];
         });
 
 
-        $(document).on('change click', 'input[name^=perception_orientation]', function() {
+        $(document).on('change', 'input[name^=perception_orientation]', function() {
             if ($(this).val() === 'disoriented') {
                 $('div[name=disorientedDiv]').css('display', 'block');
             } else {
