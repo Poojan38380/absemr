@@ -390,8 +390,7 @@ $pid = $_SESSION['pid'];
             });
         });
 
-        $('select[name=how_many_children]').on('change click', function() {
-            alert('test names' + $(this).val());
+        $('select[name=how_many_children]').on('change', function() {
             if ($(this).val() > 0) {
                 $('div[name=childrens_names_ages_div]').css('display', 'block');
             } else {
