@@ -131,8 +131,8 @@ function buildNav($newcnt, $pid, $result)
             'messageCount' => $newcnt ?? 0,
             'children' => [
                 [
-                    'url' => '#documentscard',
-                    'label' => xl('My Documents'),
+                    'url' => '/portal/patient/newpatient/form.php?pid=' . $pid,
+                    'label' => xl('Appointment'),
                     'icon' => 'fa-file-medical',
                     'dataToggle' => 'collapse'
                 ],
