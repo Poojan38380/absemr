@@ -2,6 +2,8 @@
 
 $ignoreAuth_onsite_portal = true; // ignore the standard authentication for a regular OpenEMR user
 require_once dirname(__FILE__, 4) . '/interface/globals.php';
+require_once dirname(__FILE__, 4) . '/library/appointments.inc.php';
+
 include_once('./formUI.php');
 $pid = $_REQUEST['pid'];
 
@@ -9,8 +11,11 @@ use OpenEMR\Core\Header;
 use OpenEMR\Services\AbsPortal\ActivityService;
 use OpenEMR\Services\AppointmentService;
 
+$date = date('Y-m-d');
 $patientAppointments = new AppointmentService();
-$listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid)
+$listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid);
+$groupAppointments = fetchNextXAppts($date, $pid);
+var_dump($groupAppointments);
 
 ?>
 <html>
