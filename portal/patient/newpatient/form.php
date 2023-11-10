@@ -15,13 +15,11 @@ $date = date('Y-m-d');
 $patientAppointments = new AppointmentService();
 $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid);
 $groupAppointments = fetchNextXAppts($date, $pid);
-var_dump($groupAppointments);
+
 foreach ($groupAppointments as $appt) {
-    $listOfAppointments[] = $appt;
+    $listOfGroupAppointments[] = $appt;
 }
-echo "<pre>";
-var_dump($listOfAppointments);
-echo "</pre>";
+;
 ?>
 <html>
 <title><?= xlt("Intake Form") ?></title>
@@ -307,6 +305,8 @@ echo "</pre>";
         </div>
         <div class="col-12 mt-5">
         <?php
+        echo "<pre>";
+        var_dump($listOfGroupAppointments); die;
         if (count($listOfAppointments) > 0) {
             echo "<table class='table mt-5'> <tr><th>Appointment Date</th><th>Appointment Time</th></tr>";
             $a = 0;
