@@ -301,9 +301,9 @@ foreach ($groupAppointments as $appt) {
 <?php } else { ?>
     <div class="col-12" style="padding-top: 25px">
         <div class="col-12 mt-5" style="padding: 35px">
-        <h3><?php echo xlt("Here are your scheduled appointments") ?></h3>
+        <h3><?php echo xlt("Individual Appointments") ?></h3>
         </div>
-        <div class="col-12 mt-5">
+        <div class="col-12 mt-2">
         <?php
         if (count($listOfAppointments) > 0) {
             echo "<table class='table mt-5'> <tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th></tr>";
