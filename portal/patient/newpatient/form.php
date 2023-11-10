@@ -306,7 +306,7 @@ foreach ($groupAppointments as $appt) {
         <div class="col-12 mt-5">
         <?php
         if (count($listOfAppointments) > 0) {
-            echo "<table class='table mt-5'> <tr><th>Appointment Date</th><th>Appointment Time</th></tr>";
+            echo "<table class='table mt-5'> <tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th></tr>";
             $a = 0;
             foreach ($listOfAppointments as $appt) {
                 if ($appt['pc_apptstatus'] == '-' && $appt['pc_eventDate'] >= date('Y-m-d 00:00:00')) {
