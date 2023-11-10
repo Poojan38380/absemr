@@ -19,7 +19,9 @@ var_dump($groupAppointments);
 foreach ($groupAppointments as $appt) {
     $listOfAppointments[] = $appt;
 }
+echo "<pre>";
 var_dump($listOfAppointments);
+echo "</pre>";
 ?>
 <html>
 <title><?= xlt("Intake Form") ?></title>
