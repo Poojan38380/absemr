@@ -322,7 +322,7 @@ foreach ($groupAppointments as $appt) {
             if (!empty($listOfGroupAppointments)) { ?>
                 <div class="col-12 mt-1" >
                 <h3><?php echo xlt("Group Appointments") ?></h3>
-                    <table>
+                    <table class="table">
                     <?php
                          foreach ($listOfGroupAppointments as $grpt) {
                              $nameOfGrpDate = date('D', strtotime($grpt['pc_eventDate']));
