@@ -131,6 +131,12 @@ function buildNav($newcnt, $pid, $result)
             'messageCount' => $newcnt ?? 0,
             'children' => [
                 [
+                    'url' => '#documentscard',
+                    'label' => xl('My Documents'),
+                    'icon' => 'fa-file-medical',
+                    'dataToggle' => 'collapse'
+                ],
+                [
                     'url' => '#profilecard',
                     'label' => xl('My Profile'),
                     'icon' => 'fa-user',
