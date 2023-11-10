@@ -322,15 +322,17 @@ foreach ($groupAppointments as $appt) {
             if (!empty($listOfGroupAppointments)) { ?>
                 <div class="col-12 mt-1" >
                 <h3><?php echo xlt("Group Appointments") ?></h3>
+                    <table>
                     <?php
                          foreach ($listOfGroupAppointments as $grpt) {
                              $nameOfGrpDate = date('D', strtotime($grpt['pc_eventDate']));
                              $apptGrpDate = date('m-d-Y', strtotime($grpt['pc_eventDate']));
                              $apptGrpTime = date('h:i A', strtotime($grpt['pc_startTime']));
 
-                             echo "<p>" . $nameOfGrpDate . " " . $apptGrpDate . " " . $apptGrpTime . " " . $grpt['pc_title'] . "</p>";
+                             echo "<tr><td>" . $nameOfGrpDate . " " . $apptGrpDate . "</td><td> " . $apptGrpTime . "</td><td> " . $grpt['pc_title'] . "</td></tr>";
                          }
                     ?>
+                    </table>
                 </div>
             <?php }
             echo "<p><strong>" . xlt("If you need to reschedule or cancel an appointment, please contact the office.") . "</strong></p>";
