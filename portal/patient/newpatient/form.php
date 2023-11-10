@@ -319,6 +319,11 @@ foreach ($groupAppointments as $appt) {
                 }
             }
             echo "</table>";
+            if (!empty($listOfGroupAppointments)) { ?>
+                <div class="col-12 mt-5" style="padding: 35px">
+                <h3><?php echo xlt("Group Appointments") ?></h3>
+                </div>
+            <?php }
             echo "<p><strong>" . xlt("If you need to reschedule or cancel an appointment, please contact the office.") . "</strong></p>";
             if ($a == 0) {
                 echo "<p>" . xlt("You have no scheduled appointments, contact the office.") . "</p>";
