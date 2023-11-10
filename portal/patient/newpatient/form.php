@@ -16,7 +16,10 @@ $patientAppointments = new AppointmentService();
 $listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid);
 $groupAppointments = fetchNextXAppts($date, $pid);
 var_dump($groupAppointments);
-
+foreach ($groupAppointments as $appt) {
+    $listOfAppointments[] = $appt;
+}
+var_dump($listOfAppointments);
 ?>
 <html>
 <title><?= xlt("Intake Form") ?></title>
