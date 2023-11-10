@@ -314,7 +314,7 @@ foreach ($groupAppointments as $appt) {
                     $apptDate = date('m-d-Y', strtotime($appt['pc_eventDate']));
                     $apptTime = date('h:i A', strtotime($appt['pc_startTime']));
                     $appt_name = sqlQuery("SELECT pc_catdesc FROM `openemr_postcalendar_categories` WHERE pc_catid = ?", [$appt['pc_catid']]);
-                    echo "<tr><td>" . $nameOfDate . " " . $apptDate . "</td><td>" . $appt_name . "</td><td> " . $apptTime . "</td></tr>";
+                    echo "<tr><td>" . $nameOfDate . " " . $apptDate . "</td><td>" . $appt_name['pc_catdesc'] ?? '' . "</td><td> " . $apptTime . "</td></tr>";
                     $a++;
                 }
             }
