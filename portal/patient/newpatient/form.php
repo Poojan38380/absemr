@@ -329,7 +329,7 @@ foreach ($groupAppointments as $appt) {
                              $apptGrpDate = date('m-d-Y', strtotime($grpt['pc_eventDate']));
                              $apptGrpTime = date('h:i A', strtotime($grpt['pc_startTime']));
 
-                             echo "<tr><td>" . $nameOfGrpDate . " " . $apptGrpDate . "</td><td> " . $apptGrpTime . "</td><td> " . $grpt['pc_title'] . "</td></tr>";
+                             echo "<tr><td>" . $nameOfGrpDate . " " . $apptGrpDate . "</td><td> " . $grpt['pc_title'] . "</td><td> " . $apptGrpTime . "</td></tr>";
                          }
                     ?>
                     </table>
