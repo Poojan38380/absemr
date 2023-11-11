@@ -895,8 +895,6 @@ $pid = $_SESSION['pid'];
         });
 
     });
-</script>
-<script>
     $(document).ready(function() {
         $("iframe").on("load", function() {
             var closestIframe = $(this).closest('#newpatientCardForm').find('iframe');
