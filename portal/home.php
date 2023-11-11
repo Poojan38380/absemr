@@ -337,3 +337,4 @@ echo $twig->render('portal/home.html.twig', [
         alert('clicked');
     });
 </script>
+</html>
