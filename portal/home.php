@@ -332,4 +332,8 @@ echo $twig->render('portal/home.html.twig', [
             tabIframe.contentWindow.location.reload();
         }
     });
+
+    $('#appoinmentscreen').on('click', function() {
+        alert('clicked');
+    });
 </script>
