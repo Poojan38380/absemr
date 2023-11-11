@@ -895,28 +895,6 @@ $pid = $_SESSION['pid'];
         });
 
     });
-    $(document).ready(function() {
-        $("iframe").on("load", function() {
-            var closestIframe = $(this).closest('#newpatientCardForm').find('iframe');
-            closestIframe.attr('id', 'tabIframe');
-
-            $(this).contents().on("click", '#signModalOpen', function() {
-                $('a[href$="#openSignModal"]').click();
-                $('#openSignModal').on('hidden.bs.modal', function() {
-                    reloadIframeAndActivateTab();
-                });
-            });
-        });
-
-        function reloadIframeAndActivateTab() {
-            var tabIframe = document.getElementById('tabIframe');
-            tabIframe.contentWindow.location.reload();
-        }
-    });
-
-    $('#appoinmentscreen').on('click', function() {
-        alert('clicked');
-    });
 </script>
 </html>
 
