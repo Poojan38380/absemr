@@ -885,7 +885,6 @@ $pid = $_SESSION['pid'];
             }
         });
 
-
         $(document).on('change', 'input[name^=perception_orientation]', function() {
             if ($(this).val() === 'disoriented') {
                 $('div[name=disorientedDiv]').css('display', 'block');

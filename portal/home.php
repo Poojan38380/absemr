@@ -133,7 +133,6 @@ function buildNav($newcnt, $pid, $result)
                 [
                     'url' => 'newpatientCard',
                     'label' => xl('Appointment'),
-                    'id' => 'appointmentscreen',
                     'icon' => 'fa-file-medical',
                     'dataToggle' => 'collapse'
                 ],
