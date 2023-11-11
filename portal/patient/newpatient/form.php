@@ -306,7 +306,7 @@ foreach ($groupAppointments as $appt) {
         <div class="col-12 mt-2">
         <?php
         if (count($listOfAppointments) > 0) {
-            echo "<table class='table mt-5'> <tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th></tr>";
+            echo "<table class='table mt-5'> <tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th><th>Status</th></tr>";
             $a = 0;
             foreach ($listOfAppointments as $appt) {
                 if ($appt['pc_apptstatus'] == '-' && $appt['pc_eventDate'] >= date('Y-m-d 00:00:00')) {
@@ -314,7 +314,7 @@ foreach ($groupAppointments as $appt) {
                     $apptDate = date('m-d-Y', strtotime($appt['pc_eventDate']));
                     $apptTime = date('h:i A', strtotime($appt['pc_startTime']));
                     $appt_name = sqlQuery("SELECT pc_catdesc FROM `openemr_postcalendar_categories` WHERE pc_catid = ?", [$appt['pc_catid']]);
-                    echo "<tr><td>" . $nameOfDate . " " . $apptDate . "</td><td>" . $appt_name['pc_catdesc'] . "</td><td> " . $apptTime . "</td></tr>";
+                    echo "<tr><td>" . $nameOfDate . " " . $apptDate . "</td><td>" . $appt_name['pc_catdesc'] . "</td><td> " . $apptTime . "</td><td>" . "</td></tr>";
                     $a++;
                 }
             }
