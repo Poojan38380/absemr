@@ -3,8 +3,9 @@
 $ignoreAuth_onsite_portal = true; // ignore the standard authentication for a regular OpenEMR user
 require_once dirname(__FILE__, 4) . '/interface/globals.php';
 require_once dirname(__FILE__, 4) . '/library/appointments.inc.php';
+require_once "appointments/past_appointments.php";
+require_once('./formUI.php');
 
-include_once('./formUI.php');
 $pid = $_REQUEST['pid'];
 
 use OpenEMR\Core\Header;
