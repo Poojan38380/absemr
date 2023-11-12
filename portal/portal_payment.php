@@ -1032,13 +1032,13 @@ if ($_POST['form_save'] || $_REQUEST['receipt']) {
 		    <?php
 			$selectAppointment = sqlQuery("select pc_eid from openemr_postcalendar_events where pc_pid = ? and pc_eventDate >= ? order by pc_eventDate asc limit 1", [$_SESSION['pid'], date('Y-m-d')]);
 			if(!empty($selectAppointment)) {
-			?>	
-			<button type="button" class="btn btn-primary" name = "sessionExcused" id = "sessionExcused" onclick="sessionApptChange()">Excuse From Session</button> 
+			?>
+			<button type="button" class="btn btn-primary" name="sessionExcused" id="sessionExcused" onclick="sessionApptChange()">Excuse From Session</button>
 			<?php } ?>
                 </td>
             </tr>
             <!--<tr id="tr_radio1" style="display: none">
-                <!-- For radio Insurance 
+                <!-- For radio Insurance
                 <td class='text' valign="top" style="display: none">
                     <?php //echo xlt('Payment against'); ?>:
                 </td>
@@ -1049,7 +1049,7 @@ if ($_POST['form_save'] || $_REQUEST['receipt']) {
                 </td>
             </tr>
             <tr id="tr_radio2" style="display: none">
-                <!-- For radio self 
+                <!-- For radio self
                 <td class='text' valign="top"><?php //echo xlt('Payment against'); ?>:</td>
                 <td class='text' colspan="2">
                     <input type="radio" name="radio_type_of_payment" id="radio_type_of_payment1" class="<?php //echo $hide ? $hide : ''; ?>"
@@ -1172,7 +1172,7 @@ if ($_POST['form_save'] || $_REQUEST['receipt']) {
 
 		//After 1st future date the loop will break
 		if($brow['encdate'] > date('Y-m-d')){
-			break;	
+			break;
 		}
             }
 
@@ -1715,6 +1715,6 @@ if ($_POST['form_save'] || $_REQUEST['receipt']) {
                         error: function (jqXHR, status, error) {
                                 console.log(status + ": " + error);
                         }
-                });     
+                });
         }
     </script>
