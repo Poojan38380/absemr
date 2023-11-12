@@ -183,9 +183,10 @@ if($_GET['sessionExcused'] == 'true') {
 		if(!empty($selectEncounter)) {
 			sqlQuery("update billing set activity = 0 where encounter = ?", $selectEncounter['encounter']);
 		}
-		return 'true';
+		echo 'Success: Appointment status changed to Excused.';
+        die;
 	}
-	return "No future appointments found.";
+	echo " No future appointments found.";
 
 }
 function SaveAudit($pid, $amts, $cc)
