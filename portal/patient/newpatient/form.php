@@ -20,20 +20,7 @@ foreach ($groupAppointments as $appt) {
     $listOfGroupAppointments[] = $appt;
 }
 
-function getPastAppointment($pid)
-{
-    $query = "SELECT e.pc_eid, e.pc_aid, e.pc_title, e.pc_eventDate, e.pc_startTime, e.pc_hometext, u.fname, u.lname, u.mname, c.pc_catname, e.pc_apptstatus
-                            FROM openemr_postcalendar_events AS e,
-                                users AS u,
-                                openemr_postcalendar_categories AS c
-                            WHERE e.pc_pid = ?
-                                AND e.pc_eventDate < CURRENT_DATE
-                                AND u.id = e.pc_aid
-                                AND e.pc_catid = c.pc_catid
-                            ORDER BY e.pc_eventDate " . escape_sort_order($direction) . " , e.pc_startTime DESC LIMIT " . escape_limit($showpast);
-
-    return sqlStatement($query, [$pid]);
-}
+$pastAppointments = getPatientsPastAppointments($pid, 5);
 
 ?>
 <html>
@@ -350,6 +337,8 @@ function getPastAppointment($pid)
                     </table>
                 </div>
             <?php }
+            echo "<pre>";
+            var_dump($pastAppointments);
             echo "<p><strong>" . xlt("If you need to reschedule or cancel an appointment, please contact the office.") . "</strong></p>";
             if ($a == 0) {
                 echo "<p>" . xlt("You have no scheduled appointments, contact the office.") . "</p>";
