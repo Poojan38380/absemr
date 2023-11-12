@@ -317,7 +317,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                     $apptDate = date('m-d-Y', strtotime($appt['pc_eventDate']));
                     $apptTime = date('h:i A', strtotime($appt['pc_startTime']));
                     $appt_name = sqlQuery("SELECT pc_catdesc FROM `openemr_postcalendar_categories` WHERE pc_catid = ?", [$appt['pc_catid']]);
-                    echo "<tr><td>" . $nameOfDate . " " . $apptDate . "</td><td>" . $appt_name['pc_catdesc'] . "</td><td> " . $apptTime . "</td><td>" . "</td></tr>";
+                    echo "<tr><td>" . $nameOfDate . " " . $apptDate . "</td><td>" . $appt_name['pc_catdesc'] . "</td><td> " . $apptTime . "</td><td>" .$appt['pc_apptstatus']. "</td></tr>";
                     $a++;
                 }
             }
@@ -332,7 +332,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                              $apptGrpDate = date('m-d-Y', strtotime($grpt['pc_eventDate']));
                              $apptGrpTime = date('h:i A', strtotime($grpt['pc_startTime']));
 
-                             echo "<tr><td>" . $nameOfGrpDate . " " . $apptGrpDate . "</td><td> " . $grpt['pc_title'] . "</td><td> " . $apptGrpTime . "</td><td>" . "</td></tr>";
+                             echo "<tr><td>" . $nameOfGrpDate . " " . $apptGrpDate . "</td><td> " . $grpt['pc_title'] . "</td><td> " . $apptGrpTime . "</td><td>" .$grpt['pc_apptstatus']. "</td></tr>";
                          }
                     ?>
                     </table>
