@@ -2,7 +2,8 @@
 
 
 require_once dirname(__FILE__, 5) . '/interface/globals.php';
-
+require_once dirname(__FILE__, 5) . '/library/sql.inc';
+require_once dirname(__FILE__, 5) . '/library/options.inc.php';
 
 function getPatientsPastAppointments($pid, $showpast, $direction = 'DESC')
 {
