@@ -325,7 +325,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
             if (!empty($listOfGroupAppointments)) { ?>
                 <div class="col-12 mt-1" >
                 <h3><?php echo xlt("Group Appointments") ?></h3>
-                    <table class="table">
+                    <table class="table table-striped">
                     <?php
                          foreach ($listOfGroupAppointments as $grpt) {
                              $nameOfGrpDate = date('D', strtotime($grpt['pc_eventDate']));
@@ -338,8 +338,13 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                     </table>
                 </div>
             <?php }
-            echo "<pre>";
-            var_dump($pastAppointments);
+
+            echo "<div class='col-12 mt-1' ><table class='table table-striped'><h3> " . xlt('Group Appointments') . " </h3>";
+            foreach ($pastAppointments as $pastappt) {
+                echo "<tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th><th>Status</th></tr>";
+
+            }
+            echo "</div></table>";
             echo "<p><strong>" . xlt("If you need to reschedule or cancel an appointment, please contact the office.") . "</strong></p>";
             if ($a == 0) {
                 echo "<p>" . xlt("You have no scheduled appointments, contact the office.") . "</p>";
