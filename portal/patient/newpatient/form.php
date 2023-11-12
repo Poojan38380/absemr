@@ -309,7 +309,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
         <div class="col-12 mt-2">
         <?php
         if (count($listOfAppointments) > 0) {
-            echo "<table class='table mt-5'> <tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th><th>Status</th></tr>";
+            echo "<table class='table mt-5 table-striped'> <tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th><th>Status</th></tr>";
             $a = 0;
             foreach ($listOfAppointments as $appt) {
                 if ($appt['pc_apptstatus'] == '-' && $appt['pc_eventDate'] >= date('Y-m-d 00:00:00')) {
@@ -339,10 +339,14 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                 </div>
             <?php }
 
-            echo "<div class='col-12 mt-1' ><table class='table table-striped'><h3> " . xlt('Group Appointments') . " </h3>";
+            echo "<div class='col-12 mt-1' ><table class='table table-striped'><h3> " . xlt('Past Appointments') . " </h3>";
+            echo "<tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th><th>Status</th></tr>";
             foreach ($pastAppointments as $pastappt) {
-                echo "<tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th><th>Status</th></tr>";
+                $nameOfPastDate = date('D', strtotime($pastappt['pc_eventDate']));
+                $apptPastDate = date('m-d-Y', strtotime($pastappt['pc_eventDate']));
+                $apptPastTime = date('h:i A', strtotime($pastappt['pc_startTime']));
 
+                echo "<tr><td>" . $nameOfPastDate . " " . $apptPastDate . "</td><td> " . $pastappt['pc_title'] . "</td><td> " . $apptPastTime . "</td><td>" . $pastappt['pc_status'] . "</td></tr>";
             }
             echo "</div></table>";
             echo "<p><strong>" . xlt("If you need to reschedule or cancel an appointment, please contact the office.") . "</strong></p>";
