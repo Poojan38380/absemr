@@ -303,7 +303,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
 
 <?php } else { ?>
     <div class="col-12" >
-        <div class="col-12 mt-5" style="padding: 35px">
+        <div class="col-12 mt-5" >
         <h3><?php echo xlt("Individual Appointments") ?></h3>
         </div>
         <div class="col-12 mt-2">
