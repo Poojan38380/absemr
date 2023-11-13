@@ -238,7 +238,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
 <div id="successAlert" class="alert alert-success" style="display: none;">
     <?php print xlt('Your form has been successfully submitted') ?>
 </div>
-<div id="finish_instruction" style="display:none;">
+<div id="finish_instruction">
     <p><b>Click tab to see each form. If form is not displayed automatically click tab to see form.</b></p>
 </div>
 <?php if ((!referralTabSaved($pid)) || (!therapeuticTabSaved($pid)) || (!noticePracticeTabSaved($pid)) || (!releaseTabSaved($pid))) { ?>
