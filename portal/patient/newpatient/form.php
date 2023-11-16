@@ -307,7 +307,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
         <div class="col-12 mt-2">
         <?php
         if (count($listOfAppointments) > 0) {
-            echo "<table class='table mt-5 table-striped'> <tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th><th>Status</th></tr>";
+            echo "<table class='table mt-5 table-striped'> <tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th><th>Status</th><th></th></tr>";
             $a = 0;
             foreach ($listOfAppointments as $appt) {
                 if ($appt['pc_apptstatus'] == '-' && $appt['pc_eventDate'] >= date('Y-m-d 00:00:00')) {
@@ -315,7 +315,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                     $apptDate = date('m-d-Y', strtotime($appt['pc_eventDate']));
                     $apptTime = date('h:i A', strtotime($appt['pc_startTime']));
                     $appt_name = sqlQuery("SELECT pc_catdesc FROM `openemr_postcalendar_categories` WHERE pc_catid = ?", [$appt['pc_catid']]);
-                    echo "<tr><td>" . $nameOfDate . " " . $apptDate . "</td><td>" . $appt_name['pc_catdesc'] . "</td><td> " . $apptTime . "</td><td>" .$appt['pc_apptstatus']. "</td></tr>";
+                    echo "<tr><td>" . $nameOfDate . " " . $apptDate . "</td><td>" . $appt_name['pc_catdesc'] . "</td><td> " . $apptTime . "</td><td>" .$appt['pc_apptstatus']. "</td><td><button class='btn btn-success'>Pay Session</button> </td></tr>";
                     $a++;
                 }
             }
@@ -331,7 +331,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                              $apptGrpDate = date('m-d-Y', strtotime($grpt['pc_eventDate']));*/
                              $apptGrpTime = date('h:i A', strtotime($grpt['pc_startTime']));
 
-                             echo "<tr><td>"  . " " . "</td><td> " . $grpt['group_name'] . "</td><td> " . $apptGrpTime . "</td><td>" . "</td></tr>";
+                             echo "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "  . " " . "</td><td> " . $grpt['group_name'] . "</td><td> " . $apptGrpTime . "</td><td>" . "</td><td><button class='btn btn-success'>Pay Session</button> </td></tr>";
                          }
                     ?>
                     </table>
@@ -345,7 +345,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                 $apptPastDate = date('m-d-Y', strtotime($pastappt['pc_eventDate']));
                 $apptPastTime = date('h:i A', strtotime($pastappt['pc_startTime']));
 
-                echo "<tr><td>" . $nameOfPastDate . " " . $apptPastDate . "</td><td> " . $pastappt['pc_title'] . "</td><td> " . $apptPastTime . "</td><td>" . $pastappt['pc_status'] . "</td></tr>";
+                echo "<tr><td>" . $nameOfPastDate . " " . $apptPastDate . "</td><td> " . $pastappt['pc_title'] . "</td><td> " . $apptPastTime . "</td><td>" . $pastappt['pc_status'] . "</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td></tr>";
             }
             echo "</div></table>";
             echo "<p><strong>" . xlt("If you need to reschedule or cancel an appointment, please contact the office.") . "</strong></p>";
