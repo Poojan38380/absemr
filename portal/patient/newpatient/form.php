@@ -16,10 +16,8 @@ $date = date('Y-m-d');
 $patientAppointments = new AppointmentService();
 $listOfAppointments = fetchNextXAppts($date, $pid, 5, true); //$patientAppointments->getAppointmentsForPatient($pid);
 $groupAppointments = $patientAppointments->getGroupAppointments($pid);
-var_dump($groupAppointments);
-foreach ($groupAppointments as $appt) {
-    $listOfGroupAppointments[] = $appt;
-}
+//var_dump($groupAppointments);
+
 
 $pastAppointments = getPatientsPastAppointments($pid, 5);
 
@@ -322,18 +320,19 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                 }
             }
             echo "</table>";
-            if (!empty($listOfGroupAppointments)) { ?>
+            if (!empty($groupAppointments)) { ?>
                 <div class="col-12 mt-1" >
                 <h3><?php echo xlt("Group Appointments") ?></h3>
                     <table class="table table-striped">
                     <?php
-                         foreach ($listOfGroupAppointments as $grpt) {
-                             $nameOfGrpDate = date('D', strtotime($grpt['pc_eventDate']));
+                         foreach ($groupAppointments as $grpt) {
+                             var_dump($grpt);
+                             /*$nameOfGrpDate = date('D', strtotime($grpt['pc_eventDate']));
                              $apptGrpDate = date('m-d-Y', strtotime($grpt['pc_eventDate']));
                              $apptGrpTime = date('h:i A', strtotime($grpt['pc_startTime']));
 
                              echo "<tr><td>" . $nameOfGrpDate . " " . $apptGrpDate . "</td><td> " . $grpt['pc_title'] . "</td><td> " . $apptGrpTime . "</td><td>" .$grpt['pc_apptstatus']. "</td></tr>";
-                         }
+                         */}
                     ?>
                     </table>
                 </div>
