@@ -138,7 +138,7 @@ class AppointmentService extends BaseService
                        f1.name as facility_name,
                        f2.name as billing_location_name
                        FROM (
-                             SELECT 
+                             SELECT
                                pc_eid,
                                uuid AS pc_uuid, -- we do this because our uuid registry requires the field to be named this way
                                pc_aid,
@@ -150,7 +150,7 @@ class AppointmentService extends BaseService
                                pc_billing_location,
                                pc_catid,
                                pc_pid
-                            FROM 
+                            FROM
                                  openemr_postcalendar_events
                        ) pce
                        LEFT JOIN facility as f1 ON pce.pc_facility = f1.id
@@ -161,7 +161,7 @@ class AppointmentService extends BaseService
                            ,lname
                            ,DOB
                            ,pid
-                           FROM 
+                           FROM
                                 patient_data
                       ) pd ON pd.pid = pce.pc_pid
                        LEFT JOIN users as providers ON pce.pc_aid = providers.id";
@@ -492,5 +492,13 @@ class AppointmentService extends BaseService
     {
         $sql = "SELECT * FROM openemr_postcalendar_categories WHERE pc_catid = ?";
         return QueryUtils::fetchRecords($sql, [$cat_id]);
+    }
+
+    public function getGroupAppointments($pid)
+    {
+        $sql = "SELECT tgp.group_id, tgp.group_patient_start, tgp.group_patient_end, `tg`.`group_name`
+        FROM `therapy_groups_participants` AS tgp, `therapy_groups` AS tg
+        WHERE `tgp`.`pid` = 15 AND `tgp`.`group_id` = `tg`.`group_id`";
+        return QueryUtils::fetchRecords($sql, [$pid]);
     }
 }

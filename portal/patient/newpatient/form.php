@@ -14,9 +14,9 @@ use OpenEMR\Services\AppointmentService;
 
 $date = date('Y-m-d');
 $patientAppointments = new AppointmentService();
-$listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid);
-$groupAppointments = fetchNextXAppts($date, $pid, 5, true);
-
+$listOfAppointments = fetchNextXAppts($date, $pid, 5, true); //$patientAppointments->getAppointmentsForPatient($pid);
+$groupAppointments = $patientAppointments->getGroupAppointments($pid);
+var_dump($groupAppointments);
 foreach ($groupAppointments as $appt) {
     $listOfGroupAppointments[] = $appt;
 }
