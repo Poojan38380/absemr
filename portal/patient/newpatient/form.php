@@ -302,7 +302,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
 <?php } else { ?>
     <div class="col-12" >
         <div class="col-12 mt-5" >
-        <h3><?php echo xlt("Individual Appointments") ?></h3>
+        <h3><?php echo xlt("Individual/Family Session") ?></h3>
         </div>
         <div class="col-12 mt-2">
         <?php
@@ -322,7 +322,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
             echo "</table>";
             if (!empty($groupAppointments)) { ?>
                 <div class="col-12 mt-1" >
-                <h3><?php echo xlt("Group Appointments") ?></h3>
+                <h3><?php echo xlt("Group Sessions") ?></h3>
                     <table class="table table-striped">
                     <?php
                          foreach ($groupAppointments as $grpt) {
