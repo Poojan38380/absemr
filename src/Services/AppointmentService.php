@@ -496,8 +496,9 @@ class AppointmentService extends BaseService
 
     public function getGroupAppointments($pid)
     {
-        $sql = "SELECT tgp.group_id, tgp.group_patient_start, tgp.group_patient_end, `tg`.`group_name`
-        FROM `therapy_groups_participants` AS tgp, `therapy_groups` AS tg
+        $sql = "SELECT tgp.group_id, o.pc_startTime, tgp.group_patient_start, tgp.group_patient_end, `tg`.`group_name`
+        FROM (`therapy_groups_participants` AS tgp, `therapy_groups` AS tg)
+        LEFT JOIN openemr_postcalendar_events AS o ON `tgp`.`group_id` = `o`.`pc_gid`
         WHERE `tgp`.`pid` = ? AND `tgp`.`group_id` = `tg`.`group_id`";
         return QueryUtils::fetchRecords($sql, [$pid]);
     }
