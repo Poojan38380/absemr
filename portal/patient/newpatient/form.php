@@ -326,7 +326,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                     <table class="table table-striped">
                     <?php
                          foreach ($groupAppointments as $grpt) {
-                             var_dump($grpt);
+                             echo "<pre>"; var_dump($grpt); echo "</pre>";
                              /*$nameOfGrpDate = date('D', strtotime($grpt['pc_eventDate']));
                              $apptGrpDate = date('m-d-Y', strtotime($grpt['pc_eventDate']));
                              $apptGrpTime = date('h:i A', strtotime($grpt['pc_startTime']));
