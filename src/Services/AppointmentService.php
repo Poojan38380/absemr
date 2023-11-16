@@ -498,7 +498,7 @@ class AppointmentService extends BaseService
     {
         $sql = "SELECT tgp.group_id, tgp.group_patient_start, tgp.group_patient_end, `tg`.`group_name`
         FROM `therapy_groups_participants` AS tgp, `therapy_groups` AS tg
-        WHERE `tgp`.`pid` = 15 AND `tgp`.`group_id` = `tg`.`group_id`";
+        WHERE `tgp`.`pid` = ? AND `tgp`.`group_id` = `tg`.`group_id`";
         return QueryUtils::fetchRecords($sql, [$pid]);
     }
 }
