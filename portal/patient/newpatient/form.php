@@ -315,7 +315,12 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                     $apptDate = date('m-d-Y', strtotime($appt['pc_eventDate']));
                     $apptTime = date('h:i A', strtotime($appt['pc_startTime']));
                     $appt_name = sqlQuery("SELECT pc_catdesc FROM `openemr_postcalendar_categories` WHERE pc_catid = ?", [$appt['pc_catid']]);
-                    echo "<tr><td>" . $nameOfDate . " " . $apptDate . "</td><td>" . $appt_name['pc_catdesc'] . "</td><td> " . $apptTime . "</td><td>" .$appt['pc_apptstatus']. "</td><td><button class='btn btn-success'>Pay Session</button> </td></tr>";
+                    echo "<tr><td>" . $nameOfDate . " " . $apptDate . "</td><td>" . $appt_name['pc_catdesc'] . "</td><td> " . $apptTime . "</td><td>" .$appt['pc_apptstatus']. "</td>";
+                    if ($a < 1) {
+                        echo "<td><button class='btn btn-success'>Pay Session</button> </td></tr>";
+                    } else {
+                        echo "<td></td></tr>";
+                    }
                     $a++;
                 }
             }
@@ -325,13 +330,20 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                 <h3><?php echo xlt("Group Sessions") ?></h3>
                     <table class="table table-striped">
                     <?php
+                    $i = 0;
                          foreach ($groupAppointments as $grpt) {
                              //echo "<pre>"; var_dump($grpt); echo "</pre>";
                              /*$nameOfGrpDate = date('D', strtotime($grpt['pc_eventDate']));
                              $apptGrpDate = date('m-d-Y', strtotime($grpt['pc_eventDate']));*/
                              $apptGrpTime = date('h:i A', strtotime($grpt['pc_startTime']));
 
-                             echo "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "  . " " . "</td><td> " . $grpt['group_name'] . "</td><td> " . $apptGrpTime . "</td><td>" . "</td><td><button class='btn btn-success'>Pay Session</button> </td></tr>";
+                             echo "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "  . " " . "</td><td> " . $grpt['group_name'] . "</td><td> " . $apptGrpTime . "</td><td>" . "</td>";
+                           if ($i < 1) {
+                               echo "<td><button class='btn btn-success'>Pay Session</button> </td></tr>";
+                               $i++;
+                           } else {
+                               echo "<td></td></tr>";
+                           }
                          }
                     ?>
                     </table>
