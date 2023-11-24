@@ -314,7 +314,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                     $apptTime = date('h:i A', strtotime($appt['pc_startTime']));
                     $appt_name = sqlQuery("SELECT pc_catdesc FROM `openemr_postcalendar_categories` WHERE pc_catid = ?", [$appt['pc_catid']]);
                     echo "<tr><td>" . $nameOfDate . " " . $apptDate . "</td><td>" . $appt_name['pc_catdesc'] . "</td><td> " . $apptTime . "</td><td>" .$appt['pc_apptstatus']. "</td>";
-                    if ($a = 0) {
+                    if ($a == 0) {
                         echo "<td><a class='btn btn-success' href='../../home.php?screen=#paymentcard' target='_blank'>Pay Session</a> </td></tr>";
                     } else {
                         echo "<td></td></tr>";
