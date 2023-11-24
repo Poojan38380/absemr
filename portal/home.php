@@ -271,7 +271,7 @@ function buildNav($newcnt, $pid, $result)
 }
 
 $navMenu = buildNav($newcnt, $pid, $result);
-$screen = ($_GET['screen']) ? '#paymentcard' : '#newpatientCard';
+$screen = $_GET['screen']; // == '#newpatientCard') ? '#paymentcard' : '#newpatientCard';
 
 $twig = (new TwigContainer('', $GLOBALS['kernel']))->getTwig();
 echo $twig->render('portal/home.html.twig', [
