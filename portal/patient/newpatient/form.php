@@ -62,7 +62,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
     </style>
 </head>
 
-<body>
+<body class="p-0 m-0">
 <script>
     <?php require($GLOBALS['srcdir'] . '/js/xl/jquery-datetimepicker-2-5-4-alternate.js.php'); ?>
     $LAB.script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsitedocuments.js?v=<?= $GLOBALS['v_js_includes']; ?>").wait().script(
@@ -232,7 +232,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
     }
 </script>
 
-
+<div class="container-xl px-1">
 <div id="successAlert" class="alert alert-success" style="display: none;">
     <?php print xlt('Your form has been successfully submitted') ?>
 </div>
@@ -372,6 +372,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
     </div>
 <?php } ?>
 </body>
+</div> <!-- end container xl -->
 <script>
     $(document).ready(function() {
         $("#tabs").tabs({
