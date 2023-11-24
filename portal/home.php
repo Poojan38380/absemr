@@ -276,7 +276,7 @@ $screen = ($_GET['screen']) ? '#paymentcard' : '#newpatientCard';
 $twig = (new TwigContainer('', $GLOBALS['kernel']))->getTwig();
 echo $twig->render('portal/home.html.twig', [
     'user' => $user,
-    'whereto' => ($whereto !== null) ? $whereto : $_GET['screen'],
+    'whereto' => $_SESSION['whereto'] ?? null ?: ($whereto ?? $screen),
     'result' => $result,
     'msgs' => $msgs,
     'msgcnt' => $msgcnt,
