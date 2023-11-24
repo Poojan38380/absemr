@@ -308,7 +308,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
             echo "<table class='table mt-5 table-striped'> <tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th><th>Status</th><th></th></tr>";
             $a = 0;
             foreach ($listOfAppointments as $appt) {
-                if ($appt['pc_apptstatus'] === '-' && $appt['pc_eventDate'] >= date('Y-m-d 00:00:00')) {
+                //if ($appt['pc_apptstatus'] === '-' && $appt['pc_eventDate'] >= date('Y-m-d 00:00:00')) {
                     $nameOfDate = date('D', strtotime($appt['pc_eventDate']));
                     $apptDate = date('m-d-Y', strtotime($appt['pc_eventDate']));
                     $apptTime = date('h:i A', strtotime($appt['pc_startTime']));
@@ -320,7 +320,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                         echo "<td></td></tr>";
                     }
                     $a++;
-                }
+                //}
             }
             echo "</table>";
             if (!empty($groupAppointments)) { ?>
