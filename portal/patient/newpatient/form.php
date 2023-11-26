@@ -16,9 +16,8 @@ $date = date('Y-m-d');
 $patientAppointments = new AppointmentService();
 $listOfAppointments = fetchNextXAppts($date, $pid, 5, true); //$patientAppointments->getAppointmentsForPatient($pid);
 $groupAppointments = $patientAppointments->getGroupAppointments($pid);
-
 $pastAppointments = getPatientsPastAppointments($pid, 5);
-var_dump($pastAppointments);
+
 ?>
 <html>
 <title><?= xlt("Intake Form") ?></title>
@@ -347,6 +346,9 @@ var_dump($pastAppointments);
                     </table>
                 </div>
             <?php }
+        } else {
+            echo "<p>" . xlt("You have no scheduled appointments, contact the office.") . "</p>";
+        }
 
             echo "<div class='col-12 mt-1' ><table class='table table-striped'><h3> " . xlt('Past Appointments') . " </h3>";
             echo "<tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th><th>Status</th></tr>";
@@ -360,9 +362,7 @@ var_dump($pastAppointments);
             echo "</div></table>";
             echo "<p><strong>" . xlt("If you need to reschedule or cancel an appointment, please contact the office.") . "</strong></p>";
 
-        } else {
-            echo "<p>" . xlt("You have no scheduled appointments, contact the office.") . "</p>";
-        }
+
         ?>
         </div>
     </div>
