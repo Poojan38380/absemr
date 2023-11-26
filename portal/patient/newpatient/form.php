@@ -14,7 +14,7 @@ use OpenEMR\Services\AppointmentService;
 
 $date = date('Y-m-d');
 $patientAppointments = new AppointmentService();
-$listOfAppointments = fetchNextXAppts($date, $pid, 5, true); //$patientAppointments->getAppointmentsForPatient($pid);
+$listOfAppointments = $patientAppointments->getAppointmentsForPatient($pid); //fetchNextXAppts($date, $pid, 5, true);
 $groupAppointments = $patientAppointments->getGroupAppointments($pid);
 $pastAppointments = getPatientsPastAppointments($pid, 5);
 
@@ -307,19 +307,17 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
             echo "<table class='table mt-5 table-striped'> <tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th><th>Status</th><th></th></tr>";
             $a = 0;
             foreach ($listOfAppointments as $appt) {
-                //if ($appt['pc_apptstatus'] === '-' && $appt['pc_eventDate'] >= date('Y-m-d 00:00:00')) {
                     $nameOfDate = date('D', strtotime($appt['pc_eventDate']));
                     $apptDate = date('m-d-Y', strtotime($appt['pc_eventDate']));
                     $apptTime = date('h:i A', strtotime($appt['pc_startTime']));
                     $appt_name = sqlQuery("SELECT pc_catdesc FROM `openemr_postcalendar_categories` WHERE pc_catid = ?", [$appt['pc_catid']]);
                     echo "<tr><td>" . $nameOfDate . " " . $apptDate . "</td><td>" . $appt_name['pc_catdesc'] . "</td><td> " . $apptTime . "</td><td>" .$appt['pc_apptstatus']. "</td>";
                     if ($a == 0) {
-                        echo "<td><a class='btn btn-success' href='../../home.php?screen=#paymentcard'>" . xlt('Pay Session') . "</a> </td></tr>";
+                        echo "<td>" . xlt('Select Accounting & Make Payment') . " </td></tr>";
                     } else {
                         echo "<td></td></tr>";
                     }
                     $a++;
-                //}
             }
             echo "</table>";
             if (!empty($groupAppointments)) { ?>
