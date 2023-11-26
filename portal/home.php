@@ -269,14 +269,23 @@ function buildNav($newcnt, $pid, $result)
 
     return $navItems;
 }
-
+if (!isset($_SESSION['whereto'])) {
+    $whereto = '#paymentcard';
+} else {
+    switch (true) {
+        case isset($whereto):
+            break;
+        case isset($_GET['screen']):
+            $whereto = $_GET['screen'];
+            break;
+    }
+}
 $navMenu = buildNav($newcnt, $pid, $result);
-//$screen = $_GET['screen']; // == '#newpatientCard') ? '#paymentcard' : '#newpatientCard';
 
 $twig = (new TwigContainer('', $GLOBALS['kernel']))->getTwig();
 echo $twig->render('portal/home.html.twig', [
     'user' => $user,
-    'whereto' => $_SESSION['whereto'] ?? null ?: ($whereto ?? '#paymentcard'),
+    'whereto' => $whereto, //$_SESSION['whereto'] ?? null ?: ($whereto ?? '#paymentcard'),
     'result' => $result,
     'msgs' => $msgs,
     'msgcnt' => $msgcnt,
