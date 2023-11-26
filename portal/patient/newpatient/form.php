@@ -346,7 +346,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                          }
                     ?>
                     </table>
-                    <p><strong><?php echo xlt("If you need to reschedule or cancel an appointment, please contact the office.") ?></strong></p>
+                    <p><strong><?php echo xlt("If you need to reschedule or cancel an appointment, please contact the office."); ?></strong></p>
                 </div>
             <?php }
         } else {
