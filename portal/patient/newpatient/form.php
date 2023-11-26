@@ -325,7 +325,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
             }
             echo "</table><p><strong>";
              echo xlt("If you need to reschedule or cancel an appointment, please contact the office.");
-             echo "</strong></p>";
+             echo "</strong></p><br><br>";
             if (!empty($groupAppointments)) { ?>
                 <div class="col-12 mt-1" >
                 <h3><?php echo xlt("Group Sessions") ?></h3>
