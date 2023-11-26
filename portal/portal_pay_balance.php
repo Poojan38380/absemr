@@ -1061,7 +1061,7 @@ if ($_POST['form_save'] || $_REQUEST['receipt']) {
                 </td>
             </tr>-->
             <tr height="15">
-                <td colspan='3'>Help</td>
+                <td colspan='3'></td>
             </tr>
         </table>
         <table width="20%" border="0" cellspacing="0" cellpadding="0" id="table_display_prepayment" style="margin-bottom: 10px; display: none">
