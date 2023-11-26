@@ -323,7 +323,9 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                     $a++;
                 }
             }
-            echo "</table>";
+            echo "</table><p><strong>";
+             echo xlt("If you need to reschedule or cancel an appointment, please contact the office.");
+             echo "</strong></p>";
             if (!empty($groupAppointments)) { ?>
                 <div class="col-12 mt-1" >
                 <h3><?php echo xlt("Group Sessions") ?></h3>
@@ -346,7 +348,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                          }
                     ?>
                     </table>
-                    <p><strong>"If you need to reschedule or cancel an appointment, please contact the office.</strong></p>
+
                 </div>
             <?php }
         } else {
