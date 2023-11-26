@@ -352,7 +352,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
         }
 
             echo "<div class='col-12 mt-1' ><table class='table table-striped'><h3> " . xlt('Past Appointments') . " </h3>";
-            echo "<tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th><th>Status</th></tr>";
+            echo "<tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th><th>Status</th><th></th></tr>";
             foreach ($pastAppointments as $pastappt) {
                 $nameOfPastDate = date('D', strtotime($pastappt['pc_eventDate']));
                 $apptPastDate = date('m-d-Y', strtotime($pastappt['pc_eventDate']));
