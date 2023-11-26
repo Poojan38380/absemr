@@ -307,12 +307,12 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
             echo "<table class='table mt-5 table-striped'> <tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th><th>Status</th><th></th></tr>";
             $a = 0;
             foreach ($listOfAppointments as $appt) {
-                echo "<pre>"; var_dump($appt); echo "</pre>";
+                //echo "<pre>"; var_dump($appt); echo "</pre>";
                 if ($appt['pc_eventDate'] >= date('Y-m-d')) {
                     $nameOfDate = date('D', strtotime($appt['pc_eventDate']));
                     $apptDate = date('m-d-Y', strtotime($appt['pc_eventDate']));
                     $apptTime = date('h:i A', strtotime($appt['pc_startTime']));
-                    $appt_name = sqlQuery("SELECT pc_catdesc FROM `openemr_postcalendar_categories` WHERE pc_catid = ?", [$appt['pc_catid']]);
+                    $appt_name = sqlQuery("SELECT pc_catdesc FROM `openemr_postcalendar_categories` WHERE pc_eid = ?", [$appt['pc_eid']]);
                     echo "<tr><td>" . $nameOfDate . " " . $apptDate . "</td><td>" . $appt_name['pc_catdesc'] . "</td><td> " . $apptTime . "</td><td>" . $appt['pc_apptstatus'] . "</td>";
                     if ($a == 0) {
                         echo "<td>" . xlt('Select Accounting & Make Payment') . " </td></tr>";
