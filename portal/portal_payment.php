@@ -945,7 +945,7 @@ if ($_POST['form_save'] || $_REQUEST['receipt']) {
 
     <body class="skin-blue" onunload='imclosing()' onLoad="cursor_pointer();"
           style="text-align: center; margin: auto;">
-    <div style="float: right">Here</div>
+    <div style="float: right; width: 300px;">Please pay outstanding fees before entering telehealth session</div>
     <form id="invoiceForm" method='post' action='<?php echo $GLOBALS["webroot"] ?>/portal/portal_payment.php'>
         <input type='hidden' name='form_pid' value='<?php echo attr($pid) ?>'/>
         <input type='hidden' name='form_save' value='<?php echo xla('Invoice'); ?>'/>
