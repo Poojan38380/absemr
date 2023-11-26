@@ -18,7 +18,7 @@ $listOfAppointments = fetchNextXAppts($date, $pid, 5, true); //$patientAppointme
 $groupAppointments = $patientAppointments->getGroupAppointments($pid);
 
 $pastAppointments = getPatientsPastAppointments($pid, 5);
-
+var_dump($pastAppointments);
 ?>
 <html>
 <title><?= xlt("Intake Form") ?></title>
