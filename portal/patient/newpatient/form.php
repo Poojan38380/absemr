@@ -344,6 +344,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                          }
                     ?>
                     </table>
+                    <p><strong><?php echo xlt("If you need to reschedule or cancel an appointment, please contact the office.") ?></strong></p>
                 </div>
             <?php }
         } else {
@@ -360,9 +361,6 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                 echo "<tr><td>" . $nameOfPastDate . " " . $apptPastDate . "</td><td> " . $pastappt['pc_title'] . "</td><td> " . $apptPastTime . "</td><td>" . $pastappt['pc_status'] . "</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td></tr>";
             }
             echo "</div></table>";
-            echo "<p><strong>" . xlt("If you need to reschedule or cancel an appointment, please contact the office.") . "</strong></p>";
-
-
         ?>
         </div>
     </div>
