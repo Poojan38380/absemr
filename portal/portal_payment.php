@@ -949,6 +949,7 @@ if ($_POST['form_save'] || $_REQUEST['receipt']) {
     <form id="invoiceForm" method='post' action='<?php echo $GLOBALS["webroot"] ?>/portal/portal_payment.php'>
         <input type='hidden' name='form_pid' value='<?php echo attr($pid) ?>'/>
         <input type='hidden' name='form_save' value='<?php echo xla('Invoice'); ?>'/>
+        <div style="float: right">Here</div>
         <table>
             <tr height="10">
                 <td colspan="3">&nbsp;</td>
@@ -1061,7 +1062,7 @@ if ($_POST['form_save'] || $_REQUEST['receipt']) {
                 </td>
             </tr>-->
             <tr height="15">
-                <td colspan='3'>help</td>
+                <td colspan='3'></td>
             </tr>
         </table>
         <table width="20%" border="0" cellspacing="0" cellpadding="0" id="table_display_prepayment" style="margin-bottom: 10px; display: none">
