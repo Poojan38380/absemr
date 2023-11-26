@@ -307,7 +307,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
             echo "<table class='table mt-5 table-striped'> <tr><th>Appointment Date</th><th>Appointment Type</th><th>Appointment Time</th><th>Status</th><th></th></tr>";
             $a = 0;
             foreach ($listOfAppointments as $appt) {
-                var_dump($appt) . "<br>";
+                echo "<pre>"; var_dump($appt); echo "</pre>";
                 if ($appt['pc_eventDate'] >= date('Y-m-d')) {
                     $nameOfDate = date('D', strtotime($appt['pc_eventDate']));
                     $apptDate = date('m-d-Y', strtotime($appt['pc_eventDate']));
