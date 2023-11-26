@@ -308,17 +308,19 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
             $a = 0;
             foreach ($listOfAppointments as $appt) {
                 var_dump($appt['pc_eventDate']);
+                if ($appt['pc_eventDate'] >= date('Y-m-d')) {
                     $nameOfDate = date('D', strtotime($appt['pc_eventDate']));
                     $apptDate = date('m-d-Y', strtotime($appt['pc_eventDate']));
                     $apptTime = date('h:i A', strtotime($appt['pc_startTime']));
                     $appt_name = sqlQuery("SELECT pc_catdesc FROM `openemr_postcalendar_categories` WHERE pc_catid = ?", [$appt['pc_catid']]);
-                    echo "<tr><td>" . $nameOfDate . " " . $apptDate . "</td><td>" . $appt_name['pc_catdesc'] . "</td><td> " . $apptTime . "</td><td>" .$appt['pc_apptstatus']. "</td>";
+                    echo "<tr><td>" . $nameOfDate . " " . $apptDate . "</td><td>" . $appt_name['pc_catdesc'] . "</td><td> " . $apptTime . "</td><td>" . $appt['pc_apptstatus'] . "</td>";
                     if ($a == 0) {
                         echo "<td>" . xlt('Select Accounting & Make Payment') . " </td></tr>";
                     } else {
                         echo "<td></td></tr>";
                     }
                     $a++;
+                }
             }
             echo "</table>";
             if (!empty($groupAppointments)) { ?>
