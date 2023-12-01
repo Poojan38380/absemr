@@ -270,8 +270,8 @@ function buildNav($newcnt, $pid, $result)
     return $navItems;
 }
 if (!isset($_SESSION['whereto'])) {
-    $whereto = '#paymentcard';
-} else {
+    $whereto = $_GET['screen'] ?? null;
+}/* else {
     switch (true) {
         case isset($whereto):
             break;
@@ -279,13 +279,13 @@ if (!isset($_SESSION['whereto'])) {
             $whereto = $_GET['screen'];
             break;
     }
-}
+}*/
 $navMenu = buildNav($newcnt, $pid, $result);
 
 $twig = (new TwigContainer('', $GLOBALS['kernel']))->getTwig();
 echo $twig->render('portal/home.html.twig', [
     'user' => $user,
-    'whereto' => $whereto, //$_SESSION['whereto'] ?? null ?: ($whereto ?? '#paymentcard'),
+    'whereto' => $_SESSION['whereto'] ?? null ?: ($whereto ?? null),
     'result' => $result,
     'msgs' => $msgs,
     'msgcnt' => $msgcnt,
