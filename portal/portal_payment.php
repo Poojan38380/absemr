@@ -943,8 +943,8 @@ if ($_POST['form_save'] || $_REQUEST['receipt']) {
         }
     </script>
 
-    <body class="skin-blue" onunload='imclosing()' onLoad="cursor_pointer();"
-          style="text-align: center; margin: auto;">
+    <body class="skin-blue" onunload='imclosing()' onLoad="cursor_pointer();" style="text-align: center; margin: auto;">
+    <div style="float: right"> Words here </div>
     <form id="invoiceForm" method='post' action='<?php echo $GLOBALS["webroot"] ?>/portal/portal_payment.php'>
         <input type='hidden' name='form_pid' value='<?php echo attr($pid) ?>'/>
         <input type='hidden' name='form_save' value='<?php echo xla('Invoice'); ?>'/>
@@ -965,7 +965,7 @@ if ($_POST['form_save'] || $_REQUEST['receipt']) {
                     <?php $NameNew = $patdata['fname'] . " " . $patdata['lname'] . " " . $patdata['mname']; ?>
                 </td>
                 <td>  </td>
-                <td> Message here: <div style="float: right"> Words here </div></td>
+                <td> </td>
             </tr>
             <tr height="15">
                 <td colspan='3'></td><td>  </td>
