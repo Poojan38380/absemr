@@ -271,15 +271,14 @@ function buildNav($newcnt, $pid, $result)
 }
 function checkFormsStatus()
 {
-    $pid = $_SESSION['pid'];
     $therapeuticCount = sqlQuery("select count(*) as count from patient_therapeutic_form where pid = ?", [$_SESSION['pid']]);
     $referralCount = sqlQuery("select count(*) as count from patient_notice_form where pid = ?", [$_SESSION['pid']]);
     $releaseCount = sqlQuery("select count(*) as count from patient_release_form where pid = ?", [$_SESSION['pid']]);
 
     switch (true) {
-        case $therapeuticCount['count'] >= 1:
-        case $referralCount['count'] >= 1:
-        case $releaseCount['count'] >= 1:
+        case $therapeuticCount['count'] == 0:
+        case $referralCount['count'] == 0:
+        case $releaseCount['count'] == 0:
             $result = '#newpatientCard';
             break;
 
@@ -291,7 +290,7 @@ function checkFormsStatus()
     return $result;
 }
 $whereto = checkFormsStatus();
-var_dump($whereto); echo "3whereto";
+
 $navMenu = buildNav($newcnt, $pid, $result);
 
 $twig = (new TwigContainer('', $GLOBALS['kernel']))->getTwig();
