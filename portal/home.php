@@ -51,7 +51,7 @@ while ($row = SqlFetchArray($tarns)) {
 }
 
 $whereto = $_SESSION['whereto'] ?? null;
-
+var_dump($whereto); echo "1whereto<br>";
 $user = $_SESSION['sessionUser'] ?? 'portal user';
 $result = getPatientData($pid);
 $patient_balance = get_patient_balance($pid);
@@ -69,7 +69,7 @@ foreach ($msgs as $i) {
     }
 }
 if ($newcnt > 0 && $_SESSION['portal_init']) {
-    $whereto = $_SESSION['whereto'] = '#secure-msgs-card';
+    $whereto = $_SESSION['whereto'] = '#secure-msgs-card'; echo "2whereto<br>";
 }
 $messagesURL = $GLOBALS['web_root'] . '' . '/portal/messaging/messages.php';
 
@@ -271,6 +271,7 @@ function buildNav($newcnt, $pid, $result)
 }
 if (!isset($_SESSION['whereto'])) {
     $whereto = $_GET['screen'] ?? null;
+
 }/* else {
     switch (true) {
         case isset($whereto):
@@ -280,7 +281,8 @@ if (!isset($_SESSION['whereto'])) {
             break;
     }
 }*/
-var_dump($whereto); echo "whereto";
+var_dump($_GET['screen']); echo "screen<br>";
+var_dump($whereto); echo "3whereto";
 $navMenu = buildNav($newcnt, $pid, $result);
 
 $twig = (new TwigContainer('', $GLOBALS['kernel']))->getTwig();
