@@ -952,6 +952,8 @@ if ($_POST['form_save'] || $_REQUEST['receipt']) {
         <table>
             <tr height="10">
                 <td colspan="3">&nbsp;</td>
+                <td> blank </td>
+                <td> </td>
             </tr>
             <tr>
                 <td colspan='3' align='center' class='text'>
@@ -962,9 +964,12 @@ if ($_POST['form_save'] || $_REQUEST['receipt']) {
                         text($patdata['pid']) . ")" ?></b>
                     <?php $NameNew = $patdata['fname'] . " " . $patdata['lname'] . " " . $patdata['mname']; ?>
                 </td>
+                <td> blank </td>
+                <td> </td>
             </tr>
             <tr height="15">
-                <td colspan='3'></td>
+                <td colspan='3'></td><td> blank </td>
+                <td> </td>
             </tr>
             <tr>
                 <td class='text'>
@@ -983,10 +988,13 @@ if ($_POST['form_save'] || $_REQUEST['receipt']) {
                         }
                         ?>
                     </select></td>
+                <td> blank </td>
+                <td> </td>
             </tr>
             <?php if (isset($_SESSION['authUserID'])) { ?>
                 <tr height="5">
-                    <td colspan='3'></td>
+                    <td colspan='3'></td><td> blank </td>
+                    <td> </td>
                 </tr>
                 <tr>
                     <td class='text'>
@@ -999,6 +1007,8 @@ if ($_POST['form_save'] || $_REQUEST['receipt']) {
                         ?>
                         <input class="form-control form-control-sm" id='check_number' name='form_source' style='' value='<?php echo attr($payrow['source']) ?>' />
                     </td>
+                    <td> blank </td>
+                    <td> </td>
                 </tr>
             <?php } ?>
                 <?php if (isset($_SESSION['authUserID'])) {
@@ -1027,6 +1037,8 @@ if ($_POST['form_save'] || $_REQUEST['receipt']) {
             <tr height="5">
                 <td colspan='3'></td>
             </tr>
+            <td> blank </td>
+            <td> </td>
             <tr>
 		<td>
 		    <?php
