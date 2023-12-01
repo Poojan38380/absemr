@@ -269,19 +269,28 @@ function buildNav($newcnt, $pid, $result)
 
     return $navItems;
 }
-if (!isset($_SESSION['whereto'])) {
-    $whereto = $_GET['screen'] ?? null;
+function checkFormsStatus()
+{
+    $pid = $_SESSION['pid'];
+    $therapeuticCount = sqlQuery("select count(*) as count from patient_therapeutic_form where pid = ?", [$_SESSION['pid']]);
+    $referralCount = sqlQuery("select count(*) as count from patient_notice_form where pid = ?", [$_SESSION['pid']]);
+    $releaseCount = sqlQuery("select count(*) as count from patient_release_form where pid = ?", [$_SESSION['pid']]);
 
-}/* else {
     switch (true) {
-        case isset($whereto):
+        case $therapeuticCount['count'] >= 1:
+        case $referralCount['count'] >= 1:
+        case $releaseCount['count'] >= 1:
+            $result = '#newpatientCard';
             break;
-        case isset($_GET['screen']):
-            $whereto = $_GET['screen'];
+
+        default:
+            $result = '#paymentcard';
             break;
     }
-}*/
-var_dump($_GET['screen']); echo "screen<br>";
+
+    return $result;
+}
+$whereto = checkFormsStatus();
 var_dump($whereto); echo "3whereto";
 $navMenu = buildNav($newcnt, $pid, $result);
 

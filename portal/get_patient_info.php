@@ -242,27 +242,6 @@ if ($userData = sqlQuery($sql, array($auth['pid']))) { // if query gets executed
             exit();
         }
     }
-    function checkFormsStatus()
-    {
-        $pid = $_SESSION['pid'];
-        $therapeuticCount = sqlQuery("select count(*) as count from patient_therapeutic_form where pid = ?", [$_SESSION['pid']]);
-        $referralCount = sqlQuery("select count(*) as count from patient_notice_form where pid = ?", [$_SESSION['pid']]);
-        $releaseCount = sqlQuery("select count(*) as count from patient_release_form where pid = ?", [$_SESSION['pid']]);
-
-        switch (true) {
-            case $therapeuticCount['count'] >= 1:
-            case $referralCount['count'] >= 1:
-            case $releaseCount['count'] >= 1:
-                $result = '#newpatientCard';
-                break;
-
-            default:
-                $result = '#paymentcard';
-                break;
-        }
-
-        return $result;
-    }
 
     $screen = checkFormsStatus();
 
@@ -306,5 +285,5 @@ if ($userData = sqlQuery($sql, array($auth['pid']))) { // if query gets executed
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header("Cache-Control: no-cache");
 header("Pragma: no-cache");
-header("Location: ./home.php?screen=$screen");
+header("Location: ./home.php");
 exit();
