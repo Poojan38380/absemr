@@ -248,7 +248,7 @@ if ($userData = sqlQuery($sql, array($auth['pid']))) { // if query gets executed
         $therapeuticCount = sqlQuery("select count(*) as count from patient_therapeutic_form where pid = ?", [$pid]);
         $referralCount = sqlQuery("select count(*) as count from patient_notice_form where pid = ?", [$pid]);
         $releaseCount = sqlQuery("select count(*) as count from patient_release_form where pid = ?", [$pid]);
-        if ($therapeuticCount['count'] && $referralCount['count'] && $releaseCount['count']) {
+        if (($therapeuticCount['count'] > 0) && ($referralCount['count'] > 0) && ($releaseCount['count'] > 0)) {
             return '#newpatientCard';
         }
         return '#paymentcard';
