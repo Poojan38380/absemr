@@ -280,7 +280,7 @@ if (!isset($_SESSION['whereto'])) {
             break;
     }
 }*/
-var_dump($whereto);
+var_dump($whereto); echo "whereto";
 $navMenu = buildNav($newcnt, $pid, $result);
 
 $twig = (new TwigContainer('', $GLOBALS['kernel']))->getTwig();
