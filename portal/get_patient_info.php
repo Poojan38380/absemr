@@ -243,8 +243,6 @@ if ($userData = sqlQuery($sql, array($auth['pid']))) { // if query gets executed
         }
     }
 
-    $screen = checkFormsStatus();
-
     if ($auth['portal_pwd_status'] == 1) {
         // continue (patient is authorized)
         $authorizedPortal = true;
