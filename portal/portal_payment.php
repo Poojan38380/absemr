@@ -965,7 +965,7 @@ if ($_POST['form_save'] || $_REQUEST['receipt']) {
                     <?php $NameNew = $patdata['fname'] . " " . $patdata['lname'] . " " . $patdata['mname']; ?>
                 </td>
                 <td>  </td>
-                <td> Message here: </td>
+                <td> Message here: <div style="float: right"> Words here </div></td>
             </tr>
             <tr height="15">
                 <td colspan='3'></td><td>  </td>
