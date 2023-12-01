@@ -51,7 +51,6 @@ while ($row = SqlFetchArray($tarns)) {
 }
 
 $whereto = $_SESSION['whereto'] ?? null;
-var_dump($whereto); echo "1whereto<br>";
 $user = $_SESSION['sessionUser'] ?? 'portal user';
 $result = getPatientData($pid);
 $patient_balance = get_patient_balance($pid);
