@@ -42,8 +42,8 @@ function TimeToHHMMSS_js(value){
     if (is_pm > 0) {
         let d = new Date("1970-01-01 " + value);
         let value = d.setHours(d.getHours() + 12).toTimeString();
+        return value.trim();
     }
-
     return value.trim();
 }
 
