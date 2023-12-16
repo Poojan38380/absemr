@@ -376,7 +376,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
 
         $('#tabs li').click(function() {
             var data = $(this).find('a').attr('href');
-            if (data == "#release_tab") {
+            if (data === "#release_tab") {
                 // Change authority name
             }
         });
@@ -386,12 +386,12 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
         });
 
         $('#referralForm button.submit').on('click', function() {
-            var form = $('#referralForm');
+            const form = $('#referralForm');
 
             $.ajax({
                 type: 'POST',
                 url: './formAjax.php',
-                data: $('#referralForm').serialize(),
+                data: form.serialize(),
                 success: function(data) {
                     $("#tabs").tabs({
                         active: 1
