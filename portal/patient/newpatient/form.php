@@ -980,7 +980,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
 
     function openModal() {
         var modal = document.getElementById('myModal');
-        modal.style.display = 'none';
+        modal.style.display = 'display';
     }
 </script>
 <style>
