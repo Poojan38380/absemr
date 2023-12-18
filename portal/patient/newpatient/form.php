@@ -195,8 +195,8 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
 
     function restoreCheckMarks() {
         $('.checkMark').each(function() {
-            var ckid = $(this).data('id');
-            if ($('#' + ckid).data('value') === 'Yes')
+            const ckid = $(this).data('id');
+            if (ckid.data('value') === 'Yes')
                 $('#' + ckid).prop('checked', true);
             else
                 $('#' + ckid).prop('checked', false);
