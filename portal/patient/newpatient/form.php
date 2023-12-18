@@ -244,6 +244,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
     });
 
     function openModal() {
+        alert('open modal');
         var modal = document.getElementById('myModal');
         modal.style.display = 'display';
     }
