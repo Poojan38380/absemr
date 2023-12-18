@@ -197,7 +197,7 @@
 
 <div class="row">
     <label>What are the reasons you are being referred for services & what ABS program(s) are you interested in enrolling in?</label></br>
-    <?php echo generateCheckBox('being_referred_for_services', 'being_referred_for_services') ?>
+    <?php echo generateCheckBox('being_referred_for_service', 'being_referred_for_service') ?>
 </div>
 
 <div class="row" name="being_rf_for_services_anger_mgmt_div" style="display:none">

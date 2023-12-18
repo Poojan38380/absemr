@@ -774,7 +774,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
         });
 
 
-        $(document).on('change', 'input[name^=being_referred_for_services]', function() {
+        $(document).on('change', 'input[name^=being_referred_for_service]', function() {
             if ($(this).val() === 'anger_mgmt' && $(this).is(':checked')) {
                 $('div[name=being_rf_for_services_anger_mgmt_div]').css('display', 'block');
             } else if ($(this).val() === 'anger_mgmt' && !($(this).is(':checked'))) {
