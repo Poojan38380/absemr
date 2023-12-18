@@ -90,7 +90,7 @@
     </select>
 </div>
 <div class="row" name="childrens_names_ages_div" style="display: none">
-    <label><?php xlt('What are the names and ages of your children') ?></label>
+    <label><?php echo xlt('What are the names and ages of your children') ?></label>
     <input type="text" name="all_my_children" class="form-control" style="width:50%"><br/>
 
 </div>
