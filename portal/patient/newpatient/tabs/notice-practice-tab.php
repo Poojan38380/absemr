@@ -218,7 +218,7 @@
 
                     <?php } else { ?>
                         <label for="patientSignature"><?php echo xlt("Patient Signature"); ?></label>
-                        <a class="dropdown-item btn btn-sm btn-warning" data-toggle="modal" href="../../../home.php#openSigModal" data-parent="#newpatientCard">
+                        <a class="dropdown-item btn btn-sm btn-warning" data-toggle="modal" href="#" onclick="openModal()">
                             <i class="fa fa-file-signature"></i>
                             Create Signature
                         </a>
@@ -238,6 +238,12 @@
         <input type="hidden" name="handler" id="handler" value="download">
         <input type="hidden" name="status" id="status" value="Open">
     </form>
+    <div id="myModal">
+        <p>This is my modal</p>
+    </div>
     <script>
-
+        function openModal() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = 'block';
+        }
     </script>
