@@ -983,4 +983,20 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
         modal.style.display = 'none';
     }
 </script>
+<style>
+    <style>
+        /* Style to hide the modal by default */
+    #myModal {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>
+</style>
 </html>
