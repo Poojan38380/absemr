@@ -56,10 +56,20 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
 
             /* Add any other necessary styling for the tab content */
         }
-    </style>
-</head>
 
-<body class="p-0 m-0">
+             /* Style to hide the modal by default */
+         #myModal {
+             display: none;
+             position: fixed;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+             padding: 20px;
+             background-color: #fff;
+             border: 1px solid #ccc;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+         }
+    </style>
 <script>
     <?php require($GLOBALS['srcdir'] . '/js/xl/jquery-datetimepicker-2-5-4-alternate.js.php'); ?>
     $LAB.script("<?= $GLOBALS['web_root']; ?>/portal/patient/scripts/app/onsitedocuments.js?v=<?= $GLOBALS['v_js_includes']; ?>").wait().script(
@@ -232,8 +242,14 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
         // Scroll to top when the page loads
         $('html, body').scrollTop(0);
     });
-</script>
 
+    function openModal() {
+        var modal = document.getElementById('myModal');
+        modal.style.display = 'display';
+    }
+</script>
+</head>
+<body class="p-0 m-0">
 <div class="container-xl px-1">
 <div id="successAlert" class="alert alert-success" style="display: none;">
     <?php print xlt('Your form has been successfully submitted') ?>
@@ -978,25 +994,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
 
     });
 
-    function openModal() {
-        var modal = document.getElementById('myModal');
-        modal.style.display = 'display';
-    }
+
 </script>
-<style>
-    <style>
-        /* Style to hide the modal by default */
-    #myModal {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-</style>
-</style>
+
 </html>
