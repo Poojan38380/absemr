@@ -55,7 +55,7 @@
 </div>
 
 <div class="row">
-    <label>Family Composition</label></br>
+    <h3>Family Composition</h3>
     <label>Which best describes your relationship status?<span style="color:red"> * </span></label></br>
     <?php echo generateRadioButtons('fam_relationship_list', 'fam_relationship_list') ?>
 </div>
@@ -78,13 +78,13 @@
 </div>
 
 <div class="row">
-    <label>Household Members</label></br>
+    <h3>Household Members</h3>
     <label>Who do you live with?<span style="color:red"> * </span></label><br>
     <?php echo generateCheckBox('who_live_with', 'who_live_with') ?>
 </div>
 
 <div class="row">
-    <label>Children</label></br>
+    <h3>Children</h3>
     <label>How many children/step children do you have in total?<span style="color:red"> * </span></label><br>
     <?php echo generateDropdown('how_many_children', 'how_many_children') ?>
     </select>
@@ -120,7 +120,7 @@
 </div>
 
 <div class="row">
-    <label>Family Composition</label></br>
+    <h3>Family Composition</h3>
     <label>Is there any family history of substance abuse or mental illness?<span style="color:red"> * </span></label></br>
     <input type="radio" name="fam_sub_abuse" value="yes"> Yes</br>
     <input type="radio" name="fam_sub_abuse" value="no"> No</br>
@@ -132,7 +132,7 @@
 </div>
 
 <div class="row">
-    <label>Primary care doctor</label></br>
+    <h3>Primary care doctor</h3>
     <label>Do you have a primary care doctor?<span style="color:red"> * </span></label></br>
     <input type="radio" name="primary_care_doc" value="yes"> Yes</br>
     <input type="radio" name="primary_care_doc" value="no"> No</br>
