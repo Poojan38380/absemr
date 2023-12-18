@@ -227,6 +227,11 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
         restoreRadioValues();
         restoreTextInputs();
     }
+
+    $(document).ready(function() {
+        // Scroll to top when the page loads
+        $('html, body').scrollTop(0);
+    });
 </script>
 
 <div class="container-xl px-1">
