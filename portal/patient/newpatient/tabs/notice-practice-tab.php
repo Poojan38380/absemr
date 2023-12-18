@@ -241,9 +241,4 @@
     <div id="myModal">
         <p>This is my modal</p>
     </div>
-    <script>
-        function openModal() {
-            var modal = document.getElementById('myModal');
-            modal.style.display = 'block';
-        }
-    </script>
+
