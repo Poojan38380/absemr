@@ -218,7 +218,7 @@
 
                     <?php } else { ?>
                         <label for="patientSignature"><?php echo xlt("Patient Signature"); ?></label>
-                        <a class="dropdown-item btn btn-sm btn-warning" data-toggle="modal" href="#" onclick="openModal()">
+                        <a class="dropdown-item btn btn-sm btn-warning" data-toggle="modal" onclick="openModal()">
                             <i class="fa fa-file-signature"></i>
                             Create Signature
                         </a>
