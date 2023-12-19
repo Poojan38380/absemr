@@ -218,8 +218,8 @@
 
                     <?php } else { ?>
                         <label for="patientSignature"><?php echo xlt("Patient Signature"); ?></label>
-                        <a class="dropdown-item btn btn-sm btn-warning" data-toggle="modal">
-                            <i class="fa fa-file-signature"></i>
+                        <a data-type="admin-signature" class="btn btn-primary btn-sm" href="#openSignModal" data-toggle="modal" data-backdrop="true" data-target="#openSignModal">
+             <span><?php echo xlt('Create Signature on File') . '  '; ?></span><i class="fa fa-sign-in"></i></a>
                             Create Signature
                         </a>
                     <?php } ?>
