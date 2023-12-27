@@ -20,9 +20,8 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
 
 ?>
 <html>
-<title><?= xlt("Intake Form") ?></title>
-
 <head>
+    <title><?= xlt("Intake Form") ?></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -57,18 +56,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
             /* Add any other necessary styling for the tab content */
         }
 
-             /* Style to hide the modal by default */
-         #myModal {
-             display: none;
-             position: fixed;
-             top: 50%;
-             left: 50%;
-             transform: translate(-50%, -50%);
-             padding: 20px;
-             background-color: #fff;
-             border: 1px solid #ccc;
-             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-         }
+
     </style>
 <script>
     <?php require($GLOBALS['srcdir'] . '/js/xl/jquery-datetimepicker-2-5-4-alternate.js.php'); ?>

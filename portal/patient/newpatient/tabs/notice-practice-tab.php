@@ -218,9 +218,9 @@
 
                     <?php } else { ?>
                         <label for="patientSignature"><?php echo xlt("Patient Signature"); ?></label>
-                        <a onclick="parent.openModalFromIframe()" class="btn btn-primary btn-sm" >
+                        <a onclick="parent.openModalFromIframe()" class="btn btn-caution btn-sm" >
              <span><?php echo xlt('Create Signature on File') . '  '; ?></span><i class="fa fa-sign-in"></i></a>
-                            Create Signature
+
                     <?php } ?>
 
                     <br><br>
