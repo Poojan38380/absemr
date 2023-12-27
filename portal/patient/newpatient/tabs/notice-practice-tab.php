@@ -237,7 +237,5 @@
         <input type="hidden" name="handler" id="handler" value="download">
         <input type="hidden" name="status" id="status" value="Open">
     </form>
-    <div id="myModal">
-        <p>This is my modal</p>
-    </div>
+
 
