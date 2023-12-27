@@ -38,9 +38,10 @@ function formFooter()
 function formSubmit($tableName, $values, $id, $authorized = "0")
 {
     global $attendant_type;
-
-    $sqlBindingArray = [$_SESSION['pid'], $_SESSION['authProvider'], $_SESSION['authUser'], $authorized];
-    $sql = "insert into " . escape_table_name($tableName) . " set " .  escape_sql_column_name($attendant_type, array($tableName)) . "=?, groupname=?, user=?, authorized=?, activity=1, date = NOW(),";
+    //trying to fix a situation where the session data is blank from the portal. This is a hack and should be fixed.
+    (!empty($_SESSION['authProvider'])) ? $user = $_SESSION['authProvider'] : $user = 'Kenneth';
+    $sqlBindingArray = [$_SESSION['pid'], $user, $_SESSION['authUser'], $authorized];
+    $sql = "insert into " . escape_table_name($tableName) . " SET " .  escape_sql_column_name($attendant_type, array($tableName)) . "=?, groupname=?, user=?, authorized=?, activity=1, date = NOW(),";
     foreach ($values as $key => $value) {
         if ($key == "csrf_token_form") {
             continue;
