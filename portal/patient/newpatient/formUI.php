@@ -84,6 +84,9 @@ function releaseTab($pid)
     $names = sqlQuery("SELECT social_worker_name, parole_offc_name, doc_name, prob_offc_name, welfare_worker_name,
        lawyer_attroney_name FROM patient_referral_form WHERE pid = ?", [$pid]);
     $lawyer = $names['lawyer_attroney_name'] ?? '';
+    $social_worker = $names['social_worker_name'] ?? '';
+    $parole_offc = $names['parole_offc_name'] ?? '';
+    $doc = $names['doc_name'] ?? '';
     require_once('./tabs/release-tab.php');
 }
 function releaseTabSaved($pid)
