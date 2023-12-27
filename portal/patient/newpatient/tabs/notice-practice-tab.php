@@ -218,8 +218,8 @@
 
                     <?php } else { ?>
                         <label for="patientSignature"><?php echo xlt("Patient Signature"); ?></label>
-                        <a onclick="parent.openModalFromIframe()" class="btn btn-caution btn-sm" >
-             <span><?php echo xlt('Create Signature on File') . '  '; ?></span><i class="fa fa-sign-in"></i></a>
+                        <a onclick="parent.openModalFromIframe()" class="btn btn-waring btn-sm" >
+             <span><?php echo xlt('Click here to sign') . '  '; ?></span><i class="fa fa-sign-in"></i></a>
 
                     <?php } ?>
 
