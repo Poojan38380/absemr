@@ -83,7 +83,7 @@ function releaseTab($pid)
     $onsite_signature = sqlQuery("select type,user,sig_image as sign from onsite_signatures where pid = ?", [$pid]);
     $names = sqlQuery("SELECT social_worker_name, parole_offc_name, doc_name, prob_offc_name, welfare_worker_name,
        lawyer_attroney_name FROM patient_referral_form WHERE pid = ?", [$pid]);
-    file_put_contents('/var/www/html/traps/names.log', print_r($names, true));
+    $lawyer = $name['lawyer_attroney_name'] ?? '';
     require_once('./tabs/release-tab.php');
 }
 function releaseTabSaved($pid)
