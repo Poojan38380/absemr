@@ -219,7 +219,7 @@
                     <?php } else { ?>
                         <label for="patientSignature"><?php echo xlt("Patient Signature"); ?></label>
                         <a onclick="parent.openModalFromIframe()" class="btn btn-warning btn-sm" >
-             <span><?php echo xlt('Click here to sign') . '  '; ?></span><i class="fa fa-sign-in"></i></a>
+                        <span><?php echo xlt('Click here to sign') . '  '; ?></span><i class="fa fa-sign-in"></i></a>
 
                     <?php } ?>
 

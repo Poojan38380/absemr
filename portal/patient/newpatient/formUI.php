@@ -74,8 +74,6 @@ function releaseTabEdit($pid)
     $patient = sqlQuery("select fname, lname from patient_data where pid = ?", [$pid]);
     $onsite_signature = sqlQuery("select type,user,sig_image as sign from onsite_signatures where pid = ?", [$pid]);
     $referral = sqlQuery("select * from patient_release_form where pid = ?", [$pid]);
-    file_put_contents('/var/www/html/traps/working_referral.log', $referral['full_document']);
-    //require_once('/var/www/html/traps/working_referral.log');
     require_once('./tabs_edit/release-tab.php');
 }
 
@@ -83,9 +81,6 @@ function releaseTab($pid)
 {
     $patient = sqlQuery("select fname, lname from patient_data where pid = ?", [$pid]);
     $onsite_signature = sqlQuery("select type,user,sig_image as sign from onsite_signatures where pid = ?", [$pid]);
-    $names = sqlQuery("SELECT social_worker_name, parole_offc_name, doc_name, prob_offc_name, welfare_worker_name, lawyer_attroney_name FROM patient_referral_form WHERE pid = ?", [$pid]);
-    file_put_contents('/var/www/html/traps/working_referral.log', print_r($names, true));
-    //$consents = $names['social_worker_name'] . ", " . $names['parole_offc_name'] . ", " . $names['doc_name'] . ", " . $names['prob_offc_name'] . ", " . $names['lawyer_attroney_name'];
     require_once('./tabs/release-tab.php');
 }
 function releaseTabSaved($pid)
