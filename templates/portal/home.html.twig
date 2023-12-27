@@ -548,6 +548,10 @@
 
     </section>
     <script>
+        // Function to be called from the iframe to open the modal
+        function openModalFromIframe() {
+            $("#openSignModal").modal('show');
+        }
        /* $(document).ready(function() {
             $("iframe").on("load", function() {
                 var closestIframe = $(this).closest('#newpatientCardForm').find('iframe');
