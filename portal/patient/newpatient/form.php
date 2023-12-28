@@ -376,10 +376,7 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
         </div>
     </div>
     <!-- The Modal -->
-    <div id="myModal">
-        <p>This is a modal!</p>
-        <button onclick="openModal()">Close Modal</button>
-    </div>
+
 <?php } ?>
 </body>
 </div> <!-- end container xl -->
