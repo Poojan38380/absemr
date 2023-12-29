@@ -184,9 +184,9 @@ function enableVideoButton($callFrom = null, $pid = null)
            // $disableButton = 'disabled';
         //}
 
-        if ($meetingUrl != '') {
+        //if ($meetingUrl != '') {
             return '<div style = "margin-bottom:10px"><a class="btn btn-warning href="' . trim($meetingUrl) . '" target = "_blank" ' . $disableButton . '>' . xlt('Zoom Meeting') . '</a></div>';
-        }
+        //}
     } elseif ($callFrom == 'group') {
         if ($meetingUrl != '') {
             return '<a class="btn btn-warning href="' . trim($meetingUrl) . '" target = "_blank">' . xlt('Group Zoom') . '</a>';
