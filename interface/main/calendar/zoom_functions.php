@@ -179,10 +179,11 @@ function enableVideoButton($callFrom = null, $pid = null)
     // Send button or url based on call - either from dashboard or portal
     if ($callFrom == 'dashboard') {
         $button = $disableButton = '';
-        $getPatientBalance = get_patient_balance($pid);
-        if ($getPatientBalance > 400) {
-            $disableButton = 'disabled';
-        }
+        //$getPatientBalance = get_patient_balance($pid);
+        //if ($getPatientBalance > 400) {
+           // $disableButton = 'disabled';
+        //}
+
         if ($meetingUrl != '') {
             return '<div style = "margin-bottom:10px"><a class="btn btn-warning href="' . trim($meetingUrl) . '" target = "_blank" ' . $disableButton . '>' . xlt('Zoom Meeting') . '</a></div>';
         }
