@@ -180,7 +180,7 @@ function enableVideoButton($callFrom = null, $pid = null)
     if ($callFrom == 'dashboard') {
         $button = $disableButton = '';
         $getPatientBalance = get_patient_balance($pid);
-        if ($getPatientBalance > 0) {
+        if ($getPatientBalance > 400) {
             $disableButton = 'disabled';
         }
         if ($meetingUrl != '') {
