@@ -295,7 +295,12 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
                         <form id="releaseForm" method="POST">
                             <input type="hidden" name="releaseTab" value="releaseForm">
                             <?php releaseTab($pid); ?>
-                            <button type="button" class="submit btn btn-primary" id="release">Save & Finish</button>
+                            <button type="button" class="submit btn btn-primary" id="release" <?php if (!noticePracticeTabSaved($pid) || !therapeuticTabSaved($pid) || !referralTabSaved($pid)) echo 'disabled'; ?>>
+                                Save & Finish
+                            </button>
+                            <?php if (!noticePracticeTabSaved($pid) || !therapeuticTabSaved($pid) || !referralTabSaved($pid)): ?>
+                                <span class="alert-danger" id="submit_finish">You have to submit all forms before finish.*</span>
+                            <?php endif; ?>
                         </form>
                     </div>
                 <?php } ?>
@@ -375,11 +380,12 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
         ?>
         </div>
     </div>
-    <!-- The Modal -->
+</div><!-- end container xl -->
+
+<!-- The Modal -->
 
 <?php } ?>
 </body>
-</div> <!-- end container xl -->
 <script>
     $(document).ready(function() {
         $("#tabs").tabs({
@@ -387,149 +393,132 @@ $pastAppointments = getPatientsPastAppointments($pid, 5);
         });
 
         $('#tabs li').click(function() {
-            var data = $(this).find('a').attr('href');
+            let data = $(this).find('a').attr('href');
             if (data === "#release_tab") {
-                // Change authority name
             }
         });
 
         $('.datepicker').datepicker({
             maxDate: 0
         });
+        
+        function handleTabNavigation () {
+            let selectedTab = $('ul.ui-tabs-nav li[aria-selected="true"]');
+            let currentIndex = selectedTab.index();
+            
+            let nextIndex = currentIndex + 1;
 
-        $('#referralForm button.submit').on('click', function() {
+            if (currentIndex > 0) {
+                let prevTabIndex = (currentIndex === 2) ? currentIndex - 2 : currentIndex - 1;
+                let prevTab = $('ul.ui-tabs-nav li').eq(prevTabIndex);
+
+                if (prevTab.is(':visible')) {
+                    prevTab.find('a').trigger('click');
+                    selectedTab.hide();
+                    $(selectedTab.find('a').attr('href')).hide();
+                    return;
+                }
+            }
+
+            let nextTab = selectedTab.nextAll(':visible:first');
+            if (nextTab.length > 0) {
+                nextTab.find('a').trigger('click');
+                if (nextTab.find('a').attr('href') === '#release_tab') {
+                    $('#release').removeAttr('disabled');
+                    $('#submit_finish').hide();
+                }
+            } else {
+                $('ul.ui-tabs-nav li:visible:first a').trigger('click');
+            }
+
+            selectedTab.hide();
+            $(selectedTab.find('a').attr('href')).hide();
+        }
+        
+        function handleTabScrollNavigation () {
+            let selectedTab = $('ul.ui-tabs-nav li[aria-selected="true"]');
+            let hrefValue = selectedTab.find('a.ui-tabs-anchor').attr('href');
+
+            if (hrefValue) {
+                window.location.href = hrefValue;
+                window.scrollTo(0, 0);
+            }
+            window.parent.scrollTo(0, 0);
+        }
+
+        $('#referralForm button.submit').on('click', function () {
             const form = $('#referralForm');
 
             $.ajax({
                 type: 'POST',
                 url: './formAjax.php',
                 data: form.serialize(),
-                success: function(data) {
-                    $("#tabs").tabs({
-                        active: 1
-                    });
+                success: function (data) {
                     form[0].reset();
-                    // Hide the tab content for the form that was just submitted
-                    $('#referral_tab').hide();
-
-                    // Hide the corresponding tab <li>
-                    $('ul.ui-tabs-nav li a[href="#referral_tab"]').parent().hide();
-                    // Show the success message
-
-                    //$('#successAlert').fadeIn();
-
-                    // You can also hide the success message after a certain time if needed
-                    //setTimeout(function() {
-                      //  $('#successAlert').fadeOut();
-                    //}, 5000); // Hide after 5 seconds (adjust the time as needed)
-                }
+                    handleTabNavigation();
+                    handleTabScrollNavigation();
+                },
             });
         });
 
-
-        $('#therapeuticForm button.submit').on('click', function() {
+        $('#therapeuticForm button.submit').on('click', function () {
             const form = $('#therapeuticForm');
 
             $.ajax({
                 type: 'POST',
                 url: './formAjax.php',
                 data: form.serialize(),
-                success: function(data) {
-                    $("#tabs").tabs({
-                        active: 1
-                    });
-                    // Save state to local storage
+                success: function (data) {
                     form[0].reset();
-                    // Hide the tab content for the form that was just submitted
-                    $('#therapeutic_tab').hide();
-
-                    // Hide the corresponding tab <li>
-                    $('ul.ui-tabs-nav li a[href="#therapeutic_tab"]').parent().hide();
-                    // Show the success message
-                    //$('#successAlert').fadeIn();
-
-                    // You can also hide the success message after a certain time if needed
-                    //setTimeout(function() {
-                        //$('#successAlert').fadeOut();
-                    //}, 5000); // Hide after 5 seconds (adjust the time as needed)
-                }
-            });
-        });
-
-        $('#notice_practice').on('click', function() {
-            var form = $('#noticePracticeForm');
-            let templateContent = document.getElementById('notice-templatecontent').innerHTML;
-            var payload = {
-                noticePracticeTab: true,
-                full_document: templateContent
-            };
-
-            // let escapedContent = encodeURIComponent(templateContent);
-            $.ajax({
-                url: './formAjax.php',
-                method: 'POST',
-                data: payload,
-                success: function(data) {
-                    $("#tabs").tabs({
-                        active: 1
-                    })
-                    form[0].reset();
-                    // Hide the tab content for the form that was just submitted
-                    $('#notice_practice_tab').hide();
-
-                    // Hide the corresponding tab <li>
-                    $('ul.ui-tabs-nav li a[href="#notice_practice_tab"]').parent().hide();
-                    // Show the success message
-                    $('#successAlert').fadeIn();
-
-                    /*
-                     You can also hide the success message after a certain time if needed
-                    setTimeout(function() {
-                        $('#successAlert').fadeOut();
-                    }, 5000); // Hide after 5 seconds (adjust the time as needed)
-                    */
+                    handleTabNavigation();
+                    handleTabScrollNavigation();
                 },
-                error: function(error) {
-                    console.error('Error saving template content:', error);
-                }
             });
         });
 
-        $('#release').on('click', function() {
-            var form = $('#releaseForm');
+        $('#notice_practice').on('click', function () {
+            let form = $('#noticePracticeForm');
+            let templateContent = document.getElementById('notice-templatecontent').innerHTML;
+            let payload = {
+                noticePracticeTab: true,
+                full_document: templateContent,
+            };
+
+            $.ajax({
+                url: './formAjax.php',
+                method: 'POST',
+                data: payload,
+                success: function (data) {
+                    form[0].reset();
+                    handleTabNavigation();
+                    handleTabScrollNavigation();
+                },
+                error: function (error) {
+                    console.error('Error saving template content:', error);
+                },
+            });
+        });
+
+        $('#release').on('click', function () {
+            let form = $('#releaseForm');
             let templateContent = document.getElementById('release-templatecontent').innerHTML;
-            var payload = {
+            let payload = {
                 releaseTab: true,
-                full_document: templateContent
+                full_document: templateContent,
             };
             $.ajax({
                 url: './formAjax.php',
                 method: 'POST',
                 data: payload,
-                success: function(data) {
-
-                    $("#tabs").tabs({
-                        active: 1
-                    })
+                success: function (data) {
                     form[0].reset();
-                    // Hide the tab content for the form that was just submitted
-                    $('#release_tab').hide();
-                    // Hide the corresponding tab <li>
-                    $('ul.ui-tabs-nav li a[href="#release_tab"]').parent().hide();
-
-                    /*
-                     Show the success message
-                     $('#successAlert').fadeIn();
-                     // You can also hide the success message after a certain time if needed
-                     setTimeout(function() {
-                         $('#successAlert').fadeOut();
-                     }, 5000); // Hide after 5 seconds (adjust the time as needed)
-                    */
+                    handleTabNavigation();
+                    handleTabScrollNavigation();
                     location.reload();
                 },
-                error: function(error) {
+                error: function (error) {
                     console.error('Error saving template content:', error);
-                }
+                },
             });
         });
 
