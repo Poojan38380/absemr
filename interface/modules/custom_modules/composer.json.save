@@ -1,0 +1,10 @@
+{
+
+    "require": {        "juggernautseinc/oe-quest-lab-hub": "dev-main"    },    "config": {        "github-oauth": {            "github.com": "YOUR_GITHUB_TOKEN"        }    }}
+
+
+Replace Your GitHub T
+
+{
+
+    "require": {        "juggernautseinc/oe-quest-lab-hub": "dev-main"    },    "config": {        "github-oauth": {            "github.com": "YOUR_GITHUB_TOKEN"        }    }}

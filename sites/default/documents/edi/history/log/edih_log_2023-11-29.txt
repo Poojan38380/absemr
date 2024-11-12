@@ -1,0 +1,9 @@
+20231129:231127 _GET request 
+ csvtbllist => yes  csrf_token_form => b7d26834ca1254d739f2131558b86802d575b533 
+20231129:231127 _GET request 
+ archlist => yes  csrf_token_form => b7d26834ca1254d739f2131558b86802d575b533 
+20231129:231127 csv_archive_select_list: using /var/www/html/absemr/sites/default/documents/edi/history/archive
+20231129:231127 _GET request 
+ loglist => yes  csrf_token_form => b7d26834ca1254d739f2131558b86802d575b533 
+20231129:231127 _GET request 
+ srvinfo => yes  csrf_token_form => b7d26834ca1254d739f2131558b86802d575b533 

@@ -1,0 +1,24 @@
+20230911:040904 EDI_History Setup should not overwrite existing data.<br />
+Setup: directory /var/www/html/absemr/sites/default/documents/edi<br />
+created folder /var/www/html/absemr/sites/default/documents/edi/history<br />
+created folder /var/www/html/absemr/sites/default/documents/edi/history/csv<br />
+created folder /var/www/html/absemr/sites/default/documents/edi/history/archive<br />
+created folder /var/www/html/absemr/sites/default/documents/edi/history/log<br />
+created folder /var/www/html/absemr/sites/default/documents/edi/history/tmp
+folder for f837 exists /var/www/html/absemr/sites/default/documents/edi<br />
+created type folder /var/www/html/absemr/sites/default/documents/edi/history/f997<br />
+created type folder /var/www/html/absemr/sites/default/documents/edi/history/f276<br />
+created type folder /var/www/html/absemr/sites/default/documents/edi/history/f277<br />
+created type folder /var/www/html/absemr/sites/default/documents/edi/history/f270<br />
+created type folder /var/www/html/absemr/sites/default/documents/edi/history/f271<br />
+created type folder /var/www/html/absemr/sites/default/documents/edi/history/f278<br />
+
+20230911:040904 _GET request 
+ archlist => yes  csrf_token_form => 4279babdc5627f48f1652674f8835676c5da9774 
+20230911:040904 _GET request 
+ csvtbllist => yes  csrf_token_form => 4279babdc5627f48f1652674f8835676c5da9774 
+20230911:040904 csv_archive_select_list: using /var/www/html/absemr/sites/default/documents/edi/history/archive
+20230911:040904 _GET request 
+ loglist => yes  csrf_token_form => 4279babdc5627f48f1652674f8835676c5da9774 
+20230911:040904 _GET request 
+ srvinfo => yes  csrf_token_form => 4279babdc5627f48f1652674f8835676c5da9774 

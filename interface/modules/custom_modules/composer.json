@@ -1,0 +1,26 @@
+{
+    "name": "juggernautsei/oe-quest-lab-hub",
+    "description": "description",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Sherwin",
+            "email": "sherwingaddis@gmail.com"
+        }
+    ],
+    "repositories": {
+        "juggernautseinc": {
+            "type": "git",
+            "url": "https://github.com/juggernautseinc/oe-quest-lab-hub",
+            "require": {
+                "juggernautseinc/oe-quest-lab-hub":"*"
+            }
+        }
+    },
+    "config": {
+            "github-oauth": {
+                "github.com": "ghp_HNNbrv79AEc7gZoB6XX7XwNOIUK7Wh1X1Jz"
+            }
+        }
+}
