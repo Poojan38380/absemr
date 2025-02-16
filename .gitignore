@@ -8,6 +8,7 @@
 node_modules
 /vendor/*
 /.docs/.out/*
+/sites/default/documents/smarty/*
 
 # ccda service build
 ccdaservice/node_modules
