@@ -710,8 +710,8 @@ if (!empty($_POST['form_action']) && ($_POST['form_action'] == "save")) {
 		//@author Zeoner <services@zeoner.com>
 		//Check the old video channel not equals to zoom and update
 		$getOldMeeting = sqlQuery("select pc_video_channel from openemr_postcalendar_events where pc_eid = ?", [$eid]);
-		if($_POST['form_video_channel'] == 'zoom' && $getOldMeeting['pc_video_channel'] != 'zoom')
-			zoom_meeting($eid);
+		// if($_POST['form_video_channel'] == 'zoom' && $getOldMeeting['pc_video_channel'] != 'zoom')
+		// 	zoom_meeting($eid);
 
 		// For group theraphy update notes as document and save it document category
 		if($_POST['form_gid'] != '' && $_POST['form_comments'] != ''){

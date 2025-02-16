@@ -1,0 +1,12 @@
+.main-container{
+    display: flex;
+    flex-direction: column;
+    gap: 3;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.mb{
+    margin-bottom: 10px;
+}
