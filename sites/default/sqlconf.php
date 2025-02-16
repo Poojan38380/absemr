@@ -7,9 +7,9 @@ $disable_utf8_flag = false;
 
 $host	= 'localhost';
 $port	= '3306';
-$login	= 'absopenemr';
-$pass	= 'HdTp87iU82ExVrF!@#';
-$dbase	= 'absopenemr';
+$login	= 'root';
+$pass	= 'adminroot';
+$dbase	= 'absemr';
 $db_encoding	= 'utf8mb4';
 
 $sqlconf = array();
