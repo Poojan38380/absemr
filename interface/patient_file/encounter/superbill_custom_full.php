@@ -598,7 +598,7 @@ if ($fend > ($count ?? null)) {
               "p.pr_id = ? AND p.pr_selector = '' AND p.pr_level = lo.option_id " .
               "WHERE lo.list_id = 'pricelevel' AND lo.activity = 1 ORDER BY lo.seq, lo.title", array($code_id));
             for ($i = 0; $prow = sqlFetchArray($pres); ++$i) {
-                echo "<label class='col-form-label col-form-label-sm col-md-1'>" . text(xl_list_label($prow['title'])) . "</label>";
+                echo "<label class='col-form-label col-form-label-sm col-md-3'>" . text(xl_list_label($prow['title'])) . "</label>";
                 echo "<div class='col-md'><input type='text' class='form-control form-control-sm' size='6' name='fee[" . attr($prow['option_id']) . "]' " .
                   "value='" . attr($prow['pr_price']) . "' /></div>\n";
             }
