@@ -700,7 +700,6 @@ if ($fend > ($count ?? null)) {
         <td><span class='font-weight-bold'><?php echo xlt('Serv Rep'); ?></span></td>
         <td><span class='font-weight-bold'><?php echo xlt('Type'); ?></span></td>
         <td><span class='font-weight-bold'><?php echo xlt('Description'); ?></span></td>
-        <td><span class='font-weight-bold'><?php echo xlt('Short Description'); ?></span></td>
         <?php if (related_codes_are_used()) { ?>
             <td><span class='font-weight-bold'><?php echo xlt('Related'); ?></span></td>
         <?php } ?>
