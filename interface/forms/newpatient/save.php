@@ -37,6 +37,8 @@ $facility_id = $_POST['facility_id'] ?? null;
 $billing_facility = $_POST['billing_facility'] ?? '';
 $reason = $_POST['reason'] ?? null;
 $mode = $_POST['mode'] ?? null;
+$createPatientTracker = $_POST['createPatientTracker'] ? true : false;
+$eid=$_POST['eid'];
 $referral_source = $_POST['form_referral_source'] ?? null;
 $class_code = $_POST['class_code'] ?? '';
 $pos_code = $_POST['pos_code'] ?? null;
@@ -79,54 +81,68 @@ if (!empty($encounter_type)) {
 
 if ($mode == 'new') {
     $encounter = generate_id();
+    $encounterId = sqlInsert(
+        "INSERT INTO form_encounter SET
+            date = ?,
+            onset_date = ?,
+            reason = ?,
+            facility = ?,
+            pc_catid = ?,
+            facility_id = ?,
+            billing_facility = ?,
+            sensitivity = ?,
+            referral_source = ?,
+            pid = ?,
+            encounter = ?,
+            pos_code = ?,
+            class_code = ?,
+            external_id = ?,
+            parent_encounter_id = ?,
+            provider_id = ?,
+            discharge_disposition = ?,
+            referring_provider_id = ?,
+            encounter_type_code = ?,
+            encounter_type_description = ?",
+        [
+            $date,
+            $onset_date,
+            $reason,
+            $facility,
+            $pc_catid,
+            $facility_id,
+            $billing_facility,
+            $sensitivity,
+            $referral_source,
+            $pid,
+            $encounter,
+            $pos_code,
+            $class_code,
+            $external_id,
+            $parent_enc_id,
+            $provider_id,
+            $discharge_disposition,
+            $referring_provider_id,
+            $encounter_type_code,
+            $encounter_type_description
+        ]
+    );
+    if ($createPatientTracker) {
+        $provider = sqlQuery('SELECT username FROM users WHERE id = ?', [$provider_id]);
+        $provider_name = $provider['username'];
+        sqlInsert(
+            "INSERT INTO encounter_tracker SET
+                    eid = ?,
+                    encounter = ?;",
+            [
+                $eid,
+                $encounter,
+            ]
+        );
+    }
     addForm(
         $encounter,
         "New Patient Encounter",
-        sqlInsert(
-            "INSERT INTO form_encounter SET
-                date = ?,
-                onset_date = ?,
-                reason = ?,
-                facility = ?,
-                pc_catid = ?,
-                facility_id = ?,
-                billing_facility = ?,
-                sensitivity = ?,
-                referral_source = ?,
-                pid = ?,
-                encounter = ?,
-                pos_code = ?,
-                class_code = ?,
-                external_id = ?,
-                parent_encounter_id = ?,
-                provider_id = ?,
-                discharge_disposition = ?,
-                referring_provider_id = ?,
-                encounter_type_code = ?,
-                encounter_type_description = ?",
-            [
-                $date,
-                $onset_date,
-                $reason,
-                $facility,
-                $pc_catid,
-                $facility_id,
-                $billing_facility,
-                $sensitivity,
-                $referral_source,
-                $pid,
-                $encounter,
-                $pos_code,
-                $class_code,
-                $external_id,
-                $parent_enc_id,
-                $provider_id,
-                $discharge_disposition,
-                $referring_provider_id,
-                $encounter_type_code,
-                $encounter_type_description
-            ]
-        ),
+        $encounterId,
         "newpatient",
         $pid,
         $userauthorized,
@@ -238,7 +254,7 @@ $result4 = sqlStatement("SELECT fe.encounter,fe.date,openemr_postcalendar_catego
         <?php if ($mode == 'new') { ?>
         my_left_nav.setEncounter(<?php echo js_escape(oeFormatShortDate($date)) . ", " . js_escape($encounter) . ", window.name"; ?>);
         // Load the tab set for the new encounter, w is usually the RBot frame.
-        w.location.href = '<?php echo "$rootdir/patient_file/encounter/encounter_top.php"; ?>';
+        // w.location.href = '<?php echo "$rootdir/patient_file/encounter/encounter_top.php"; ?>';
         <?php } else { // not new encounter ?>
         // Always return to encounter summary page.
         window.location.href = '<?php echo "$rootdir/patient_file/encounter/forms.php"; ?>';

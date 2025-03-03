@@ -226,48 +226,48 @@ function DOBandEncounter($pc_eid)
 
     // Manage tracker status.
     // And auto-create a new encounter if appropriate.
-    if (!empty($_POST['form_pid'])) {
-        $is_tracker = is_tracker_encounter_exist($event_date, $appttime, $_POST['form_pid'], $_GET['eid']);
-        $is_checkin = is_checkin($_POST['form_apptstatus']);
-        if (
-            (int)$GLOBALS['auto_create_new_encounters']
-            && $is_checkin == '1'
-            && !$is_tracker
-        ) {
-            $encounter = todaysEncounterCheck($_POST['form_pid'], $event_date, $_POST['form_comments'], $_POST['facility'], $_POST['billing_facility'], $_POST['form_provider'], $_POST['form_category'], false, $pc_eid);
-            if ($encounter) {
-                $info_msg .= xl("New encounter created with id");
-                $info_msg .= " $encounter";
-            }
+    // if (!empty($_POST['form_pid'])) {
+    //     $is_tracker = is_tracker_encounter_exist($event_date, $appttime, $_POST['form_pid'], $_GET['eid']);
+    //     $is_checkin = is_checkin($_POST['form_apptstatus']);
+    //     if (
+    //         (int)$GLOBALS['auto_create_new_encounters']
+    //         && $is_checkin == '1'
+    //         && !$is_tracker
+    //     ) {
+    //         $encounter = todaysEncounterCheck($_POST['form_pid'], $event_date, $_POST['form_comments'], $_POST['facility'], $_POST['billing_facility'], $_POST['form_provider'], $_POST['form_category'], false, $pc_eid);
+    //         if ($encounter) {
+    //             $info_msg .= xl("New encounter created with id");
+    //             $info_msg .= " $encounter";
+    //         }
 
-            # Capture the appt status and room number for patient tracker. This will map the encounter to it also.
-            if (isset($GLOBALS['temporary-eid-for-manage-tracker']) || !empty($_GET['eid'])) {
-                // Note that the temporary-eid-for-manage-tracker is used to capture the eid for new appointments and when separate a recurring
-                // appointment. It is set in the InsertEvent() function. Note that in the case of spearating a recurrent appointment, the get eid
-                // parameter is actually erroneous(is eid of the recurrent appt and not the new separated appt), so need to use the
-                // temporary-eid-for-manage-tracker global instead.
-                $temp_eid = (isset($GLOBALS['temporary-eid-for-manage-tracker'])) ? $GLOBALS['temporary-eid-for-manage-tracker'] : $_GET['eid'];
-                manage_tracker_status($event_date, $appttime, $temp_eid, $_POST['form_pid'], $_SESSION["authUser"], $_POST['form_apptstatus'], $_POST['form_room'], $encounter);
-            }
-        } else {
-            # Capture the appt status and room number for patient tracker.
-            if (!empty($_GET['eid'])) {
-                manage_tracker_status($event_date, $appttime, $_GET['eid'], $_POST['form_pid'], $_SESSION["authUser"], $_POST['form_apptstatus'], $_POST['form_room'], $is_tracker);
-            }
-        }
-    }
+    //         # Capture the appt status and room number for patient tracker. This will map the encounter to it also.
+    //         if (isset($GLOBALS['temporary-eid-for-manage-tracker']) || !empty($_GET['eid'])) {
+    //             // Note that the temporary-eid-for-manage-tracker is used to capture the eid for new appointments and when separate a recurring
+    //             // appointment. It is set in the InsertEvent() function. Note that in the case of spearating a recurrent appointment, the get eid
+    //             // parameter is actually erroneous(is eid of the recurrent appt and not the new separated appt), so need to use the
+    //             // temporary-eid-for-manage-tracker global instead.
+    //             $temp_eid = (isset($GLOBALS['temporary-eid-for-manage-tracker'])) ? $GLOBALS['temporary-eid-for-manage-tracker'] : $_GET['eid'];
+    //             manage_tracker_status($event_date, $appttime, $temp_eid, $_POST['form_pid'], $_SESSION["authUser"], $_POST['form_apptstatus'], $_POST['form_room'], $encounter);
+    //         }
+    //     } else {
+    //         # Capture the appt status and room number for patient tracker.
+    //         if (!empty($_GET['eid'])) {
+    //             manage_tracker_status($event_date, $appttime, $_GET['eid'], $_POST['form_pid'], $_SESSION["authUser"], $_POST['form_apptstatus'], $_POST['form_room'], $is_tracker);
+    //         }
+    //     }
+    // }
 
     // auto create encounter for therapy group
-    if (!empty($_POST['form_gid'])) {
-        // status Took Place is the check in of therapy group
-        if ($GLOBALS['auto_create_new_encounters'] && $event_date == date('Y-m-d') && $_POST['form_apptstatus'] == '=') {
-            $encounter = todaysTherapyGroupEncounterCheck($_POST['form_gid'], $event_date, $_POST['form_comments'], $_POST['facility'], $_POST['billing_facility'], $_POST['form_provider'], $_POST['form_category'], false, $pc_eid);
-            if ($encounter) {
-                $info_msg .= xl("New group encounter created with id");
-                $info_msg .= " $encounter";
-            }
-        }
-    }
+    // if (!empty($_POST['form_gid'])) {
+    //     // status Took Place is the check in of therapy group
+    //     if ($GLOBALS['auto_create_new_encounters'] && $event_date == date('Y-m-d') && $_POST['form_apptstatus'] == '=') {
+    //         $encounter = todaysTherapyGroupEncounterCheck($_POST['form_gid'], $event_date, $_POST['form_comments'], $_POST['facility'], $_POST['billing_facility'], $_POST['form_provider'], $_POST['form_category'], false, $pc_eid);
+    //         if ($encounter) {
+    //             $info_msg .= xl("New group encounter created with id");
+    //             $info_msg .= " $encounter";
+    //         }
+    //     }
+    // }
 }
 
 
@@ -929,6 +929,16 @@ if ($eid) {
     $starttimem = substr($row['pc_startTime'], 3, 2);
     $repeats = $row['pc_recurrtype'];
     $multiple_value = $row['pc_multiple'];
+    
+    $trackingData = sqlQuery("SELECT * FROM encounter_tracker WHERE eid = ?", [$eid] );
+    $encounterId = $trackingData['encounter'];
+    $formEncounter = sqlQuery("SELECT * FROM form_encounter WHERE encounter = ?", [$encounterId] );
+    error_log( '$trackingData');
+    error_log( json_encode($formEncounter));
+    $formId = $formEncounter['id'];
+    // error_log( '$trackingData');
+    // error_log( json_encode($trackingData));
+    // error_log($encounterId);
 
     // parse out the repeating data, if any
     $rspecs = unserialize($row['pc_recurrspec'], ['allowed_classes' => false]); // extract recurring data
@@ -1027,6 +1037,79 @@ if ($groupid) {
 
     ?>
 <script>
+
+    function closeEncounterPopup() {
+        console.log("Closing Encounter Popup");
+        document.getElementById("encounterPopup")?.remove();
+    }
+
+    function cancelEncounterPopup() {
+        closeEncounterPopup();
+        const apptStatusDropdown = document.querySelector('select[name="form_apptstatus"]');
+        apptStatusDropdown.value = '-';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+  // Get the appointment status dropdown
+try{    
+    const apptStatusDropdown = document.querySelector('select[name="form_apptstatus"]');
+  
+  if (apptStatusDropdown) {
+    // Add change event listener
+    apptStatusDropdown.addEventListener('change', function() {
+      // Check if "Arrived" is selected
+    try{
+        if (this.value === 'Arrived') { //Make this dynamic
+        // Create iframe if it doesn't exist
+        let iframe = document.getElementById('arrivedIframe');
+        const category = document.getElementById('form_category').value;
+        const provider = document.querySelector('select[name="form_provider"]').value;
+
+        const eventDate = document.getElementById('form_date').value;
+        const eventHour = document.querySelector('input[name="form_hour"]').value;
+        const eventMinute = document.querySelector('input[name="form_minute"]').value;
+        const ampm = document.querySelector('select[name="form_ampm"]').value;
+        const dateTime = `${eventDate} ${eventHour}:${eventMinute} ${ampm ? 'am' : 'pm'}`;
+        const formatedDateTime = parent.convertDateFormat(dateTime);
+        console.log("Formated Date Time: " + formatedDateTime)
+        if (!iframe) {
+          iframe = document.createElement('iframe');
+          iframe.id = 'encounterPopup';
+          <?php
+          if(isset($formId)){
+            echo("iframe.src = '/bsemr/interface/patient_file/encounter/view_form.php?id=" . $formId . "&formname=newpatient&iframeMode=true';");
+          }else {
+            echo ('iframe.src = `/bsemr/interface/forms/newpatient/new.php?autoloaded=1&dateOfService=${formatedDateTime}&provider=${provider}&pc_catid=${category}&calenc=&iframeMode=true&eid=' . $eid . '`;');
+          }
+           ?>
+          
+          iframe.style.width = '100%';
+          iframe.style.height = '500px';
+          iframe.style.border = '1px solid #ccc';
+          iframe.style.marginTop = '15px';
+          
+          // Add iframe after the form group div
+          this.closest('.col-sm.form-group').after(iframe);
+        } else {
+          // Show existing iframe if hidden
+          iframe.style.display = 'block';
+        }
+      } else {
+        // Hide iframe if not "Arrived"
+        closeEncounterPopup();
+      }
+    }catch(error) {
+        console.error('Error checking appointment status dropdown:', error);
+    }
+    });
+    
+    // Trigger the change event in case "Arrived" is already selected on page load
+    apptStatusDropdown.dispatchEvent(new Event('change'));
+  }
+}catch(error){
+    console.error('Error adding change event listener for appointment status dropdown:', error);
+}
+});
 <?php require $GLOBALS['srcdir'] . "/formatting_DateToYYYYMMDD_js.js.php" ?>
 
  var mypcc = '<?php echo $GLOBALS['phone_country_code'] ?>';
@@ -1774,7 +1857,8 @@ function isRegularRepeat($repeat)
     </div>
 </div>
 <div class="form-row mx-2">
-    <div class="col-sm form-group">
+    <div class="col-sm form-group" <?php echo isset($_GET['eid']) ? '' : 'hidden'; ?>>
+        <!-- Status Select -->
         <label id='title_apptstatus'><?php echo xlt('Status'); ?>:</label>
         <label id='title_prefcat' class='font-weight-bold' style='display:none'><?php echo xlt('Pref Cat'); ?>:</label>
         <?php

@@ -110,3 +110,22 @@ async function startMeeting(pcEid) {
         alert(`Error: ${error.message}`);
     }
 }
+
+function convertDateFormat(dateString) {
+    console.log("Date String: ", dateString);
+
+    // Use regex to properly separate date, time, and AM/PM
+    const match = dateString.match(/^(\d{2})\/(\d{2})\/(\d{4}) (\d{1,2}):(\d{2}) (am|pm)$/);
+
+    if (!match) {
+        console.error("Invalid date format");
+        return null;
+    }
+
+    // Extract parts using regex groups
+    const [, day, month, year, hoursRaw, minutes, period] = match;
+
+    // Format with leading zeros where needed
+    return `${day}/${month}/${year} ${hoursRaw}:${minutes} ${period}`;
+
+}

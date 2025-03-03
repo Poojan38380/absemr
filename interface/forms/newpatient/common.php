@@ -38,7 +38,7 @@ $days = array("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", 
     "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31");
 $thisyear = date("Y");
 $years = array($thisyear - 1, $thisyear, $thisyear + 1, $thisyear + 2);
-
+$iframeMode = isset($_GET['iframeMode']) ? $_GET['iframeMode'] : 'false';
 $mode = (!empty($_GET['mode'])) ? $_GET['mode'] : null;
 
 // "followup" mode is relevant when enable follow up encounters global is enabled
@@ -156,6 +156,7 @@ $ires = sqlStatement("SELECT id, type, title, begdate FROM lists WHERE " .
                 if (submit) {
                     top.restoreSession();
                     $('#new-encounter-form').submit();
+                    parent.closeEncounterPopup();
                 }
             }
 
@@ -236,8 +237,15 @@ $ires = sqlStatement("SELECT id, type, title, begdate FROM lists WHERE " .
         // Handler for cancel clicked when not creating a new encounter.
         // Just reload the view mode.
         function cancelClickedOld() {
-            location.href = '<?php echo "$rootdir/patient_file/encounter/forms.php"; ?>';
-            return false;
+            if(<?php echo $iframeMode ?> && <?php echo $viewmode ?>){
+                parent.closeEncounterPopup();
+            } else if(<?php echo $iframeMode ?>){
+                parent.cancelEncounterPopup();
+            }
+            else{
+                location.href = '<?php echo "$rootdir/patient_file/encounter/forms.php"; ?>';
+                return false;
+            }
         }
 
     </script>
@@ -324,8 +332,10 @@ $ires = sqlStatement("SELECT id, type, title, begdate FROM lists WHERE " .
             <?php if ($viewmode && $mode !== "followup") { ?>
                 <input type='hidden' name='mode' value='update' />
                 <input type='hidden' name='id' value='<?php echo (isset($_GET["id"])) ? attr($_GET["id"]) : '' ?>' />
-            <?php } else { ?>
-                <input type='hidden' name='mode' value='new' />
+                <?php } else { ?>
+                    <input type='hidden' name='mode' value='new' />
+                    <input type='hidden' name='eid' value='<?php echo $_GET['eid']  ?>' />
+                    <input type='hidden' name='createPatientTracker' value='<?php echo $iframeMode ? 'true' : 'false' ?>' />
             <?php } ?>
             <input type="hidden" name="csrf_token_form" value="<?php echo attr(CsrfUtils::collectCsrfToken()); ?>" />
 
@@ -391,7 +401,8 @@ $ires = sqlStatement("SELECT id, type, title, begdate FROM lists WHERE " .
                                         if ($viewmode) {
                                             $selected = ($result['pc_catid'] == $catId) ? " selected" : "";
                                         } else {
-                                            $selected = ($GLOBALS['default_visit_category'] == $catId) ? " selected" : "";
+                                            $defaultValue = isset($_GET['pc_catid']) ? $_GET['pc_catid'] : $GLOBALS['default_visit_category'];
+                                            $selected = ($defaultValue == $catId) ? " selected" : "";
                                         }
 
                                         $optionStr = str_replace("%selected%", $selected, $optionStr);
@@ -464,7 +475,7 @@ $ires = sqlStatement("SELECT id, type, title, begdate FROM lists WHERE " .
                         <div class="col-sm <?php displayOption('enc_service_date');?>">
                             <div class="form-group">
                                 <label for='form_date' class="text-right"><?php echo xlt('Date of Service:'); ?></label>
-                                <input type='text' class='form-control datepicker' name='form_date' id='form_date' <?php echo ($disabled ?? '') ?> value='<?php echo $viewmode ? attr(oeFormatDateTime($result['date'])) : attr(oeFormatDateTime(date('Y-m-d H:i:00'))); ?>' title='<?php echo xla('Date of service'); ?>' />
+                                <input type='text' class='form-control datepicker' name='form_date' id='form_date' <?php echo ($disabled ?? '') ?> value='<?php echo $viewmode ? attr(oeFormatDateTime($result['date'])) : attr(isset($_GET['dateOfService']) ? $_GET['dateOfService'] : oeFormatDateTime(date('Y-m-d H:i:00'))); ?>' title='<?php echo xla('Date of service'); ?>' />
                             </div>
                         </div>
                         <div class="col-sm <?php echo ($GLOBALS['gbl_visit_onset_date'] == 1) ?: 'd-none'; ?>">
@@ -510,6 +521,8 @@ $ires = sqlStatement("SELECT id, type, title, begdate FROM lists WHERE " .
                                     <?php
                                     if ($viewmode) {
                                         $provider_id = $result['provider_id'];
+                                    } elseif(isset($_GET['provider'])) {
+                                        $provider_id = $_GET['provider'];
                                     }
                                     $userService = new UserService();
                                     $users = $userService->getActiveUsers();
