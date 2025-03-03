@@ -126,7 +126,9 @@ if ($mode == 'new') {
             $encounter_type_description
         ]
     );
-    if ($createPatientTracker) {
+    error_log('$encounter_id');
+    error_log(json_encode($encounterId));
+    if ($createPatientTracker && isset($encounterId)) {
         $provider = sqlQuery('SELECT username FROM users WHERE id = ?', [$provider_id]);
         $provider_name = $provider['username'];
         sqlInsert(
@@ -254,7 +256,9 @@ $result4 = sqlStatement("SELECT fe.encounter,fe.date,openemr_postcalendar_catego
         <?php if ($mode == 'new') { ?>
         my_left_nav.setEncounter(<?php echo js_escape(oeFormatShortDate($date)) . ", " . js_escape($encounter) . ", window.name"; ?>);
         // Load the tab set for the new encounter, w is usually the RBot frame.
-        // w.location.href = '<?php echo "$rootdir/patient_file/encounter/encounter_top.php"; ?>';
+        if(!$createPatientTracker){
+            w.location.href = '<?php echo "$rootdir/patient_file/encounter/encounter_top.php"; ?>';
+        }
         <?php } else { // not new encounter ?>
         // Always return to encounter summary page.
         window.location.href = '<?php echo "$rootdir/patient_file/encounter/forms.php"; ?>';

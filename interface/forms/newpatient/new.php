@@ -17,7 +17,7 @@ require_once("$srcdir/patient.inc");
 use OpenEMR\Common\Acl\AclMain;
 
 // Check permission to create encounters.
-$tmp = getPatientData(isset($_GET['pid']) ? $_GET['pid'] : $pid, "squad");
+$tmp = getPatientData($pid, "squad");
 if (
     ($tmp['squad'] && ! AclMain::aclCheckCore('squads', $tmp['squad'])) ||
     !AclMain::aclCheckForm('newpatient', '', array('write', 'addonly'))
