@@ -237,7 +237,7 @@ $ires = sqlStatement("SELECT id, type, title, begdate FROM lists WHERE " .
         // Handler for cancel clicked when not creating a new encounter.
         // Just reload the view mode.
         function cancelClickedOld() {
-            if(<?php echo $iframeMode ?> && <?php echo $viewmode ?>){
+            if(<?php echo $iframeMode ?> && <?php echo $viewmode ? 'true' : 'false' ?>){
                 parent.closeEncounterPopup();
             } else if(<?php echo $iframeMode ?>){
                 parent.cancelEncounterPopup();
