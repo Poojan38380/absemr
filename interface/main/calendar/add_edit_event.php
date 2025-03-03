@@ -1040,7 +1040,9 @@ if ($groupid) {
 
     function closeEncounterPopup() {
         console.log("Closing Encounter Popup");
-        document.getElementById("encounterPopup")?.remove();
+        setTimeout(() => {
+            document.getElementById("encounterPopup")?.remove();
+        },500)
     }
 
     function cancelEncounterPopup() {
