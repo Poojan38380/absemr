@@ -37,8 +37,9 @@ $facility_id = $_POST['facility_id'] ?? null;
 $billing_facility = $_POST['billing_facility'] ?? '';
 $reason = $_POST['reason'] ?? null;
 $mode = $_POST['mode'] ?? null;
-$createPatientTracker = $_POST['createPatientTracker'] ? true : false;
+$createPatientTracker = $_POST['createPatientTracker'] === "true" ? true : false;
 $eid=$_POST['eid'];
+$pid = $_POST['pid']?? $pid;
 $referral_source = $_POST['form_referral_source'] ?? null;
 $class_code = $_POST['class_code'] ?? '';
 $pos_code = $_POST['pos_code'] ?? null;
@@ -126,9 +127,7 @@ if ($mode == 'new') {
             $encounter_type_description
         ]
     );
-    error_log('$encounter_id');
-    error_log(json_encode($encounterId));
-    if ($createPatientTracker && isset($encounterId)) {
+    if ($createPatientTracker === true && isset($encounterId)) {
         $provider = sqlQuery('SELECT username FROM users WHERE id = ?', [$provider_id]);
         $provider_name = $provider['username'];
         sqlInsert(
@@ -256,7 +255,7 @@ $result4 = sqlStatement("SELECT fe.encounter,fe.date,openemr_postcalendar_catego
         <?php if ($mode == 'new') { ?>
         my_left_nav.setEncounter(<?php echo js_escape(oeFormatShortDate($date)) . ", " . js_escape($encounter) . ", window.name"; ?>);
         // Load the tab set for the new encounter, w is usually the RBot frame.
-        if(!$createPatientTracker){
+        if(!(<?php echo $createPatientTracker; ?> === true)){
             w.location.href = '<?php echo "$rootdir/patient_file/encounter/encounter_top.php"; ?>';
         }
         <?php } else { // not new encounter ?>

@@ -1081,7 +1081,7 @@ try{
           if(isset($formId)){
             echo("iframe.src = '/bsemr/interface/patient_file/encounter/view_form.php?id=" . $formId . "&formname=newpatient&iframeMode=true';");
           }else {
-            echo ('iframe.src = `/bsemr/interface/forms/newpatient/new.php?autoloaded=1&dateOfService=${formatedDateTime}&provider=${provider}&pc_catid=${category}&calenc=&iframeMode=true&eid=' . $eid . '`;');
+            echo ('iframe.src = `/bsemr/interface/forms/newpatient/new.php?autoloaded=1&dateOfService=${formatedDateTime}&provider=${provider}&pc_catid=${category}&calenc=&iframeMode=true&eid=' . $eid . "&pid=$patientid". '`;');
           }
            ?>
           

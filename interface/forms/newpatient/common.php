@@ -40,6 +40,7 @@ $thisyear = date("Y");
 $years = array($thisyear - 1, $thisyear, $thisyear + 1, $thisyear + 2);
 $iframeMode = isset($_GET['iframeMode']) ? $_GET['iframeMode'] : 'false';
 $mode = (!empty($_GET['mode'])) ? $_GET['mode'] : null;
+$pid = isset($_GET['pid']) ? $_GET['pid'] : $pid;
 
 // "followup" mode is relevant when enable follow up encounters global is enabled
 // it allows the user to duplicate past encounter and connect between the two
@@ -331,14 +332,20 @@ $ires = sqlStatement("SELECT id, type, title, begdate FROM lists WHERE " .
             <?php } ?>
             <?php if ($viewmode && $mode !== "followup") { ?>
                 <input type='hidden' name='mode' value='update' />
+                <input type='hidden' name='eid' value='<?php echo $_GET['eid']  ?>' />
                 <input type='hidden' name='id' value='<?php echo (isset($_GET["id"])) ? attr($_GET["id"]) : '' ?>' />
                 <?php } else { ?>
                     <input type='hidden' name='mode' value='new' />
                     <input type='hidden' name='eid' value='<?php echo $_GET['eid']  ?>' />
-                    <input type='hidden' name='createPatientTracker' value='<?php echo $iframeMode ? 'true' : 'false' ?>' />
+                    <input type='hidden' name='createPatientTracker' value='<?php echo $iframeMode ?>' />
             <?php } ?>
             <input type="hidden" name="csrf_token_form" value="<?php echo attr(CsrfUtils::collectCsrfToken()); ?>" />
-
+            <?php
+            if(isset($_GET['pid'])){
+                echo "<input type='hidden' name='pid' value='" . $_GET['pid']  ."' />";
+            }
+             ?>
+            
             <?php if ($mode === "followup") { ?>
                 <input type='hidden' name='parent_enc_id' value='<?php echo attr($encounterId); ?>' />
             <?php } ?>

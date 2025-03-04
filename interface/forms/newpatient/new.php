@@ -16,6 +16,8 @@ require_once("$srcdir/patient.inc");
 
 use OpenEMR\Common\Acl\AclMain;
 
+$pid = isset($_GET['pid']) ? $_GET['pid'] : $pid;
+error_log("Patient Id: ".$pid);
 // Check permission to create encounters.
 $tmp = getPatientData($pid, "squad");
 if (
