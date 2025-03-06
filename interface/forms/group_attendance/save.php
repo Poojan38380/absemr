@@ -23,6 +23,13 @@ if (!$can_edit) {
     formJump();
 }
 
+if(isset($_POST['encounterId'])){
+    $encounter = $_POST['encounterId'];
+}
+if(isset($_POST['groupId'])){
+    $therapy_group = $_POST['groupId'];
+}
+
 // Get relevant data from group appt (the appt that created the group encounter)
 $appt_data = get_appt_data($encounter);
 
@@ -35,8 +42,11 @@ if ($_GET['mode'] == 'new') {
     $newid = largest_id_plus_one('form_group_attendance');
 
     // Insert into 'forms' table
-    addForm($encounter, "Group Attendance Form", $newid, "group_attendance", null, $userauthorized);
-
+    if (isset($_POST['groupId'])) {
+        addForm($encounter, "Group Attendance Form", $newid, "group_attendance", null, $userauthorized, "", "", "",$therapy_group);
+    } else {
+        addForm($encounter, "Group Attendance Form", $newid, "group_attendance", null, $userauthorized);
+    }
     // Insert into form_group_attendance table
     $sql_for_table_ftga = "INSERT INTO form_group_attendance (id, date, group_id, user, groupname, authorized, encounter_id, activity) " .
         "VALUES(?,NOW(),?,?,?,?,?,?);";

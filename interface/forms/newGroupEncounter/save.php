@@ -31,8 +31,10 @@ if (!CsrfUtils::verifyCsrfToken($_POST["csrf_token_form"])) {
 
 $facilityService = new FacilityService();
 
-$group_id = $_SESSION['therapy_group'];
+$group_id = isset($_POST['group_id']) ? $_POST['group_id'] : $_SESSION['therapy_group'];
+$eid = isset($_POST['eid']) ? $_POST['eid'] : null;
 $provider_id = $userauthorized ? $_SESSION['authUserID'] : 0;
+$createPatientTracker = isset($_POST['createPatientTracker']) ? true : false;
 
 $date             = (isset($_POST['form_date']))            ? DateToYYYYMMDD($_POST['form_date']) : '';
 $onset_date       = (isset($_POST['form_onset_date']))      ? DateToYYYYMMDD($_POST['form_onset_date']) : '';
@@ -53,47 +55,64 @@ $facility = $facilityresult['name'];
 if ($mode == 'new') {
     $provider_id = $userauthorized ? $_SESSION['authUserID'] : 0;
     $encounter = generate_id();
+    $encounterId = sqlInsert(
+        "INSERT INTO form_groups_encounter SET
+            date = ?,
+            onset_date = ?,
+            reason = ?,
+            facility = ?,
+            pc_catid = ?,
+            facility_id = ?,
+            billing_facility = ?,
+            sensitivity = ?,
+            referral_source = ?,
+            group_id = ?,
+            encounter = ?,
+            pos_code = ?,
+            provider_id = ?,
+            counselors = ?",
+        [
+            $date,
+            $onset_date,
+            $reason,
+            $facility,
+            $pc_catid,
+            $facility_id,
+            $billing_facility,
+            $sensitivity,
+            $referral_source,
+            $group_id,
+            $encounter,
+            $pos_code,
+            $provider_id,
+            $counselors
+        ]
+    );
     addForm(
         $encounter,
         "New Therapy Group Encounter",
-        sqlInsert(
-            "INSERT INTO form_groups_encounter SET
-                date = ?,
-                onset_date = ?,
-                reason = ?,
-                facility = ?,
-                pc_catid = ?,
-                facility_id = ?,
-                billing_facility = ?,
-                sensitivity = ?,
-                referral_source = ?,
-                group_id = ?,
-                encounter = ?,
-                pos_code = ?,
-                provider_id = ?,
-                counselors = ?",
-            [
-                $date,
-                $onset_date,
-                $reason,
-                $facility,
-                $pc_catid,
-                $facility_id,
-                $billing_facility,
-                $sensitivity,
-                $referral_source,
-                $group_id,
-                $encounter,
-                $pos_code,
-                $provider_id,
-                $counselors
-            ]
-        ),
+        $encounterId,
         "newGroupEncounter",
         null,
         $userauthorized,
-        $date
+        $date,
+        "",
+        "",
+        $group_id
     );
+    if ($createPatientTracker === true && isset($encounterId)) {
+        $provider = sqlQuery('SELECT username FROM users WHERE id = ?', [$provider_id]);
+        $provider_name = $provider['username'];
+        sqlInsert(
+            "INSERT INTO encounter_tracker SET
+                    eid = ?,
+                    encounter = ?;",
+            [
+                $eid,
+                $encounter,
+            ]
+        );
+    }
 } elseif ($mode == 'update') {
     $id = $_POST["id"];
     $result = sqlQuery("SELECT encounter, sensitivity FROM form_groups_encounter WHERE id = ?", array($id));

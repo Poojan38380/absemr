@@ -932,10 +932,13 @@ if ($eid) {
     
     $trackingData = sqlQuery("SELECT * FROM encounter_tracker WHERE eid = ?", [$eid] );
     $encounterId = $trackingData['encounter'];
-    $formEncounter = sqlQuery("SELECT * FROM form_encounter WHERE encounter = ?", [$encounterId] );
+    $formEncounter = isset($groupid) && $groupid !== '0' ? sqlQuery("SELECT * FROM form_groups_encounter WHERE encounter = ? ", [$encounterId]) : sqlQuery("SELECT * FROM form_encounter WHERE encounter = ?", [$encounterId] );
     error_log( '$trackingData');
     error_log( json_encode($formEncounter));
     $formId = $formEncounter['id'];
+    if(isset($formId) && isset($encounterId)){
+        $attendanceForm = sqlQuery("SELECT * FROM form_group_attendance WHERE encounter_id = ?", [$encounterId]);
+    }
     // error_log( '$trackingData');
     // error_log( json_encode($trackingData));
     // error_log($encounterId);
@@ -1038,6 +1041,38 @@ if ($groupid) {
     ?>
 <script>
 
+    function openGroupAttendance(){
+        console.log("Opening Group Attendance");
+        <?php
+            if (!(isset($formId))) {
+                echo ("alert('Encounter Form not found for this event. Please ensure you have the correct form.');");
+            }
+            ?>
+            let iframe = document.getElementById('attendancePopup');
+            if (!iframe) {
+                iframe = document.createElement('iframe');
+                iframe.id = 'attendancePopup';
+                <?php
+                if (isset($formId)) {
+                    echo ("iframe.src = '/bsemr/interface/patient_file/encounter/view_form.php?id=" . $formId . "&formname=newpatient&iframeMode=true';");
+                } else {
+                    echo ('iframe.src = `/bsemr/interface/forms/newGroupEncounter/new.php?autoloaded=1&dateOfService=${eventDate}&provider=${provider}&pc_catid=${category}&calenc=&iframeMode=true&eid=' . $eid . "&gid=$groupid" . '`;');
+                }
+                ?>
+
+                iframe.style.width = '100%';
+                iframe.style.height = '500px';
+                iframe.style.border = '1px solid #ccc';
+                iframe.style.marginTop = '15px';
+
+                // Add iframe after the form group div
+                // this.closest('.col-sm.form-group').after(iframe);
+            } else {
+                // Show existing iframe if hidden
+                iframe.style.display = 'block';
+            }
+        }
+
     function closeEncounterPopup() {
         console.log("Closing Encounter Popup");
         setTimeout(() => {
@@ -1046,6 +1081,7 @@ if ($groupid) {
     }
 
     function cancelEncounterPopup() {
+        console.log("Going too Good");
         closeEncounterPopup();
         const apptStatusDropdown = document.querySelector('select[name="form_apptstatus"]');
         apptStatusDropdown.value = '-';
@@ -1054,6 +1090,42 @@ if ($groupid) {
     document.addEventListener('DOMContentLoaded', function() {
   // Get the appointment status dropdown
 try{    
+    const attendanceButton = document.getElementById('attendance');
+    if(attendanceButton){
+        attendanceButton.addEventListener('click', function() {
+      // Check if "Arrived" is selected
+    try{
+        // Create iframe if it doesn't exist
+        let iframe = document.getElementById('encounterPopup');
+        if (!iframe) {
+          iframe = document.createElement('iframe');
+          iframe.id = 'encounterPopup';
+          <?php
+          if(isset($formId)){
+            if(isset($attendanceForm)){
+                $attendanceFormId = $attendanceForm['id'];
+                echo "iframe.src = '/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&attendanceFormId=$attendanceFormId'";
+            } else{
+                echo "iframe.src = '/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId'";
+            }
+          }
+            ?>
+          
+          iframe.style.width = '100%';
+          iframe.style.height = '500px';
+          iframe.style.border = '1px solid #ccc';
+          iframe.style.marginTop = '15px';
+          
+          // Add iframe after the form group div
+          this.closest('.col-sm.form-group').after(iframe);
+        } 
+    
+    }catch(error) {
+        console.error('Error checking appointment status dropdown:', error);
+    }
+    });
+    
+    }
     const apptStatusDropdown = document.querySelector('select[name="form_apptstatus"]');
   
   if (apptStatusDropdown) {
@@ -1063,7 +1135,7 @@ try{
     try{
         if (this.value === 'Arrived') { //Make this dynamic
         // Create iframe if it doesn't exist
-        let iframe = document.getElementById('arrivedIframe');
+        let iframe = document.getElementById('encounterPopup');
         const category = document.getElementById('form_category').value;
         const provider = document.querySelector('select[name="form_provider"]').value;
 
@@ -1096,7 +1168,33 @@ try{
           // Show existing iframe if hidden
           iframe.style.display = 'block';
         }
-      } else {
+      } else if(this.value === 'tookPlace'){
+        <?php   if(isset($formId)){
+            echo("return;");
+          } ?>
+        let iframe = document.getElementById('encounterPopup');
+        const category = document.getElementById('form_category').value;
+        const provider = document.querySelector('select[name="form_provider"]').value;
+        const eventDate = document.getElementById('form_date').value;
+        if (!iframe) {
+          iframe = document.createElement('iframe');
+          iframe.id = 'encounterPopup';
+          <?php
+          echo ('iframe.src = `/bsemr/interface/forms/newGroupEncounter/new.php?autoloaded=1&dateOfService=${eventDate}&provider=${provider}&pc_catid=${category}&calenc=&iframeMode=true&eid=' . $eid . "&gid=$groupid" . '`;');
+          ?>
+          
+          iframe.style.width = '100%';
+          iframe.style.height = '500px';
+          iframe.style.border = '1px solid #ccc';
+          iframe.style.marginTop = '15px';
+          
+          // Add iframe after the form group div
+          this.closest('.col-sm.form-group').after(iframe);
+        } else {
+          // Show existing iframe if hidden
+          iframe.style.display = 'block';
+        }
+      }else {
         // Hide iframe if not "Arrived"
         closeEncounterPopup();
       }
@@ -1887,6 +1985,21 @@ if (empty($_GET['prov'])) { ?>
     </div>
     <?php } ?>
 </div><!-- status row -->
+<?php 
+if(isset($formId) && isset($groupid) && $groupid !== '0'){
+?>
+    <div class="form-row mx-2">
+    <div class="col-sm form-group" <?php echo isset($_GET['eid']) ? '' : 'hidden'; ?>>
+        <!-- Status Select -->
+        <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-secondary" type='button' id='attendance'
+            value='<?php echo xla('Group Attendance'); ?>' />
+
+    </div>
+</div>
+<?php
+}
+?>
+
 <div class="form-row mx-2">
     <div class="col-sm form-group">
         <label><?php echo xlt('Comments'); ?>:</label>

@@ -30,7 +30,15 @@ if (!$can_view && !$can_edit) {
 }
 
 $statuses_in_meeting = getGroupAttendanceStatuses();
-
+if (isset($_GET['gid'])) {
+    $therapy_group = $_GET['gid'];
+}
+if (isset($_GET['attendanceFormId'])) {
+    $id = $_GET['attendanceFormId'];
+}
+if (isset($_GET['encounterId'])) {
+    $encounter = $_GET['encounterId'];
+}
 $returnurl = 'encounter_top.php';
 
 //If editing form, get participants from therapy_groups_participant_attendance table. Otherwise get from therapy_groups_participants table.
@@ -71,6 +79,16 @@ if ($form_id) {//If editing a form or the form already exists (inwhich case will
 <?php } else { ?>
 <form id="group_attendance_form" method='post' onclick="top.restoreSession();" action="<?php echo $rootdir;?>/forms/group_attendance/save.php?mode=new" name="my_form">
 <?php } ?>
+    <?php 
+    if(isset($_GET['encounterId'])){
+    ?>
+    <input type="hidden" name="encounterId" value="<?php echo $_GET['encounterId'];?>" />
+    <?php } ?>
+    <?php 
+    if(isset($_GET['gid'])){
+    ?>
+    <input type="hidden" name="groupId" value="<?php echo $_GET['gid'];?>" />
+    <?php } ?>
     <div id="add_participant">
         <div class="button_wrap">
             <span class='title'><?php echo xlt('Group Attendance Form'); ?></span>

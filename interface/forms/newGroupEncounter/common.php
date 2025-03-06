@@ -26,6 +26,7 @@ use OpenEMR\Services\FacilityService;
 
 $facilityService = new FacilityService();
 
+$iframeMode = isset($_GET['iframeMode']) ? true : false;
 $months = array("01","02","03","04","05","06","07","08","09","10","11","12");
 $days = array("01","02","03","04","05","06","07","08","09","10","11","12","13","14",
   "15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31");
@@ -103,6 +104,7 @@ require_once($GLOBALS['srcdir'] . "/validation/validation_script.js.php"); ?>
      if (submit) {
        top.restoreSession();
        $('#new-encounter-form').submit();
+       parent.closeEncounterPopup();
      }
    }
 
@@ -126,7 +128,14 @@ ajax_bill_loc(pid,dte,facility);
 // Handler for Cancel clicked when creating a new encounter.
 // Show demographics or encounters list depending on what frame we're in.
 function cancelClickedNew() {
-    window.parent.left_nav.loadFrame('ens1', window.name, 'patient_file/history/encounters.php');
+    if(<?php echo $iframeMode ?> && <?php echo $viewmode ? 'true' : 'false' ?>) {
+        parent.closeEncounterPopup();
+    } else if (<?php echo $iframeMode ?>) {
+        console.log("Going Good");
+        parent.cancelEncounterPopup();
+    } else{
+        window.parent.left_nav.loadFrame('ens1', window.name, 'patient_file/history/encounters.php');
+    }
     return false;
 }
 
@@ -134,6 +143,7 @@ function cancelClickedNew() {
 // Just reload the view mode.
 function cancelClickedOld() {
     location.href = '<?php echo "$rootdir/patient_file/encounter/forms.php"; ?>';
+
     return false;
 }
 
@@ -168,11 +178,20 @@ $help_icon = '';
                 <h2><?php echo text($heading_caption); ?><?php echo $help_icon; ?></h2>
             </div>
             <form id="new-encounter-form" method='post' action="<?php echo $rootdir ?>/forms/newGroupEncounter/save.php" name='new_encounter'>
-                <?php if ($viewmode) { ?>
+                    <input type="hidden" name='eid' value='<?php echo (isset($_GET["eid"])) ? attr($_GET["eid"]) : '' ?>' />
+                    <?php if ($viewmode) { ?>
                     <input type="hidden" name='mode' value='update' />
                     <input type="hidden" name='id' value='<?php echo (isset($_GET["id"])) ? attr($_GET["id"]) : '' ?>' />
                 <?php } else { ?>
                     <input type='hidden' name='mode' value='new' />
+                    <?php
+                    if($iframeMode===true) {
+                        echo "<input type='hidden' name='createPatientTracker' value='true' />";
+                    }
+                    if(isset($groupId)){
+                        echo "<input type='hidden' name='group_id' value='$groupId'/>";
+                    }
+                     ?>
                 <?php } ?>
                 <fieldset>
                     <input type="hidden" name="csrf_token_form" value="<?php echo attr(CsrfUtils::collectCsrfToken()); ?>" />
@@ -252,7 +271,7 @@ $help_icon = '';
                             <label for='form_date' class="col-form-label col-sm-2"><?php echo xlt('Date of Service'); ?>:</label>
                             <div class="col-sm-3">
                                 <input type='text' class='form-control datepicker' name='form_date' id='form_date' <?php echo $disabled ?>
-                                       value='<?php echo $viewmode ? attr(oeFormatShortDate(substr($result['date'], 0, 10))) : attr(oeFormatShortDate(date('Y-m-d'))); ?>'
+                                       value='<?php echo $viewmode ? attr(oeFormatShortDate(substr($result['date'], 0, 10))) : (isset($_GET['dateOfService']) ? $_GET['dateOfService'] : attr(oeFormatShortDate(date('Y-m-d')))); ?>'
                                        title='<?php echo xla('Date of service'); ?>'/>
                             </div>
 

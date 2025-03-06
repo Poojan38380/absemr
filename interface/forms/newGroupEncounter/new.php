@@ -39,6 +39,7 @@ if (($tmp['squad'] && ! AclMain::aclCheckCore('squads', $tmp['squad'])) ||
 
 $viewmode = false;
 if (AclMain::aclCheckCore("groups", "glog", false, 'write')) {
+    $groupId = isset($_GET['gid']) ? $_GET['gid'] : null;
     require_once("common.php");
 } else {
     echo xlt("access not allowed");
