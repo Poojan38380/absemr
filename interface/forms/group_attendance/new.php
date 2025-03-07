@@ -155,8 +155,19 @@ if ($form_id) {//If editing a form or the form already exists (inwhich case will
     </div>
 </form>
 <script>
-    $(function () {
+    <?php
+    if (isset($_GET['gid'])) {
+        ?>
 
+const form = document.getElementById("group_attendance_form");
+form.addEventListener("submit",() => {
+    parent.closeEncounterPopup();
+})
+        
+
+            <?php } ?>
+    $(function () {
+        
         /* Initialise Datatable */
         var table = $('#group_attendance_form_table').DataTable({
             initComplete: function () {
