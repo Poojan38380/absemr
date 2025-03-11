@@ -156,12 +156,12 @@ if ($form_id) {//If editing a form or the form already exists (inwhich case will
 </form>
 <script>
     <?php
-    if (isset($_GET['gid'])) {
+    if (isset($_GET['iframeMode']) == true) {
         ?>
 
 const form = document.getElementById("group_attendance_form");
 form.addEventListener("submit",() => {
-    parent.closeEncounterPopup();
+    parent.submitEventForm();
 })
         
 
@@ -271,7 +271,11 @@ form.addEventListener("submit",() => {
         /* Form elements */
         $('.cancel').on('click', function () {
             top.restoreSession();
+            <?php if($_GET['iframeMode'] == true) { ?>
+                parent.closeEncounterPopup();
+            <?php } else {?>
             parent.closeTab(window.name, false);
+            <?php }?>
         });
 
 

@@ -156,8 +156,8 @@ $ires = sqlStatement("SELECT id, type, title, begdate FROM lists WHERE " .
                 const submit = submitme(1, event, 'new-encounter-form', collectvalidation);
                 if (submit) {
                     top.restoreSession();
-                    $('#new-encounter-form').submit();
-                    parent.closeEncounterPopup();
+                    $('#new-encoufnter-form').submit();
+                    parent.submitEventForm();
                 }
             }
 

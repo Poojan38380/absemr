@@ -1080,6 +1080,18 @@ if ($groupid) {
         },500)
     }
 
+    function submitEventForm() {
+        console.log("Function is called");
+        const saveButton = document.getElementById('form_save');
+        console.log("The form: ");
+        console.log(saveButton);
+        if(saveButton){
+            console.log("Submitting the form");
+         saveButton.click();   
+        }
+        
+    }
+
     function cancelEncounterPopup() {
         console.log("Going too Good");
         closeEncounterPopup();
@@ -1104,9 +1116,9 @@ try{
           if(isset($formId)){
             if(isset($attendanceForm)){
                 $attendanceFormId = $attendanceForm['id'];
-                echo "iframe.src = '/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&attendanceFormId=$attendanceFormId'";
+                echo "iframe.src = '/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&attendanceFormId=$attendanceFormId&iframeMode=true'";
             } else{
-                echo "iframe.src = '/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId'";
+                echo "iframe.src = '/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&iframeMode=true'";
             }
           }
             ?>
