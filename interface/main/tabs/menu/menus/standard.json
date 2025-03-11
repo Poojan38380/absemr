@@ -2349,16 +2349,33 @@
     "requirement": 0
   },
   {
-    "label": "Zoom Credentials",
+    "label": "Others",
     "menu_id": "zom0",
-    "target": "zom",
-    "url": "/interface/zoom/zoomCredentials.php",
-    "children": [],
-    "requirement": 0,
-    "acl_req": [
-      "patients",
-      "appt"
-    ],
-    "global_req_strict": []
+    "children": [
+      {
+        "label": "Zoom Credentials",
+        "menu_id": "Popup:Issues",
+        "url": "/interface/zoom/zoomCredentials.php",
+        "target": "pop",
+        "children": [],
+        "requirement": 0,
+        "acl_req": [
+          "patients",
+          "med"
+        ]
+      },
+      {
+        "label": "Processing Fee",
+        "menu_id": "Popup:Issues",
+        "url": "/interface/others/processingFee.php",
+        "target": "pop",
+        "children": [],
+        "requirement": 0,
+        "acl_req": [
+          "patients",
+          "med"
+        ]
+      }
+    ]
   }
 ]
