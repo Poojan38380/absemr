@@ -1057,9 +1057,7 @@ if ($groupid) {
                 <?php
                 if (isset($formId)) {
                     echo ("iframe.src = '/bsemr/interface/patient_file/encounter/view_form.php?id=" . $formId . "&formname=newpatient&iframeMode=true';");
-                } else {
-                    echo ('iframe.src = `/bsemr/interface/forms/newGroupEncounter/new.php?autoloaded=1&dateOfService=${eventDate}&provider=${provider}&pc_catid=${category}&calenc=&iframeMode=true&eid=' . $eid . "&gid=$groupid" . '`;');
-                }
+                } 
                 ?>
 
                 iframe.style.width = '100%';
@@ -1608,7 +1606,7 @@ function find_available(extra) {
         <li class="nav-item">
             <a class="nav-link<?php echo $normal;?>" href='add_edit_event.php?startampm=<?php echo attr($startm);?>&starttimeh=<?php echo attr($starth);?>&userid=<?php echo attr($uid);?>&starttimem=<?php echo attr($starttm);?>&date=<?php echo attr($dt);?>&catid=<?php echo attr($cid);?>'><?php echo xlt('Patient');?></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" hidden>
             <a class="nav-link<?php echo $provider_class;?>" href='add_edit_event.php?prov=true&startampm=<?php echo attr($startm);?>&starttimeh=<?php echo attr($starth);?>&userid=<?php echo attr($uid);?>&starttimem=<?php echo attr($starttm);?>&date=<?php echo attr($dt);?>&catid=<?php echo attr($cid);?>'><?php echo xlt('Provider');?></a>
         </li>
         <?php if ($have_group_global_enabled) :?>
@@ -2060,11 +2058,11 @@ if(isset($formId) && isset($groupid) && $groupid !== '0'){
 <div class="form-row mx-2 mt-3">
     <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-primary" type='button' name='form_save' id='form_save' value='<?php echo xla('Save'); ?>' />
     <?php if (!($GLOBALS['select_multi_providers'])) { //multi providers appt is not supported by check slot avail window, so skip ?>
-        <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-secondary" type='button' id='find_available' value='<?php echo xla('Find Available{{Provider}}'); ?>' />
+        <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-secondary" type='button' hidden id='find_available' value='<?php echo xla('Find Available{{Provider}}'); ?>' />
     <?php } ?>
     <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-danger" type='button' name='form_delete' id='form_delete' value='<?php echo xla('Delete'); ?>'<?php echo (!$eid) ? " disabled" : ""; ?> />
     <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-secondary" type='button' id='cancel' onclick="dlgclose()" value='<?php echo xla('Cancel'); ?>' />
-    <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-secondary" type='button' name='form_duplicate' id='form_duplicate' value='<?php echo xla('Create Duplicate'); ?>' />
+    <input hidden class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-secondary" type='button' name='form_duplicate' id='form_duplicate' value='<?php echo xla('Create Duplicate'); ?>' />
 </div>
 <?php if ($informant) {
     echo "<label><p class='text'>" . xlt('Last update by') . " " .
