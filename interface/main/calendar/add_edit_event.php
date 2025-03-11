@@ -930,6 +930,8 @@ if ($eid) {
     $repeats = $row['pc_recurrtype'];
     $multiple_value = $row['pc_multiple'];
     
+    $attendanceData = sqlQuery("SELECT * FROM event_attendance WHERE eid = ?", [$eid]);
+    $attendedPids = $attendanceData['pids'];
     $trackingData = sqlQuery("SELECT * FROM encounter_tracker WHERE eid = ?", [$eid] );
     $encounterId = $trackingData['encounter'];
     $formEncounter = isset($groupid) && $groupid !== '0' ? sqlQuery("SELECT * FROM form_groups_encounter WHERE encounter = ? ", [$encounterId]) : sqlQuery("SELECT * FROM form_encounter WHERE encounter = ?", [$encounterId] );
@@ -1114,11 +1116,11 @@ try{
           iframe.id = 'encounterPopup';
           <?php
           if(isset($formId)){
-            if(isset($attendanceForm)){
+            if(($attendanceForm)){
                 $attendanceFormId = $attendanceForm['id'];
                 echo "iframe.src = '/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&attendanceFormId=$attendanceFormId&iframeMode=true'";
             } else{
-                echo "iframe.src = '/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&iframeMode=true'";
+                echo "iframe.src = '/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&iframeMode=true&attendance=$attendedPids'";
             }
           }
             ?>

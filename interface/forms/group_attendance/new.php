@@ -124,16 +124,22 @@ if ($form_id) {//If editing a form or the form already exists (inwhich case will
         </tr>
         </thead>
         <tbody>
+        <?php $attendance = isset($_GET['attendance']) ? json_decode($_GET['attendance'],true) : []; ?>
         <?php foreach ($participants as $participant) {?>
             <tr>
                 <td ><?php echo text($participant['fname'] . ", " . $participant['lname']); ?></td>
                 <td ><?php echo text($participant['pid']); ?></td>
                 <td >
+                    <?php
+                        if(in_array($participant['pid'], $attendance)) {
+                            $attendedEvent = true;
+                        }
+                     ?>
                     <select class="form-control status_select" name="<?php echo "patientData[" . attr($participant['pid']) . "][status]" ;?>" <?php if (!$can_edit) {
                         ?> disabled <?php
                                                                      } ?> >
                         <?php foreach ($statuses_in_meeting as $status_in_meeting) {?>
-                            <option value="<?php echo attr($status_in_meeting['option_id']); ?>" <?php if ($participant['meeting_patient_status'] == $status_in_meeting['option_id']) {
+                            <option value="<?php echo attr($status_in_meeting['option_id']); ?>" <?php if (($attendedEvent && $status_in_meeting['option_id'] === '@') || ($participant['meeting_patient_status'] == $status_in_meeting['option_id'])) {
                                 echo 'selected';
                                            }?> > <?php echo xlt($status_in_meeting['title']); ?></option>
                         <?php } ?>
