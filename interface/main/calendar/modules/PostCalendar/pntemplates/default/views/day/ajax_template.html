@@ -744,7 +744,7 @@ foreach ($providers as $provider) {
                 else
                     $divTitle .= "\r\n[" . $catname . ' ' . $comment . "]" . $fname . " " . $lname;
                 $content .= "<span class='appointment'>";
-                $content .="<a class='link_title' data-pid='". attr($eid) . "' href='javascript:parent.startMeeting(" . attr_js($eid) . ")' title='Join'>Join</a>&nbsp;";
+                $content .="<a class='link_title' data-pid='". attr($event["eid"]) . "' href='javascript:parent.startMeeting(" . attr_js($event["eid"]) . ")' title='Join'>Join</a>&nbsp;";
                 $content .= create_event_time_anchor($dispstarth.":".$startm);
                 if ($event['recurrtype'] > 0) $content .= "<img src='{$this->_tpl_vars['TPL_IMAGE_PATH']}/repeating8.png' border='0' style='margin:0px 2px 0px 2px;' title='" . xla("Repeating event") . "' alt='" . xla("Repeating event") . "'>";
                 $content .= '&nbsp;' . text($event['apptstatus']);
