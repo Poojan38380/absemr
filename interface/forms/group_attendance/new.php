@@ -124,16 +124,21 @@ if ($form_id) {//If editing a form or the form already exists (inwhich case will
         </tr>
         </thead>
         <tbody>
-        <?php $attendance = isset($_GET['attendance']) ? json_decode($_GET['attendance'],true) : []; ?>
+        <?php
+         $attendance = isset($_GET['attendance']) ? json_decode($_GET['attendance'],true) : []; 
+         $reason = isset($_GET['reason']) ? $_GET['reason'] : "";
+         ?>
         <?php foreach ($participants as $participant) {?>
             <tr>
                 <td ><?php echo text($participant['fname'] . ", " . $participant['lname']); ?></td>
                 <td ><?php echo text($participant['pid']); ?></td>
                 <td >
                     <?php
+                       if(isset($attendance)){
                         if(in_array($participant['pid'], $attendance)) {
                             $attendedEvent = true;
                         }
+                       }
                      ?>
                     <select class="form-control status_select" name="<?php echo "patientData[" . attr($participant['pid']) . "][status]" ;?>" <?php if (!$can_edit) {
                         ?> disabled <?php
@@ -146,7 +151,7 @@ if ($form_id) {//If editing a form or the form already exists (inwhich case will
                     </select>
                 </td>
                 <td >
-                    <input class="form-control comment" type="text" name="<?php echo "patientData[" . attr($participant['pid']) . "][comment]";  ?>" value="<?php echo attr($participant['meeting_patient_comment']) ;?>" <?php if (!$can_edit) {
+                    <input class="form-control comment" type="text" name="<?php echo "patientData[" . attr($participant['pid']) . "][comment]";  ?>" value="<?php echo attr(isset($participant['meeting_patient_comment']) ? $participant['meeting_patient_comment'] : ($attendedEvent ? $reason : "")) ;?>" <?php if (!$can_edit) {
                         ?> disabled <?php } ?> ></input>
                 </td>
             </tr>

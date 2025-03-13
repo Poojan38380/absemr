@@ -153,11 +153,13 @@ $ires = sqlStatement("SELECT id, type, title, begdate FROM lists WHERE " .
         let collectvalidation = <?php echo $collectthis; ?>;
         $(function () {
             window.saveClicked = function (event) {
+                    console.log("Atleast Save was clicked");
                 const submit = submitme(1, event, 'new-encounter-form', collectvalidation);
                 if (submit) {
                     top.restoreSession();
-                    $('#new-encoufnter-form').submit();
+                    $('#new-encounter-form').submit();
                     parent.submitEventForm();
+                    console.log("Successfully submitted the from");
                 }
             }
 

@@ -44,7 +44,11 @@ if ($viewmode) {
         exit();
     }
 }
-
+$therapyGroupCategories = array();
+$query = sqlStatement("SELECT pc_catid FROM openemr_postcalendar_categories WHERE pc_cattype = 3 AND pc_active = 1");
+while ($result1 = sqlFetchArray($query)) {
+    $therapyGroupCategories[] = $result1['pc_catid'];
+}
 // Sort comparison for sensitivities by their order attribute.
 function sensitivity_compare($a, $b)
 {
@@ -100,11 +104,15 @@ require_once($GLOBALS['srcdir'] . "/validation/validation_script.js.php"); ?>
  var collectvalidation = <?php echo $collectthis; ?>;
  $(function () {
    window.saveClicked = function(event) {
+    console.log("Save was clicked");
      var submit = submitme(1, event, 'new-encounter-form', collectvalidation);
+     console.log(submit);
      if (submit) {
        top.restoreSession();
        $('#new-encounter-form').submit();
        parent.closeEncounterPopup();
+        console.log("Save working?");
+
      }
    }
 
@@ -128,16 +136,17 @@ ajax_bill_loc(pid,dte,facility);
 // Handler for Cancel clicked when creating a new encounter.
 // Show demographics or encounters list depending on what frame we're in.
 function cancelClickedNew() {
-    if(<?php echo $iframeMode ?> && <?php echo $viewmode ? 'true' : 'false' ?>) {
-        parent.closeEncounterPopup();
-    } else if (<?php echo $iframeMode ?>) {
-        console.log("Going Good");
-        parent.cancelEncounterPopup();
-    } else{
-        window.parent.left_nav.loadFrame('ens1', window.name, 'patient_file/history/encounters.php');
+    <?php
+        if ($iframeMode && $viewMode) {
+            $js = "parent.closeEncounterPopup();";
+        } else if ($iframeMode) {
+            $js = "parent.cancelEncounterPopup();";
+        } else {
+            $js = "window.location.href = '" . $GLOBALS['rootdir'] . "/patient_file/encounter/forms.php';";
+        }
+        echo $js;
+        ?>
     }
-    return false;
-}
 
 // Handler for cancel clicked when not creating a new encounter.
 // Just reload the view mode.
@@ -205,7 +214,7 @@ $help_icon = '';
                                     <option value='_blank'>-- <?php echo xlt('Select One'); ?> --</option>
                                     <?php
                                     $cres = sqlStatement("SELECT pc_catid, pc_catname, pc_cattype " .
-                                        "FROM openemr_postcalendar_categories where pc_active = 1 ORDER BY pc_seq ");
+                                        "FROM openemr_postcalendar_categories where pc_active = 1 AND pc_cattype = 3 ORDER BY pc_seq ");
                                     while ($crow = sqlFetchArray($cres)) {
                                         $catid = $crow['pc_catid'];
                                         if ($crow['pc_cattype'] != 3) {
