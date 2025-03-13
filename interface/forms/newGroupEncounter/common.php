@@ -110,7 +110,7 @@ require_once($GLOBALS['srcdir'] . "/validation/validation_script.js.php"); ?>
      if (submit) {
        top.restoreSession();
        $('#new-encounter-form').submit();
-       parent.closeEncounterPopup();
+       parent.submitEventForm();
         console.log("Save working?");
 
      }

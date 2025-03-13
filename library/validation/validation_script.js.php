@@ -48,7 +48,6 @@ if ($use_validate_js) {
 function submitme(new_validate,e,form_id, constraints) {
 
         top.restoreSession();
-        console.log("Validating");
 
         //Use the old validation script if no parameter sent (backward compatibility)
         //if we want to use the "old" validate function (set in globals) the validate function that will be called is the one that
@@ -75,8 +74,6 @@ function submitme(new_validate,e,form_id, constraints) {
             var form = document.querySelector("form#"+form_id);
             //gets all the "elements" in the form and sends them to the validate library
             //for more information @see https://validatejs.org/
-                console.log("Event");
-                console.log(e);
             var elements = validate.collectFormValues(form);
             var element, new_key;
 
