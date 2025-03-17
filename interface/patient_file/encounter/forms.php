@@ -74,6 +74,46 @@ $esignApi = new Api();
 if (file_exists(dirname(__FILE__) . "/../../forms/track_anything/style.css")) { ?>
  <script>
  var csrf_token_js = <?php echo js_escape(CsrfUtils::collectCsrfToken()); ?>;
+ async function syncFeeSheet(){
+  try {
+        console.log("Called");
+        const apiUrl = '/bsemr/interface/others/syncFeeSheet.php';
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({ 
+              pid: <?php echo $pid; ?> ,
+              encounterId: <?php echo $encounter;  ?>
+            })
+        });
+
+        const data = await response.json();
+        // Check if the HTTP response status is not OK (non-200)
+        if (!response.ok) {
+            throw new Error(`Error: ${data.message}: ${data.details}}`);
+        }
+
+        // Extract meeting data
+        const { price_level } = data.data;
+
+        console.log("Response:", data);
+
+        if(data.success){
+            alert("Successfully Synced FeeSheet");
+        }
+
+    } catch (error) {
+        // Log error to console for debugging
+        console.error("Error in startMeeting:", error);
+
+        // Show user-friendly error message
+        alert(`Error: ${error.message}`);
+    }
+}
+
  </script>
  <script src="<?php echo $GLOBALS['web_root']?>/interface/forms/track_anything/report.js"></script>
  <link rel="stylesheet" href="<?php echo $GLOBALS['web_root']?>/interface/forms/track_anything/style.css">
