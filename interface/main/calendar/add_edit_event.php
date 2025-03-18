@@ -1040,40 +1040,36 @@ if ($groupid) {
 
     ?>
 <script>
-
-    function openGroupAttendance(){
+    var blockAppointmentChangeEvent = true;
+    function openGroupAttendance() {
         console.log("Opening Group Attendance");
         <?php
-            if (!(isset($formId))) {
-                echo ("alert('Encounter Form not found for this event. Please ensure you have the correct form.');");
-            }
-            ?>
-            let iframe = document.getElementById('attendancePopup');
-            if (!iframe) {
-                iframe = document.createElement('iframe');
-                iframe.id = 'attendancePopup';
-                <?php
-                if (isset($formId)) {
-                    echo ("iframe.src = '/bsemr/interface/patient_file/encounter/view_form.php?id=" . $formId . "&formname=newpatient&iframeMode=true';");
-                } 
-                ?>
-
-                iframe.style.width = '100%';
-                iframe.style.height = '500px';
-                iframe.style.border = '1px solid #ccc';
-                iframe.style.marginTop = '15px';
-
-                // Add iframe after the form group div
-                // this.closest('.col-sm.form-group').after(iframe);
-            } else {
-                // Show existing iframe if hidden
-                iframe.style.display = 'block';
-            }
+        if (!(isset($formId))) {
+            echo ("alert('Encounter Form not found for this event. Please ensure you have the correct form.');");
         }
+        ?>
+        let iframe = document.getElementById('attendancePopup');
+        iframe = document.createElement('iframe');
+        iframe.id = 'attendancePopup';
+        <?php
+        if (isset($formId)) {
+            echo ("iframe.src = '/bsemr/interface/patient_file/encounter/view_form.php?id=" . $formId . "&formname=newpatient&iframeMode=true';");
+        }
+        ?>
+
+        iframe.style.display = 'block';
+        iframe.style.width = '100%';
+        iframe.style.height = '800px';
+        iframe.style.border = '1px solid #ccc';
+        iframe.style.marginTop = '15px';
+
+        // Add iframe after the form group div
+        // this.closest('.col-sm.form-group').after(iframe);
+    }
 
     function closeEncounterPopup() {
         console.log("Closing Encounter Popup");
-            document.getElementById("encounterPopup")?.remove();
+        document.getElementById("encounterPopup")?.remove();
     }
 
     function submitEventForm() {
@@ -1081,11 +1077,11 @@ if ($groupid) {
         const saveButton = document.getElementById('form_save');
         console.log("The form: ");
         console.log(saveButton);
-        if(saveButton){
+        if (saveButton) {
             console.log("Submitting the form");
-         saveButton.click();   
+            saveButton.click();
         }
-        
+
     }
 
     function cancelEncounterPopup() {
@@ -1095,309 +1091,422 @@ if ($groupid) {
         apptStatusDropdown.value = '-';
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-  // Get the appointment status dropdown
-try{    
-    const attendanceButton = document.getElementById('attendance');
-    if(attendanceButton){
-        attendanceButton.addEventListener('click', function() {
-      // Check if "Arrived" is selected
-    try{
-        // Create iframe if it doesn't exist
-        let iframe = document.getElementById('encounterPopup');
-        if (!iframe) {
-          iframe = document.createElement('iframe');
-          iframe.id = 'encounterPopup';
-          <?php
-          if(isset($formId)){
-            if(($attendanceForm)){
-                $attendanceFormId = $attendanceForm['id'];
-                echo "iframe.src = '/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&attendanceFormId=$attendanceFormId&iframeMode=true'";
-            } else{
-                echo "iframe.src = '/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&iframeMode=true&attendance=$attendedPids&reason=" . $formEncounter['reason'] ."'";
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the appointment status dropdown
+        try {
+
+            const syncFeeSheetButton = document.getElementById('syncFeeSheet');
+            if(syncFeeSheetButton){
+                syncFeeSheetButton.addEventListener('click', async function() {
+                try {
+                    const apiUrl = '/bsemr/interface/others/syncFeeSheet.php';
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({ 
+                          eid: <?php echo $eid; ?> ,
+                        })
+                    });
+                
+                    const data = await response.json();
+                    // Check if the HTTP response status is not OK (non-200)
+                    if (!response.ok) {
+                        throw new Error(`Error: ${data.message}: ${data.details}}`);
+                    }
+                
+                    // Extract meeting data
+                    const { price_level } = data.data;
+                
+                    console.log("Response:", data);
+                
+                    if(data.success){
+                        alert("Successfully Synced FeeSheet");
+                    }
+                
+                } catch (error) {
+                    // Log error to console for debugging
+                    console.error("Error in startMeeting:", error);
+                
+                    // Show user-friendly error message
+                    alert(`Error: ${error.message}`);
+                }
+                })
             }
-          }
-            ?>
-          
-          iframe.style.width = '100%';
-          iframe.style.height = '500px';
-          iframe.style.border = '1px solid #ccc';
-          iframe.style.marginTop = '15px';
-          
-          // Add iframe after the form group div
-          this.closest('.col-sm.form-group').after(iframe);
-        } 
-    
-    }catch(error) {
-        console.error('Error checking appointment status dropdown:', error);
-    }
-    });
-    
-    }
-    const apptStatusDropdown = document.querySelector('select[name="form_apptstatus"]');
-  
-  if (apptStatusDropdown) {
-    // Add change event listener
-    apptStatusDropdown.addEventListener('change', function() {
-      // Check if "Arrived" is selected
-    try{
-        if (this.value === 'Arrived') { //Make this dynamic
-        // Create iframe if it doesn't exist
-        let iframe = document.getElementById('encounterPopup');
-        const category = document.getElementById('form_category').value;
-        const provider = document.querySelector('select[name="form_provider"]').value;
 
-        const eventDate = document.getElementById('form_date').value;
-        const eventHour = document.querySelector('input[name="form_hour"]').value;
-        const eventMinute = document.querySelector('input[name="form_minute"]').value;
-        const ampm = document.querySelector('select[name="form_ampm"]').value;
-        const dateTime = `${eventDate} ${eventHour}:${eventMinute} ${ampm ? 'am' : 'pm'}`;
-        const formatedDateTime = parent.convertDateFormat(dateTime);
-        console.log("Formated Date Time: " + formatedDateTime)
-        if (!iframe) {
-          iframe = document.createElement('iframe');
-          iframe.id = 'encounterPopup';
-          <?php
-          if(isset($formId)){
-            echo("iframe.src = '/bsemr/interface/patient_file/encounter/view_form.php?id=" . $formId . "&formname=newpatient&iframeMode=true';");
-          }else {
-            echo ('iframe.src = `/bsemr/interface/forms/newpatient/new.php?autoloaded=1&dateOfService=${formatedDateTime}&provider=${provider}&pc_catid=${category}&calenc=&iframeMode=true&eid=' . $eid . "&pid=$patientid". '`;');
-          }
-           ?>
-          
-          iframe.style.width = '100%';
-          iframe.style.height = '500px';
-          iframe.style.border = '1px solid #ccc';
-          iframe.style.marginTop = '15px';
-          
-          // Add iframe after the form group div
-          this.closest('.col-sm.form-group').after(iframe);
-        } else {
-          // Show existing iframe if hidden
-          iframe.style.display = 'block';
-        }
-      } else if(this.value === 'tookPlace'){
-        <?php   if(isset($formId)){
-            echo("return;");
-          } ?>
-        let iframe = document.getElementById('encounterPopup');
-        const category = document.getElementById('form_category').value;
-        const provider = document.querySelector('select[name="form_provider"]').value;
-        const eventDate = document.getElementById('form_date').value;
-        if (!iframe) {
-          iframe = document.createElement('iframe');
-          iframe.id = 'encounterPopup';
-          <?php
-          echo ('iframe.src = `/bsemr/interface/forms/newGroupEncounter/new.php?autoloaded=1&dateOfService=${eventDate}&provider=${provider}&pc_catid=${category}&calenc=&iframeMode=true&eid=' . $eid . "&gid=$groupid" . '`;');
-          ?>
-          
-          iframe.style.width = '100%';
-          iframe.style.height = '500px';
-          iframe.style.border = '1px solid #ccc';
-          iframe.style.marginTop = '15px';
-          
-          // Add iframe after the form group div
-          this.closest('.col-sm.form-group').after(iframe);
-        } else {
-          // Show existing iframe if hidden
-          iframe.style.display = 'block';
-        }
-      }else {
-        // Hide iframe if not "Arrived"
-        closeEncounterPopup();
-      }
-    }catch(error) {
-        console.error('Error checking appointment status dropdown:', error);
-    }
-    });
-    
-    // Trigger the change event in case "Arrived" is already selected on page load
-    apptStatusDropdown.dispatchEvent(new Event('change'));
-  }
-}catch(error){
-    console.error('Error adding change event listener for appointment status dropdown:', error);
-}
-});
-<?php require $GLOBALS['srcdir'] . "/formatting_DateToYYYYMMDD_js.js.php" ?>
+            const editEncounterButton = document.getElementById('editEncounter');
+            if (editEncounterButton) {
+                editEncounterButton.addEventListener('click', function () {
+                    // Check if "Arrived" is selected
+                    try {
+                        // Create iframe if it doesn't exist
+                        let iframe = document.getElementById('encounterPopup');
+                        iframe = document.createElement('iframe');
+                        iframe.id = 'encounterPopup';
+                        <?php
+                        if (isset($formId)) {
+                            echo ("iframe.src = '/bsemr/interface/patient_file/encounter/view_form.php?id=" . $formId . "&formname=newpatient&iframeMode=true';");
+                        }
+                        ?>
 
- var mypcc = '<?php echo $GLOBALS['phone_country_code'] ?>';
+                        iframe.style.display = 'block';
+                        iframe.style.width = '100%';
+                        iframe.style.height = '800px';
+                        iframe.style.border = '1px solid #ccc';
+                        iframe.style.marginTop = '15px';
 
- var durations = new Array();
-<?php
- // Read the event categories, generate their options list, and get
- // the default event duration from them if this is a new event.
- $cattype = 0;
-if (!empty($_GET['prov']) && ($_GET['prov'] == true)) {
-    $cattype = 1;
-}
+                        // Add iframe after the form group div
+                        this.closest('.col-sm.form-group').after(iframe);
 
-if ($_GET['group'] == true) {
-    $cattype = 3;
-}
+                    } catch (error) {
+                        console.error('Error checking appointment status dropdown:', error);
+                    }
+                });
 
-$cres = sqlStatement("SELECT pc_catid, pc_cattype, pc_catname, " .
-"pc_recurrtype, pc_duration, pc_end_all_day " .
-"FROM openemr_postcalendar_categories where pc_active = 1 ORDER BY pc_seq");
-$catoptions = "";
-$prefcat_options = "    <option value='0'>-- " . xlt("None{{Category}}") . " --</option>\n";
-$thisduration = 0;
-if ($eid) {
-    $thisduration = $row['pc_alldayevent'] ? 1440 : round($row['pc_duration'] / 60);
-}
-
-while ($crow = sqlFetchArray($cres)) {
-    $duration = round($crow['pc_duration'] / 60);
-    if ($crow['pc_end_all_day']) {
-        $duration = 1440;
-    }
-
-    // This section is to build the list of preferred categories:
-    if ($duration) {
-        $prefcat_options .= "    <option value='" . attr($crow['pc_catid']) . "'";
-        if ($eid) {
-            if ($crow['pc_catid'] == $row['pc_prefcatid']) {
-                $prefcat_options .= " selected";
             }
+
+            const attendanceButton = document.getElementById('attendance');
+            if (attendanceButton) {
+                attendanceButton.addEventListener('click', function () {
+                    // Check if "Arrived" is selected
+                    try {
+                        // Create iframe if it doesn't exist
+                        let iframe = document.getElementById('encounterPopup');
+                        iframe = document.createElement('iframe');
+                        iframe.id = 'encounterPopup';
+                        <?php
+                        if (isset($formId)) {
+                            if (($attendanceForm)) {
+                                $attendanceFormId = $attendanceForm['id'];
+                                echo "iframe.src = '/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&attendanceFormId=$attendanceFormId&iframeMode=true'";
+                            } else {
+                                echo "iframe.src = '/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&iframeMode=true&attendance=$attendedPids&reason=" . $formEncounter['reason'] . "'";
+                            }
+                        }
+                        ?>
+
+                        iframe.style.display = 'block';
+                        iframe.style.width = '100%';
+                        iframe.style.height = '800px';
+                        iframe.style.border = '1px solid #ccc';
+                        iframe.style.marginTop = '15px';
+
+                        // Add iframe after the form group div
+                        this.closest('.col-sm.form-group').after(iframe);
+
+                    } catch (error) {
+                        console.error('Error checking appointment status dropdown:', error);
+                    }
+                });
+
+            }
+            const apptStatusDropdown = document.querySelector('select[name="form_apptstatus"]');
+
+            if (apptStatusDropdown) {
+                // Add change event listener
+                apptStatusDropdown.addEventListener('change', function () {
+                    if (blockAppointmentChangeEvent) {
+                        blockAppointmentChangeEvent = false;
+                        return;
+                    }
+                    // Check if "Arrived" is selected
+                    try {
+                        if (this.value === 'Arrived') { //Make this dynamic
+                            // Create iframe if it doesn't exist
+                            
+                            console.log("Appointment Status Changed");
+                            let iframe = document.getElementById('encounterPopup');
+                            const category = document.getElementById('form_category').value;
+                            const provider = document.querySelector('select[name="form_provider"]').value;
+
+                            const eventDate = document.getElementById('form_date').value;
+                            const eventHour = document.querySelector('input[name="form_hour"]').value;
+                            const eventMinute = document.querySelector('input[name="form_minute"]').value;
+                            const ampm = document.querySelector('select[name="form_ampm"]').value;
+                            const dateTime = `${eventDate} ${eventHour}:${eventMinute} ${ampm ? 'am' : 'pm'}`;
+                            const formatedDateTime = parent.convertDateFormat(dateTime);
+                            console.log("Formated Date Time: " + formatedDateTime)
+                            iframe = document.createElement('iframe');
+                            iframe.id = 'encounterPopup';
+                            <?php
+                            if (isset($formId)) {
+                                echo ("return;");
+                            } else {
+                                echo ('iframe.src = `/bsemr/interface/forms/newpatient/new.php?autoloaded=1&dateOfService=${formatedDateTime}&provider=${provider}&pc_catid=${category}&calenc=&iframeMode=true&eid=' . $eid . "&pid=$patientid" . '`;');
+                            }
+                            ?>
+
+                            iframe.style.display = 'block';
+                            iframe.style.width = '100%';
+                            iframe.style.height = '800px';
+                            iframe.style.border = '1px solid #ccc';
+                            iframe.style.marginTop = '15px';
+
+                            // Add iframe after the form group div
+                            this.closest('.col-sm.form-group').after(iframe);
+
+                        } else if (this.value === 'tookPlace') {
+                            <?php if (isset($formId)) {
+                                echo ("return;");
+                            } ?>
+                           
+                            let iframe = document.getElementById('encounterPopup');
+                            const category = document.getElementById('form_category').value;
+                            const provider = document.querySelector('select[name="form_provider"]').value;
+                            const eventDate = document.getElementById('form_date').value;
+                            iframe = document.createElement('iframe');
+                            iframe.id = 'encounterPopup';
+                            <?php
+                            echo ('iframe.src = `/bsemr/interface/forms/newGroupEncounter/new.php?autoloaded=1&dateOfService=${eventDate}&provider=${provider}&pc_catid=${category}&calenc=&iframeMode=true&eid=' . $eid . "&gid=$groupid" . '`;');
+                            ?>
+
+                            iframe.style.display = 'block';
+                            iframe.style.width = '100%';
+                            iframe.style.height = '800px';
+                            iframe.style.border = '1px solid #ccc';
+                            iframe.style.marginTop = '15px';
+
+                            // Add iframe after the form group div
+                            this.closest('.col-sm.form-group').after(iframe);
+
+                        } else {
+                            // Hide iframe if not "Arrived"
+                            closeEncounterPopup();
+                        }
+                    } catch (error) {
+                        console.error('Error checking appointment status dropdown:', error);
+                    }
+                });
+
+                // Trigger the change event in case "Arrived" is already selected on page load
+                apptStatusDropdown.dispatchEvent(new Event('change'));
+            }
+        } catch (error) {
+            console.error('Error adding change event listener for appointment status dropdown:', error);
         }
+    });
+    <?php require $GLOBALS['srcdir'] . "/formatting_DateToYYYYMMDD_js.js.php" ?>
 
-        $prefcat_options .= ">" . text(xl_appt_category($crow['pc_catname'])) . "</option>\n";
+    var mypcc = '<?php echo $GLOBALS['phone_country_code'] ?>';
+
+    var durations = new Array();
+    <?php
+    // Read the event categories, generate their options list, and get
+    // the default event duration from them if this is a new event.
+    $cattype = 0;
+    if (!empty($_GET['prov']) && ($_GET['prov'] == true)) {
+        $cattype = 1;
     }
 
-    if ($crow['pc_cattype'] != $cattype) {
-        continue;
+    if ($_GET['group'] == true) {
+        $cattype = 3;
     }
 
-    echo " durations[" . attr($crow['pc_catid']) . "] = " . attr($duration) . "\n";
-    // echo " rectypes[" . $crow['pc_catid'] . "] = " . $crow['pc_recurrtype'] . "\n";
-    $catoptions .= "    <option value='" . attr($crow['pc_catid']) . "'";
+    $cres = sqlStatement("SELECT pc_catid, pc_cattype, pc_catname, " .
+        "pc_recurrtype, pc_duration, pc_end_all_day " .
+        "FROM openemr_postcalendar_categories where pc_active = 1 ORDER BY pc_seq");
+    $catoptions = "";
+    $prefcat_options = "    <option value='0'>-- " . xlt("None{{Category}}") . " --</option>\n";
+    $thisduration = 0;
     if ($eid) {
-        if ($crow['pc_catid'] == $row['pc_catid']) {
-            $catoptions .= " selected";
-        }
-    } else {
-        if ($crow['pc_catid'] == $default_catid) {
-            $catoptions .= " selected";
-            $thisduration = $duration;
-        }
+        $thisduration = $row['pc_alldayevent'] ? 1440 : round($row['pc_duration'] / 60);
     }
 
-    $catoptions .= ">" . text(xl_appt_category($crow['pc_catname'])) . "</option>\n";
-}
-?>
+    while ($crow = sqlFetchArray($cres)) {
+        $duration = round($crow['pc_duration'] / 60);
+        if ($crow['pc_end_all_day']) {
+            $duration = 1440;
+        }
 
-<?php require($GLOBALS['srcdir'] . "/restoreSession.php"); ?>
+        // This section is to build the list of preferred categories:
+        if ($duration) {
+            $prefcat_options .= "    <option value='" . attr($crow['pc_catid']) . "'";
+            if ($eid) {
+                if ($crow['pc_catid'] == $row['pc_prefcatid']) {
+                    $prefcat_options .= " selected";
+                }
+            }
 
-// This is for callback by the find-patient popup.
-function setpatient(pid, lname, fname, dob) {
-    var f = document.forms[0];
-    f.form_patient.value = lname + ', ' + fname;
-    f.form_pid.value = pid;
-    dobstyle = (dob == '' || dob.substr(5, 10) == '00-00') ? '' : 'none';
-    document.getElementById('dob_row').style.display = dobstyle;
-}
+            $prefcat_options .= ">" . text(xl_appt_category($crow['pc_catname'])) . "</option>\n";
+        }
 
-// This invokes the find-patient popup.
-function sel_patient() {
-    let title = '<?php echo xlt('Patient Search'); ?>';
-    dlgopen('find_patient_popup.php', 'findPatient', 650, 300, '', title);
-}
+        if ($crow['pc_cattype'] != $cattype) {
+            continue;
+        }
 
-// This invokes javascript listener.
-<?php
-$eventDispatcher->dispatch(AppointmentRenderEvent::RENDER_JAVASCRIPT, new AppointmentRenderEvent($row), 10);
-?>
-
-// This is for callback by the find-group popup.
-function setgroup(gid, name, end_date) {
-    var f = document.forms[0];
-    f.form_group.value = name;
-    f.form_gid.value = gid;
-    if (f.form_enddate.value == "") {
-        f.form_enddate.value = end_date;
-    }
-
-}
-
-// This invokes the find-group popup.
-function sel_group() {
-    top.restoreSession();
-    let title = '<?php echo xlt('Group Search'); ?>';
-    dlgopen('find_group_popup.php', '_blank', 650, 300, '', title);
-}
-
-// Do whatever is needed when a new event category is selected.
-// For now this means changing the event title and duration.
-function set_display() {
-    var f = document.forms[0];
-    var s = f.form_category;
-    if (s.selectedIndex >= 0) {
-        var catid = s.options[s.selectedIndex].value;
-        var style_apptstatus = document.getElementById('title_apptstatus').style;
-        var style_prefcat = document.getElementById('title_prefcat').style;
-        if (catid == '2') { // In Office
-            style_apptstatus.display = 'none';
-            style_prefcat.display = '';
-            f.form_apptstatus.style.display = 'none';
-            f.form_prefcat.style.display = '';
+        echo " durations[" . attr($crow['pc_catid']) . "] = " . attr($duration) . "\n";
+        // echo " rectypes[" . $crow['pc_catid'] . "] = " . $crow['pc_recurrtype'] . "\n";
+        $catoptions .= "    <option value='" . attr($crow['pc_catid']) . "'";
+        if ($eid) {
+            if ($crow['pc_catid'] == $row['pc_catid']) {
+                $catoptions .= " selected";
+            }
         } else {
-            style_prefcat.display = 'none';
-            style_apptstatus.display = '';
-            f.form_prefcat.style.display = 'none';
-            f.form_apptstatus.style.display = '';
+            if ($crow['pc_catid'] == $default_catid) {
+                $catoptions .= " selected";
+                $thisduration = $duration;
+            }
+        }
+
+        $catoptions .= ">" . text(xl_appt_category($crow['pc_catname'])) . "</option>\n";
+    }
+    ?>
+
+    <?php require($GLOBALS['srcdir'] . "/restoreSession.php"); ?>
+
+    // This is for callback by the find-patient popup.
+    function setpatient(pid, lname, fname, dob) {
+        var f = document.forms[0];
+        f.form_patient.value = lname + ', ' + fname;
+        f.form_pid.value = pid;
+        dobstyle = (dob == '' || dob.substr(5, 10) == '00-00') ? '' : 'none';
+        document.getElementById('dob_row').style.display = dobstyle;
+    }
+
+    // This invokes the find-patient popup.
+    function sel_patient() {
+        let title = '<?php echo xlt('Patient Search'); ?>';
+        dlgopen('find_patient_popup.php', 'findPatient', 650, 300, '', title);
+    }
+
+    // This invokes javascript listener.
+    <?php
+    $eventDispatcher->dispatch(AppointmentRenderEvent::RENDER_JAVASCRIPT, new AppointmentRenderEvent($row), 10);
+    ?>
+
+    // This is for callback by the find-group popup.
+    function setgroup(gid, name, end_date) {
+        var f = document.forms[0];
+        f.form_group.value = name;
+        f.form_gid.value = gid;
+        if (f.form_enddate.value == "") {
+            f.form_enddate.value = end_date;
+        }
+
+    }
+
+    // This invokes the find-group popup.
+    function sel_group() {
+        top.restoreSession();
+        let title = '<?php echo xlt('Group Search'); ?>';
+        dlgopen('find_group_popup.php', '_blank', 650, 300, '', title);
+    }
+
+    // Do whatever is needed when a new event category is selected.
+    // For now this means changing the event title and duration.
+    function set_display() {
+        var f = document.forms[0];
+        var s = f.form_category;
+        if (s.selectedIndex >= 0) {
+            var catid = s.options[s.selectedIndex].value;
+            var style_apptstatus = document.getElementById('title_apptstatus').style;
+            var style_prefcat = document.getElementById('title_prefcat').style;
+            if (catid == '2') { // In Office
+                style_apptstatus.display = 'none';
+                style_prefcat.display = '';
+                f.form_apptstatus.style.display = 'none';
+                f.form_prefcat.style.display = '';
+            } else {
+                style_prefcat.display = 'none';
+                style_apptstatus.display = '';
+                f.form_prefcat.style.display = 'none';
+                f.form_apptstatus.style.display = '';
+            }
         }
     }
-}
 
-// Do whatever is needed when a new event category is selected.
-// For now this means changing the event title and duration.
-function set_category() {
-    var f = document.forms[0];
-    var s = f.form_category;
-    if (s.selectedIndex >= 0) {
-        var catid = s.options[s.selectedIndex].value;
-	f.form_title.value = s.options[s.selectedIndex].text;
-	var duration = parseInt(f.form_title.value.replace(/[^0-9.]/g, ""));
-        f.form_duration.value = (duration) ? duration : durations[catid];
-        f.form_duration.value = durations[catid];
-        set_display();
+    // Do whatever is needed when a new event category is selected.
+    // For now this means changing the event title and duration.
+    function set_category() {
+        var f = document.forms[0];
+        var s = f.form_category;
+        if (s.selectedIndex >= 0) {
+            var catid = s.options[s.selectedIndex].value;
+            f.form_title.value = s.options[s.selectedIndex].text;
+            var duration = parseInt(f.form_title.value.replace(/[^0-9.]/g, ""));
+            f.form_duration.value = (duration) ? duration : durations[catid];
+            f.form_duration.value = durations[catid];
+            set_display();
+        }
     }
-}
 
-// Modify some visual attributes when the all-day or timed-event
-// radio buttons are clicked.
-function set_allday() {
-    var f = document.forms[0];
-    var color1 = 'var(--gray)';
-    var color2 = 'var(--gray)';
-    var disabled2 = true;
-    if (document.getElementById('rballday1').checked) {
-        color1 = '';
+    // Modify some visual attributes when the all-day or timed-event
+    // radio buttons are clicked.
+    function set_allday() {
+        var f = document.forms[0];
+        var color1 = 'var(--gray)';
+        var color2 = 'var(--gray)';
+        var disabled2 = true;
+        if (document.getElementById('rballday1').checked) {
+            color1 = '';
+        }
+        if (document.getElementById('rballday2').checked) {
+            color2 = '';
+            disabled2 = false;
+        }
+        document.getElementById('tdallday1').style.color = color1;
+        document.getElementById('tdallday2').style.color = color2;
+        //document.getElementById('tdallday3').style.color = color2;
+        document.getElementById('tdallday4').style.color = color2;
+        document.getElementById('tdallday5').style.color = color2;
+        f.form_hour.disabled = disabled2;
+        f.form_minute.disabled = disabled2;
+        <?php if ($GLOBALS['time_display_format'] == 1) { ?>
+            f.form_ampm.disabled = disabled2;
+        <?php } ?>
+        f.form_duration.disabled = disabled2;
     }
-    if (document.getElementById('rballday2').checked) {
-        color2 = '';
-        disabled2 = false;
-    }
-    document.getElementById('tdallday1').style.color = color1;
-    document.getElementById('tdallday2').style.color = color2;
-    //document.getElementById('tdallday3').style.color = color2;
-    document.getElementById('tdallday4').style.color = color2;
-    document.getElementById('tdallday5').style.color = color2;
-    f.form_hour.disabled = disabled2;
-    f.form_minute.disabled = disabled2;
-    <?php if ($GLOBALS['time_display_format'] == 1) { ?>
-        f.form_ampm.disabled = disabled2;
-    <?php } ?>
-    f.form_duration.disabled = disabled2;
-}
 
-// Modify some visual attributes when the Repeat checkbox is clicked.
-function set_repeat() {
-    var f = document.forms[0];
-    var isdisabled = true;
-    var mycolor = 'var(--gray)';
-    var myvisibility = 'hidden';
-    if (f.form_repeat.checked) {
-        f.days_every_week.checked = false;
+    // Modify some visual attributes when the Repeat checkbox is clicked.
+    function set_repeat() {
+        var f = document.forms[0];
+        var isdisabled = true;
+        var mycolor = 'var(--gray)';
+        var myvisibility = 'hidden';
+        if (f.form_repeat.checked) {
+            f.days_every_week.checked = false;
+            document.getElementById("days_label").style.color = mycolor;
+            var days = document.getElementById("days").getElementsByTagName('input');
+            var labels = document.getElementById("days").getElementsByTagName('label');
+            for (var i = 0; i < days.length; i++) {
+                days[i].disabled = isdisabled;
+                labels[i].style.color = mycolor;
+            }
+            isdisabled = false;
+            mycolor = 'var(--black)';
+            myvisibility = 'visible';
+        }
+        f.form_repeat_type.disabled = isdisabled;
+        f.form_repeat_freq.disabled = isdisabled;
+        f.form_enddate.disabled = isdisabled;
+        document.getElementById('tdrepeat1').style.color = mycolor;
+        document.getElementById('tdrepeat2').style.color = mycolor;
+    }
+
+    // Event when days_every_week is checked.
+    function set_days_every_week() {
+        var f = document.forms[0];
+        if (f.days_every_week.checked) {
+            //disable regular repeat
+            f.form_repeat.checked = false;
+            f.form_repeat_type.disabled = true;
+            f.form_repeat_freq.disabled = true;
+            document.getElementById('tdrepeat1').style.color = 'var(--gray)';
+
+            //enable end_date setting
+            document.getElementById('tdrepeat2').style.color = 'var(--black)';
+            f.form_enddate.disabled = false;
+
+            var isdisabled = false;
+            var mycolor = 'var(--black)';
+            var myvisibility = 'visible';
+        } else {
+            var isdisabled = true;
+            var mycolor = 'var(--gray)';
+            var myvisibility = 'hidden';
+        }
         document.getElementById("days_label").style.color = mycolor;
         var days = document.getElementById("days").getElementsByTagName('input');
         var labels = document.getElementById("days").getElementsByTagName('label');
@@ -1405,163 +1514,123 @@ function set_repeat() {
             days[i].disabled = isdisabled;
             labels[i].style.color = mycolor;
         }
-        isdisabled = false;
-        mycolor = 'var(--black)';
-        myvisibility = 'visible';
-    }
-    f.form_repeat_type.disabled = isdisabled;
-    f.form_repeat_freq.disabled = isdisabled;
-    f.form_enddate.disabled = isdisabled;
-    document.getElementById('tdrepeat1').style.color = mycolor;
-    document.getElementById('tdrepeat2').style.color = mycolor;
-}
 
-// Event when days_every_week is checked.
-function set_days_every_week() {
-    var f = document.forms[0];
-    if (f.days_every_week.checked) {
-        //disable regular repeat
-        f.form_repeat.checked = false;
-        f.form_repeat_type.disabled = true;
-        f.form_repeat_freq.disabled = true;
-        document.getElementById('tdrepeat1').style.color = 'var(--gray)';
-
-        //enable end_date setting
-        document.getElementById('tdrepeat2').style.color = 'var(--black)';
-        f.form_enddate.disabled = false;
-
-        var isdisabled = false;
-        var mycolor = 'var(--black)';
-        var myvisibility = 'visible';
-    } else {
-        var isdisabled = true;
-        var mycolor = 'var(--gray)';
-        var myvisibility = 'hidden';
-    }
-    document.getElementById("days_label").style.color = mycolor;
-    var days = document.getElementById("days").getElementsByTagName('input');
-    var labels = document.getElementById("days").getElementsByTagName('label');
-    for (var i = 0; i < days.length; i++) {
-        days[i].disabled = isdisabled;
-        labels[i].style.color = mycolor;
+        //If no repetition is checked, disable end_date setting.
+        if (!f.days_every_week.checked && !f.form_repeat.checked) {
+            //disable end_date setting
+            document.getElementById('tdrepeat2').style.color = mycolor;
+            f.form_enddate.disabled = isdisabled;
+        }
     }
 
-    //If no repetition is checked, disable end_date setting.
-    if (!f.days_every_week.checked && !f.form_repeat.checked) {
-        //disable end_date setting
-        document.getElementById('tdrepeat2').style.color = mycolor;
-        f.form_enddate.disabled = isdisabled;
-    }
-}
+    // Constants used by dateChanged() function.
+    const occurNames = Array(
+        '<?php echo xls("1st{{nth}}"); ?>',
+        '<?php echo xls("2nd{{nth}}"); ?>',
+        '<?php echo xls("3rd{{nth}}"); ?>',
+        '<?php echo xls("4th{{nth}}"); ?>'
+    );
 
-// Constants used by dateChanged() function.
-const occurNames = Array(
-    '<?php echo xls("1st{{nth}}"); ?>',
-    '<?php echo xls("2nd{{nth}}"); ?>',
-    '<?php echo xls("3rd{{nth}}"); ?>',
-    '<?php echo xls("4th{{nth}}"); ?>'
-);
+    const weekDays = Array(
+        '<?php echo xls("Sunday"); ?>',
+        '<?php echo xls("Monday"); ?>',
+        '<?php echo xls("Tuesday"); ?>',
+        '<?php echo xls("Wednesday"); ?>',
+        '<?php echo xls("Thursday"); ?>',
+        '<?php echo xls("Friday"); ?>',
+        '<?php echo xls("Saturday"); ?>'
+    );
 
-const weekDays = Array(
-    '<?php echo xls("Sunday"); ?>',
-    '<?php echo xls("Monday"); ?>',
-    '<?php echo xls("Tuesday"); ?>',
-    '<?php echo xls("Wednesday"); ?>',
-    '<?php echo xls("Thursday"); ?>',
-    '<?php echo xls("Friday"); ?>',
-    '<?php echo xls("Saturday"); ?>'
-);
+    // Monitor start date changes to adjust repeat type options.
+    function dateChanged() {
+        var f = document.forms[0];
+        if (!f.form_date.value) return;
+        var d = new Date(DateToYYYYMMDD_js(f.form_date.value));
+        var downame = weekDays[d.getUTCDay()];
+        var nthtext = '';
+        var occur = Math.floor((d.getUTCDate() - 1) / 7);
+        if (occur < 4) { // 5th is not allowed
+            nthtext = occurNames[occur] + ' ' + downame;
+        }
+        var lasttext = '';
+        var tmp = new Date(d.getUTCFullYear(), d.getUTCMonth() + 1, 0);
+        if (tmp.getDate() - d.getUTCDate() < 7) { // Modified by epsdky 2016 (details in commit)
+            // This is a last occurrence of the specified weekday in the month,
+            // so permit that as an option.
+            lasttext = '<?php echo xls("Last"); ?> ' + downame;
+        }
+        var si = f.form_repeat_type.selectedIndex;
+        var opts = f.form_repeat_type.options;
+        opts.length = 5; // remove any nth and Last entries
+        if (nthtext) {
+            opts[opts.length] = new Option(nthtext, '5');
+        }
+        if (lasttext) {
+            opts[opts.length] = new Option(lasttext, '6');
+        }
+        if (si < opts.length) {
+            f.form_repeat_type.selectedIndex = si;
+        } else {
+            f.form_repeat_type.selectedIndex = 5;
+        } // Added by epsdky 2016 (details in commit)
+    }
 
- // Monitor start date changes to adjust repeat type options.
-function dateChanged() {
-    var f = document.forms[0];
-    if (!f.form_date.value) return;
-    var d = new Date(DateToYYYYMMDD_js(f.form_date.value));
-    var downame = weekDays[d.getUTCDay()];
-    var nthtext = '';
-    var occur = Math.floor((d.getUTCDate() - 1) / 7);
-    if (occur < 4) { // 5th is not allowed
-        nthtext = occurNames[occur] + ' ' + downame;
+    // This is for callback by the find-available popup.
+    function setappt(year, mon, mday, hours, minutes) {
+        //Infeg Save button should become active once an appointment is selected.
+        $('#form_save').attr('disabled', false);
+        var f = document.forms[0];
+        <?php
+        $currentDateFormat = $GLOBALS['date_display_format'];
+        if ($currentDateFormat == 0) { ?>
+            f.form_date.value = '' + year + '-' +
+                ('' + (mon + 100)).substring(1) + '-' +
+                ('' + (mday + 100)).substring(1);
+        <?php } elseif ($currentDateFormat == 1) { ?>
+            f.form_date.value = ('' + (mon + 100)).substring(1) + '/' +
+                ('' + (mday + 100)).substring(1) + '/' +
+                '' + year;
+        <?php } elseif ($currentDateFormat == 2) { ?>
+            f.form_date.value = ('' + (mday + 100)).substring(1) + '/' +
+                ('' + (mon + 100)).substring(1) + '/' +
+                '' + year;
+        <?php } ?>
+        f.form_hour.value = hours;
+        <?php if ($GLOBALS['time_display_format'] == 1) { ?>
+            f.form_hour.value = (hours > 12) ? hours - 12 : hours;
+            f.form_ampm.selectedIndex = (hours >= 12) ? 1 : 0;
+        <?php } ?>
+        f.form_minute.value = ('' + (minutes + 100)).substring(1);
     }
-    var lasttext = '';
-    var tmp = new Date(d.getUTCFullYear(), d.getUTCMonth() + 1, 0);
-    if (tmp.getDate() - d.getUTCDate() < 7) { // Modified by epsdky 2016 (details in commit)
-        // This is a last occurrence of the specified weekday in the month,
-        // so permit that as an option.
-        lasttext = '<?php echo xls("Last"); ?> ' + downame;
-    }
-    var si = f.form_repeat_type.selectedIndex;
-    var opts = f.form_repeat_type.options;
-    opts.length = 5; // remove any nth and Last entries
-    if (nthtext) {
-        opts[opts.length] = new Option(nthtext, '5');
-    }
-    if (lasttext) {
-        opts[opts.length] = new Option(lasttext, '6');
-    }
-    if (si < opts.length) {
-        f.form_repeat_type.selectedIndex = si;
-    } else {
-        f.form_repeat_type.selectedIndex = 5;
-    } // Added by epsdky 2016 (details in commit)
-}
 
-// This is for callback by the find-available popup.
-function setappt(year,mon,mday,hours,minutes) {
-    //Infeg Save button should become active once an appointment is selected.
-    $('#form_save').attr('disabled', false);
-    var f = document.forms[0];
-    <?php
-    $currentDateFormat = $GLOBALS['date_display_format'];
-    if ($currentDateFormat == 0) { ?>
-    f.form_date.value =  '' + year + '-' +
-        ('' + (mon  + 100)).substring(1) + '-' +
-        ('' + (mday + 100)).substring(1);
-    <?php } elseif ($currentDateFormat == 1) { ?>
-    f.form_date.value = ('' + (mon  + 100)).substring(1) + '/' +
-        ('' + (mday + 100)).substring(1) + '/' +
-        '' + year;
-    <?php } elseif ($currentDateFormat == 2) { ?>
-    f.form_date.value = ('' + (mday + 100)).substring(1) + '/' +
-        ('' + (mon  + 100)).substring(1) + '/' +
-        '' + year;
-    <?php } ?>
-    f.form_hour.value = hours;
-    <?php if ($GLOBALS['time_display_format'] == 1) { ?>
-        f.form_hour.value = (hours > 12) ? hours - 12 : hours;
-        f.form_ampm.selectedIndex = (hours >= 12) ? 1 : 0;
-    <?php } ?>
-    f.form_minute.value = ('' + (minutes + 100)).substring(1);
-}
-
-// Invoke the find-available popup.
-function find_available(extra) {
-    //Infeg Save button should become active once an appointment is selected.
-    $('#form_save').attr('disabled', false);
-    top.restoreSession();
-    // (CHEMED) Conditional value selection, because there is no <select> element
-    // when making an appointment for a specific provider
-    var s = document.forms[0].form_provider;
-    var f = document.forms[0].facility;
-    <?php if ($userid != 0) { ?>
-        s = document.forms[0].form_provider.value;
-        f = document.forms[0].facility.value;
-    <?php } else {?>
-        s = document.forms[0].form_provider.options[s.selectedIndex].value;
-        f = document.forms[0].facility.options[f.selectedIndex].value;
-    <?php }?>
-    var c = document.forms[0].form_category;
-    var formDate = document.forms[0].form_date;
-    let title = <?php echo xlj('Available Appointments Calendar'); ?>;
-    dlgopen('<?php echo $GLOBALS['web_root']; ?>/interface/main/calendar/find_appt_popup.php' +
-        '?providerid=' + s +
-        '&catid=' + c.options[c.selectedIndex].value +
-        '&facility=' + f +
-        '&startdate=' + formDate.value +
-        '&evdur=' + document.forms[0].form_duration.value +
-        '&eid=<?php echo (int)$eid; ?>' + extra,
-        '', 725, 200, '', title);
-}
+    // Invoke the find-available popup.
+    function find_available(extra) {
+        //Infeg Save button should become active once an appointment is selected.
+        $('#form_save').attr('disabled', false);
+        top.restoreSession();
+        // (CHEMED) Conditional value selection, because there is no <select> element
+        // when making an appointment for a specific provider
+        var s = document.forms[0].form_provider;
+        var f = document.forms[0].facility;
+        <?php if ($userid != 0) { ?>
+            s = document.forms[0].form_provider.value;
+            f = document.forms[0].facility.value;
+        <?php } else { ?>
+            s = document.forms[0].form_provider.options[s.selectedIndex].value;
+            f = document.forms[0].facility.options[f.selectedIndex].value;
+        <?php } ?>
+        var c = document.forms[0].form_category;
+        var formDate = document.forms[0].form_date;
+        let title = <?php echo xlj('Available Appointments Calendar'); ?>;
+        dlgopen('<?php echo $GLOBALS['web_root']; ?>/interface/main/calendar/find_appt_popup.php' +
+            '?providerid=' + s +
+            '&catid=' + c.options[c.selectedIndex].value +
+            '&facility=' + f +
+            '&startdate=' + formDate.value +
+            '&evdur=' + document.forms[0].form_duration.value +
+            '&eid=<?php echo (int) $eid; ?>' + extra,
+            '', 725, 200, '', title);
+    }
 </script>
 <style>
     body {
@@ -1982,6 +2051,7 @@ function isRegularRepeat($repeat)
             <?php echo $prefcat_options ?>
         </select>
     </div>
+    <iframe style="display:none;" id="encounterPopup"></iframe>
 
 <?php
 if (empty($_GET['prov'])) { ?>
@@ -2001,6 +2071,36 @@ if(isset($formId) && isset($groupid) && $groupid !== '0'){
         <!-- Status Select -->
         <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-secondary" type='button' id='attendance'
             value='<?php echo xla('Group Attendance'); ?>' />
+
+    </div>
+</div>
+<?php
+}
+?>
+
+<?php 
+if(isset($formId) && isset($patientid) && $patientid !== ''){
+?>
+    <div class="form-row mx-2">
+    <div class="col-sm form-group" <?php echo isset($_GET['eid']) ? '' : 'hidden'; ?>>
+        <!-- Status Select -->
+        <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-secondary" type='button' id='editEncounter'
+            value='<?php echo xla('Edit Encounter'); ?>' />
+
+    </div>
+</div>
+<?php
+}
+?>
+
+<?php 
+if(isset($formId)){
+?>
+    <div class="form-row mx-2">
+    <div class="col-sm form-group" <?php echo isset($_GET['eid']) ? '' : 'hidden'; ?>>
+        <!-- Status Select -->
+        <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-secondary" type='button' id='syncFeeSheet'
+            value='<?php echo xla('Sync FeeSheet'); ?>' />
 
     </div>
 </div>

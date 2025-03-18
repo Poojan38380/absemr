@@ -5,6 +5,7 @@ require("../globals.php");
 error_reporting(E_ALL & ~E_DEPRECATED);
 ini_set('display_errors', 1);
 require_once("$srcdir/FeeSheetHtml.class.php");
+use OpenEMR\Billing\BillingUtilities;
 
 $PriceCodes = [
     '16' => '90832', //30 minutes
@@ -48,8 +49,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 
 // List of required fields
 $requiredFields = [
-    'encounterId',
-    'pid',
+    'eid',
 ];
 $missingFields = [];
 foreach ($requiredFields as $field) {
@@ -65,11 +65,20 @@ if (!empty($missingFields)) {
 }
 
 // Sanitize input
-$encounterId = htmlspecialchars($data['encounterId']);
-$pid = htmlspecialchars($data['pid']);
+$eid = htmlspecialchars($data['eid']);
 
 try {
 
+    $event = sqlQuery("SELECT * FROM openemr_postcalendar_events WHERE pc_eid = ?", [$eid]);
+    $tracker = sqlQuery("SELECT * FROM encounter_tracker WHERE eid = ? ", $eid);
+    if($tracker === false){
+        sendErrorResponse("Corresponding Encounter does not exists", "Corresponding Encounter does not exists", 400);
+    }
+    $encounter = $tracker['encounter'];
+    if($event['pc_pid'] === '0' && $event['pc_gid'] !=='0'){
+        sendErrorResponse("Feature not ready for group events", "Feature not ready for group events", 400);
+    }
+    $pid = $event['pc_pid'];
     $getPriceLevelQuery = sqlQuery("SELECT price_level FROM patient_data " .
         "WHERE pid = ?", [$pid]);
 
@@ -77,16 +86,11 @@ try {
     if (empty($price_level)) {
         sendErrorResponse("Price Level Not Found", 404);
     }
-    $trackingData = sqlQuery("SELECT * FROM encounter_tracker WHERE encounter = ?", [$encounterId]);
-    if (isset($trackingData['eid']) === false) {
-        sendErrorResponse("Event has no tracking data", "Please use this feature only for encounters created from events", 400);
-    }
-    $eid = $trackingData['eid'];
-    $event = sqlQuery("SELECT * FROM openemr_postcalendar_events WHERE pc_eid = ?", [$eid]);
+ 
     $category_id = $event['pc_catid'];
     $code = $PriceCodes[$category_id];
     $codeDetails = sqlQuery("select * from  codes where code = ? && superbill = 'Telemedicine'", [$code]);
-    $priceData = sqlQuery("select p.pr_price, c.modifier, c.code from codes c left join prices p on p.pr_id = c.id where c.code = ? and p.pr_level = ?", ['90837', $price_level]);
+    $priceData = sqlQuery("select p.pr_price, c.modifier, c.code from codes c left join prices p on p.pr_id = c.id where c.code = ? and p.pr_level = ?", [$code, $price_level]);
     if($priceData === false){
         $priceData = sqlQuery("select p.pr_price, c.modifier, c.code from codes c left join prices p on p.pr_id = c.id where c.code = ? and p.pr_level = ?", [$code, 'standard']);
     }
@@ -94,22 +98,31 @@ try {
     $code_type = "CPT4";
     $units = "1";
 
-    $bill = [
-        [
-            'code_type' => $code_type,
-            'code' => $code,
-            'billed' => "",
-            'mod' => "",
-            'priceLevel' => $price_level,
-            'price' => $price,
-            'units' => $units,
-            'justify' => '',
-            'provid' => "",
-            'notecodes' => ''
-        ]
+    $billresult = BillingUtilities::getBillingByEncounter($pid, $encounter, "*");
+    // Convert $billresult to an array and add 'del' => '1'
+    $bill = array_map(function ($item) {
+        $item = (array) $item;
+        $item['del'] = '1';
+        return $item;
+    }, $billresult);
+
+    // Append the additional array to $bill
+    $bill[] = [
+        'code_type' => $code_type,
+        'code' => $code,
+        'billed' => "",
+        'mod' => "",
+        'pricelevel' => $price_level,
+        'price' => $price,
+        'units' => $units,
+        'justify' => '',
+        'provid' => "",
+        'notecodes' => ''
     ];
 
-    $fs = new FeeSheetHtml();
+
+    $fs = new FeeSheetHtml($pid, $encounter);
+
     $fs->save(
         $bill,
         $_POST['prod'],
