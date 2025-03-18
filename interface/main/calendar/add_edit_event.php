@@ -1107,7 +1107,7 @@ if ($groupid) {
                         },
                         credentials: 'include',
                         body: JSON.stringify({ 
-                          eid: <?php echo $eid; ?> ,
+                          eid: <?php echo isset($eid) ? $eid : "''"; ?> ,
                         })
                     });
                 
