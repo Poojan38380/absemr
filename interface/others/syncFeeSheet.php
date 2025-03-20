@@ -71,27 +71,101 @@ try {
 
     $event = sqlQuery("SELECT * FROM openemr_postcalendar_events WHERE pc_eid = ?", [$eid]);
     $tracker = sqlQuery("SELECT * FROM encounter_tracker WHERE eid = ? ", $eid);
-    if($tracker === false){
+    if ($tracker === false) {
         sendErrorResponse("Corresponding Encounter does not exists", "Corresponding Encounter does not exists", 400);
     }
     $encounter = $tracker['encounter'];
-    if($event['pc_pid'] === '0' && $event['pc_gid'] !=='0'){
-        sendErrorResponse("Feature not ready for group events", "Feature not ready for group events", 400);
+    if ($event['pc_pid'] === '' && $event['pc_gid'] !== '0') {
+        $gid = $event['pc_gid'];
+        $groupEncounter = sqlQuery("SELECT * from form_groups_encounter WHERE encounter = ? ", [$tracker['encounter']]);
+        $select_sql = "SELECT * FROM form_encounter WHERE external_id = ? AND pc_catid = ? AND date = ?; ";
+        $result = sqlStatement($select_sql, array($gid, 15, $groupEncounter['date']));
+        while ($patient_encounter = sqlFetchArray($result)) {
+            $pid = $patient_encounter['pid'];
+            $encounter = $patient_encounter['encounter'];
+            $getPriceLevelQuery = sqlQuery("SELECT price_level FROM patient_data " .
+                "WHERE pid = ?", [$pid]);
+            if (empty($getPriceLevelQuery)) {
+                sendErrorResponse("Price Level Not Found for this", 404);
+            }
+            $price_level = $getPriceLevelQuery['price_level'];
+            if (empty($price_level)) {
+                $patient_data = sqlQuery("select fname, lname from patient_data where pid = ? ", [$pid]);
+                
+                sendErrorResponse("Price Level Not Found for " . $patient_data['fname'] . " " . $patient_data['lname'], 404);
+            }
+
+            $category_id = $event['pc_catid'];
+            $code = $PriceCodes[$category_id];
+            $codeDetails = sqlQuery("select * from  codes where code = ? && superbill = 'Telemedicine'", [$code]);
+            $priceData = sqlQuery("select p.pr_price, c.modifier, c.code from codes c left join prices p on p.pr_id = c.id where c.code = ? and p.pr_level = ?", [$code, $price_level]);
+            if ($priceData === false) {
+                $priceData = sqlQuery("select p.pr_price, c.modifier, c.code from codes c left join prices p on p.pr_id = c.id where c.code = ? and p.pr_level = ?", [$code, 'standard']);
+            }
+            $price = $priceData['pr_price'];
+            $code_type = "CPT4";
+            $units = "1";
+
+            $billresult = BillingUtilities::getBillingByEncounter($pid, $encounter, "*");
+            // Convert $billresult to an array and add 'del' => '1'
+            $bill = array_map(function ($item) {
+                $item = (array) $item;
+                $item['del'] = '1';
+                return $item;
+            }, $billresult);
+
+            // Append the additional array to $bill
+            $bill[] = [
+                'code_type' => $code_type,
+                'code' => $code,
+                'billed' => "",
+                'mod' => "",
+                'pricelevel' => $price_level,
+                'price' => $price,
+                'units' => $units,
+                'justify' => '',
+                'provid' => "",
+                'notecodes' => ''
+            ];
+
+
+            $fs = new FeeSheetHtml($pid, $encounter);
+
+            $fs->save(
+                $bill,
+                $_POST['prod'],
+            );
+        }
+
+        $response = [
+            'success' => true,
+            'message' => 'Fee Sheet Synced Successfully',
+            'data' => [
+                'price_level' => $price_level,
+            ]
+        ];
+    
+        // Send the JSON response
+        http_response_code(200);
+        echo json_encode($response);
+        exit;
     }
     $pid = $event['pc_pid'];
     $getPriceLevelQuery = sqlQuery("SELECT price_level FROM patient_data " .
         "WHERE pid = ?", [$pid]);
-
+    if (empty($getPriceLevelQuery)) {
+        sendErrorResponse("Price Level Not Found for this", 404);
+    }
     $price_level = $getPriceLevelQuery['price_level'];
     if (empty($price_level)) {
         sendErrorResponse("Price Level Not Found", 404);
     }
- 
+
     $category_id = $event['pc_catid'];
     $code = $PriceCodes[$category_id];
     $codeDetails = sqlQuery("select * from  codes where code = ? && superbill = 'Telemedicine'", [$code]);
     $priceData = sqlQuery("select p.pr_price, c.modifier, c.code from codes c left join prices p on p.pr_id = c.id where c.code = ? and p.pr_level = ?", [$code, $price_level]);
-    if($priceData === false){
+    if ($priceData === false) {
         $priceData = sqlQuery("select p.pr_price, c.modifier, c.code from codes c left join prices p on p.pr_id = c.id where c.code = ? and p.pr_level = ?", [$code, 'standard']);
     }
     $price = $priceData['pr_price'];
