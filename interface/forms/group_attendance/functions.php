@@ -15,7 +15,8 @@
 require_once(dirname(__FILE__) . "/../../../library/api.inc");
 require_once(dirname(__FILE__) . "/../../../library/forms.inc");
 require_once(dirname(__FILE__) . "/../../../library/patient_tracker.inc.php");
-
+use OpenEMR\Services\FacilityService;
+$facilityService = new FacilityService();
 /**
  * Returns form_id of an existing attendance form for group encounter (if one already exists);
  * @param $encounter
@@ -112,6 +113,7 @@ function insert_patient_appt($pid, $gid, $pc_aid, $pc_eventDate, $pc_startTime, 
  */
 function insert_patient_encounter($pid, $gid, $group_encounter_date, $participantData, $pc_aid)
 {
+    global $facilityService;
     $select_sql = "SELECT id, encounter FROM form_encounter WHERE pid = ? AND external_id = ? AND pc_catid = ? AND date = ?; ";
     $result = sqlStatement($select_sql, array($pid, $gid, get_groups_cat_id(), $group_encounter_date));
     $result_array = sqlFetchArray($result);
@@ -120,18 +122,74 @@ function insert_patient_encounter($pid, $gid, $group_encounter_date, $participan
         sqlStatement($insert_sql, array($participantData['comment'], $result_array['id']));
         return $result_array['encounter'];
     } else {
-        $insert_encounter_sql =
-            "INSERT INTO form_encounter (date, reason, pid, encounter, pc_catid, provider_id, external_id) " .
-            "VALUES (?, ?, ?, ?, ?, ?, ?);";
         $enc_id = generate_id();
-        $sqlBindArray = array();
         $user = (is_null($pc_aid)) ? $_SESSION['authUserID'] : $pc_aid;
-        array_push($sqlBindArray, $group_encounter_date, $participantData['comment'], $pid, $enc_id, get_groups_cat_id(), $user, $gid);
-        $form_id = sqlInsert($insert_encounter_sql, $sqlBindArray);
+        $facilities = $facilityService->getAllServiceLocations();
+        $encounterId = sqlInsert(
+            "INSERT INTO form_encounter SET
+                date = ?,
+                onset_date = ?,
+                reason = ?,
+                facility = ?,
+                pc_catid = ?,
+                facility_id = ?,
+                billing_facility = ?,
+                sensitivity = ?,
+                referral_source = ?,
+                pid = ?,
+                encounter = ?,
+                pos_code = ?,
+                class_code = ?,
+                external_id = ?,
+                parent_encounter_id = ?,
+                provider_id = ?,
+                discharge_disposition = ?,
+                referring_provider_id = ?,
+                encounter_type_code = ?,
+                encounter_type_description = ?",
+            [
+                $group_encounter_date,
+                "",
+                $participantData['comment'],
+                $facilities[0]['name'],
+                15,
+                $facilities[0]['id'],
+                $facilities[0]['name'],
+                "",
+                "",
+                $pid,
+                $enc_id,
+                null,
+                '',
+                $gid,
+                null,
+                $user,
+                null,
+                $user,
+                null,
+                ''
+                ]
+            );
+            addForm(
+                $enc_id,
+                "New Patient Encounter",
+                $encounterId,
+                "newpatient",
+                $pid,
+                "1",
+                $group_encounter_date
+            );
+            // $insert_encounter_sql =
+            //     "INSERT INTO form_encounter (date, reason, pid, encounter, pc_catid, provider_id, external_id) " .
+            //     "VALUES (?, ?, ?, ?, ?, ?, ?);";
+        // $sqlBindArray = array();
+        
+        // array_push($sqlBindArray, $group_encounter_date, $participantData['comment'], $pid, $enc_id, get_groups_cat_id(), $user, $gid);
+        // $form_id = sqlInsert($insert_encounter_sql, $sqlBindArray);
 
-        global $userauthorized;
+        // global $userauthorized;
 
-        addForm($enc_id, "New Patient Encounter", $form_id, "newpatient", $pid, $userauthorized, $group_encounter_date, '', '', null);
+        // addForm($enc_id, "New Patient Encounter", $form_id, "newpatient", $pid, $userauthorized, $group_encounter_date, '', '', null);
 
         return $enc_id;
     }
