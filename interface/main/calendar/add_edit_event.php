@@ -157,10 +157,11 @@ if ($group_disabled) {
 
 function InsertEventFull()
 {
-    global $new_multiple_value,$provider,$event_date,$duration,$recurrspec,$starttime,$endtime,$locationspec;
+    global $new_multiple_value,$provider,$event_date,$duration,$recurrspec,$recurrdata,$starttime,$endtime,$locationspec;
     // =======================================
     // multi providers case
     // =======================================
+    
     if (is_array($_POST['form_provider'])) {
         // obtain the next available unique key to group multiple providers around some event
         $q = sqlStatement("SELECT MAX(pc_multiple) as max FROM openemr_postcalendar_events");
@@ -195,6 +196,7 @@ function InsertEventFull()
         $args = $_POST;
         // specify some special variables needed for the INSERT
         $args['new_multiple_value'] = "";
+        $args['recurrdata'] = $recurrdata;
         $args['event_date'] = $event_date;
         $args['duration'] = $duration * 60;
         $args['recurrspec'] = $recurrspec;
@@ -417,6 +419,14 @@ if (!empty($_POST['form_action']) && ($_POST['form_action'] == "duplicate" || $_
 
         // capture the recurring specifications
         $recurrspec = array(
+            "event_repeat_freq" => "0",
+            "event_repeat_freq_type" => "0",
+            "event_repeat_on_num" => "$my_repeat_on_num",
+            "event_repeat_on_day" => "0",
+            "event_repeat_on_freq" => "0",
+            "exdate" => ""
+        );
+        $recurrdata = array(
             "event_repeat_freq" => "$my_repeat_freq",
             "event_repeat_freq_type" => "$my_repeat_type",
             "event_repeat_on_num" => "$my_repeat_on_num",

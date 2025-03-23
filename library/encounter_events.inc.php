@@ -341,11 +341,12 @@ function check_event_exist($eid)
 function InsertEvent($args, $from = 'general')
 {
     $pc_recurrtype = '0';
+    $pc_recurrdata = "0";
     if (!empty($args['form_repeat']) || !empty($args['days_every_week'])) {
-        if ($args['recurrspec']['event_repeat_freq_type'] == "6") {
-            $pc_recurrtype = 3;
+        if ($args['recurrdata']['event_repeat_freq_type'] == "6") {
+            $pc_recurrdata = 3;
         } else {
-            $pc_recurrtype = $args['recurrspec']['event_repeat_on_freq'] ? '2' : '1';
+            $pc_recurrdata = $args['recurrdata']['event_repeat_on_freq'] ? '2' : '1';
         }
     }
 
@@ -354,26 +355,100 @@ function InsertEvent($args, $from = 'general')
     $form_gid = empty($args['form_gid']) ? '' : $args['form_gid'];
     ;
     if ($from == 'general') {
-        $pc_eid = sqlInsert(
-            "INSERT INTO openemr_postcalendar_events ( " .
-            "pc_catid, pc_multiple, pc_aid, pc_pid, pc_gid, pc_title, pc_time, pc_hometext, " .
-            "pc_informant, pc_eventDate, pc_endDate, pc_duration, pc_recurrtype, " .
-            "pc_recurrspec, pc_startTime, pc_endTime, pc_alldayevent, " .
-            "pc_apptstatus, pc_prefcatid, pc_location, pc_eventstatus, pc_sharing, pc_facility,pc_billing_location,pc_room, pc_video_channel" .
-            ") VALUES (?,?,?,?,?,?,NOW(),?,?,?,?,?,?,?,?,?,?,?,?,?,1,1,?,?,?,?)",
-            array($args['form_category'],(isset($args['new_multiple_value']) ? $args['new_multiple_value'] : ''),$args['form_provider'],$form_pid,$form_gid,
-            $args['form_title'],$args['form_comments'],$_SESSION['authUserID'],$args['event_date'],
-            fixDate($args['form_enddate']),$args['duration'],$pc_recurrtype,serialize($args['recurrspec']),
-            $args['starttime'],$args['endtime'],$args['form_allday'],$args['form_apptstatus'],$args['form_prefcat'],
-            $args['locationspec'],(int)$args['facility'],(int)$args['billing_facility'],$form_room, $args['form_video_channel'])
-        );
+        $eventsToInsert = [];
 
-            //Manage tracker status.
-        if (!empty($form_pid)) {
-            manage_tracker_status($args['event_date'], $args['starttime'], $pc_eid, $form_pid, $_SESSION['authUser'], $args['form_apptstatus'], $args['form_room']);
+        if (!empty($args['recurrdata'])) {
+            $startDate = new DateTime($args['event_date']);
+            $endDate = new DateTime($args['form_enddate']);
+    
+            if ($pc_recurrdata == 3) { // Weekly Recurrence
+                $dayMapping = [
+                    "1" => "Sunday",
+                    "2" => "Monday",
+                    "3" => "Tuesday",
+                    "4" => "Wednesday",
+                    "5" => "Thursday",
+                    "6" => "Friday",
+                    "7" => "Saturday"
+                ];
+
+                $daysOfWeek = array_map(fn($num) => $dayMapping[trim($num)], explode(',', $args['recurrdata']['event_repeat_freq'])); // Array of days (e.g., ['Monday', 'Friday'])
+                
+                while ($startDate <= $endDate) {
+                    if (in_array($startDate->format('l'), $daysOfWeek)) { // Check if the day matches recurrence days
+                        $eventsToInsert[] = clone $startDate; // Add the date to insert
+                    }
+                    $startDate->modify('+1 day'); // Move to next day
+                }
+            }else if($pc_recurrdata == 1){
+                while ($startDate <= $endDate) {
+                    $eventsToInsert[] = clone $startDate;
+                    $repeatFreq = $args['recurrdata']['event_repeat_freq'];
+                    // Determine next occurrence based on repeat type
+                    $startDate->modify("+$repeatFreq day");
+                    // $startDate->modify('+1 week');
+                    // $startDate->modify('+1 month');
+                }
+            } else {
+                $eventsToInsert[] = new DateTime($args['event_date']); // Single event
+            }
+        } else {
+            $eventsToInsert[] = new DateTime($args['event_date']); // Single event
         }
 
-            $GLOBALS['temporary-eid-for-manage-tracker'] = $pc_eid; //used by manage tracker module to set correct encounter in tracker when check in
+        foreach ($eventsToInsert as $eventDate) {
+            $formattedEventDate = $eventDate->format('Y-m-d');
+    
+            $pc_eid = sqlInsert(
+                "INSERT INTO openemr_postcalendar_events (
+                    pc_catid, pc_multiple, pc_aid, pc_pid, pc_gid, pc_title, pc_time, pc_hometext,
+                    pc_informant, pc_eventDate, pc_endDate, pc_duration, pc_recurrtype,
+                    pc_recurrspec, pc_startTime, pc_endTime, pc_alldayevent,
+                    pc_apptstatus, pc_prefcatid, pc_location, pc_eventstatus, pc_sharing, pc_facility, pc_billing_location, pc_room, pc_video_channel, recurr_data_type
+                ) VALUES (?,?,?,?,?,?,NOW(),?,?,?,?,?,?,?,?,?,?,?,?,?,1,1,?,?,?,?,?)",
+                array(
+                    $args['form_category'],
+                    (isset($args['new_multiple_value']) ? $args['new_multiple_value'] : ''),
+                    $args['form_provider'],
+                    $form_pid,
+                    $form_gid,
+                    $args['form_title'],
+                    $args['form_comments'],
+                    $_SESSION['authUserID'],
+                    $formattedEventDate,
+                    fixDate($args['form_enddate']),
+                    $args['duration'],
+                    $pc_recurrtype,
+                    serialize($args['recurrspec']),
+                    $args['starttime'],
+                    $args['endtime'],
+                    $args['form_allday'],
+                    $args['form_apptstatus'],
+                    $args['form_prefcat'],
+                    $args['locationspec'],
+                    (int)$args['facility'],
+                    (int)$args['billing_facility'],
+                    $form_room,
+                    $args['form_video_channel'],
+                    $pc_recurrdata
+                )
+            );
+    
+            if (!empty($form_pid)) {
+                manage_tracker_status(
+                    $formattedEventDate,
+                    $args['starttime'],
+                    $pc_eid,
+                    $form_pid,
+                    $_SESSION['authUser'],
+                    $args['form_apptstatus'],
+                    $args['form_room']
+                );
+            }
+        }
+    
+       
+            // $GLOBALS['temporary-eid-for-manage-tracker'] = $pc_eid; //used by manage tracker module to set correct encounter in tracker when check in
 
             return $pc_eid;
     } elseif ($from == 'payment') {
