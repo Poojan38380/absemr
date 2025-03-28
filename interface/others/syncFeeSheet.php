@@ -91,7 +91,7 @@ try {
             $price_level = $getPriceLevelQuery['price_level'];
             if (empty($price_level)) {
                 $patient_data = sqlQuery("select fname, lname from patient_data where pid = ? ", [$pid]);
-                
+
                 sendErrorResponse("Price Level Not Found for " . $patient_data['fname'] . " " . $patient_data['lname'], 404);
             }
 
@@ -127,9 +127,39 @@ try {
                 'provid' => "",
                 'notecodes' => ''
             ];
+            $bill[] = [
+                'code_type' => 'COPAY',
+                'code' => '10',
+                'billed' => "",
+                'pricelevel' => $price_level,
+                'price' => $price,
+                'units' => "1",
+                'provid' => "",
+            ];
 
 
             $fs = new FeeSheetHtml($pid, $encounter);
+            $resMoneyGot = sqlStatement(
+                "SELECT pay_amount as PatientPay,session_id as id, date(post_time) as date " .
+                "FROM ar_activity where deleted IS NULL AND pid = ? and encounter = ? and " .
+                "payer_type = 0 and account_code = 'PCP'",
+                array($fs->pid, $fs->encounter)
+            ); //new fees screen copay gives account_code='PCP'
+            while ($rowMoneyGot = sqlFetchArray($resMoneyGot)) {
+                $PatientPay = $rowMoneyGot['PatientPay'] * -1;
+                $id = $rowMoneyGot['id'];
+                $fs->addServiceLineItem(array(
+                    'codetype' => 'COPAY',
+                    'code' => '',
+                    'modifier' => '',
+                    'ndc_info' => $rowMoneyGot['date'],
+                    'auth' => 1,
+                    'del' => '',
+                    'units' => '',
+                    'fee' => $PatientPay,
+                    'id' => $id,
+                ));
+            }
 
             $fs->save(
                 $bill,
@@ -144,7 +174,7 @@ try {
                 'price_level' => $price_level,
             ]
         ];
-    
+
         // Send the JSON response
         http_response_code(200);
         echo json_encode($response);
@@ -172,13 +202,40 @@ try {
     $code_type = "CPT4";
     $units = "1";
 
+    $copayEntries = [];
+    $fs = new FeeSheetHtml($pid, $encounter);
+    $resMoneyGot = sqlStatement(
+        "SELECT pay_amount as PatientPay,session_id as id, date(post_time) as date " .
+        "FROM ar_activity where deleted IS NULL AND pid = ? and encounter = ? and " .
+        "payer_type = 0 and account_code = 'PCP'",
+        array($fs->pid, $fs->encounter)
+    ); //new fees screen copay gives account_code='PCP'
+    while ($rowMoneyGot = sqlFetchArray($resMoneyGot)) {
+        $PatientPay = $rowMoneyGot['PatientPay'] * -1;
+        $id = $rowMoneyGot['id'];
+        $copayEntries[] = array(
+            'code_type' => 'COPAY',
+            'code' => '',
+            'modifier' => '',
+            'ndc_info' => $rowMoneyGot['date'],
+            'auth' => 1,
+            'del' => '',
+            'units' => '',
+            'fee' => $PatientPay,
+            'id' => $id,
+        );
+    }
     $billresult = BillingUtilities::getBillingByEncounter($pid, $encounter, "*");
+    $serviceItems = $fs->serviceitems;
     // Convert $billresult to an array and add 'del' => '1'
-    $bill = array_map(function ($item) {
-        $item = (array) $item;
-        $item['del'] = '1';
-        return $item;
-    }, $billresult);
+    $bill = array_map(
+        function ($item) {
+            $item = (array) $item;
+            $item['del'] = '1';
+            return $item;
+        },
+        array_merge($billresult, $copayEntries)
+    );
 
     // Append the additional array to $bill
     $bill[] = [
@@ -193,9 +250,18 @@ try {
         'provid' => "",
         'notecodes' => ''
     ];
+    $bill[] = [
+        'code_type' => 'COPAY',
+        'code' => '10',
+        'billed' => "",
+        'pricelevel' => $price_level,
+        'price' => $price,
+        'units' => "1",
+        'provid' => "",
+    ];
 
 
-    $fs = new FeeSheetHtml($pid, $encounter);
+
 
     $fs->save(
         $bill,

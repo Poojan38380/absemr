@@ -2375,6 +2375,18 @@
           "patients",
           "med"
         ]
+      },
+      {
+        "label": "Category Mapping",
+        "menu_id": "Popup:Issues",
+        "url": "/interface/others/cptCategoryMapping.php",
+        "target": "pop",
+        "children": [],
+        "requirement": 0,
+        "acl_req": [
+          "patients",
+          "med"
+        ]
       }
     ]
   }
