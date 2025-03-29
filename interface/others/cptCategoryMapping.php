@@ -102,8 +102,8 @@ $sql = sqlStatement(
                     <td class="actions">
                         <a
                             href="cptCategoryMapping.php?id=<?php echo $row['id']; ?>&cpt4code=<?php echo $row['cpt4code']; ?>&category=<?php echo $row['category']; ?>&edit=true">Edit</a>
-                        <a href="process.php?delete=<?php echo $row['id']; ?>"
-                            onclick="return confirm('Are you sure you want to delete this entry?');">Delete</a>
+                        <a href="#" <?php echo $row['id']; ?>
+                            onclick="handleDelete(<?php echo $row['id']; ?>)">Delete</a>
                     </td>
                 </tr>
             <?php endwhile; ?>
@@ -145,6 +145,34 @@ $sql = sqlStatement(
                     console.error('Error:', error);
                 });
         }
+
+        function handleDelete(id) {
+            if (confirm('Are you sure you want to delete this entry?')) {
+                fetch('services/process.php', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                         delete: "Delete",
+                         id
+                         }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            alert(data.message);
+                            location.reload();
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        }
+
     </script>
 </body>
 

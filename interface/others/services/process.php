@@ -29,10 +29,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 }
 
 
-$requiredFields = [
-    'cpt4code',
-    'category'
-];
+$requiredFields = [];
 $missingFields = [];
 foreach ($requiredFields as $field) {
     if (!isset($data[$field]) || empty($data[$field])) {
@@ -52,6 +49,7 @@ $category = htmlspecialchars($data['category']);
 $id = isset($data['id']) ? $data['id'] : false;
 $add = isset($data['add']) ? 'add' : false;
 $update = isset($data['update']) ? 'update' : false;
+$delete = isset($data['delete']) ? 'delete' : false;
 
 // Handle Add
 if ($add) {
@@ -59,93 +57,83 @@ if ($add) {
         // Prepare SQL to insert new record
         $sql = "INSERT INTO cpt_category_mapping (cpt4code, category) VALUES (?, ?)";
         $result = sqlQuery($sql, [$cpt4code, $category]);
-    
+
         // Get the last inserted ID (assuming sqlQuery returns the last insert ID)
         $newId = sqlQuery("SELECT LAST_INSERT_ID() as id", ['id']);
-    
+
         // Send success response
-        sendSuccessResponse([
+        $response = [
             'status' => 'success',
+            'message' => 'Record added successfully',
             'id' => $newId,
             'cpt4code' => $cpt4code,
             'category' => $category
-        ], 'Category mapping added successfully', 201);
-    
+        ];
+        http_response_code(201);
+        echo json_encode($response);
+
     } catch (Exception $e) {
         // Handle database errors
         sendErrorResponse(
-            "Database Error", 
-            "Failed to insert record: " . $e->getMessage(), 
+            "Database Error",
+            "Failed to insert record: " . $e->getMessage(),
             500
         );
     }
-} else if($update){
+} else if ($update) {
     try {
         // Prepare SQL to insert new record
         $sql = "UPDATE cpt_category_mapping SET cpt4code = '$cpt4code', category = '$category' WHERE id= $id";
         $result = sqlQuery($sql, []);
         // Get the last inserted ID (assuming sqlQuery returns the last insert ID)
-        $newId = sqlQuery("SELECT LAST_INSERT_ID() as id", ['id']);
-    
+        $updatedData = sqlQuery("SELECT * from cpt_category_mapping where id = ?", [$id]);
+
         // Send success response
-        sendSuccessResponse([
+        $response = [
             'status' => 'success',
-            'id' => $newId,
-            'cpt4code' => $cpt4code,
-            'category' => $category
-        ], 'Category mapping added successfully', 201);
-    
+            'message' => 'Record updated successfully',
+            'id' => $updatedData['id'],
+            'cpt4code' => $updatedData['cpt4code'],
+            'category' => $updatedData['category']
+        ];
+
+        http_response_code(200);
+        echo json_encode($response);
+
+
     } catch (Exception $e) {
         // Handle database errors
         sendErrorResponse(
-            "Database Error", 
-            "Failed to insert record: " . $e->getMessage(), 
+            "Database Error",
+            "Failed to insert record: " . $e->getMessage(),
             500
         );
     }
-}
+} else if ($delete) {
+    try {
+        // Prepare SQL to insert new record
+        $sql = "DELETE FROM cpt_category_mapping WHERE id= $id";
+        $result = sqlQuery($sql, []);
 
-// Handle Edit (Fetch for editing)
-if (isset($_GET['edit'])) {
-    $edit_id = $conn->real_escape_string($_GET['edit']);
-    $edit_result = $conn->query("SELECT * FROM cpt_category_mapping WHERE id = '$edit_id'");
-    $edit_row = $edit_result->fetch_assoc();
+        // Send success response
+        $response = [
+            'status' => 'success',
+            'message' => 'Record deleted successfully',
+            'id' => $newId,
+            'cpt4code' => $cpt4code,
+            'category' => $category
+        ];
 
-    // Include index.php to show the form with existing data
-    include 'index.php';
-    exit();
-}
+        http_response_code(200);
+        echo json_encode($response);
 
-// Handle Update
-if (isset($_POST['update'])) {
-    $id = $conn->real_escape_string($_POST['id']);
-    $cpt4code = $conn->real_escape_string($_POST['cpt4code']);
-    $category = $conn->real_escape_string($_POST['category']);
-
-    $sql = "UPDATE cpt_category_mapping 
-            SET cpt4code = '$cpt4code', 
-                category = '$category' 
-            WHERE id = '$id'";
-
-    if ($conn->query($sql)) {
-        header("Location: index.php?msg=updated");
-        exit();
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-}
-
-// Handle Delete
-if (isset($_GET['delete'])) {
-    $delete_id = $conn->real_escape_string($_GET['delete']);
-
-    $sql = "DELETE FROM cpt_category_mapping WHERE id = '$delete_id'";
-
-    if ($conn->query($sql)) {
-        header("Location: index.php?msg=deleted");
-        exit();
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+    } catch (Exception $e) {
+        // Handle database errors
+        sendErrorResponse(
+            "Database Error",
+            "Failed to insert record: " . $e->getMessage(),
+            500
+        );
     }
 }
 
