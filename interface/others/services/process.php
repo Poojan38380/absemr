@@ -58,14 +58,10 @@ if ($add) {
         $sql = "INSERT INTO cpt_category_mapping (cpt4code, category) VALUES (?, ?)";
         $result = sqlQuery($sql, [$cpt4code, $category]);
 
-        // Get the last inserted ID (assuming sqlQuery returns the last insert ID)
-        $newId = sqlQuery("SELECT LAST_INSERT_ID() as id", ['id']);
-
         // Send success response
         $response = [
             'status' => 'success',
             'message' => 'Record added successfully',
-            'id' => $newId,
             'cpt4code' => $cpt4code,
             'category' => $category
         ];
