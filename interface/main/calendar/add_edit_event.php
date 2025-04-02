@@ -1074,7 +1074,7 @@ if ($groupid) {
         iframe.style.marginTop = '15px';
 
         // Add iframe after the form group div
-        // this.closest('.col-sm.form-group').after(iframe);
+        // this.closest('.col-sm.form-group').insertAdjacentElement('afterend', iframe);
     }
 
     function closeEncounterPopup() {
@@ -1168,7 +1168,7 @@ if ($groupid) {
                         iframe.style.marginTop = '15px';
 
                         // Add iframe after the form group div
-                        this.closest('.col-sm.form-group').after(iframe);
+                        this.closest('.col-sm.form-group').insertAdjacentElement('afterend', iframe);
 
                     } catch (error) {
                         console.error('Error checking appointment status dropdown:', error);
@@ -1204,7 +1204,7 @@ if ($groupid) {
                         iframe.style.marginTop = '15px';
 
                         // Add iframe after the form group div
-                        this.closest('.col-sm.form-group').after(iframe);
+                        this.closest('.col-sm.form-group').insertAdjacentElement('afterend', iframe);
 
                     } catch (error) {
                         console.error('Error checking appointment status dropdown:', error);
@@ -1255,7 +1255,7 @@ if ($groupid) {
                             iframe.style.marginTop = '15px';
 
                             // Add iframe after the form group div
-                            this.closest('.col-sm.form-group').after(iframe);
+                            this.closest('.col-sm.form-group').insertAdjacentElement('afterend', iframe);
 
                         } else if (this.value === 'tookPlace') {
                             <?php if (isset($formId)) {
@@ -1279,7 +1279,7 @@ if ($groupid) {
                             iframe.style.marginTop = '15px';
 
                             // Add iframe after the form group div
-                            this.closest('.col-sm.form-group').after(iframe);
+                            this.closest('.col-sm.form-group').insertAdjacentElement('afterend', iframe);
 
                         } else {
                             // Hide iframe if not "Arrived"
