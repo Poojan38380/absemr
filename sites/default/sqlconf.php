@@ -9,7 +9,7 @@ $host	= 'localhost';
 $port	= '3306';
 $login	= 'root';
 $pass	= 'adminroot';
-$dbase	= 'absemr';
+$dbase	= 'bsemr';
 $db_encoding	= 'utf8mb4';
 
 $sqlconf = array();

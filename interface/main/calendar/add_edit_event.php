@@ -1149,6 +1149,7 @@ if ($groupid) {
             const editEncounterButton = document.getElementById('editEncounter');
             if (editEncounterButton) {
                 editEncounterButton.addEventListener('click', function () {
+                console.log("Clicked");
                     // Check if "Arrived" is selected
                     try {
                         // Create iframe if it doesn't exist
@@ -1186,16 +1187,17 @@ if ($groupid) {
                         let iframe = document.getElementById('encounterPopup');
                         iframe = document.createElement('iframe');
                         iframe.id = 'encounterPopup';
-                        <?php
+                        iframe.src = `
+                        <?php 
                         if (isset($formId)) {
                             if (($attendanceForm)) {
                                 $attendanceFormId = $attendanceForm['id'];
-                                echo "iframe.src = '/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&attendanceFormId=$attendanceFormId&iframeMode=true'";
+                                echo "/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&attendanceFormId=$attendanceFormId&iframeMode=true'";
                             } else {
-                                echo "iframe.src = '/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&iframeMode=true&attendance=$attendedPids&reason=" . $formEncounter['reason'] . "'";
+                                echo "/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&iframeMode=true&attendance=$attendedPids&reason=" . $formEncounter['reason']; 
                             }
                         }
-                        ?>
+                        ?>`;
 
                         iframe.style.display = 'block';
                         iframe.style.width = '100%';
