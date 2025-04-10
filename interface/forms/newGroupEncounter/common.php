@@ -390,7 +390,9 @@ $help_icon = '';
                 </div>
                 <div class="clearfix"></div>
             </form>
-</div><!--end of co
+</div>
+    <script src="<?php echo $GLOBALS['web_root'] ?>/library/js/CustomTemplateLoader.js"></script>
+
 
 </form>
 
