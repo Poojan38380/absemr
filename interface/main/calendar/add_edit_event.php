@@ -51,6 +51,7 @@ require_once($GLOBALS['srcdir'] . '/patient_tracker.inc.php');
 require_once($GLOBALS['incdir'] . "/main/holidays/Holidays_Controller.php");
 require_once($GLOBALS['srcdir'] . '/group.inc');
 require_once('./zoom_functions.php');
+require_once("../../balanceSheet.php");
 
 use OpenEMR\Common\Acl\AclMain;
 use OpenEMR\Common\Twig\TwigContainer;
@@ -645,6 +646,19 @@ if (!empty($_POST['form_action']) && ($_POST['form_action'] == "save")) {
 		    "pc_video_channel = '" . add_escape_custom($_POST['form_video_channel']) . "' ,"  .
                     "pc_billing_location = '" . add_escape_custom((int)$_POST['billing_facility']) . "' "  .
                     "WHERE pc_aid = '" . add_escape_custom($provider) . "' AND pc_multiple = '" . add_escape_custom($row['pc_multiple'])  . "'");
+                    $appointmentStatus = add_escape_custom($_POST['form_apptstatus)']);
+                    $eventData = sqlQuery("SELECT pc_pid FROM openemr_postcalendar_events WHERE pc_eid = ?", array($eid));
+                    $pid = $eventData['pc_pid'];
+                    if($appointmentStatus === "Arrived" || $appointmentStatus === "excuse"){
+                        $fineStatus = "FINABLE";
+                    } else{
+                        $fineStatus = "UNFINABLE";
+                    }
+                    $refundStatus = true;
+                    if($appointmentStatus === "Arrived"){
+                        $refundStatus = false;
+                    }
+                    createBalanceSheetEntry($pid, $eid, $fineStatus, $refundStatus, $appointmentStatus === '-');
                 } // foreach
             }
 
@@ -754,7 +768,19 @@ if (!empty($_POST['form_action']) && ($_POST['form_action'] == "save")) {
 		"pc_video_channel = '" . add_escape_custom($_POST['form_video_channel']) . "' ,"  .
                 "pc_billing_location = '" . add_escape_custom((int)$_POST['billing_facility']) . "' "  .
 		"WHERE pc_eid = '" . add_escape_custom($eid) . "'");
-            }
+                $appointmentStatus = add_escape_custom($_POST['form_apptstatus']);
+                $eventData = sqlQuery("SELECT pc_pid FROM openemr_postcalendar_events WHERE pc_eid = ?", array($eid));
+                $pid = $eventData['pc_pid'];
+                if ($appointmentStatus === "Arrived" || $appointmentStatus === "excuse") {
+                    $fineStatus = "UNFINABLE";
+                } else {
+                    $fineStatus = "FINABLE";
+                }
+                $refundStatus = true;
+                if($appointmentStatus === "Arrived"){
+                    $refundStatus = false;
+                }
+                createBalanceSheetEntry($pid, $eid, $fineStatus, $refundStatus, $appointmentStatus === '-');            }
         }
 
         // =======================================

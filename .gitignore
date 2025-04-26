@@ -24,3 +24,6 @@ ccdaservice/node_modules
 
 # testing
 .phpunit.result.cache
+
+#docs
+/sites/default/documents/edi/*

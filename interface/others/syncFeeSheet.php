@@ -237,6 +237,24 @@ try {
         array_merge($billresult, $copayEntries)
     );
 
+    $fetchDignosis = sqlStatement("SELECT * FROM lists WHERE pid = $pid AND type = 'medication' ORDER BY begdate");
+    while ($data = sqlFetchArray($fetchDignosis)) {
+        $diagnosis = $data['diagnosis'];
+        list($type, $diagnosisCode) = explode(':', $diagnosis);
+        $bill[] = [
+            'code_type' => $type,
+            'code' => $diagnosisCode,
+            'billed' => "",
+            'mod' => "",
+            'pricelevel' => null,
+            'price' => null,
+            'units' => null,
+            'justify' => '',
+            'provid' => "",
+            'notecodes' => ''
+        ];
+    }
+
     // Append the additional array to $bill
     $bill[] = [
         'code_type' => $code_type,
