@@ -238,9 +238,13 @@ try {
     );
 
     $fetchDignosis = sqlStatement("SELECT * FROM lists WHERE pid = $pid AND type = 'medication' ORDER BY begdate");
+    $i = 0;
     while ($data = sqlFetchArray($fetchDignosis)) {
         $diagnosis = $data['diagnosis'];
         list($type, $diagnosisCode) = explode(':', $diagnosis);
+        if($i===0){
+        $primaryDiagnosis = "$type|$diagnosisCode";
+        }
         $bill[] = [
             'code_type' => $type,
             'code' => $diagnosisCode,
@@ -253,6 +257,7 @@ try {
             'provid' => "",
             'notecodes' => ''
         ];
+        $i++;
     }
 
     // Append the additional array to $bill
@@ -264,7 +269,7 @@ try {
         'pricelevel' => $price_level,
         'price' => $price,
         'units' => $units,
-        'justify' => '',
+        'justify' => $primaryDiagnosis ?? '',
         'provid' => "",
         'notecodes' => ''
     ];
