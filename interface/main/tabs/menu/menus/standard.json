@@ -487,6 +487,18 @@
           ]
         ],
         "global_req": "auto_sftp_claims_to_x12_partner"
+      },
+      {
+        "label": "Balance Sheet",
+        "menu_id": "Popup:Issues",
+        "url": "/interface/others/balance_sheet.php",
+        "target": "biltrk",
+        "children": [],
+        "requirement": 0,
+        "acl_req": [
+          "patientportal",
+          "portal"
+        ]
       }
     ],
     "requirement": 0,

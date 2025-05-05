@@ -5,8 +5,8 @@
 global $disable_utf8_flag;
 $disable_utf8_flag = false;
 
-// $host	= 'localhost';
-$host	= 'database-1.cp62ccos478d.us-east-1.rds.amazonaws.com';
+$host	= 'localhost';
+// $host	= 'database-1.cp62ccos478d.us-east-1.rds.amazonaws.com';
 $port	= '3306';
 $login	= 'root';
 $pass	= 'adminroot';

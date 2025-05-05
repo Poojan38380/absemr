@@ -82,6 +82,7 @@ try {
         $result = sqlStatement($select_sql, array($gid, 15, $groupEncounter['date']));
         while ($patient_encounter = sqlFetchArray($result)) {
             $pid = $patient_encounter['pid'];
+            $patient_data = sqlQuery("select fname, lname from patient_data where pid = ? ", [$pid]);
             $encounter = $patient_encounter['encounter'];
             $getPriceLevelQuery = sqlQuery("SELECT price_level FROM patient_data " .
                 "WHERE pid = ?", [$pid]);
@@ -89,8 +90,7 @@ try {
                 sendErrorResponse("Price Level Not Found for this", 404);
             }
             $price_level = $getPriceLevelQuery['price_level'];
-            if (empty($price_level)) {
-                $patient_data = sqlQuery("select fname, lname from patient_data where pid = ? ", [$pid]);
+            if (empty($price_level) || !isset($price_level)) {
 
                 sendErrorResponse("Price Level Not Found for " . $patient_data['fname'] . " " . $patient_data['lname'], 404);
             }
@@ -114,6 +114,36 @@ try {
                 return $item;
             }, $billresult);
 
+            //Fetch diagnosis and add to our fee sheet
+            $fetchDignosis = sqlStatement("SELECT * FROM lists WHERE pid = $pid AND type = 'medication' ORDER BY begdate");
+            $i = 0;
+            while ($data = sqlFetchArray($fetchDignosis)) {
+                if (!(isset($data['diagnosis'])) || $data['diagnosis'] === '') {
+                    sendErrorResponse("Diagnosis Not Found", "Diagnosis Not Found", 404);
+                    break;
+                }
+                $diagnosis = $data['diagnosis'];
+                list($type, $diagnosisCode) = explode(':', $diagnosis);
+                if ($i === 0) {
+                    $primaryDiagnosis = "$type|$diagnosisCode";
+                }
+                $bill[] = [
+                    'code_type' => $type,
+                    'code' => $diagnosisCode,
+                    'billed' => "",
+                    'mod' => "",
+                    'pricelevel' => null,
+                    'price' => null,
+                    'units' => null,
+                    'justify' => '',
+                    'provid' => "",
+                    'notecodes' => ''
+                ];
+                $i++;
+            }
+            if($i == 0){
+                sendErrorResponse("Diagnosis Not Found for " . $patient_data['fname'] . " " . $patient_data['lname'], "", 404);
+            }
             // Append the additional array to $bill
             $bill[] = [
                 'code_type' => $code_type,
@@ -237,13 +267,18 @@ try {
         array_merge($billresult, $copayEntries)
     );
 
+    //Fetch diagnosis and add to our fee sheet
     $fetchDignosis = sqlStatement("SELECT * FROM lists WHERE pid = $pid AND type = 'medication' ORDER BY begdate");
     $i = 0;
     while ($data = sqlFetchArray($fetchDignosis)) {
+        if (!(isset($data['diagnosis'])) || $data['diagnosis'] === '') {
+            sendErrorResponse("Diagnosis Not Found", "Diagnosis Not Found", 404);
+            break;
+        }
         $diagnosis = $data['diagnosis'];
         list($type, $diagnosisCode) = explode(':', $diagnosis);
-        if($i===0){
-        $primaryDiagnosis = "$type|$diagnosisCode";
+        if ($i === 0) {
+            $primaryDiagnosis = "$type|$diagnosisCode";
         }
         $bill[] = [
             'code_type' => $type,
