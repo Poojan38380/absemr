@@ -469,10 +469,7 @@ if (!$ckavail) {
             } <?php
         } else {
             //Someone is going to have to go over this with a fine-toothed comb because I couldn't really parse the original here
-            if ($isProv) { ?>
-                if (confirm(<?php echo xlj('Provider not available, use it anyway?'); ?>)) {
-                <?php
-            } else { ?>
+            if (!$isProv) { ?>
                 if (confirm(<?php echo xlj('This appointment slot is already used, use it anyway?'); ?>)) {
                 <?php
             } ?>
