@@ -473,6 +473,7 @@ if (!$ckavail) {
                 if (confirm(<?php echo xlj('Provider not available, use it anyway?'); ?>)) {
                 <?php
             } else { ?>
+
                 if (confirm(<?php echo xlj('This appointment slot is already used, use it anyway?'); ?>)) {
                 <?php
             } ?>

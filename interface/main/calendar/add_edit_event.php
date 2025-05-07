@@ -2191,9 +2191,6 @@ if(isset($formId)){
 </div>
 <div class="form-row mx-2 mt-3">
     <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-primary" type='button' name='form_save' id='form_save' value='<?php echo xla('Save'); ?>' />
-    <?php if (!($GLOBALS['select_multi_providers'])) { //multi providers appt is not supported by check slot avail window, so skip ?>
-        <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-secondary" type='button' hidden id='find_available' value='<?php echo xla('Find Available{{Provider}}'); ?>' />
-    <?php } ?>
     <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-danger" type='button' name='form_delete' id='form_delete' value='<?php echo xla('Delete'); ?>'<?php echo (!$eid) ? " disabled" : ""; ?> />
     <input class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-secondary" type='button' id='cancel' onclick="dlgclose()" value='<?php echo xla('Cancel'); ?>' />
     <input hidden class="col-sm mx-sm-2 my-2 my-sm-auto btn btn-secondary" type='button' name='form_duplicate' id='form_duplicate' value='<?php echo xla('Create Duplicate'); ?>' />
@@ -2394,42 +2391,8 @@ function deleteEvent() {
 
 function SubmitForm() {
     var f = document.forms[0];
-    <?php if (!($GLOBALS['select_multi_providers']) && empty($_GET['prov'])) { // multi providers appt is not supported by check slot avail window, so skip. && is not provider tab. ?>
-    if (f.form_action.value != 'delete') {
-        // Check slot availability.
-        var mins = parseInt(f.form_hour.value) * 60 + parseInt(f.form_minute.value);
-        <?php if ($GLOBALS['time_display_format']  == 1) :
-            ?>if (f.form_ampm.value == '2' && mins < 720) mins += 720;<?php endif ?>
-        find_available('&cktime=' + mins);
-    }
-    else {
-        top.restoreSession();
-        f.submit();
-    }
-    <?php } else { ?>
-        <?php
-    /*Support Multi-Provider Events in features*/
-        $sdate = $date;
-        $edate = new DateTime($date);
-        $edate->modify('tomorrow');
-        $edate = $edate->format('Y-m-d');
-        $is_holiday = false;
-        $holidays_controller = new Holidays_Controller();
-        $holidays = $holidays_controller->get_holidays_by_date_range($sdate, $edate);
-        if (in_array($sdate, $holidays)) {
-            $is_holiday = true;
-        }?>
-    if (f.form_action.value != 'delete') {
-        <?php if ($is_holiday) {?>
-        if (!confirm('<?php echo xls('On this date there is a holiday, use it anyway?'); ?>')) {
-            top.restoreSession();
-        }
-        <?php }?>
-    }
     top.restoreSession();
     f.submit();
-    <?php } ?>
-
     return true;
 }
 </script>
