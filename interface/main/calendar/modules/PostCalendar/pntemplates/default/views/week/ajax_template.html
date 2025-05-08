@@ -761,6 +761,7 @@ foreach ($providers as $provider) {
 
                 $content .= "<span class='appointment" . attr($apptToggle ?? "") . "'>";
                 $content .= create_event_time_anchor($dispstarth . ':' . $startm);
+                $content .="<span class='link_title'>&nbsp;ID: ". $event["eid"] . "</span>&nbsp;";
                 if ($event['recurrtype'] > 0) $content .= "<img src='{$this->_tpl_vars['TPL_IMAGE_PATH']}/repeating8.png' class='border-0' style='margin:0 2px 0 2px;' title='Repeating event' alt='Repeating event' />";
                 $content .= text($event['apptstatus']);
                 if ($patientid) {

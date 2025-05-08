@@ -552,6 +552,7 @@ foreach ($providers as $provider) {
                 else
                     $divTitle .= "\r\n[" . $catname . ' ' . $comment . "]" . $fname . " " . $lname;
                 $content .= create_event_time_anchor($displayTime);
+                $content .="<span class='link_title'>&nbsp;ID: ". $event["eid"] . "</span>&nbsp;";
                 if ($patientid) {
                     // include patient name and link to their details
                     $link_title = $fname . " " . $lname . " \n";
