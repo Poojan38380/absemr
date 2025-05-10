@@ -33,7 +33,7 @@ class FormService
         }
 
         if ($attendant_type == 'pid') {
-            $sql .= " and pid=? and therapy_group_id IS NULL ";
+            $sql .= " and pid=? ";
         } else {
             $sql .= " and therapy_group_id = ? and pid IS NULL ";
         }
