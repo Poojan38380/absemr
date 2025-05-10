@@ -966,8 +966,8 @@ if ($eid) {
     $repeats = $row['pc_recurrtype'];
     $multiple_value = $row['pc_multiple'];
     
-    $attendanceData = sqlQuery("SELECT * FROM event_attendance WHERE eid = ?", [$eid]);
-    $attendedPids = $attendanceData['pids'] ?? [];
+    $attendanceData = sqlQuery("SELECT GROUP_CONCAT(pid) AS pids FROM event_attendance WHERE eid = ? GROUP BY eid", [$eid]);
+    $attendedPids = !empty($attendanceData['pids']) ? explode(',', $attendanceData['pids']) : [];
     $trackingData = sqlQuery("SELECT * FROM encounter_tracker WHERE eid = ?", [$eid] );
     $encounterId = $trackingData['encounter'];
     $formEncounter = isset($groupid) && $groupid !== '0' ? sqlQuery("SELECT * FROM form_groups_encounter WHERE encounter = ? ", [$encounterId]) : sqlQuery("SELECT * FROM form_encounter WHERE encounter = ?", [$encounterId] );
