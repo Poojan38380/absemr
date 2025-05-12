@@ -968,8 +968,8 @@ if ($eid) {
     
     $attendanceQuery = "SELECT pid, status FROM event_attendance WHERE eid = ? GROUP BY eid";
     $attendanceRes = sqlStatement($attendanceQuery, [$eid]);
-    for ($iter = 0; $row = sqlFetchArray($attendanceRes); $iter++) {
-        $attendanceData[$iter] = $row;
+    for ($iter = 0; $record = sqlFetchArray($attendanceRes); $iter++) {
+        $attendanceData[$iter] = $record;
     }
     // $attendedPids = !empty($attendanceData['pids']) ? explode(',', $attendanceData['pids']) : [];
     $trackingData = sqlQuery("SELECT * FROM encounter_tracker WHERE eid = ?", [$eid] );
