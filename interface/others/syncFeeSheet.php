@@ -5,19 +5,15 @@ require("../globals.php");
 error_reporting(E_ALL & ~E_DEPRECATED);
 ini_set('display_errors', 1);
 require_once("$srcdir/FeeSheetHtml.class.php");
+
 use OpenEMR\Billing\BillingUtilities;
 
-$PriceCodes = [
-    '16' => '90832', //30 minutes
-    '17' => '90834', //45 minutes
-    '10' => '90837', //60 minutes
-    '15' => '90853', //Group Therapy,
-    '12' => '90791', //Intake Evalutation / Pyschotherapy dignostics sessions
-    '18' => '90839', //Psychotherapy Crisis
-    '5' => '90847', //Family Therapy
-    '9' => '90846', //Family Therapy without patient
-    '19' => '99404', //EAP
-];
+// Function to get CPT code from category mapping
+function getCptCodeFromCategory($category_id)
+{
+    $result = sqlQuery("SELECT cpt4code FROM cpt_category_mapping WHERE category = ?", [$category_id]);
+    return $result ? $result['cpt4code'] : null;
+}
 
 // Function to send error response
 function sendErrorResponse($message, $details = null, $httpCode = 400)
@@ -96,7 +92,10 @@ try {
             }
 
             $category_id = $event['pc_catid'];
-            $code = $PriceCodes[$category_id];
+            $code = getCptCodeFromCategory($category_id);
+            if (!$code) {
+                sendErrorResponse("CPT Code Not Found", "No CPT code mapping found for category ID: " . $category_id, 404);
+            }
             $codeDetails = sqlQuery("select * from  codes where code = ? && superbill = 'Telemedicine'", [$code]);
             $priceData = sqlQuery("select p.pr_price, c.modifier, c.code from codes c left join prices p on p.pr_id = c.id where c.code = ? and p.pr_level = ?", [$code, $price_level]);
             if ($priceData === false) {
@@ -141,7 +140,7 @@ try {
                 ];
                 $i++;
             }
-            if($i == 0){
+            if ($i == 0) {
                 sendErrorResponse("Diagnosis Not Found for " . $patient_data['fname'] . " " . $patient_data['lname'], "", 404);
             }
             // Append the additional array to $bill
@@ -158,15 +157,15 @@ try {
                 'notecodes' => ''
             ];
             $patientSessionPayment = sqlQuery("SELECT amount FROM patient_session_payments WHERE pid = ? AND session_id = ?", [$pid, $eid]);
-            
+
             // Check for shadow payments
             $shadowPayment = sqlQuery("SELECT pay_amount FROM ar_activity WHERE pid = ? AND encounter = ? AND payer_type = 0 AND account_code = 'PCP' AND deleted IS NULL", [$pid, $encounter]);
-            
+
             if (!$patientSessionPayment && !$shadowPayment && (!isset($patientSessionPayment['amount']) || $patientSessionPayment['amount'] != 0)) {
                 sendErrorResponse("Payment Not Found", "Payment has not been done yet for " . $patient_data['fname'] . " " . $patient_data['lname'], 404);
             }
-            
-            if($patientSessionPayment){
+
+            if ($patientSessionPayment) {
                 $bill[] = [
                     'code_type' => 'COPAY',
                     'code' => '10',
@@ -182,8 +181,8 @@ try {
             $fs = new FeeSheetHtml($pid, $encounter);
             $resMoneyGot = sqlStatement(
                 "SELECT pay_amount as PatientPay,session_id as id, date(post_time) as date " .
-                "FROM ar_activity where deleted IS NULL AND pid = ? and encounter = ? and " .
-                "payer_type = 0 and account_code = 'PCP'",
+                    "FROM ar_activity where deleted IS NULL AND pid = ? and encounter = ? and " .
+                    "payer_type = 0 and account_code = 'PCP'",
                 array($fs->pid, $fs->encounter)
             ); //new fees screen copay gives account_code='PCP'
             while ($rowMoneyGot = sqlFetchArray($resMoneyGot)) {
@@ -233,7 +232,10 @@ try {
     }
 
     $category_id = $event['pc_catid'];
-    $code = $PriceCodes[$category_id];
+    $code = getCptCodeFromCategory($category_id);
+    if (!$code) {
+        sendErrorResponse("CPT Code Not Found", "No CPT code mapping found for category ID: " . $category_id, 404);
+    }
     $codeDetails = sqlQuery("select * from  codes where code = ? && superbill = 'Telemedicine'", [$code]);
     $priceData = sqlQuery("select p.pr_price, c.modifier, c.code from codes c left join prices p on p.pr_id = c.id where c.code = ? and p.pr_level = ?", [$code, $price_level]);
     if ($priceData === false) {
@@ -247,8 +249,8 @@ try {
     $fs = new FeeSheetHtml($pid, $encounter);
     $resMoneyGot = sqlStatement(
         "SELECT pay_amount as PatientPay,session_id as id, date(post_time) as date " .
-        "FROM ar_activity where deleted IS NULL AND pid = ? and encounter = ? and " .
-        "payer_type = 0 and account_code = 'PCP'",
+            "FROM ar_activity where deleted IS NULL AND pid = ? and encounter = ? and " .
+            "payer_type = 0 and account_code = 'PCP'",
         array($fs->pid, $fs->encounter)
     ); //new fees screen copay gives account_code='PCP'
     while ($rowMoneyGot = sqlFetchArray($resMoneyGot)) {
@@ -321,15 +323,15 @@ try {
     ];
 
     $patientSessionPayment = sqlQuery("SELECT amount FROM patient_session_payments WHERE pid = ? AND session_id = ?", [$pid, $eid]);
-    
+
     // Check for shadow payments
     $shadowPayment = sqlQuery("SELECT pay_amount FROM ar_activity WHERE pid = ? AND encounter = ? AND payer_type = 0 AND account_code = 'PCP' AND deleted IS NULL", [$pid, $encounter]);
-    
+
     if (!$patientSessionPayment && !$shadowPayment && (!isset($patientSessionPayment['amount']) || $patientSessionPayment['amount'] != 0)) {
         sendErrorResponse("Payment Not Found", "Payment has not been done yet", 404);
     }
-    
-    if($patientSessionPayment){
+
+    if ($patientSessionPayment) {
         $bill[] = [
             'code_type' => 'COPAY',
             'code' => '10',
@@ -361,9 +363,7 @@ try {
     // Send the JSON response
     http_response_code(200);
     echo json_encode($response);
-
 } catch (Exception $e) {
     // Send error response for any unexpected errors
     sendErrorResponse("Unexpected Error", $e->getMessage(), 500);
 }
-?>
