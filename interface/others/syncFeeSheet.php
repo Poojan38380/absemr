@@ -157,15 +157,26 @@ try {
                 'provid' => "",
                 'notecodes' => ''
             ];
-            $bill[] = [
-                'code_type' => 'COPAY',
-                'code' => '10',
-                'billed' => "",
-                'pricelevel' => $price_level,
-                'price' => $price,
-                'units' => "1",
-                'provid' => "",
-            ];
+            $patientSessionPayment = sqlQuery("SELECT amount FROM patient_session_payments WHERE pid = ? AND session_id = ?", [$pid, $eid]);
+            
+            // Check for shadow payments
+            $shadowPayment = sqlQuery("SELECT pay_amount FROM ar_activity WHERE pid = ? AND encounter = ? AND payer_type = 0 AND account_code = 'PCP' AND deleted IS NULL", [$pid, $encounter]);
+            
+            if (!$patientSessionPayment && !$shadowPayment && (!isset($patientSessionPayment['amount']) || $patientSessionPayment['amount'] != 0)) {
+                sendErrorResponse("Payment Not Found", "Payment has not been done yet for " . $patient_data['fname'] . " " . $patient_data['lname'], 404);
+            }
+            
+            if($patientSessionPayment){
+                $bill[] = [
+                    'code_type' => 'COPAY',
+                    'code' => '10',
+                    'billed' => "",
+                    'pricelevel' => $price_level,
+                    'price' => $patientSessionPayment['amount'],
+                    'units' => "1",
+                    'provid' => "",
+                ];
+            }
 
 
             $fs = new FeeSheetHtml($pid, $encounter);
@@ -308,15 +319,27 @@ try {
         'provid' => "",
         'notecodes' => ''
     ];
-    $bill[] = [
-        'code_type' => 'COPAY',
-        'code' => '10',
-        'billed' => "",
-        'pricelevel' => $price_level,
-        'price' => $price,
-        'units' => "1",
-        'provid' => "",
-    ];
+
+    $patientSessionPayment = sqlQuery("SELECT amount FROM patient_session_payments WHERE pid = ? AND session_id = ?", [$pid, $eid]);
+    
+    // Check for shadow payments
+    $shadowPayment = sqlQuery("SELECT pay_amount FROM ar_activity WHERE pid = ? AND encounter = ? AND payer_type = 0 AND account_code = 'PCP' AND deleted IS NULL", [$pid, $encounter]);
+    
+    if (!$patientSessionPayment && !$shadowPayment && (!isset($patientSessionPayment['amount']) || $patientSessionPayment['amount'] != 0)) {
+        sendErrorResponse("Payment Not Found", "Payment has not been done yet", 404);
+    }
+    
+    if($patientSessionPayment){
+        $bill[] = [
+            'code_type' => 'COPAY',
+            'code' => '10',
+            'billed' => "",
+            'pricelevel' => $price_level,
+            'price' => $patientSessionPayment['amount'],
+            'units' => "1",
+            'provid' => "",
+        ];
+    }
 
 
 
