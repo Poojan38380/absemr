@@ -966,8 +966,12 @@ if ($eid) {
     $repeats = $row['pc_recurrtype'];
     $multiple_value = $row['pc_multiple'];
     
-    $attendanceData = sqlQuery("SELECT GROUP_CONCAT(pid) AS pids FROM event_attendance WHERE eid = ? GROUP BY eid", [$eid]);
-    $attendedPids = !empty($attendanceData['pids']) ? explode(',', $attendanceData['pids']) : [];
+    $attendanceQuery = "SELECT pid, status FROM event_attendance WHERE eid = ? GROUP BY eid";
+    $attendanceRes = sqlStatement($attendanceQuery, [$eid]);
+    for ($iter = 0; $record = sqlFetchArray($attendanceRes); $iter++) {
+        $attendanceData[$iter] = $record;
+    }
+    // $attendedPids = !empty($attendanceData['pids']) ? explode(',', $attendanceData['pids']) : [];
     $trackingData = sqlQuery("SELECT * FROM encounter_tracker WHERE eid = ?", [$eid] );
     $encounterId = $trackingData['encounter'];
     $formEncounter = isset($groupid) && $groupid !== '0' ? sqlQuery("SELECT * FROM form_groups_encounter WHERE encounter = ? ", [$encounterId]) : sqlQuery("SELECT * FROM form_encounter WHERE encounter = ?", [$encounterId] );
@@ -1220,7 +1224,7 @@ if ($groupid) {
                                 $attendanceFormId = $attendanceForm['id'];
                                 echo "/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&attendanceFormId=$attendanceFormId&iframeMode=true'";
                             } else {
-                                echo "/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&iframeMode=true&attendance=$attendedPids&reason=" . $formEncounter['reason']; 
+                                echo "/bsemr/interface/patient_file/encounter/load_form.php?formname=group_attendance&gid=$groupid&encounterId=$encounterId&iframeMode=true&attendance=" . json_encode($attendanceData) . "&reason=" . $formEncounter['reason']; 
                             }
                         }
                         ?>`;

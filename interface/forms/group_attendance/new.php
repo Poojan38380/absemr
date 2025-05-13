@@ -135,16 +135,29 @@ if ($form_id) {//If editing a form or the form already exists (inwhich case will
                 <td >
                     <?php
                        if(isset($attendance)){
-                        if(in_array($participant['pid'], $attendance)) {
-                            $attendedEvent = true;
+                            foreach ($attendance as $index => $obj) {
+                                if ($obj['pid'] === $participant['pid']) {
+                                    $foundIndex = $index;
+                                    break;
+                                }
+                            }
+                        if (isset($foundIndex)) {
+                            $status = $attendance[$foundIndex]->status;
+                            if ($status === 'present') {
+                                $attendedEvent = true;
+                                $excusedEvent = false;
+                            } else {
+                                $attendedEvent = false;
+                                $excusedEvent = true;
+                            }
                         }
-                       }
+                        }
                      ?>
                     <select class="form-control status_select" name="<?php echo "patientData[" . attr($participant['pid']) . "][status]" ;?>" <?php if (!$can_edit) {
                         ?> disabled <?php
                                                                      } ?> >
                         <?php foreach ($statuses_in_meeting as $status_in_meeting) {?>
-                            <option value="<?php echo attr($status_in_meeting['option_id']); ?>" <?php if (($attendedEvent && $status_in_meeting['option_id'] === '@') || ($participant['meeting_patient_status'] == $status_in_meeting['option_id'])) {
+                            <option value="<?php echo attr($status_in_meeting['option_id']); ?>" <?php if (($excusedEvent && $status_in_meeting['option_id'] === '~') || ($attendedEvent && $status_in_meeting['option_id'] === '@') || ($participant['meeting_patient_status'] == $status_in_meeting['option_id'])) {
                                 echo 'selected';
                                            }?> > <?php echo xlt($status_in_meeting['title']); ?></option>
                         <?php } ?>
