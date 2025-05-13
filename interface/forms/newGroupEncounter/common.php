@@ -380,7 +380,7 @@ $help_icon = '';
                     </div>
                 </fieldset>
                 <div class="col-md-12 form-group clearfix">
-                      <button type="button" class="btn btn-secondary btn-save" onclick="top.restoreSession(); saveClicked(undefined);"><?php echo xlt('Save');?></button>
+                      <button type="button" class="btn btn-secondary btn-save" onclick="top.restoreSession(); saveClicked(undefined);"><?php echo xlt('Save Note');?></button>
                       <?php if ($viewmode || empty($_GET["autoloaded"])) { // not creating new encounter ?>
                           <button type="button" class="btn btn-link btn-cancel" onClick="return cancelClickedOld()"><?php echo xlt('Cancel');?></button>
                       <?php } else { // not $viewmode ?>

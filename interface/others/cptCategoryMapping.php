@@ -71,13 +71,15 @@ $sql = sqlStatement(
             <input type='hidden' id='id' name='id' value='<?php echo $_GET['id']; ?>'>
         <?php } ?>
 
-        <label for="cpt4code">CPT Category:</label>
-        <input type="text" name="cpt4code" id="cpt4code" required
-            value="<?php echo isset($_GET['cpt4code']) ? $_GET['cpt4code'] : ''; ?>">
+        <label for="cpt4code">CPT Code (5 Digit):</label>
+        <input type="number" name="cpt4code" id="cpt4code" required min="0" max="99999" pattern="\d{5}"
+            value="<?php echo isset($_GET['cpt4code']) ? $_GET['cpt4code'] : ''; ?>"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 5)">
 
-        <label for="category">Category Name:</label>
-        <input type="text" name="category" id="category" required
-            value="<?php echo isset($_GET['category']) ? $_GET['category'] : ''; ?>">
+        <label for="category">Category Id:</label>
+        <input type="number" name="category" id="category" required min="0"
+            value="<?php echo isset($_GET['category']) ? $_GET['category'] : ''; ?>"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')">
 
         <input type="submit" name="<?php echo isset($_GET) ? 'update' : 'add'; ?>"
             value="<?php echo isset($_GET['id']) ? 'Update' : 'Add'; ?> Entry">
@@ -88,8 +90,8 @@ $sql = sqlStatement(
         <thead>
             <tr>
                 <th>ID</th>
-                <th>CPT Category</th>
-                <th>Category Name</th>
+                <th>CPT Code (5 Digit)</th>
+                <th>Category Id</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -126,12 +128,12 @@ $sql = sqlStatement(
             <?php } ?>
 
             fetch('services/process.php', {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'success') {
@@ -149,15 +151,15 @@ $sql = sqlStatement(
         function handleDelete(id) {
             if (confirm('Are you sure you want to delete this entry?')) {
                 fetch('services/process.php', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                         delete: "Delete",
-                         id
-                         }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
+                        method: 'POST',
+                        body: JSON.stringify({
+                            delete: "Delete",
+                            id
+                        }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
                     .then(response => response.json())
                     .then(data => {
                         if (data.status === 'success') {
@@ -172,7 +174,6 @@ $sql = sqlStatement(
                     });
             }
         }
-
     </script>
 </body>
 
