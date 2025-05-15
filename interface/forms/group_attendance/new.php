@@ -142,7 +142,7 @@ if ($form_id) {//If editing a form or the form already exists (inwhich case will
                                 }
                             }
                         if (isset($foundIndex)) {
-                            $status = $attendance[$foundIndex]->status;
+                            $status = $attendance[$foundIndex]['status'];
                             if ($status === 'present') {
                                 $attendedEvent = true;
                                 $excusedEvent = false;
