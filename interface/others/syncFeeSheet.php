@@ -162,7 +162,7 @@ try {
             $shadowPayment = sqlQuery("SELECT pay_amount FROM ar_activity WHERE pid = ? AND encounter = ? AND payer_type = 0 AND account_code = 'PCP' AND deleted IS NULL", [$pid, $encounter]);
 
             if (!$patientSessionPayment && !$shadowPayment && (!isset($patientSessionPayment['amount']) || $patientSessionPayment['amount'] != 0)) {
-                sendErrorResponse("Payment Not Found", "Payment has not been done yet for " . $patient_data['fname'] . " " . $patient_data['lname'], 404);
+                isset($paymentWarning) ? $paymentWarning .= ", " . ("Payment Not Found " . "Payment has not been done yet for " . $patient_data['fname'] . " " . $patient_data['lname']) : $paymentWarning = ("Payment Not Found " . "Payment has not been done yet for " . $patient_data['fname'] . " " . $patient_data['lname']);
             }
 
             if ($patientSessionPayment) {
@@ -209,7 +209,7 @@ try {
 
         $response = [
             'success' => true,
-            'message' => 'Fee Sheet Synced Successfully',
+            'message' => 'Fee Sheet Synced Successfully. ' . ($paymentWarning ?? ''),
             'data' => [
                 'price_level' => $price_level,
             ]
@@ -328,7 +328,7 @@ try {
     $shadowPayment = sqlQuery("SELECT pay_amount FROM ar_activity WHERE pid = ? AND encounter = ? AND payer_type = 0 AND account_code = 'PCP' AND deleted IS NULL", [$pid, $encounter]);
 
     if (!$patientSessionPayment && !$shadowPayment && (!isset($patientSessionPayment['amount']) || $patientSessionPayment['amount'] != 0)) {
-        sendErrorResponse("Payment Not Found", "Payment has not been done yet", 404);
+        $paymentWarning = "Payment Not Found, Payment has not been done yet";
     }
 
     if ($patientSessionPayment) {
@@ -354,7 +354,7 @@ try {
 
     $response = [
         'success' => true,
-        'message' => 'Fee Sheet Synced Successfully',
+        'message' => 'Fee Sheet Synced Successfully. ' . ($paymentWarning ?? ''),
         'data' => [
             'price_level' => $price_level,
         ]

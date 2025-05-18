@@ -1163,7 +1163,7 @@ if ($groupid) {
                     console.log("Response:", data);
                 
                     if(data.success){
-                        alert("Successfully Synced FeeSheet");
+                        alert(data.message);
                     }
                 
                 } catch (error) {
