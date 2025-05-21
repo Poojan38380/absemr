@@ -1,33 +1,98 @@
 <html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .wrapper {
+                background-color: #f9f9f9;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                padding: 25px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            .header {
+                color: #0056b3;
+                font-size: 24px;
+                margin-bottom: 20px;
+                text-align: center;
+                font-weight: bold;
+            }
+            .tagline {
+                font-style: italic;
+                text-align: center;
+                margin-bottom: 25px;
+                color: #555;
+            }
+            .credentials-box {
+                background-color: #e8f4ff;
+                border: 1px solid #bfd3e6;
+                border-radius: 5px;
+                padding: 15px;
+                margin: 20px 0;
+            }
+            .contact-info {
+                background-color: #f5f5f5;
+                padding: 10px;
+                border-radius: 5px;
+                margin-top: 20px;
+                font-size: 14px;
+            }
+            a {
+                color: #0056b3;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            .footer {
+                margin-top: 30px;
+                text-align: center;
+                font-size: 14px;
+            }
+        </style>
+    </head>
     <body>
-        <div class='wrapper'>
-            {% if portal_onsite_two_enable is not empty %}
-                {{ "Patient Portal Web Address"|xlt }}:<br />
-                <a href='{{ portal_onsite_two_address|attr }}' target='_blank'>{{ portal_onsite_two_address|text }}</a>
-                <br /><br />
-            {% endif %}
-            <strong>{{ "Portal Account Name"|xlt }}</strong>: {{ uname }}<br /><br />
-            <strong>{{ "Login User Name"|xlt }}:</strong> {{ login_uname|text }}
-            <br /><strong>{{ "Password"|xlt }}:</strong>
-            {{ pwd|text }}<br /><br />
-            {{ "Patient Portal Web Address"|xlt }}:<br />
-            <a href='{{ portal_onsite_two_address|attr }}' target='_blank'>{{ portal_onsite_two_address|text }}</a>
-            <br /><br />
+        <div class="wrapper">
+            <div class="header">Welcome to ABS</div>
+            <div class="tagline">"Where lives change for the better"</div>
+            
+            <p>Dear {{ fname|text }},</p>
+            
+            <p>Welcome to ABS. We're committed to supporting your mental health and well-being every step of the way.</p>
+            
+            <p>To help you manage your care with ease, we've set up your secure ABS Patient Portal. From the ABS Patient Portal, you can view & access upcoming appointments, see past appointments, request to be excused, pay copayments, request documentation, and more.</p>
+            
+            <p>To gain access to the ABS Patient Portal you must click this link <a href='{{ portal_onsite_two_address|attr }}' target='_blank'>{{ portal_onsite_two_address|text }}</a> and use the following credentials that have been created just for you.</p>
+            
+            <div class="credentials-box">
+                <p><strong>Your log in credentials are:</strong></p>
+                <p><strong>Login User Name:</strong> {{ login_uname|text }}</p>
+                <p><strong>Password:</strong> {{ pwd|text }}</p>
+            </div>
+            
+            <div class="contact-info">
+                <p>If you have any questions please call the ABS on-call assistant at 718-871-4593 ext # 0</p>
+            </div>
+            
             {% if enforce_signin_email %}
-                <strong>{{ "Login Trusted Email"|xlt  }}</strong>:
+                <p><strong>Login Trusted Email:</strong>
                 {% if email_direct is not empty %}
-                    {{  email_direct|text }}
+                    {{ email_direct|text }}
                 {% else %}
-                    {{ "Is Required. Contact Provider."|xlt}}
+                    {{ "Is Required. Contact Provider."|xlt }}
                 {% endif %}
+                </p>
             {% endif %}
-            <br /><br />
-            <strong>{{ "You may be required to change your password during first login."|xlt }}</strong><br />
-            {{ "This is required for your security as well as ours."|xlt }}<br />
-            {{ "Afterwards however, you may change your portal credentials anytime from portal menu."|xlt }}<br /><br />
-
+            
+            <div class="footer">Thank you for choosing ABS for your care.</div>
+            
             {% include 'emails/partials/patient/email-message-fhir-access.html.twig' with {fhir_address: fhir_address, fhir_requirements_address: fhir_requirements_address} %}
-            {{ "Thank you for allowing us to serve you."|xlt }}
         </div>
     </body>
 </html>
