@@ -12,6 +12,7 @@ $user = $userService->getCurrentlyLoggedInUser();
 $client_id = $user['client_id'];
 $client_secret = $user['client_secret'];
 $zoom_account_id = $user['zoom_account_id'];
+$meeting_for_email = $user['meeting_for_email'];
 
 // Function to send error response
 function sendErrorResponse($message, $details = null, $httpCode = 400)
@@ -47,7 +48,7 @@ function getEncodedSecret($client_id, $client_secret)
     }
 }
 
-$zoomCreds = ['client_id', 'client_secret', 'zoom_account_id'];
+$zoomCreds = ['client_id', 'client_secret', 'zoom_account_id', 'meeting_for_email'];
 $missingCreds = [];
 
 foreach ($zoomCreds as $field) {
@@ -229,7 +230,7 @@ try {
         "duration" => max(5, intval($event['pc_duration'] / 60)), // Ensure minimum 5 minutes
         "password" => substr($event['pc_title'] . $event['pc_eid'], 0, 10), // Truncate password
         "pre_schedule" => false,
-        "schedule_for" => "yuvrajsingh08cs@gmail.com",
+        "schedule_for" => $meeting_for_email,
         "start_time" => date('Y-m-d\TH:i:s', time()),
         "timezone" => date_default_timezone_get(),
         "type" => 2

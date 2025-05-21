@@ -39,18 +39,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $client_id = trim(htmlspecialchars($data['client_id']));
     $client_secret = trim(htmlspecialchars($data['client_secret']));
     $zoom_account_id = trim(htmlspecialchars($data['zoom_account_id']));
+    $meeting_for_email = trim(htmlspecialchars($data['meeting_for_email']));
 
     try {
         $updateQuery = "UPDATE users SET 
     client_id = ?, 
     client_secret = ?, 
-    zoom_account_id = ? 
+    zoom_account_id = ?,
+    meeting_for_email = ?
     WHERE id = ?";
 
         $updateResult = sqlQuery($updateQuery, [
             $client_id,
             $client_secret,
             $zoom_account_id,
+            $meeting_for_email,
             $user['id']
         ]);
 
@@ -150,6 +153,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label for="accountId">Account ID:</label>
         <input type="text" id="accountId" name="zoom_account_id" placeholder="Enter Account ID" required value = "' . $user['zoom_account_id'] . '">
 
+        <label for="meetingForEmail">(Meeting For) Email:</label>
+        <input type="email" id="meetingForEmail" name="meeting_for_email" placeholder="Enter Email for Meetings" required value = "' . $user['meeting_for_email'] . '">
+
         <button type="submit">Submit</button>
         </form>
     
@@ -161,7 +167,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 const data = {
                     client_id: formData.get("client_id"),
                     client_secret: formData.get("client_secret"),
-                    zoom_account_id: formData.get("zoom_account_id")
+                    zoom_account_id: formData.get("zoom_account_id"),
+                    meeting_for_email: formData.get("meeting_for_email")
                 };
     
                 fetch("zoomCredentials.php", {
