@@ -49,11 +49,11 @@
             }
             a:hover {
                 text-decoration: underline;
-            }
-            .footer {
-                margin-top: 30px;
-                text-align: center;
+            }         
+            .extra-info {
+                margin-top: 20px;
                 font-size: 14px;
+                color: #555;
             }
         </style>
     </head>
@@ -62,7 +62,7 @@
             <div class="header">Welcome to ABS</div>
             <div class="tagline">"Where lives change for the better"</div>
             
-            <p>Dear {{ fname|text }},</p>
+            <p>Dear {{ fname|default('Patient')|xlt }},</p>
             
             <p>Welcome to ABS. We're committed to supporting your mental health and well-being every step of the way.</p>
             
@@ -90,7 +90,7 @@
                 </p>
             {% endif %}
             
-            <div class="footer">Thank you for choosing ABS for your care.</div>
+            <div class="extra-info">Thank you for choosing ABS for your care.</div>
             
             {% include 'emails/partials/patient/email-message-fhir-access.html.twig' with {fhir_address: fhir_address, fhir_requirements_address: fhir_requirements_address} %}
         </div>
