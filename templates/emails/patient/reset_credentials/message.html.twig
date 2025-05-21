@@ -1,16 +1,84 @@
 <html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .wrapper {
+                background-color: #f9f9f9;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                padding: 25px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            .header {
+                color: #0056b3;
+                font-size: 24px;
+                margin-bottom: 20px;
+                text-align: center;
+                font-weight: bold;
+            }
+            .tagline {
+                font-style: italic;
+                text-align: center;
+                margin-bottom: 25px;
+                color: #555;
+            }
+            .credentials-box {
+                background-color: #e8f4ff;
+                border: 1px solid #bfd3e6;
+                border-radius: 5px;
+                padding: 15px;
+                margin: 20px 0;
+            }
+            .contact-info {
+                background-color: #f5f5f5;
+                padding: 10px;
+                border-radius: 5px;
+                margin-top: 20px;
+                font-size: 14px;
+            }
+            a {
+                color: #0056b3;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            .extra-info {
+                margin-top: 20px;
+                font-size: 14px;
+                color: #555;
+            }
+        </style>
+    </head>
     <body>
-        <div class='wrapper'>
-            <p>{{  "We received a credentials reset request. The link to reset your credentials is below."|xlt }}</p>
-            <p>{{ "Please ignore this email if you did not make this request"|xlt }}</p>
-            <p><strong>{{ "Credentials Reset. Below link is only valid for one hour."|xlt }}: </strong></p>
-            <a href="{{ encoded_link|attr }}">{{ encoded_link|text }}</a>
-            <p><strong>{{ "One Time verification PIN"|xlt }}: </strong>{{ pin|text }}</p>
-            <p><strong>{{ "Your Portal Login Web Address. Bookmark for future logins."|xlt }}: </strong></p>
+        <div class="wrapper">
+            <div class="header">ABS Patient Portal</div>
+            <div class="tagline">"Where lives change for the better"</div>
+
+            <p>We received a credentials reset request for your ABS Patient Portal account. The link to reset your credentials is below.</p>
+            <p>Please ignore this email if you did not make this request.</p>
+
+            <div class="credentials-box">
+                <p><strong>Credentials Reset Link (valid for one hour):</strong></p>
+                <p><a href="{{ encoded_link|attr }}">{{ encoded_link|text }}</a></p>
+                <p><strong>One Time Verification PIN:</strong> {{ pin|text }}</p>
+            </div>
+
+            <p><strong>Your Portal Login Web Address (bookmark for future logins):</strong></p>
             <p><a href='{{ portal_onsite_two_address|attr }}'>{{ portal_onsite_two_address|text }}</a></p>
 
-            {% include 'emails/partials/patient/email-message-fhir-access.html.twig' with {fhir_address: fhir_address, fhir_requirements_address: fhir_requirements_address} %}
-            <p>{{ "Thank you for allowing us to serve you."|xlt }}</p>
+            <div class="contact-info">
+                <p>If you have any questions please call the ABS on-call assistant at 718-871-4593 ext # 0</p>
+            </div>
+
+            <div class="extra-info">Thank you for choosing ABS for your care.</div>
         </div>
     </body>
 </html>
