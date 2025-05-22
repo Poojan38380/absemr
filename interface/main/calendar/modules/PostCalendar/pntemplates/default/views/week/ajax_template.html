@@ -759,9 +759,8 @@ foreach ($providers as $provider) {
                 else
                     $divTitle .= "\r\n[" . $catname . ' ' . $comment . "]" .$fname . " " . $lname;
 
-                $content .= "<span class='appointment" . attr($apptToggle ?? "") . "'>";
+                $content .= "<div style='display: flex; flex-wrap: wrap; gap: 4px;' class='appointment" . attr($apptToggle ?? "") . "'>";
                 $content .= create_event_time_anchor($dispstarth . ':' . $startm);
-                $content .="<span class='link_title'>&nbsp;ID: ". $event["eid"] . "</span>&nbsp;";
                 if ($event['recurrtype'] > 0) $content .= "<img src='{$this->_tpl_vars['TPL_IMAGE_PATH']}/repeating8.png' class='border-0' style='margin:0 2px 0 2px;' title='Repeating event' alt='Repeating event' />";
                 $content .= text($event['apptstatus']);
                 if ($patientid) {
@@ -820,7 +819,8 @@ foreach ($providers as $provider) {
                         $content .= text(xl_appt_category($catname));
                     }
                 }
-                $content .= "</span>";
+                $content .="<span class='link_title'>&nbsp;ID: ". $event["eid"] . "</span>&nbsp;";
+                $content .= "</div>";
             }
 
             $divTitle .= "\n(" . xl('double click to edit') . ")";

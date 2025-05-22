@@ -743,10 +743,9 @@ foreach ($providers as $provider) {
                     $divTitle .= "\r\n[" . $catname . ' ' . $comment . "]" . $groupname;
                 else
                     $divTitle .= "\r\n[" . $catname . ' ' . $comment . "]" . $fname . " " . $lname;
-                $content .= "<span class='appointment'>";
+                $content .= "<div style='display: flex; flex-wrap: wrap; gap: 4px;' class='appointment'>";
                 $content .="<a class='link_title' data-pid='". attr($event["eid"]) . "' href='javascript:parent.startMeeting(" . attr_js($event["eid"]) . ")' title='Join'>Join</a>&nbsp;";
                 $content .= create_event_time_anchor($dispstarth.":".$startm);
-                $content .="<span class='link_title'>&nbsp;ID: ". $event["eid"] . "</span>&nbsp;";
                 if ($event['recurrtype'] > 0) $content .= "<img src='{$this->_tpl_vars['TPL_IMAGE_PATH']}/repeating8.png' border='0' style='margin:0px 2px 0px 2px;' title='" . xla("Repeating event") . "' alt='" . xla("Repeating event") . "'>";
                 $content .= '&nbsp;' . text($event['apptstatus']);
                 if ($patientid) {
@@ -801,7 +800,8 @@ foreach ($providers as $provider) {
                         $content .= text(xl_appt_category($catname));
                     }
                 }
-                $content .= "</span>";
+                $content .="<span class='link_title'>&nbsp;ID: ". $event["eid"] . "</span>&nbsp;";
+                $content .= "</div>";
             }
 
             $divTitle .= "\n(" . xl('double click to edit') . ")";
