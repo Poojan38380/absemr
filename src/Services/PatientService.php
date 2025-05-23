@@ -111,8 +111,11 @@ class PatientService extends BaseService
 
     public function getFreshPid()
     {
-        $pid = sqlQuery("SELECT MAX(pid)+1 AS pid FROM patient_data");
-        return $pid['pid'] === null ? 1 : intval($pid['pid']);
+        $pid = sqlQuery("SELECT last_patient_id AS pid FROM patient_id_tracker WHERE id = 1");
+        $patientId = $pid['pid'] === null ? 1 : intval($pid['pid']);
+        $newPatientId = $patientId + 1;
+        $updatedValue = sqlQuery("UPDATE patient_id_tracker SET last_patient_id = $newPatientId WHERE id = 1");
+        return $newPatientId;
     }
 
     /**
