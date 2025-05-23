@@ -9,7 +9,7 @@ $host	= 'localhost';
 // $host	= 'database-1.cp62ccos478d.us-east-1.rds.amazonaws.com';
 $port	= '3306';
 $login	= 'root';
-$pass	= 'mysql@38380';
+$pass	= 'adminroot';
 $dbase	= 'bsemr';
 $db_encoding	= 'utf8mb4';
 
