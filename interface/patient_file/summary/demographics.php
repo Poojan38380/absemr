@@ -990,7 +990,7 @@ $oemr_ui = new OemrUI($arrOeUiSettings);
 	$getPatientBalance = get_patient_balance($pid);
 
 	//Enabling zoom video call
-	echo enableVideoButton('dashboard', $pid);
+	// echo enableVideoButton('dashboard', $pid);
 
 	$list_id = "dashboard"; // to indicate nav item is active, count and give correct id
         // Collect the patient menu then build it
