@@ -1,9 +1,9 @@
 async function joinMeeting(meetDetails, patientData) {
     try {
-        const thing = `/bsemr/interface/zoom/index.html?meetingId=${meetDetails.meeting_id}&meetingPwd=${meetDetails.password}&meetingRole=1&displayName=${patientData.fname || ''} ${patientData.lname || ''}&meetingEmail=${`yuvrajsingh08cs@gmail.com`}`;
+        const thing = `/bsemr/interface/zoom/index.html?meetingId=${meetDetails.meeting_id}&meetingPwd=${meetDetails.password}&meetingRole=1&displayName=${patientData.fname || ''} ${patientData.lname || ''}&meetingEmail=${meetDetails.meeting_for_email}`;
         console.log("This is the thing: ", thing);
-        parent.navigateTab(`/bsemr/interface/zoom/index.html?meetingId=${meetDetails.meeting_id}&meetingPwd=${meetDetails.password}&meetingRole=1&displayName=${patientData.fname || ''} ${patientData.lname || ''}&meetingEmail=${`yuvrajsingh08cs@gmail.com`}`, 'meet');
-        parent.navigateTab(`/bsemr/interface/zoom/index.html?meetingId=${meetDetails.meeting_id}&meetingPwd=${meetDetails.password}&meetingRole=1&displayName=${patientData.fname || ''} ${patientData.lname || ''}&meetingEmail=${`yuvrajsingh08cs@gmail.com`}`, 'meet');
+        parent.navigateTab(`/bsemr/interface/zoom/index.html?meetingId=${meetDetails.meeting_id}&meetingPwd=${meetDetails.password}&meetingRole=1&displayName=${patientData.fname || ''} ${patientData.lname || ''}&meetingEmail=${meetDetails.meeting_for_email}`, 'meet');
+        parent.navigateTab(`/bsemr/interface/zoom/index.html?meetingId=${meetDetails.meeting_id}&meetingPwd=${meetDetails.password}&meetingRole=1&displayName=${patientData.fname || ''} ${patientData.lname || ''}&meetingEmail=${meetDetails.meeting_for_email}`, 'meet');
         // parent.tabClicked("meet")
     } catch (error) {
         alert("Error joining meeting: ", error.message);
