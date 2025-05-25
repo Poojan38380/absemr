@@ -198,6 +198,7 @@ try {
                 'password' => $event['password'],
                 'fname' => $userInfo['fname'],
                 'lname' => $userInfo['lname'],
+                'meeting_for_email' => $meeting_for_email
             ]
         ];
 
@@ -310,6 +311,7 @@ try {
             'password' => $password,
             'fname' => $userInfo['fname'],
             'lname' => $userInfo['lname'],
+            'meeting_for_email' => $meeting_for_email
         ]
     ];
 
