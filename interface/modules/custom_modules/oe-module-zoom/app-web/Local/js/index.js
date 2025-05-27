@@ -96,7 +96,7 @@ document.getElementById("join_meeting").addEventListener("click", (e) => {
       console.log(res.result);
       meetingConfig.signature = res.result;
       meetingConfig.sdkKey = CLIENT_ID;
-      const joinUrl = "/meeting.html?" + testTool.serialize(meetingConfig);
+      const joinUrl = "/meeting.php?" + testTool.serialize(meetingConfig);
       console.log(joinUrl);
       window.open(joinUrl, "_blank");
     },
@@ -130,7 +130,7 @@ window.copyJoinLink = function (element) {
       meetingConfig.sdkKey = CLIENT_ID;
       const joinUrl =
         testTool.getCurrentDomain() +
-        "/meeting.html?" +
+        "/meeting.php?" +
         testTool.serialize(meetingConfig);
       document.getElementById('copy_link_value').setAttribute('link', joinUrl);
       copyToClipboard('copy_link_value');

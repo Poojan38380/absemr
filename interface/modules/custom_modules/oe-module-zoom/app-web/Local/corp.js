@@ -34,7 +34,7 @@ new WebpackDevServer(
     },
     proxy: [
       {
-        path: '/meeting.html',
+        path: '/meeting.php',
         target: 'http://127.0.0.1:9998/'
       }
     ],

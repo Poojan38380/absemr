@@ -760,6 +760,7 @@ foreach ($providers as $provider) {
                     $divTitle .= "\r\n[" . $catname . ' ' . $comment . "]" .$fname . " " . $lname;
 
                 $content .= "<div style='display: flex; flex-wrap: wrap; gap: 4px;' class='appointment" . attr($apptToggle ?? "") . "'>";
+                $content .="<a class='link_title' data-pid='". attr($event["eid"]) . "' href='javascript:parent.startMeeting(" . attr_js($event["eid"]) . ")' title='Join'>Join</a>&nbsp;";
                 $content .= create_event_time_anchor($dispstarth . ':' . $startm);
                 if ($event['recurrtype'] > 0) $content .= "<img src='{$this->_tpl_vars['TPL_IMAGE_PATH']}/repeating8.png' class='border-0' style='margin:0 2px 0 2px;' title='Repeating event' alt='Repeating event' />";
                 $content .= text($event['apptstatus']);

@@ -1,3 +1,14 @@
+<?php
+require("../globals.php");
+
+// Enable error reporting for debugging
+error_reporting(E_ALL & ~E_DEPRECATED);
+ini_set('display_errors', 1);
+
+use OpenEMR\Services\UserService;
+$userService = new UserService();
+$user = $userService->getCurrentlyLoggedInUser();
+?>
 <!DOCTYPE html>
 
 <head>
@@ -110,7 +121,8 @@
                             <option value="sv-SE">Swedish Svenska</option>
                         </select>
                     </div>
-
+                    <input hidden id="sdkClientId" type="text" value="<?php echo $user['sdk_client_id'] ?>">
+                    <input hidden id="sdkClientSecret" type="text" value="<?php echo $user['sdk_client_secret'] ?>">
                     <input type="hidden" value="" id="copy_link_value" />
                     <!-- <button type="submit" class="btn btn-primary" id="join_meeting">Join</button> -->
                     <button type="submit" class="btn btn-primary" id="clear_all">Clear</button>

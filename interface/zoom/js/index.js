@@ -16,13 +16,13 @@ function websdkready() {
   // ZoomMtg.setZoomJSLib("https://jssdk.zoomus.cn/{VERSION}/lib", "/av"); // china cdn option
   ZoomMtg.preLoadWasm(); // pre download wasm file to save time.
 
-  var CLIENT_ID = "bFEXFOCVQuqBk24qwUPnA";
+  var CLIENT_ID = document.getElementById('sdkClientId').value;
   /**
    * NEVER PUT YOUR ACTUAL SDK SECRET OR CLIENT SECRET IN CLIENT SIDE CODE, THIS IS JUST FOR QUICK PROTOTYPING
    * The below generateSignature should be done server side as not to expose your SDK SECRET in public
    * You can find an example in here: https://developers.zoom.us/docs/meeting-sdk/auth/#signature
    */
-  var CLIENT_SECRET = "WAm26T6ZhFa1jcJB2a5Fg5hMPct1qfAP";
+  var CLIENT_SECRET = document.getElementById('sdkClientSecret').value;
 
   // some help code, remember mn, pwd, lang to cookie, and autofill.
   document.getElementById("display_name").value =
@@ -104,7 +104,7 @@ function websdkready() {
           console.log(res);
           meetingConfig.signature = res;
           meetingConfig.sdkKey = CLIENT_ID;
-          var joinUrl = "/bsemr/interface/zoom/meeting.html?" + testTool.serialize(meetingConfig);
+          var joinUrl = "/bsemr/interface/zoom/meeting.php?" + testTool.serialize(meetingConfig);
           console.log(joinUrl);
           window.location.href = joinUrl
         },
@@ -141,7 +141,7 @@ function websdkready() {
         meetingConfig.sdkKey = CLIENT_ID;
         var joinUrl =
           testTool.getCurrentDomain() +
-          "/bsemr/interface/zoom/meeting.html?" +
+          "/bsemr/interface/zoom/meeting.php?" +
           testTool.serialize(meetingConfig);
         document
           .getElementById("copy_link_value")

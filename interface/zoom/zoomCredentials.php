@@ -40,13 +40,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $client_secret = trim(htmlspecialchars($data['client_secret']));
     $zoom_account_id = trim(htmlspecialchars($data['zoom_account_id']));
     $meeting_for_email = trim(htmlspecialchars($data['meeting_for_email']));
+    $sdk_client_id = trim(htmlspecialchars($data['sdk_client_id']));
+    $sdk_client_secret = trim(htmlspecialchars($data['sdk_client_secret']));
 
     try {
         $updateQuery = "UPDATE users SET 
     client_id = ?, 
     client_secret = ?, 
     zoom_account_id = ?,
-    meeting_for_email = ?
+    meeting_for_email = ?,
+    sdk_client_id = ?,
+    sdk_client_secret = ?
     WHERE id = ?";
 
         $updateResult = sqlQuery($updateQuery, [
@@ -54,6 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $client_secret,
             $zoom_account_id,
             $meeting_for_email,
+            $sdk_client_id,
+            $sdk_client_secret,
             $user['id']
         ]);
 
@@ -148,13 +154,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="text" id="clientId" name="client_id" placeholder="Enter Client ID" required value = "' . $user['client_id'] . '">
 
         <label for="clientSecret">Client Secret:</label>
-        <input type="password" id="clientSecret" name="client_secret" placeholder="Enter Client Secret" required value = "' . $user['client_secret'] . '">
+        <input type="text" id="clientSecret" name="client_secret" placeholder="Enter Client Secret" required value = "' . $user['client_secret'] . '">
 
         <label for="accountId">Account ID:</label>
         <input type="text" id="accountId" name="zoom_account_id" placeholder="Enter Account ID" required value = "' . $user['zoom_account_id'] . '">
 
         <label for="meetingForEmail">(Meeting For) Email:</label>
         <input type="email" id="meetingForEmail" name="meeting_for_email" placeholder="Enter Email for Meetings" required value = "' . $user['meeting_for_email'] . '">
+
+        <label for="sdkClientId">SDK Client ID:</label>
+        <input type="text" id="sdkClientId" name="sdk_client_id" placeholder="Enter Email for Meetings" required value = "' . $user['sdk_client_id'] . '">
+
+        <label for="sdkClientSecret">SDK Client Secret:</label>
+        <input type="text" id="sdkClientSecret" name="sdk_client_secret" placeholder="Enter Email for Meetings" required value = "' . $user['sdk_client_secret'] . '">
 
         <button type="submit">Submit</button>
         </form>
@@ -168,7 +180,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     client_id: formData.get("client_id"),
                     client_secret: formData.get("client_secret"),
                     zoom_account_id: formData.get("zoom_account_id"),
-                    meeting_for_email: formData.get("meeting_for_email")
+                    meeting_for_email: formData.get("meeting_for_email"),
+                    sdk_client_id: formData.get("sdk_client_id"),
+                    sdk_client_secret: formData.get("sdk_client_secret")
                 };
     
                 fetch("zoomCredentials.php", {

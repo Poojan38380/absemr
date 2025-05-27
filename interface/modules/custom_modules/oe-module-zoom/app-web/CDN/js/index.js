@@ -109,7 +109,7 @@ function websdkready() {
           console.log(res.result);
           meetingConfig.signature = res.result;
           meetingConfig.sdkKey = CLIENT_ID;
-          var joinUrl = "/meeting.html?" + testTool.serialize(meetingConfig);
+          var joinUrl = "/meeting.php?" + testTool.serialize(meetingConfig);
           console.log(joinUrl);
           window.open(joinUrl, "_blank");
         },
@@ -143,7 +143,7 @@ function websdkready() {
         meetingConfig.sdkKey = CLIENT_ID;
         var joinUrl =
           testTool.getCurrentDomain() +
-          "/meeting.html?" +
+          "/meeting.php?" +
           testTool.serialize(meetingConfig);
         document.getElementById('copy_link_value').setAttribute('link', joinUrl);
         copyToClipboard('copy_link_value');

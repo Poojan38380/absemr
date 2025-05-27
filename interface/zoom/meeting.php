@@ -1,3 +1,14 @@
+<?php
+require("../globals.php");
+
+// Enable error reporting for debugging
+error_reporting(E_ALL & ~E_DEPRECATED);
+ini_set('display_errors', 1);
+
+use OpenEMR\Services\UserService;
+$userService = new UserService();
+$user = $userService->getCurrentlyLoggedInUser();
+?>
 <!DOCTYPE html>
 
 <head>
@@ -9,6 +20,8 @@
 </head>
 
 <body>
+    <input hidden id="sdkClientId" type="text" value="<?php echo $user['sdk_client_id'] ?>">
+    <input hidden id="sdkClientSecret" type="text" value="<?php echo $user['sdk_client_secret'] ?>">
     <script src="https://source.zoom.us/3.9.0/lib/vendor/react.min.js"></script>
     <script src="https://source.zoom.us/3.9.0/lib/vendor/react-dom.min.js"></script>
     <script src="https://source.zoom.us/3.9.0/lib/vendor/redux.min.js"></script>

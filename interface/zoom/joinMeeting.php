@@ -4,7 +4,9 @@ require("../globals.php");
 // Enable error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
+use OpenEMR\Services\UserService;
+$userService = new UserService();
+$user = $userService->getCurrentlyLoggedInUser();
 // Function to send error response
 function sendErrorResponse($message, $details = null, $httpCode = 400)
 {
@@ -22,8 +24,11 @@ function sendErrorResponse($message, $details = null, $httpCode = 400)
 function getEncodedSecret()
 {
     try {
-        $clientId = "hQ77av7T_qhcOy_pR0g4A";
-        $clientSecret = "qn4XedDIaxxoUgiWUZ87hYOuPiaHalmC";
+        global $user;
+        $sql = "SELECT client_id, client_secret from users where id = ?";
+        $result = sqlQuery($sql, [$user['id']]);
+        $clientId = $result['client_id'];
+        $clientSecret = $result['client_secret'];
 
         if (empty($clientId) || empty($clientSecret)) {
             sendErrorResponse("Missing Zoom credentials", "Client ID or Secret is empty");
@@ -48,7 +53,7 @@ function initiateOauthService()
         // Data for the POST request
         $postData = http_build_query([
             "grant_type" => "account_credentials",
-            "account_id" => "Z7qOzYSZSb6Bd3Y5cZz_TA"
+            // "account_id" => "Z7qOzYSZSb6Bd3Y5cZz_TA"
         ]);
 
         // Validate account ID
