@@ -2156,7 +2156,7 @@ if(isset($formId)){
         <input class='form-control' type='text' name='form_comments' value='<?php echo attr($hometext); ?>' title='<?php echo xla('Optional information about this event'); ?>' />
     </div>
 </div>
-<div class="form-row mx-2">
+<div style="display: none;" class="form-row mx-2">
     <div class="col-sm form-group">
 	<label><?php echo xlt('Video Channel'); ?>:</label>
 
