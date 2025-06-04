@@ -12,15 +12,429 @@ $user = $userService->getCurrentlyLoggedInUser();
 <!DOCTYPE html>
 
 <head>
-    <title>Zoom WebSDK CDN</title>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link type="text/css" rel="stylesheet" href="https://source.zoom.us/3.9.0/css/bootstrap.css" />
-    <link rel="stylesheet" href="./css/index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: floatUp 6s infinite linear;
+        }
+
+        .particle:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            left: 20%;
+            animation-delay: 1s;
+        }
+
+        .particle:nth-child(3) {
+            left: 30%;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(4) {
+            left: 40%;
+            animation-delay: 3s;
+        }
+
+        .particle:nth-child(5) {
+            left: 50%;
+            animation-delay: 4s;
+        }
+
+        .particle:nth-child(6) {
+            left: 60%;
+            animation-delay: 5s;
+        }
+
+        .particle:nth-child(7) {
+            left: 70%;
+            animation-delay: 0.5s;
+        }
+
+        .particle:nth-child(8) {
+            left: 80%;
+            animation-delay: 1.5s;
+        }
+
+        .particle:nth-child(9) {
+            left: 90%;
+            animation-delay: 2.5s;
+        }
+
+        .particle:nth-child(10) {
+            left: 15%;
+            animation-delay: 3.5s;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Loading container */
+        .loading-container {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+
+        /* Main spinner */
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .spinner::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 2px solid transparent;
+            border-top: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: spin 2s linear infinite reverse;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Loading text */
+        .loading-text {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            animation: fadeInOut 2s ease-in-out infinite;
+        }
+
+        @keyframes fadeInOut {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Progress bar */
+        .progress-container {
+            width: 300px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            margin: 20px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700);
+            background-size: 200% 100%;
+            border-radius: 3px;
+            animation: progressMove 2s ease-in-out infinite, progressGlow 2s ease-in-out infinite;
+            width: 100%;
+        }
+
+        @keyframes progressMove {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        @keyframes progressGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            }
+        }
+
+        /* Dots animation */
+        .dots {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 20px;
+            margin-top: 20px;
+        }
+
+        .dots div {
+            position: absolute;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            animation: dotsBounce 1.2s infinite ease-in-out both;
+        }
+
+        .dots div:nth-child(1) {
+            left: 8px;
+            animation-delay: -0.24s;
+        }
+
+        .dots div:nth-child(2) {
+            left: 32px;
+            animation-delay: -0.12s;
+        }
+
+        .dots div:nth-child(3) {
+            left: 56px;
+            animation-delay: 0;
+        }
+
+        @keyframes dotsBounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+            }
+
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        /* Pulse ring */
+        .pulse-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: pulseRing 3s ease-out infinite;
+        }
+
+        .pulse-ring::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: pulseRing 3s ease-out infinite 0.5s;
+        }
+
+        @keyframes pulseRing {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Loading messages */
+        .loading-messages {
+            margin-top: 30px;
+            height: 30px;
+            position: relative;
+        }
+
+        .message {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: messageSlide 8s infinite;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .message:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .message:nth-child(2) {
+            animation-delay: 2s;
+        }
+
+        .message:nth-child(3) {
+            animation-delay: 4s;
+        }
+
+        .message:nth-child(4) {
+            animation-delay: 6s;
+        }
+
+        @keyframes messageSlide {
+
+            0%,
+            20% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+
+            25%,
+            45% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50%,
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .loading-text {
+                font-size: 1.2rem;
+            }
+
+            .progress-container {
+                width: 250px;
+            }
+
+            .spinner {
+                width: 60px;
+                height: 60px;
+            }
+
+            .pulse-ring {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <!-- Animated background particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Pulse ring effect -->
+    <div class="pulse-ring"></div>
+
+    <!-- Main loading content -->
+    <div class="loading-container">
+        <!-- Main spinner -->
+        <div class="spinner"></div>
+
+        <!-- Loading text -->
+        <div class="loading-text">Loading...</div>
+
+        <!-- Progress bar -->
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+
+        <!-- Bouncing dots -->
+        <div class="dots">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <!-- Rotating messages -->
+        <div class="loading-messages">
+            <div class="message">Initializing application...</div>
+            <div class="message">Loading resources...</div>
+            <div class="message">Preparing interface...</div>
+            <div class="message">Almost ready...</div>
+        </div>
+    </div>
     <style>
         .sdk-select {
             height: 34px;
@@ -136,14 +550,9 @@ $user = $userService->getCurrentlyLoggedInUser();
         </div>
     </nav>
 
-    <div class="main-container" >
-        <button type="submit" class="btn btn-primary" id="join_meeting">Join</button>
-    </div>
 
-
-  
     <script>
-       
+
         // Function to get URL parameters
         function getUrlParams() {
             const params = new URLSearchParams(window.location.search);

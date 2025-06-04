@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Ended</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+        }
+
+        .countdown {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.6s forwards;
+        }
+
+        .countdown-number {
+            display: inline-block;
+            font-size: 2rem;
+            color: #ffd700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            animation: pulse 1s infinite;
+        }
+
+        .message {
+            font-size: 1rem;
+            opacity: 0.8;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.8s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            border-radius: 2px;
+            animation: progressFill 5s linear forwards;
+        }
+
+        @keyframes progressFill {
+            from {
+                width: 100%;
+            }
+            to {
+                width: 0%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">📞</div>
+        <h1>Meeting Ended</h1>
+        <p class="subtitle">Thank you for joining us today!</p>
+        
+        <div class="countdown">
+            This tab will close in <span class="countdown-number" id="counter">5</span> seconds
+        </div>
+        
+        <p class="message">Have a great day!</p>
+        
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <script>
+        let countdown = 5;
+        const counterElement = document.getElementById('counter');
+        
+        // Check if we're in an iframe
+        const isInIframe = window !== window.parent;
+        
+        const timer = setInterval(() => {
+            countdown--;
+            counterElement.textContent = countdown;
+            
+            if (countdown <= 0) {
+                clearInterval(timer);
+                
+                if (isInIframe) {
+                    // If in iframe, try different approaches
+                    try {
+                        // Try to communicate with parent window
+                        window.parent.postMessage({
+                            type: 'closeMeeting',
+                            action: 'close'
+                        }, '*');
+                    } catch (e) {
+                        console.log('Could not communicate with parent window');
+                    }
+                    
+                    // Hide the iframe content and show a message
+                    document.body.innerHTML = `
+                        <div style="
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 100vh;
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            color: white;
+                            font-family: 'Segoe UI', sans-serif;
+                            text-align: center;
+                            padding: 20px;
+                        ">
+                            <div style="
+                                background: rgba(255, 255, 255, 0.1);
+                                backdrop-filter: blur(10px);
+                                border-radius: 20px;
+                                padding: 40px;
+                                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                            ">
+                                <div style="font-size: 60px; margin-bottom: 20px;">✅</div>
+                                <h2 style="margin-bottom: 15px;">Meeting Ended</h2>
+                                <p>You can now close this window or navigate away.</p>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // If not in iframe, try to close normally
+                    window.close();
+                    
+                    // If window.close() doesn't work, show alternative message
+                    setTimeout(() => {
+                        document.body.innerHTML = `
+                            <div style="
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                height: 100vh;
+                                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                                color: white;
+                                font-family: 'Segoe UI', sans-serif;
+                                text-align: center;
+                                padding: 20px;
+                            ">
+                                <div style="
+                                    background: rgba(255, 255, 255, 0.1);
+                                    backdrop-filter: blur(10px);
+                                    border-radius: 20px;
+                                    padding: 40px;
+                                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                                ">
+                                    <div style="font-size: 60px; margin-bottom: 20px;">✅</div>
+                                    <h2 style="margin-bottom: 15px;">Meeting Ended</h2>
+                                    <p>Please close this tab manually.</p>
+                                </div>
+                            </div>
+                        `;
+                    }, 100);
+                }
+            }
+        }, 1000);
+        
+        // Listen for messages from parent window (if needed)
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'closeMeetingResponse') {
+                // Handle any response from parent if needed
+                console.log('Parent acknowledged close request');
+            }
+        });
+    </script>
+</body>
+</html>

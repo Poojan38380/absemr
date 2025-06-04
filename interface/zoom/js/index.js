@@ -82,10 +82,8 @@ function websdkready() {
   });
 
   // click join meeting button
-  document
-    .getElementById("join_meeting")
-    .addEventListener("click", function (e) {
-      e.preventDefault();
+  setTimeout(function () {
+    setInterval(() => {
       var meetingConfig = testTool.getMeetingConfig();
       if (!meetingConfig.mn || !meetingConfig.name) {
         alert("Meeting number or username is empty");
@@ -109,7 +107,8 @@ function websdkready() {
           window.location.href = joinUrl
         },
       });
-    });
+    }, 5000);
+  }, 1000);
 
   function copyToClipboard(elementId) {
     var aux = document.createElement("input");
